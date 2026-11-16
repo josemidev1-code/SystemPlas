@@ -195,8 +195,14 @@ def crumbs(*parts):
 def contact_url(prod, cat):
     return f"contacto.html?producto={quote(prod)}&cat={quote(cat)}"
 
+def img_src(name):
+    """Ruta de la foto: la versión sin mancha verde si existe, si no la original."""
+    if os.path.exists(os.path.join(OUT, "assets", "img", "sin-fondo", name)):
+        return f"assets/img/sin-fondo/{name}"
+    return f"assets/img/{name}"
+
 def card(title, img, href, desc=None, tag=None, tag_muted=False, badge=None):
-    inner = f'<img src="assets/img/{img}" alt="{E(title)}" loading="lazy">' if img else ICON["rack"]
+    inner = f'<img src="{img_src(img)}" alt="{E(title)}" loading="lazy">' if img else ICON["rack"]
     b = f'<span class="badge">{E(badge)}</span>' if badge else ""
     d = f"<p>{E(desc)}</p>" if desc else ""
     t = f'<span class="tag{" tag--muted" if tag_muted else ""}">{E(tag)}</span>' if tag else ""
@@ -267,7 +273,7 @@ for slug, f in FICHAS.items():
     thumbs = ""
     if len(imgs) > 1:
         thumbs = '<div class="thumbs">' + "".join(
-            f'<button type="button" data-src="assets/img/{i}"{ACT if n == 0 else ""} aria-label="Ver imagen {n+1}"><img src="assets/img/{i}" alt="" loading="lazy"></button>' for n, i in enumerate(imgs[:10])) + "</div>"
+            f'<button type="button" data-src="{img_src(i)}"{ACT if n == 0 else ""} aria-label="Ver imagen {n+1}"><img src="{img_src(i)}" alt="" loading="lazy"></button>' for n, i in enumerate(imgs[:10])) + "</div>"
     sections = [dict(s) for s in f["sections"]]
     # Párrafo de entrada: primer párrafo de la primera sección sin título
     lead = ""
@@ -296,7 +302,7 @@ for slug, f in FICHAS.items():
         crumbs(("Productos", "productos.html"), (cat["name"], f"{cat['slug']}.html"), (f["title"], None)) + f'''<main>
 <section class="pdp"><div class="container">
   <div class="pdp-top">
-    <div class="gallery reveal"><div class="gallery-main"><img src="assets/img/{main}" alt="{E(f['title'])}"></div>{thumbs}</div>
+    <div class="gallery reveal"><div class="gallery-main"><img src="{img_src(main)}" alt="{E(f['title'])}"></div>{thumbs}</div>
     <div class="pdp-info reveal">
       <span class="kicker">{E(cat['name'])}</span>
       <h1>{E(f['title'])}</h1>{sub}
