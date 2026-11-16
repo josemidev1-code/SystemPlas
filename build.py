@@ -201,25 +201,17 @@ def img_src(name):
         return f"assets/img/sin-fondo/{name}"
     return f"assets/img/{name}"
 
-def card(title, img, href, desc=None, tag=None, tag_muted=False, badge=None):
+def card(title, img, href):
     inner = f'<img src="{img_src(img)}" alt="{E(title)}" loading="lazy">' if img else ICON["rack"]
-    b = f'<span class="badge">{E(badge)}</span>' if badge else ""
-    d = f"<p>{E(desc)}</p>" if desc else ""
-    t = f'<span class="tag{" tag--muted" if tag_muted else ""}">{E(tag)}</span>' if tag else ""
-    return f'<a class="product-card reveal" href="{href}"><div class="thumb">{b}{inner}</div><h3>{E(title)}</h3>{d}{t}</a>'
+    return f'<a class="product-card" href="{href}"><div class="thumb">{inner}</div><h3>{E(title)}</h3></a>'
 
 def product_cards(cat):
-    out = []
-    for name, img, slug, desc in cat["items"]:
-        if slug:
-            out.append(card(name, img, f"{slug}.html", desc, "Ver ficha →"))
-        else:
-            out.append(card(name, img, contact_url(name, cat["name"]), desc, "Consultar →", True))
-    return "".join(out)
+    return "".join(card(name, img, f"{slug}.html" if slug else contact_url(name, cat["name"]))
+                   for name, img, slug, _desc in cat["items"])
 
 def cat_tabs(active):
     return '<nav class="cat-tabs" aria-label="Categorías"><div class="container">' + "".join(
-        f'<a href="{c["slug"]}.html"{ACT if c["slug"] == active else ""}>{E(c["name"])}<span class="count">{len(c["items"])}</span></a>' for c in CATS
+        f'<a href="{c["slug"]}.html"{ACT if c["slug"] == active else ""}>{E(c["name"])}</a>' for c in CATS
     ) + "</div></nav>\n"
 
 def band(title, text, btn="Solicitar catálogo de productos", href="contacto.html"):
@@ -294,7 +286,7 @@ for slug, f in FICHAS.items():
     if cat["slug"] == "resistencias-electricas":
         custom = '<div class="custom-note"><div><strong>¿Necesita una medida especial?</strong> Envíenos dimensiones, voltaje, potencia, perforaciones y tipo de conexión y le preparamos un presupuesto a medida.</div></div>'
     related = [it for it in cat["items"] if it[2] != slug][:4]
-    rel_html = "".join(card(n, i, f"{s}.html" if s else contact_url(n, cat["name"]), d, "Ver ficha →" if s else "Consultar →", not s) for n, i, s, d in related)
+    rel_html = "".join(card(n, i, f"{s}.html" if s else contact_url(n, cat["name"])) for n, i, s, d in related)
     wa_text = quote(f"Hola, me interesa {f['title']} (System Plast). ¿Me pueden dar más información?")
     sub = f'<p class="pdp-sub">{E(f["subtitle"])}</p>' if f["subtitle"] else ""
     mobile_cta = f'<div class="mobile-cta"><a class="btn btn-primary" href="{contact_url(f["title"], cat["name"])}">Pedir presupuesto</a><a class="btn btn-wa" href="https://wa.me/{TEL[1:]}?text={wa_text}" target="_blank" rel="noopener">{ICON["wa"]} WhatsApp</a></div>\n'
@@ -337,8 +329,7 @@ for c in CATS:
     bt, bx = c["band"]
     page = head(f"{c['name']} | System Plast", c["short"]) + header("productos.html") + hero(t, s, "Productos System Plast") + \
         cat_tabs(c["slug"]) + f'''<main>
-<section class="section section--grey"><div class="container">
-  <div class="section-head reveal"><span class="kicker">{E(c['name'])}</span><h2>¿Qué producto necesitas?</h2><p>{E(c['short'])} Abre cada ficha para ver ventajas y especificaciones, o pide presupuesto directamente.</p></div>
+<section class="section"><div class="container">
   <div class="product-grid">{product_cards(c)}</div>
 </div></section>
 ''' + band(bt, bx) + CTA + "</main>\n" + footer()
@@ -347,7 +338,7 @@ for c in CATS:
 # ---------------------------------------------------------------------------
 # Productos
 # ---------------------------------------------------------------------------
-cats_html = "".join(card(c["name"], c["img"], f"{c['slug']}.html", c["short"], f"Ver {len(c['items'])} productos →") for c in CATS)
+cats_html = "".join(card(c["name"], c["img"], f"{c['slug']}.html") for c in CATS)
 write("productos.html", head("Productos | System Plast", "Catálogo System Plast: controladores HRS de canal caliente, resistencias eléctricas, EOAT para robótica y estanterías para moldes.") +
       header("productos.html") + hero("Catálogo de productos", "Productos diseñados para mejorar la productividad y garantizar procesos de inyección más eficientes y seguros", "System Plast") +
       cat_tabs(None) + f'''<main>
@@ -373,10 +364,10 @@ why = [("star", "Calidad garantizada", "Equipos y productos diseñados bajo est�
        ("globe", "Cobertura amplia", "Envíos y atención en cualquier parte del mundo."),
        ("clock", "Respuesta y recambios", "De 12 a 24 horas.")]
 news_html = "".join(f'<a class="news-card reveal" href="{u}" target="_blank" rel="noopener"><img src="assets/img/{i}" alt="" loading="lazy"><div class="body"><span class="kicker">{E(src)}</span><h3>{E(t)}</h3><span class="card-link">Leer noticia ↗</span></div></a>' for i, t, src, u in NEWS)
-home_cats = "".join(card(c["name"], c["img"], f"{c['slug']}.html", None, f"Ver {len(c['items'])} productos →") for c in CATS)
+home_cats = "".join(card(c["name"], c["img"], f"{c['slug']}.html") for c in CATS)
 featured = [("serie-mtc-b", "Serie MTC-B", "Más vendido"), ("resistencias-de-aluminio", "Resistencias de aluminio", None),
             ("cambiadores-rapidos-de-herramientas-quick-changers", "Cambiadores rápidos", None), ("svge-8", "Controlador SVGE-8", "Nuevo")]
-feat_html = "".join(card(n, CARD_IMG[s], f"{s}.html", FICHAS[s]["subtitle"], "Ver ficha →", badge=b) for s, n, b in featured)
+feat_html = "".join(card(n, CARD_IMG[s], f"{s}.html") for s, n, b in featured)
 write("index.html", head("System Plast | Sistemas de control y plásticos industriales", "Soluciones de alto rendimiento para la industria del plástico y la inyección: controladores de canal caliente, resistencias, EOAT y estanterías para moldes.") +
       header("index.html") + f'''<section class="hero hero--home" style="background-image:url(assets/img/home-2.jpg)"><div class="container">
   <span class="hero-eyebrow">Innovación en sistemas de control y plásticos industriales</span>

@@ -39,5 +39,27 @@ class FotosRecortadas(Base):
         self.lacks("sin-fondo/logo.png", html)
 
 
+class Tarjetas(Base):
+    def cards(self, name):
+        return re.findall(r'<a class="product-card[^"]*"[^>]*>.*?</a>', page(name), re.S)
+
+    def test_tarjeta_solo_foto_y_nombre(self):
+        cards = self.cards("eoat-accesorio-robotica.html")
+        self.assertEqual(len(cards), 10)
+        for c in cards:
+            self.lacks("<p>", c)
+            self.lacks('class="tag', c)
+            self.lacks('class="badge', c)
+
+    def test_producto_sin_foto_muestra_icono(self):
+        self.assertTrue(any("thumb-placeholder" in c for c in self.cards("estanterias-moldes.html")))
+
+    def test_producto_sin_ficha_enlaza_a_contacto(self):
+        self.assertTrue(any('href="contacto.html?producto=' in c for c in self.cards("estanterias-moldes.html")))
+
+    def test_categoria_sin_contadores_en_pestanas(self):
+        self.lacks('class="count"', page("eoat-accesorio-robotica.html"))
+
+
 if __name__ == "__main__":
     unittest.main()
