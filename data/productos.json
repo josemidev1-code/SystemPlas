@@ -1,0 +1,1096 @@
+{
+ "anillo-calefactor-ceramico": {
+  "title": "Anillo Calefactor Cerámico",
+  "subtitle": "Calor estable para altas temperaturas",
+  "sections": [
+   {
+    "h": null,
+    "items": [
+     {
+      "t": "p",
+      "v": "El anillo calefactor cerámico se fabrica mediante el enhebrado de tiras cerámicas con cables. El elemento calefactor está hecho de alambre redondo importado, enrollado en forma de resorte e insertado en el núcleo de la tira cerámica. La cubierta exterior es de acero inoxidable y el centro utiliza algodón aislante térmico de alta temperatura (tablero de fibra de silicato de aluminio) para evitar la pérdida de calor. Su principio de funcionamiento consiste en generar calor mediante el flujo de corriente a través de un cable de resistencia, para luego conducir dicho calor hacia el exterior a través de los materiales cerámicos."
+     },
+     {
+      "t": "kv",
+      "k": "Resistencia a altas temperaturas",
+      "v": "El anillo calefactor cerámico puede trabajar de manera estable en entornos de calor extremo, siendo apto para diversas aplicaciones de alta temperatura."
+     },
+     {
+      "t": "kv",
+      "k": "Transferencia de calor rápida",
+      "v": "El material cerámico ofrece una conducción térmica veloz, es robusto y no se rompe fácilmente; además, no se deforma ni envejece a altas temperaturas."
+     },
+     {
+      "t": "kv",
+      "k": "Alta estabilidad",
+      "v": "El proceso de calentamiento es relativamente lento y estable, sin picos repentinos de temperatura, lo que lo hace ideal para situaciones que requieren un control térmico preciso."
+     },
+     {
+      "t": "kv",
+      "k": "Larga vida útil",
+      "v": "Al ser resistente al calor, a la corrosión y a la oxidación, este material puede funcionar de manera estable durante mucho tiempo en entornos hostiles."
+     },
+     {
+      "t": "kv",
+      "k": "Alta seguridad",
+      "v": "No produce llamas abiertas durante el proceso de calentamiento, lo que reduce el riesgo de incendio; además, posee excelentes propiedades de aislamiento para prevenir accidentes por fugas eléctricas."
+     }
+    ]
+   }
+  ],
+  "images": [
+   "p/anillo-calefactor-ceramico-1.png",
+   "p/anillo-calefactor-ceramico-2.png",
+   "p/anillo-calefactor-ceramico-3.png"
+  ]
+ },
+ "cambiadores-rapidos-de-herramientas-quick-changers": {
+  "title": "Cambiadores Rápidos de Herramientas (Quick Changers)",
+  "subtitle": "Cambio de garra en segundos",
+  "sections": [
+   {
+    "h": null,
+    "items": [
+     {
+      "t": "p",
+      "v": "Módulos mecánicos y neumáticos que permiten desacoplar y acoplar el efector final al brazo robótico en segundos, estandarizando las conexiones."
+     }
+    ]
+   },
+   {
+    "h": "Parámetros",
+    "items": [
+     {
+      "t": "kv",
+      "k": "Carga nominal máxima",
+      "v": "15 kg"
+     },
+     {
+      "t": "kv",
+      "k": "Tamaño del orificio pasante – cantidad",
+      "v": "8 vías G1/8"
+     }
+    ]
+   }
+  ],
+  "images": [
+   "p/cambiadores-rapidos-de-herramientas-quick-changers-1.png",
+   "p/cambiadores-rapidos-de-herramientas-quick-changers-2.png",
+   "p/cambiadores-rapidos-de-herramientas-quick-changers-3.png",
+   "p/cambiadores-rapidos-de-herramientas-quick-changers-4.png"
+  ]
+ },
+ "funda-de-aislamiento-para-el-ahorro-de-energia": {
+  "title": "Funda de Aislamiento para el Ahorro de Energía",
+  "subtitle": "Menos pérdida de calor, menos consumo",
+  "sections": [
+   {
+    "h": null,
+    "items": [
+     {
+      "t": "p",
+      "v": "Las fundas aislantes suelen estar fabricadas con materiales resistentes a altas y bajas temperaturas y al fuego."
+     },
+     {
+      "t": "p",
+      "v": "Ofrecen ventajas como la no conductividad, resistencia a altas temperaturas, no son autoinflamables y poseen un excelente efecto de aislamiento térmico."
+     },
+     {
+      "t": "p",
+      "v": "Su estructura generalmente consta de tres capas: revestimiento interior, capa de aislamiento intermedia y capa protectora exterior. El diseño se mide y fabrica meticulosamente según el entorno del lugar y las condiciones de funcionamiento del equipo. Se trata de un dispositivo de ahorro de energía diseñado específicamente para máquinas de moldeo por inyección, cuya función principal es reducir la pérdida de calor, mejorar la eficiencia operativa de la máquina y optimizar el entorno de trabajo."
+     },
+     {
+      "t": "kv",
+      "k": "Reducción de la pérdida de calor",
+      "v": "Reduce la disipación de calor en la superficie de la máquina de moldeo por inyección mediante materiales aislantes para mantener una temperatura estable en su interior."
+     },
+     {
+      "t": "p",
+      "v": "Ahorro de energía y reducción del consumo: Disminuye el consumo de energía de calefacción y el gasto eléctrico general, lo que se traduce en un ahorro en las facturas de electricidad."
+     },
+     {
+      "t": "kv",
+      "k": "Mejora de la eficiencia de producción",
+      "v": "Mantiene la máquina funcionando a una temperatura constante, reduciendo los problemas de producción causados por las fluctuaciones térmicas y mejorando tanto la calidad del producto como la eficiencia."
+     },
+     {
+      "t": "kv",
+      "k": "Mejora del entorno de trabajo",
+      "v": "Reduce la temperatura superficial de las máquinas y disminuye la temperatura general del taller, mejorando las condiciones laborales de los operarios."
+     }
+    ]
+   }
+  ],
+  "images": [
+   "p/funda-de-aislamiento-para-el-ahorro-de-energia-1.png",
+   "p/funda-de-aislamiento-para-el-ahorro-de-energia-2.png",
+   "p/funda-de-aislamiento-para-el-ahorro-de-energia-3.png"
+  ]
+ },
+ "nano-infrarrojo-calentador-de-bajo-consumo": {
+  "title": "Nano-infrarrojo",
+  "subtitle": "Calentador de bajo consumo",
+  "sections": [
+   {
+    "h": null,
+    "items": [
+     {
+      "t": "p",
+      "v": "Es un dispositivo que utiliza radiación infrarroja lejana para el calentamiento, principalmente calentando objetos a través de energía radiante. Su principio de funcionamiento consiste en utilizar las características de la radiación infrarroja, la cual posee una fuerte capacidad de penetración y puede calentar el interior del objeto con mayor profundidad. Esto permite que el interior y el exterior del objeto se calienten simultáneamente, aumentando la eficiencia del aprovechamiento del calor y reduciendo la pérdida de calor hacia el entorno."
+     },
+     {
+      "t": "kv",
+      "k": "Eficiencia y ahorro de energía",
+      "v": "La eficiencia de conversión de calefacción eléctrica de la bobina de calentamiento nanoinfrarroja es de hasta el 99.8%, y la tasa de ahorro de energía puede alcanzar entre el 30% y el 83%. Esta alta eficiencia le otorga importantes beneficios económicos en aplicaciones industriales."
+     },
+     {
+      "t": "kv",
+      "k": "Radiación unidireccional",
+      "v": "El método de calentamiento por radiación infrarroja permite una radiación de calor e ciente y unidireccional que actúa directamente sobre la superficie del objeto, reduciendo el desperdicio de calor."
+     },
+     {
+      "t": "kv",
+      "k": "Baja temperatura super cial",
+      "v": "La temperatura de la superficie es inferior a 70 grados, lo que mejora considerablemente el entorno de trabajo y reduce la pérdida de calor."
+     },
+     {
+      "t": "kv",
+      "k": "Larga vida útil",
+      "v": "Fabricado con una estructura totalmente de acero inoxidable, ofrece un rendimiento estable y una vida útil de hasta 8 años."
+     }
+    ]
+   }
+  ],
+  "images": [
+   "p/nano-infrarrojo-calentador-de-bajo-consumo-1.png",
+   "p/nano-infrarrojo-calentador-de-bajo-consumo-2.png",
+   "p/nano-infrarrojo-calentador-de-bajo-consumo-3.png"
+  ]
+ },
+ "pantalla-tactil-serie-tg": {
+  "title": "Pantalla táctil serie TG",
+  "subtitle": "Controlador de temperatura del canal caliente",
+  "sections": [
+   {
+    "h": "Características",
+    "items": [
+     {
+      "t": "li",
+      "v": "Si la pantalla táctil está dañada, aún se puede encender y utilizar normalmente."
+     }
+    ]
+   },
+   {
+    "h": "Ventajas",
+    "items": [
+     {
+      "t": "li",
+      "v": "Una sola unidad puede admitir el control de hasta 128 zonas."
+     },
+     {
+      "t": "li",
+      "v": "Con la función de detección de fallas en línea, el equipo funciona de manera estable."
+     },
+     {
+      "t": "li",
+      "v": "Sistema estable de una tarjeta, un control."
+     },
+     {
+      "t": "li",
+      "v": "La configuración de parámetros es sencilla y el equipo es estable y confiable."
+     },
+     {
+      "t": "li",
+      "v": "Modo de control de doble pantalla para uso continuo."
+     }
+    ]
+   },
+   {
+    "h": "El primer módulo de control de temperatura operado con perilla",
+    "items": [
+     {
+      "t": "p",
+      "v": "Cuando no se utiliza la pantalla táctil, la temperatura y otras funciones se pueden ajustar girando la perilla del módulo de control de temperatura local. La pantalla LCD del módulo de control de temperatura local, con visualización completa en chino/inglés, muestra el número de serie del control de temperatura, el tipo de termopar, la corriente, la proporción de salida de corriente, el estado de funcionamiento y la información de fallos. El panel cuenta con perillas de operación, indicadores luminosos de estado de alimentación y de comunicación, y el módulo de control de temperatura se puede intercambiar entre cualquier zona de control de temperatura."
+     }
+    ]
+   },
+   {
+    "h": "Sistema operativo de pantalla táctil conveniente y rico en funciones",
+    "items": [
+     {
+      "t": "p",
+      "v": "Para mayor comodidad y para que los botones se adapten mejor a la presión manual, una sola página muestra 15 zonas y una sola celda muestra el control de una zona de control de temperatura. En la página, se pueden activar o desactivar zonas de control de temperatura individuales, mostrando el número de serie de la zona, la temperatura real, la temperatura configurada, el estado de funcionamiento, la información de fallos y alarmas, el bucle de copia, el tipo de molde, la corriente y la proporción de salida de corriente, la función de bloqueo de pantalla, la función de ajuste de temperatura global, la función de media temperatura (mantener caliente) y la función de copia de temperatura."
+     }
+    ]
+   }
+  ],
+  "images": []
+ },
+ "pinzas-de-aguja-y-de-expansion": {
+  "title": "Pinzas de Aguja y de Expansión",
+  "subtitle": "Agarre para piezas blandas y por diámetro interior",
+  "sections": [
+   {
+    "h": null,
+    "items": [
+     {
+      "t": "p",
+      "v": "Soluciones de agarre para aplicaciones complejas; las de aguja penetran textiles o piezas blandas, mientras que las de expansión sujetan las piezas desde el diámetro interior."
+     }
+    ]
+   }
+  ],
+  "images": [
+   "p/pinzas-de-aguja-y-de-expansion-1.png"
+  ]
+ },
+ "pinzas-de-bebedero-sprue-grippers": {
+  "title": "Pinzas de Bebedero (Sprue Grippers)",
+  "subtitle": "Extracción segura de coladas",
+  "sections": [
+   {
+    "h": null,
+    "items": [
+     {
+      "t": "p",
+      "v": "Mandíbulas neumáticas de alto agarre con diseño compacto, especializadas en la extracción segura de coladas y canales de inyección en espacios reducidos."
+     }
+    ]
+   }
+  ],
+  "images": [
+   "p/pinzas-de-bebedero-sprue-grippers-1.png",
+   "p/pinzas-de-bebedero-sprue-grippers-2.png",
+   "p/pinzas-de-bebedero-sprue-grippers-3.png",
+   "p/pinzas-de-bebedero-sprue-grippers-4.png"
+  ]
+ },
+ "pinzas-neumaticas-paralelas-y-angulares": {
+  "title": "Pinzas Neumáticas Paralelas y Angulares",
+  "subtitle": "Manipulación precisa de piezas",
+  "sections": [
+   {
+    "h": null,
+    "items": [
+     {
+      "t": "p",
+      "v": "Actuadores estándar de dos o tres dedos utilizados para la manipulación, sujeción y posicionado preciso de piezas plásticas moldeadas."
+     }
+    ]
+   }
+  ],
+  "images": [
+   "p/pinzas-neumaticas-paralelas-y-angulares-1.png",
+   "p/pinzas-neumaticas-paralelas-y-angulares-2.png",
+   "p/pinzas-neumaticas-paralelas-y-angulares-3.png"
+  ]
+ },
+ "placa-calefactora-de-mica-y-acero-inoxidable": {
+  "title": "Placa calefactora de mica y acero inoxidable",
+  "subtitle": "Calentamiento superficial eficiente",
+  "sections": [
+   {
+    "h": null,
+    "items": [
+     {
+      "t": "p",
+      "v": "La placa de calentamiento de mica es un dispositivo térmico fabricado aprovechando las excelentes propiedades de aislamiento y resistencia a altas temperaturas de la placa de mica. Utiliza la placa de mica como sustrato y capa aislante, complementada con una aleación de níquel-cromo como elemento calefactor. Se fabrica mediante prensado en caliente en diversas formas, como cuadradas, circulares, irregulares, entre otras."
+     },
+     {
+      "t": "kv",
+      "k": "Excelente aislamiento",
+      "v": "La placa de mica tiene propiedades aislantes superiores, con una resistencia de aislamiento superior a 100 MΩ, manteniendo su capacidad incluso a altas temperaturas."
+     },
+     {
+      "t": "kv",
+      "k": "Resistencia a altas temperaturas",
+      "v": "Soporta temperaturas de hasta 600 °C o incluso superiores, lo que la hace ideal para entornos de calor extremo."
+     },
+     {
+      "t": "kv",
+      "k": "Ligera y delgada",
+      "v": "Su diseño de bajo peso y poco espesor permite una alta potencia en un volumen pequeño, adaptándose a espacios limitados."
+     },
+     {
+      "t": "kv",
+      "k": "Transferencia de calor eficiente",
+      "v": "Es un elemento de calentamiento superficial con alta eficiencia y distribución uniforme del calor. Minimiza la pérdida térmica gracias a su gran superficie de contacto con el objeto a calentar."
+     },
+     {
+      "t": "kv",
+      "k": "Fácil de instalar y controlar",
+      "v": "Los cables conductores pueden conectarse mediante remaches. Se puede instalar con adhesivos o tornillos y permite un control de temperatura preciso mediante termostatos externos."
+     }
+    ]
+   }
+  ],
+  "images": [
+   "p/placa-calefactora-de-mica-y-acero-inoxidable-1.png",
+   "p/placa-calefactora-de-mica-y-acero-inoxidable-2.png",
+   "p/placa-calefactora-de-mica-y-acero-inoxidable-3.png"
+  ]
+ },
+ "resistencia-en-acero-inoxidable-de-mica": {
+  "title": "Resistencia de mica en acero inoxidable",
+  "subtitle": "Calentamiento estable",
+  "sections": [
+   {
+    "h": null,
+    "items": [
+     {
+      "t": "p",
+      "v": "Las resistencias de calentamiento de mica en acero inoxidable están hechas de alambre calefactor de níquel-cromo de alta calidad, con mica natural como capa de aislante y una capa de acero inoxidable de alta calidad como capa conductora del calor."
+     },
+     {
+      "t": "p",
+      "v": "Las resistencias se pueden fabricar en la forma deseada, tanto cilíndricas, planas, formas irregulares según necesidades."
+     }
+    ]
+   },
+   {
+    "h": "Parámetros necesarios para personalización",
+    "items": [
+     {
+      "t": "kv",
+      "k": "Dimensiones de la resistencia",
+      "v": "Diámetro interior (mm) x Altura (mm) x Espesor: 3-5mm."
+     },
+     {
+      "t": "kv",
+      "k": "Voltaje de trabajo",
+      "v": "9v, 24v, 36v, 110v, 220v, 230v, 240v, 380v, etc."
+     },
+     {
+      "t": "kv",
+      "k": "Potencia de la misma",
+      "v": "Normalmente se instala 3w por centímetro cuadrado, otra necesidad exponer."
+     },
+     {
+      "t": "kv",
+      "k": "Perforaciones",
+      "v": "Se puede perforar con agujeros redondos o cuadrados, también de forma requerida."
+     },
+     {
+      "t": "kv",
+      "k": "Tipo de cableado",
+      "v": "Conectores cerámicos, cables de alta temperatura, salidas de enchufe, etc."
+     },
+     {
+      "t": "kv",
+      "k": "Modo de salida de cable",
+      "v": "Salida frontal, salida lateral, salida recta, salida en ángulo, etc"
+     }
+    ]
+   },
+   {
+    "h": "Carga superficial",
+    "items": [
+     {
+      "t": "p",
+      "v": "La temperatura normal de funcionamiento de una resistencia de mica es de 2.5 a 3 vatios por centímetro cuadrado, se recomienda sistema de control automático de temperatura según el rango de potencia requerido."
+     }
+    ]
+   }
+  ],
+  "images": [
+   "p/resistencia-en-acero-inoxidable-de-mica-1.png",
+   "p/resistencia-en-acero-inoxidable-de-mica-2.png",
+   "p/resistencia-en-acero-inoxidable-de-mica-3.png",
+   "p/resistencia-en-acero-inoxidable-de-mica-4.png",
+   "p/resistencia-en-acero-inoxidable-de-mica-5.png"
+  ]
+ },
+ "resistencia-en-cobre-puro": {
+  "title": "Resistencia en cobre puro",
+  "subtitle": "Calentamiento estable",
+  "sections": [
+   {
+    "h": null,
+    "items": [
+     {
+      "t": "p",
+      "v": "La resistencia de banda de cobre es un producto fabricado con tecnología avanzada. Es un elemento de calefacción eléctrica que utiliza corriente para generar calor a través de un conductor. Generalmente está hecho de cobre de alta pureza. Cuenta con un diseño estético y razonable, una larga vida útil, reduce la frecuencia de reemplazos y mejora la eficiencia de producción en máquinas de moldeo por inyección."
+     }
+    ]
+   },
+   {
+    "h": "Características Principales",
+    "items": [
+     {
+      "t": "kv",
+      "k": "Apariencia",
+      "v": "Diseño estético y funcional; larga vida útil que reduce tiempos de inactividad y costos de reemplazo."
+     },
+     {
+      "t": "kv",
+      "k": "Fijación",
+      "v": "Utiliza pernos hexagonales internos para un ajuste firme, confiable y de fácil instalación."
+     },
+     {
+      "t": "kv",
+      "k": "Aislamiento",
+      "v": "Emplea placas de mica importadas resistentes a altas temperaturas, con excelentes propiedades aislantes."
+     },
+     {
+      "t": "kv",
+      "k": "Cables de alta temperatura",
+      "v": "Utiliza cables calefactores de alta calidad (estándar europeo/americano) que ofrecen disipación rápida y uniforme de calor, además de soportar altos voltajes."
+     },
+     {
+      "t": "kv",
+      "k": "Resistencia térmica",
+      "v": "La temperatura en la superficie de la máquina puede alcanzar hasta 500°C sin quemarse."
+     },
+     {
+      "t": "kv",
+      "k": "Materiales",
+      "v": "Cobre, cables para alta temperatura, malla metálica tejida, terminales de cerámica, placa de mica, placa electrolítica y filamento calefactor importado."
+     }
+    ]
+   },
+   {
+    "h": "Parámetros para Pedidos Personalizados",
+    "items": [
+     {
+      "t": "p",
+      "v": "Para solicitar una pieza a medida, se deben proporcionar los siguientes datos:"
+     },
+     {
+      "t": "kv",
+      "k": "Dimensiones",
+      "v": "Diámetro interior (mm) × Altura (mm). El espesor estándar es de 3mm a 5mm."
+     },
+     {
+      "t": "kv",
+      "k": "Voltaje",
+      "v": "Ejemplo: 9V, 24V, 36V, 110V, 220V, 230V, 240V, 380V, etc."
+     },
+     {
+      "t": "kv",
+      "k": "Potencia",
+      "v": "Generalmente se calcula a razón de 3W por centímetro cuadrado (3 W/cm²). Para requisitos especiales, contactar al vendedor."
+     },
+     {
+      "t": "kv",
+      "k": "Aperturas",
+      "v": "Se pueden realizar agujeros cuadrados o redondos según sea necesario."
+     },
+     {
+      "t": "kv",
+      "k": "Tipo de conexión",
+      "v": "Terminales de cerámica, cables de alta temperatura, salida de tornillos, enchufes, etc. (Opciones flexibles)."
+     }
+    ]
+   }
+  ],
+  "images": [
+   "p/resistencia-en-cobre-puro-1.png",
+   "p/resistencia-en-cobre-puro-2.png",
+   "p/resistencia-en-cobre-puro-3.png",
+   "p/resistencia-en-cobre-puro-4.png",
+   "p/resistencia-en-cobre-puro-5.png"
+  ]
+ },
+ "resistencias-de-aluminio": {
+  "title": "Resistencias de aluminio",
+  "subtitle": "Calentamiento estable",
+  "sections": [
+   {
+    "h": null,
+    "items": [
+     {
+      "t": "p",
+      "v": "La resistencia de mica con cubierta de aluminio es un dispositivo de calefacción eléctrica común que utiliza las propiedades aislantes y la buena resistencia a altas temperaturas del material de mica para generar calor mediante el calentamiento de hilos de aleación de níquel-cromo con corriente eléctrica."
+     },
+     {
+      "t": "p",
+      "v": "Este tipo de resistencia suele tener una carcasa exterior de aluminio y una estructura interna compuesta por placas de mica y cables calefactores. Sus ventajas incluyen: procesamiento sencillo, funcionamiento fiable, uso práctico, calentamiento rápido, alta eficiencia térmica y bajo consumo de energía. Por ello, se utilizan ampliamente en industrias como la maquinaria de plásticos, embalaje e impresión, petroquímica y equipos electrónicos."
+     }
+    ]
+   },
+   {
+    "h": "Parámetros necesarios para personalización",
+    "items": [
+     {
+      "t": "kv",
+      "k": "Dimensiones",
+      "v": "Diámetro interior (mm) × Altura (mm). El espesor estándar es de 3 mm a 5 mm."
+     },
+     {
+      "t": "kv",
+      "k": "Voltaje",
+      "v": "Por ejemplo: 9V, 24V, 36V, 110V, 220V, 230V, 240V, 380V, etc."
+     },
+     {
+      "t": "kv",
+      "k": "Potencia",
+      "v": "Generalmente se fabrican a razón de 3W por centímetro cuadrado. Si tiene requisitos especiales, póngase en contacto con el vendedor."
+     },
+     {
+      "t": "kv",
+      "k": "Perforaciones",
+      "v": "Se pueden realizar orificios cuadrados o redondos."
+     },
+     {
+      "t": "kv",
+      "k": "Tipo de conexión",
+      "v": "Terminales de cerámica, cables para alta temperatura, terminales de tornillo, enchufes, etc. (Opciones flexibles)."
+     },
+     {
+      "t": "kv",
+      "k": "Salida del cable",
+      "v": "Salida frontal (recta), salida lateral o salida directa"
+     }
+    ]
+   }
+  ],
+  "images": [
+   "p/resistencias-de-aluminio-1.png",
+   "p/resistencias-de-aluminio-2.png",
+   "p/resistencias-de-aluminio-3.png"
+  ]
+ },
+ "resistencias-de-calentamiento-tipo-resorte": {
+  "title": "Resistencias de calentamiento tipo resorte",
+  "subtitle": "Calentamiento estable",
+  "sections": [
+   {
+    "h": null,
+    "items": [
+     {
+      "t": "p",
+      "v": "Las resistencias de calentamiento tipo resorte (o de bobina abierta) son elementos calefactores fabricados generalmente con aleación de nicromel (80% níquel y 20% cromo), diseñados para emitir calor de manera uniforme y directa"
+     }
+    ]
+   },
+   {
+    "h": "Especificaciones Técnicas",
+    "items": [
+     {
+      "t": "kv",
+      "k": "Materiales",
+      "v": "Acero inoxidable 304, óxido de magnesio, hilo calefactor, conectores, funda protectora de cable y cables conductores."
+     },
+     {
+      "t": "kv",
+      "k": "Voltaje",
+      "v": "El voltaje convencional es de 220V, con posibilidad de personalización no estándar."
+     },
+     {
+      "t": "kv",
+      "k": "Termopar",
+      "v": "Opciones disponibles de Tipo J y Tipo K."
+     },
+     {
+      "t": "kv",
+      "k": "Longitud del cable",
+      "v": "La longitud estándar es de 1000 mm; longitudes mayores requieren personalización."
+     },
+     {
+      "t": "kv",
+      "k": "Tipo de cable",
+      "v": "Generalmente cable de cobre con silicona de fibra de vidrio o cable de cobre envuelto en teflón. Otros materiales requieren personalización."
+     },
+     {
+      "t": "kv",
+      "k": "Temperatura máxima de superficie",
+      "v": "750°C."
+     },
+     {
+      "t": "kv",
+      "k": "Tolerancia dimensional superficial",
+      "v": "+- 0.1%"
+     },
+     {
+      "t": "p",
+      "v": "Resistencia a la tensión (Rigidez dieléctrica): 700V."
+     },
+     {
+      "t": "kv",
+      "k": "Tolerancia de potencia (en frío)",
+      "v": "+5% – 10%."
+     },
+     {
+      "t": "kv",
+      "k": "Resistencia de aislamiento (en frío)",
+      "v": "0,5 MΩ."
+     },
+     {
+      "t": "kv",
+      "k": "Corriente de fuga (en frío a 253V)",
+      "v": "0.5mA."
+     },
+     {
+      "t": "kv",
+      "k": "Tolerancias de longitud",
+      "v": "Longitud de calentamiento +-5%, extremo frío +0mm"
+     },
+     {
+      "t": "p",
+      "v": "-10mm, longitud del conector +- 2mm."
+     },
+     {
+      "t": "kv",
+      "k": "Salida del cable",
+      "v": "Axial, tangencial o radial. Otros métodos de salida son personalizables."
+     },
+     {
+      "t": "kv",
+      "k": "Método de bobinado",
+      "v": "Espiral, sinuoso (meandro), distribuido por vataje, bobinado denso u otras formas geométricas."
+     }
+    ]
+   }
+  ],
+  "images": [
+   "p/resistencias-de-calentamiento-tipo-resorte-1.png",
+   "p/resistencias-de-calentamiento-tipo-resorte-2.png",
+   "p/resistencias-de-calentamiento-tipo-resorte-3.png"
+  ]
+ },
+ "serie-mtc-b": {
+  "title": "Serie MTC-B",
+  "subtitle": "Controlador de temperatura del canal caliente",
+  "sections": [
+   {
+    "h": "Ventajas",
+    "items": [
+     {
+      "t": "li",
+      "v": "Pantalla IPS a todo color."
+     },
+     {
+      "t": "li",
+      "v": "Protección activa contra conexiones incorrectas de calefacción y sensor de temperatura."
+     },
+     {
+      "t": "li",
+      "v": "Visualización de fallos en chino/inglés, clara y rápida."
+     },
+     {
+      "t": "li",
+      "v": "Gráfico de forma de onda de temperatura que muestra el estado del control de temperatura."
+     },
+     {
+      "t": "li",
+      "v": "Función opcional de medición de energía eléctrica que monitoriza el consumo de energía."
+     }
+    ]
+   },
+   {
+    "h": "Pantalla a color IPS: la visualización del texto es más fácil de entender",
+    "items": [
+     {
+      "t": "p",
+      "v": "La tarjeta de control de temperatura incorpora una pantalla LCD IPS a todo color de alta resolución, lo que facilita su configuración sin necesidad de un manual de instrucciones. La información de estado, como fallos de calentamiento, fallos del termopar, corriente, relación de salida y la barra de menú, se muestran en texto, con libre alternancia entre chino e inglés."
+     }
+    ]
+   },
+   {
+    "h": "Control de temperatura de alta precisión e interfaz universal: adaptación perfecta a otras marcas",
+    "items": [
+     {
+      "t": "p",
+      "v": "Equipada con un sistema de control de temperatura de alta precisión, que reduce significativamente la tasa de defectos en los productos moldeados por inyección."
+     },
+     {
+      "t": "p",
+      "v": "La tarjeta de control de temperatura utiliza una interfaz universal internacional (gold finger), que se adapta perfectamente a otras marcas sin ninguna pérdida."
+     }
+    ]
+   }
+  ],
+  "images": [
+   "p/serie-mtc-b-1.png",
+   "p/serie-mtc-b-2.png",
+   "p/serie-mtc-b-3.png",
+   "p/serie-mtc-b-4.png",
+   "p/serie-mtc-b-5.png"
+  ]
+ },
+ "serie-mtc-g": {
+  "title": "Serie MTC-G",
+  "subtitle": "Controlador de temperatura del canal caliente",
+  "sections": [
+   {
+    "h": "Ventajas",
+    "items": [
+     {
+      "t": "li",
+      "v": "Pantalla IPS a todo color."
+     },
+     {
+      "t": "li",
+      "v": "Protección activa contra conexiones incorrectas de calefacción y sensor de temperatura."
+     },
+     {
+      "t": "li",
+      "v": "Visualización de fallos en chino/inglés, clara y rápida."
+     },
+     {
+      "t": "li",
+      "v": "Gráfico de forma de onda de temperatura que muestra el estado del control de temperatura."
+     },
+     {
+      "t": "li",
+      "v": "Función opcional de medición de energía eléctrica que monitoriza el consumo de energía."
+     }
+    ]
+   },
+   {
+    "h": "Pantalla a color IPS: la visualización del texto es más fácil de entender",
+    "items": [
+     {
+      "t": "p",
+      "v": "La tarjeta de control de temperatura incorpora una pantalla LCD IPS a todo color de alta resolución, lo que facilita su configuración sin necesidad de un manual de instrucciones. La información de estado, como fallos de calentamiento, fallos del termopar, corriente, relación de salida y la barra de menú, se muestran en texto, con libre alternancia entre chino e inglés."
+     }
+    ]
+   },
+   {
+    "h": "Control de temperatura de alta precisión e interfaz universal: adaptación perfecta a otras marcas",
+    "items": [
+     {
+      "t": "p",
+      "v": "Equipada con un sistema de control de temperatura de alta precisión, que reduce significativamente la tasa de defectos en los productos moldeados por inyección."
+     },
+     {
+      "t": "p",
+      "v": "La tarjeta de control de temperatura utiliza una interfaz universal internacional (gold finger), que se adapta perfectamente a otras marcas sin ninguna pérdida."
+     }
+    ]
+   }
+  ],
+  "images": [
+   "p/serie-mtc-g-1.png",
+   "p/serie-mtc-g-2.png",
+   "p/serie-mtc-g-3.png",
+   "p/serie-mtc-g-4.png",
+   "p/serie-mtc-g-5.png"
+  ]
+ },
+ "serie-mtc-h": {
+  "title": "Serie MTC-H",
+  "subtitle": "Controlador de temperatura del canal caliente",
+  "sections": [
+   {
+    "h": "Ventajas",
+    "items": [
+     {
+      "t": "li",
+      "v": "Una sola unidad puede admitir hasta 128 zonas de control."
+     },
+     {
+      "t": "li",
+      "v": "Cuenta con un sistema de control dual de una tarjeta estable."
+     },
+     {
+      "t": "li",
+      "v": "Con configuraciones de parámetros simples, el equipo es estable y confiable."
+     },
+     {
+      "t": "li",
+      "v": "Equipado con una función de detección de fallas en línea, el equipo funciona de manera estable."
+     }
+    ]
+   },
+   {
+    "h": "Pantalla plegable",
+    "items": [
+     {
+      "t": "p",
+      "v": "Diseño de pantalla plegable, la interfaz táctil permite visualizar 10 zonas de control de temperatura en una sola página, donde cada celda muestra el control de una zona. En la página, se pueden activar o desactivar zonas de control de temperatura individuales. La información mostrada incluye el número de zona, la temperatura real, la temperatura configurada, el estado de funcionamiento, los avisos de fallos y alarmas, la copia del circuito, el modelo del molde, la corriente y la relación de salida de corriente, la pantalla de bloqueo con función de ajuste global de temperatura, la función de media temperatura (mantener caliente) y la función de copia de temperatura."
+     }
+    ]
+   }
+  ],
+  "images": [
+   "p/serie-mtc-h-1.png",
+   "p/serie-mtc-h-2.png",
+   "p/serie-mtc-h-3.png",
+   "p/serie-mtc-h-4.png",
+   "p/serie-mtc-h-5.png",
+   "p/serie-mtc-h-6.png",
+   "p/serie-mtc-h-7.png",
+   "p/serie-mtc-h-8.png",
+   "p/serie-mtc-h-9.png"
+  ]
+ },
+ "serie-mtc-i": {
+  "title": "Serie MTC-I",
+  "subtitle": "Controlador de temperatura del canal caliente",
+  "sections": [
+   {
+    "h": "Ventajas",
+    "items": [
+     {
+      "t": "li",
+      "v": "Pantalla a color en chino/inglés"
+     },
+     {
+      "t": "li",
+      "v": "Pequeño y exquisito, altamente integrado."
+     },
+     {
+      "t": "li",
+      "v": "Un módulo controla dos temperaturas"
+     },
+     {
+      "t": "li",
+      "v": "La configuración de parámetros es sencilla y el equipo es estable y confiable."
+     },
+     {
+      "t": "li",
+      "v": "Sistema estable con controles duales de una tarjeta y de doble tarjeta"
+     },
+     {
+      "t": "li",
+      "v": "Diseño modular"
+     },
+     {
+      "t": "li",
+      "v": "Control preciso de temperatura, protección contra desalineación."
+     }
+    ]
+   },
+   {
+    "h": "Ámbito de uso",
+    "items": [
+     {
+      "t": "p",
+      "v": "Moldes de canal caliente, diversos moldes de plástico, equipos de tratamiento térmico, etc."
+     }
+    ]
+   },
+   {
+    "h": "Pantalla del módulo de control de temperatura de funcionamiento tipo perilla",
+    "items": [
+     {
+      "t": "p",
+      "v": "La temperatura y otras operaciones se ajustan girando la perilla del módulo de control de temperatura. La pantalla LCD del módulo de control de temperatura está disponible en chino e inglés. El número de serie del control de temperatura, el modelo galvánico, la corriente, la relación de salida de corriente, el estado de funcionamiento y la información de fallos se muestran en la pantalla. El panel cuenta con perillas de operación, indicadores de estado de alimentación e indicadores de comunicación. Los módulos de control de temperatura se pueden intercambiar entre cualquier zona de control de temperatura."
+     },
+     {
+      "t": "p",
+      "v": "El uso del modo de control dual con una sola tarjeta reduce el tamaño de la máquina en un 50 % en comparación con productos similares, lo que la hace altamente integrada y compacta. Su exquisito diseño interno utiliza interfaces duales y dos soportes para tarjetas para lograr un mecanismo de control de temperatura estable"
+     }
+    ]
+   }
+  ],
+  "images": []
+ },
+ "serie-tg": {
+  "title": "Serie TG",
+  "subtitle": "Controlador de temperatura del canal caliente",
+  "sections": [
+   {
+    "h": "Ventajas",
+    "items": [
+     {
+      "t": "li",
+      "v": "Una sola unidad puede admitir el control de hasta 128 zonas."
+     },
+     {
+      "t": "li",
+      "v": "Con la función de detección de fallas en línea, el equipo funciona de manera estable."
+     },
+     {
+      "t": "li",
+      "v": "Sistema estable de una tarjeta, un control."
+     },
+     {
+      "t": "li",
+      "v": "La configuración de parámetros es sencilla y el equipo es estable y confiable."
+     }
+    ]
+   },
+   {
+    "h": "El primer módulo de control de temperatura operado con perilla",
+    "items": [
+     {
+      "t": "p",
+      "v": "Cuando no se utiliza la pantalla táctil, la temperatura y otras funciones se pueden ajustar girando la perilla del módulo de control de temperatura local. La pantalla LCD del módulo de control de temperatura local, con visualización completa en chino/inglés, muestra el número de serie del control de temperatura, el tipo de termopar, la corriente, la proporción de salida de corriente, el estado de funcionamiento y la información de fallos. El panel cuenta con perillas de operación, indicadores luminosos de estado de alimentación y de comunicación, y el módulo de control de temperatura se puede intercambiar entre cualquier zona de control de temperatura."
+     }
+    ]
+   }
+  ],
+  "images": []
+ },
+ "svge-8": {
+  "title": "Controlador de secuencia universal SVGE-8",
+  "subtitle": "Para valve gates y boquillas de molde",
+  "sections": [
+   {
+    "h": "Características",
+    "items": [
+     {
+      "t": "li",
+      "v": "Las válvulas de aceite y aire son intercambiables."
+     },
+     {
+      "t": "li",
+      "v": "Permite la apertura o el cierre de un solo circuito."
+     },
+     {
+      "t": "li",
+      "v": "Pantalla táctil para un manejo sencillo."
+     },
+     {
+      "t": "li",
+      "v": "Es posible la apertura o el cierre manual de las electroválvulas."
+     },
+     {
+      "t": "li",
+      "v": "Admite ajuste de tiempo de dos o cuatro etapas."
+     }
+    ]
+   },
+   {
+    "h": "Parámetros",
+    "items": [
+     {
+      "t": "kv",
+      "k": "Entrada de energía",
+      "v": "200~240 V CA 50/60 Hz"
+     },
+     {
+      "t": "kv",
+      "k": "Entrada de señal",
+      "v": "CC 24 V o entrada de interruptor (seleccionable en fábrica)"
+     },
+     {
+      "t": "kv",
+      "k": "Rango de tiempo",
+      "v": "0,00~99,99 segundos"
+     },
+     {
+      "t": "kv",
+      "k": "Grupos de control",
+      "v": "8 zonas"
+     },
+     {
+      "t": "kv",
+      "k": "Voltaje de salida",
+      "v": "24 V CC o 220 V CA"
+     }
+    ]
+   },
+   {
+    "h": "Configuración del producto",
+    "items": [
+     {
+      "t": "li",
+      "v": "Host · Cable de alimentación del dispositivo"
+     },
+     {
+      "t": "li",
+      "v": "Pantalla táctil de 3,7 u 8 pulgadas"
+     },
+     {
+      "t": "li",
+      "v": "Cable de conexión de señal de disparo"
+     },
+     {
+      "t": "li",
+      "v": "Línea de conexión de control de válvula solenoide"
+     }
+    ]
+   },
+   {
+    "h": "Dos períodos de tiempo",
+    "items": [
+     {
+      "t": "p",
+      "v": "T1, T2 (T1 es el tiempo de retardo, T2 es el tiempo de inyección)"
+     }
+    ]
+   },
+   {
+    "h": "Cuatro períodos de tiempo",
+    "items": [
+     {
+      "t": "p",
+      "v": "T1, T2, T3, T4 cuatro segmentos de tiempo (T1, T3 son tiempos de retardo, T2, T4 son tiempos de inyección)"
+     }
+    ]
+   }
+  ],
+  "images": []
+ },
+ "tarjeta-tipo-mtc-b": {
+  "title": "Tarjeta tipo MTC-B",
+  "subtitle": "Tarjeta de control de temperatura del canal caliente (universal)",
+  "sections": [
+   {
+    "h": null,
+    "items": []
+   },
+   {
+    "h": "Ventajas",
+    "items": [
+     {
+      "t": "li",
+      "v": "Pantalla IPS a todo color."
+     },
+     {
+      "t": "li",
+      "v": "Protección activa contra conexiones incorrectas de calefacción y sensor de temperatura."
+     },
+     {
+      "t": "li",
+      "v": "Visualización de fallos en chino/inglés, clara y rápida."
+     },
+     {
+      "t": "li",
+      "v": "Gráfico de forma de onda de temperatura que muestra el estado del control de temperatura."
+     },
+     {
+      "t": "li",
+      "v": "Función opcional de medición de energía eléctrica que monitoriza el consumo de energía."
+     }
+    ]
+   },
+   {
+    "h": "Pantalla a color IPS: la visualización del texto es más fácil de entender",
+    "items": [
+     {
+      "t": "p",
+      "v": "La tarjeta de control de temperatura incorpora una pantalla LCD IPS a todo color de alta resolución, lo que facilita su configuración sin necesidad de un manual de instrucciones. La información de estado, como fallos de calentamiento, fallos del termopar, corriente, relación de salida y la barra de menú, se muestran en texto, con libre alternancia entre chino e inglés."
+     }
+    ]
+   },
+   {
+    "h": "Control de temperatura de alta precisión e interfaz universal: adaptación perfecta a otras marcas",
+    "items": [
+     {
+      "t": "p",
+      "v": "Equipada con un sistema de control de temperatura de alta precisión, que reduce significativamente la tasa de defectos en los productos moldeados por inyección."
+     },
+     {
+      "t": "p",
+      "v": "La tarjeta de control de temperatura utiliza una interfaz universal internacional (gold finger), que se adapta perfectamente a otras marcas sin ninguna pérdida."
+     }
+    ]
+   }
+  ],
+  "images": []
+ },
+ "ventosas-de-vacio": {
+  "title": "Ventosas de vacío",
+  "subtitle": "Silicona, NBR y poliuretano",
+  "sections": [
+   {
+    "h": null,
+    "items": [
+     {
+      "t": "p",
+      "v": "Utilizadas en automatización, robótica e industria general se fabrican principalmente en tres materiales clave: NBR (caucho nitrílico), Silicona y Poliuretano (PU/PUR). Cada uno ofrece propiedades específicas según la aplicación."
+     }
+    ]
+   }
+  ],
+  "images": [
+   "p/ventosas-de-vacio-1.png",
+   "p/ventosas-de-vacio-2.png",
+   "p/ventosas-de-vacio-3.png"
+  ]
+ }
+}
