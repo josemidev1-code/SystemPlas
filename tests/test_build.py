@@ -67,5 +67,16 @@ class Portada(Base):
             self.lacks("hero-eyebrow", page(n))
 
 
+class SinAnimacion(Base):
+    def test_ninguna_pagina_usa_reveal(self):
+        for f in glob.glob(os.path.join(ROOT, "*.html")):
+            with open(f, encoding="utf-8") as fh:
+                self.assertNotRegex(fh.read(), r'class="[^"]*\breveal\b', os.path.basename(f))
+
+    def test_js_sin_observer(self):
+        with open(os.path.join(ROOT, "assets/js/main.js"), encoding="utf-8") as fh:
+            self.lacks("IntersectionObserver", fh.read())
+
+
 if __name__ == "__main__":
     unittest.main()

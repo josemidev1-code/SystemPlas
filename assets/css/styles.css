@@ -199,9 +199,7 @@ p { margin: 0 0 1em; }
 .to-top.show { opacity: 1; visibility: visible; }
 
 /* ---------- Animación de aparición ---------- */
-.js .reveal { opacity: 0; transform: translateY(18px); transition: opacity .5s ease, transform .5s ease; }
-.js .reveal.in { opacity: 1; transform: none; }
-@media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; transition: none; } html { scroll-behavior: auto; } }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
 
 /* ---------- Responsive ---------- */
 @media (max-width: 1080px) {

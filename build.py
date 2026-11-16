@@ -143,7 +143,7 @@ def header(active):
 </div></header>
 '''
 
-CTA = '''<section class="cta" style="background-image:url(assets/img/home-2.jpg)"><div class="container reveal">
+CTA = '''<section class="cta" style="background-image:url(assets/img/home-2.jpg)"><div class="container">
   <h2>Innovamos contigo</h2>
   <p>Nuestras <strong>soluciones a medida</strong> garantizan una integración perfecta con las líneas de producción de nuestros clientes, lo que les permite obtener <strong>una ventaja competitiva en el mercado</strong>. Cuéntanos tu proyecto.</p>
   <a class="btn" href="contacto.html">Contacto</a>
@@ -215,7 +215,7 @@ def cat_tabs(active):
     ) + "</div></nav>\n"
 
 def band(title, text, btn="Solicitar catálogo de productos", href="contacto.html"):
-    return f'''<section class="band"><div class="container reveal">
+    return f'''<section class="band"><div class="container">
   <h2>{E(title)}</h2><p>{E(text)}</p>
   <a class="btn btn-outline-light" href="{href}">{E(btn)}</a>
 </div></section>
@@ -253,7 +253,7 @@ def render_section(sec, first):
     if long_kv:
         body += '<div class="feat-grid">' + "".join(f'<div class="feat"><h3>{E(i["k"])}</h3><p>{E(i["v"])}</p></div>' for i in long_kv) + "</div>"
     wide = bool(long_kv) or len(" ".join(p["v"] for p in ps)) > 700 or len(short_kv) > 7
-    return f'<section class="block reveal{" block--wide" if wide else ""}"><h2>{E(h)}</h2>{body}</section>', wide
+    return f'<section class="block{" block--wide" if wide else ""}"><h2>{E(h)}</h2>{body}</section>', wide
 
 for slug, f in FICHAS.items():
     cat = CAT_BY_PRODUCT.get(slug)
@@ -294,8 +294,8 @@ for slug, f in FICHAS.items():
         crumbs(("Productos", "productos.html"), (cat["name"], f"{cat['slug']}.html"), (f["title"], None)) + f'''<main>
 <section class="pdp"><div class="container">
   <div class="pdp-top">
-    <div class="gallery reveal"><div class="gallery-main"><img src="{img_src(main)}" alt="{E(f['title'])}"></div>{thumbs}</div>
-    <div class="pdp-info reveal">
+    <div class="gallery"><div class="gallery-main"><img src="{img_src(main)}" alt="{E(f['title'])}"></div>{thumbs}</div>
+    <div class="pdp-info">
       <span class="kicker">{E(cat['name'])}</span>
       <h1>{E(f['title'])}</h1>{sub}
       <p class="lead">{E(lead)}</p>
@@ -315,7 +315,7 @@ for slug, f in FICHAS.items():
   <div class="pdp-body">{"".join(blocks)}</div>
 </div></section>
 <section class="related"><div class="container">
-  <div class="section-head reveal"><span class="kicker">{E(cat['name'])}</span><h2>Otros productos de la categoría</h2></div>
+  <div class="section-head"><span class="kicker">{E(cat['name'])}</span><h2>Otros productos de la categoría</h2></div>
   <div class="product-grid grid-4">{rel_html}</div>
 </div></section>
 ''' + CTA + "</main>\n" + mobile_cta + footer()
@@ -343,12 +343,12 @@ write("productos.html", head("Productos | System Plast", "Catálogo System Plast
       header("productos.html") + hero("Catálogo de productos", "Productos diseñados para mejorar la productividad y garantizar procesos de inyección más eficientes y seguros") +
       cat_tabs(None) + f'''<main>
 <section class="section section--grey"><div class="container">
-  <div class="section-head reveal"><span class="kicker">Categorías de productos</span><h2>Conoce nuestra variedad de productos</h2><p>Equipos y componentes para que sus procesos de inyección sean más eficientes, seguros y rentables.</p></div>
+  <div class="section-head"><span class="kicker">Categorías de productos</span><h2>Conoce nuestra variedad de productos</h2><p>Equipos y componentes para que sus procesos de inyección sean más eficientes, seguros y rentables.</p></div>
   <div class="product-grid cat-grid cat-grid--4">{cats_html}</div>
 </div></section>
 ''' + band("Soluciones a medida", "Nuestras soluciones a medida garantizan una integración perfecta con las líneas de producción de nuestros clientes, lo que les permite obtener una ventaja competitiva en el mercado.", "Contáctanos") + f'''<section class="section"><div class="container">
-  <p class="statement reveal">Estos productos ayudan a nuestros clientes a <strong>mejorar la eficiencia de la producción, reducir el consumo de energía y mejorar la calidad del producto</strong>.</p>
-  <p class="reveal">Al ofrecer productos de mayor calidad y servicios más especializados, aspiramos a contribuir significativamente al desarrollo de la industria global del moldeo por inyección y a liderar la nueva generación de tecnología de control de temperatura de canal caliente.</p>
+  <p class="statement">Estos productos ayudan a nuestros clientes a <strong>mejorar la eficiencia de la producción, reducir el consumo de energía y mejorar la calidad del producto</strong>.</p>
+  <p>Al ofrecer productos de mayor calidad y servicios más especializados, aspiramos a contribuir significativamente al desarrollo de la industria global del moldeo por inyección y a liderar la nueva generación de tecnología de control de temperatura de canal caliente.</p>
 </div></section>
 ''' + CTA + "</main>\n" + footer())
 
@@ -363,7 +363,7 @@ why = [("star", "Calidad garantizada", "Equipos y productos diseñados bajo est�
        ("user", "Atención personalizada", "Soporte antes, durante y después de su compra."),
        ("globe", "Cobertura amplia", "Envíos y atención en cualquier parte del mundo."),
        ("clock", "Respuesta y recambios", "De 12 a 24 horas.")]
-news_html = "".join(f'<a class="news-card reveal" href="{u}" target="_blank" rel="noopener"><img src="assets/img/{i}" alt="" loading="lazy"><div class="body"><span class="kicker">{E(src)}</span><h3>{E(t)}</h3><span class="card-link">Leer noticia ↗</span></div></a>' for i, t, src, u in NEWS)
+news_html = "".join(f'<a class="news-card" href="{u}" target="_blank" rel="noopener"><img src="assets/img/{i}" alt="" loading="lazy"><div class="body"><span class="kicker">{E(src)}</span><h3>{E(t)}</h3><span class="card-link">Leer noticia ↗</span></div></a>' for i, t, src, u in NEWS)
 home_cats = "".join(card(c["name"], c["img"], f"{c['slug']}.html") for c in CATS)
 featured = [("serie-mtc-b", "Serie MTC-B", "Más vendido"), ("resistencias-de-aluminio", "Resistencias de aluminio", None),
             ("cambiadores-rapidos-de-herramientas-quick-changers", "Cambiadores rápidos", None), ("svge-8", "Controlador SVGE-8", "Nuevo")]
@@ -377,32 +377,32 @@ write("index.html", head("System Plast | Sistemas de control y plásticos indust
 </div></section>
 ''' + TRUST + f'''<main>
 <section class="section section--grey"><div class="container">
-  <div class="section-head reveal"><span class="kicker">Nuestros productos</span><h2>Tecnología y soluciones para tu negocio</h2><p>En SYSTEM PLAST ofrecemos productos diseñados para mejorar la productividad y garantizar procesos de inyección de plástico más eficientes y seguros.</p></div>
+  <div class="section-head"><span class="kicker">Nuestros productos</span><h2>Tecnología y soluciones para tu negocio</h2><p>En SYSTEM PLAST ofrecemos productos diseñados para mejorar la productividad y garantizar procesos de inyección de plástico más eficientes y seguros.</p></div>
   <div class="product-grid grid-4">{home_cats}</div>
 </div></section>
 <section class="section"><div class="container">
-  <div class="section-head reveal"><span class="kicker">Destacados</span><h2>Productos más solicitados</h2></div>
+  <div class="section-head"><span class="kicker">Destacados</span><h2>Productos más solicitados</h2></div>
   <div class="product-grid grid-4">{feat_html}</div>
 </div></section>
 <section class="section section--grey"><div class="container">
-  <div class="section-head reveal"><span class="kicker">Tecnología avanzada para tu proceso de inyección</span><h2>Tu aliado estratégico en innovación</h2></div>
-  <div class="feature-list">{"".join(f'<div class="feature reveal"><span class="num">{n}.</span><h3>{E(t)}</h3><p>{E(d)}</p></div>' for n, t, d in features)}</div>
+  <div class="section-head"><span class="kicker">Tecnología avanzada para tu proceso de inyección</span><h2>Tu aliado estratégico en innovación</h2></div>
+  <div class="feature-list">{"".join(f'<div class="feature"><span class="num">{n}.</span><h3>{E(t)}</h3><p>{E(d)}</p></div>' for n, t, d in features)}</div>
 </div></section>
 ''' + band("Asesoría técnica especializada", "En SYSTEM PLAST entendemos que elegir un proveedor es elegir un socio de confianza. Le ayudamos a elegir el equipo adecuado y le acompañamos antes, durante y después de la compra.", "Solicitar asesoramiento") + f'''<section class="section"><div class="container">
-  <div class="section-head reveal"><span class="kicker">Por qué elegirnos</span><h2>Lo que nos diferencia</h2><p>En SYSTEM PLAST entendemos que elegir un proveedor es elegir un socio de confianza. Por eso ofrecemos:</p></div>
-  <div class="why">{"".join(f'<div class="why-item reveal"><div class="icon">{ICON[ic]}</div><h4>{E(t)}</h4><p>{E(d)}</p></div>' for ic, t, d in why)}</div>
+  <div class="section-head"><span class="kicker">Por qué elegirnos</span><h2>Lo que nos diferencia</h2><p>En SYSTEM PLAST entendemos que elegir un proveedor es elegir un socio de confianza. Por eso ofrecemos:</p></div>
+  <div class="why">{"".join(f'<div class="why-item"><div class="icon">{ICON[ic]}</div><h4>{E(t)}</h4><p>{E(d)}</p></div>' for ic, t, d in why)}</div>
 </div></section>
 <section class="section section--grey"><div class="container">
-  <div class="section-head reveal"><span class="kicker">Industrias</span><h2>Que confían en SYSTEM PLAST</h2><p>Nuestros productos están presentes en grandes sectores como automoción, electrodomésticos, dispositivos médicos y envases.</p></div>
-  <div class="logos reveal">{"".join(f'<img src="assets/img/industria-{i}.png" alt="Cliente de System Plast" loading="lazy">' for i in range(1, 7))}</div>
+  <div class="section-head"><span class="kicker">Industrias</span><h2>Que confían en SYSTEM PLAST</h2><p>Nuestros productos están presentes en grandes sectores como automoción, electrodomésticos, dispositivos médicos y envases.</p></div>
+  <div class="logos">{"".join(f'<img src="assets/img/industria-{i}.png" alt="Cliente de System Plast" loading="lazy">' for i in range(1, 7))}</div>
 </div></section>
 <section class="section"><div class="container">
-  <div class="section-head reveal"><span class="kicker">Actualidad</span><h2>Noticias del sector</h2></div>
+  <div class="section-head"><span class="kicker">Actualidad</span><h2>Noticias del sector</h2></div>
   <div class="news-grid">{news_html}</div>
 </div></section>
 <section class="section section--grey"><div class="container">
-  <p class="statement reveal">Estos productos ayudan a nuestros clientes a <strong>mejorar la eficiencia de la producción, reducir el consumo de energía y mejorar la calidad del producto</strong>.</p>
-  <p class="reveal">Al ofrecer productos de mayor calidad y servicios más especializados, aspiramos a contribuir significativamente al desarrollo de la industria global del moldeo por inyección y a liderar la nueva generación de tecnología de control de temperatura de canal caliente.</p>
+  <p class="statement">Estos productos ayudan a nuestros clientes a <strong>mejorar la eficiencia de la producción, reducir el consumo de energía y mejorar la calidad del producto</strong>.</p>
+  <p>Al ofrecer productos de mayor calidad y servicios más especializados, aspiramos a contribuir significativamente al desarrollo de la industria global del moldeo por inyección y a liderar la nueva generación de tecnología de control de temperatura de canal caliente.</p>
 </div></section>
 ''' + CTA + "</main>\n" + footer())
 
@@ -412,17 +412,17 @@ write("index.html", head("System Plast | Sistemas de control y plásticos indust
 write("quienes-somos.html", head("Quiénes somos | System Plast", "20 años desarrollando y distribuyendo soluciones tecnológicas para la industria del plástico.") +
       header("quienes-somos.html") + hero("Quiénes somos", "Desarrollo y distribución de soluciones tecnológicas") + crumbs(("Quiénes somos", None)) + f'''<main>
 <section class="section"><div class="container split">
-  <div class="reveal"><span class="kicker">01. Nuestra empresa</span><h2>En SYSTEM PLAST nos especializamos</h2>
+  <div><span class="kicker">01. Nuestra empresa</span><h2>En SYSTEM PLAST nos especializamos</h2>
   <p>En el desarrollo y distribución de soluciones tecnológicas para la industria del plástico. Nuestro compromiso es ofrecer equipos y sistemas que optimicen procesos, aumenten la eficiencia y garanticen calidad en cada producción.</p>
   <p>Con 20 años de experiencia, un equipo altamente capacitado y la confianza de nuestros clientes, nos hemos consolidado como un aliado estratégico para empresas que buscan innovación y resultados reales.</p>
   <div class="stats"><div class="stat"><strong>20</strong><span>Años de experiencia</span></div><div class="stat"><strong>+50</strong><span>Clientes</span></div></div></div>
-  <div class="reveal"><img src="assets/img/home-2.jpg" alt="Célula de inyección con robot" loading="lazy"></div>
+  <div><img src="assets/img/home-2.jpg" alt="Célula de inyección con robot" loading="lazy"></div>
 </div></section>
 <section class="section section--grey"><div class="container">
-  <div class="section-head reveal"><span class="kicker">Calidad</span><h2>¿Por qué elegirnos?</h2><p>Nos adherimos estrictamente a los sistemas internacionales de gestión de calidad durante todo el proceso de producción, desde la adquisición de materias primas hasta el ensamblaje del producto.</p></div>
+  <div class="section-head"><span class="kicker">Calidad</span><h2>¿Por qué elegirnos?</h2><p>Nos adherimos estrictamente a los sistemas internacionales de gestión de calidad durante todo el proceso de producción, desde la adquisición de materias primas hasta el ensamblaje del producto.</p></div>
   <div class="pdp-body" style="margin-top:0">
-    <section class="block reveal"><h2>Liderazgo tecnológico</h2><p>Contamos con una amplia gama de soluciones en control de temperatura, desde equipos monozona y multizona hasta sistemas inteligentes diseñados para lograr la máxima precisión. Nuestros controladores de canal caliente integran tecnología avanzada basada en algoritmos PID, lo que permite un control estable, exacto y con tiempos de respuesta muy rápidos.</p><p>Gracias a estas características, se optimiza el proceso de moldeo por inyección, garantizando mayor eficiencia, consistencia y confiabilidad para los fabricantes que buscan resultados de alto nivel.</p></section>
-    <section class="block reveal"><h2>Servicios personalizados</h2><p>Entendemos que cada cliente tiene requerimientos particulares, por eso desarrollamos y fabricamos cajas de control de temperatura totalmente personalizadas, diseñadas para ajustarse de manera precisa a los procesos de moldeo por inyección y a las demandas específicas de producción.</p><p>Nuestras soluciones hechas a la medida se integran de forma eficiente en las líneas de producción, brindando a las empresas un mejor rendimiento operativo y una ventaja competitiva dentro de su industria.</p></section>
+    <section class="block"><h2>Liderazgo tecnológico</h2><p>Contamos con una amplia gama de soluciones en control de temperatura, desde equipos monozona y multizona hasta sistemas inteligentes diseñados para lograr la máxima precisión. Nuestros controladores de canal caliente integran tecnología avanzada basada en algoritmos PID, lo que permite un control estable, exacto y con tiempos de respuesta muy rápidos.</p><p>Gracias a estas características, se optimiza el proceso de moldeo por inyección, garantizando mayor eficiencia, consistencia y confiabilidad para los fabricantes que buscan resultados de alto nivel.</p></section>
+    <section class="block"><h2>Servicios personalizados</h2><p>Entendemos que cada cliente tiene requerimientos particulares, por eso desarrollamos y fabricamos cajas de control de temperatura totalmente personalizadas, diseñadas para ajustarse de manera precisa a los procesos de moldeo por inyección y a las demandas específicas de producción.</p><p>Nuestras soluciones hechas a la medida se integran de forma eficiente en las líneas de producción, brindando a las empresas un mejor rendimiento operativo y una ventaja competitiva dentro de su industria.</p></section>
   </div>
 </div></section>
 ''' + band("Nuestra visión de futuro", "De cara al futuro, la empresa se compromete a seguir centrándose en el sector de los controladores de temperatura de canal caliente. Incrementaremos la inversión en investigación y desarrollo, fomentando una cultura de innovación continua para liderar la nueva generación de tecnología de control de temperatura de canal caliente.", "Ver productos", "productos.html") + CTA + "</main>\n" + footer())
@@ -442,7 +442,7 @@ opts = "".join(f"<option>{E(c['name'])}</option>" for c in CATS) + "<option>Otro
 write("contacto.html", head("Contacto | System Plast", f"Contacte con System Plast: {DIR1}, {DIR2}. Tel. {TEL_TXT}.") + header("contacto.html") +
       hero("Contacto", "Un miembro de nuestro equipo le responderá", compact=True) + crumbs(("Contacto", None)) + f'''<main>
 <section class="section section--grey"><div class="container contact-grid">
-  <div class="contact-info reveal">
+  <div class="contact-info">
     <h3>Hablemos de su proyecto</h3>
     <p>Si tiene alguna pregunta sobre controladores de temperatura de canal caliente, controladores de válvula secuencial, resistencias o EOAT, complete el formulario y un miembro de nuestro equipo le responderá.</p>
     <dl><dt>Dirección</dt><dd>{DIR1}<br>{DIR2}</dd>
@@ -451,7 +451,7 @@ write("contacto.html", head("Contacto | System Plast", f"Contacte con System Pla
     <dt>WhatsApp</dt><dd><a href="https://wa.me/{TEL[1:]}" target="_blank" rel="noopener">Escríbanos por WhatsApp</a></dd>
     <dt>Respuesta</dt><dd>De 12 a 24 horas</dd></dl>
   </div>
-  <form class="form reveal" id="contact-form">
+  <form class="form" id="contact-form">
     <div class="row"><div class="field"><label for="nombre">Nombre *</label><input id="nombre" name="nombre" autocomplete="name" required></div>
     <div class="field"><label for="empresa">Empresa</label><input id="empresa" name="empresa" autocomplete="organization"></div></div>
     <div class="row"><div class="field"><label for="email">Email *</label><input id="email" name="email" type="email" autocomplete="email" required></div>
