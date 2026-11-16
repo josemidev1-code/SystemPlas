@@ -291,6 +291,7 @@ for slug, f in FICHAS.items():
     rel_html = "".join(card(n, i, f"{s}.html" if s else contact_url(n, cat["name"]), d, "Ver ficha →" if s else "Consultar →", not s) for n, i, s, d in related)
     wa_text = quote(f"Hola, me interesa {f['title']} (System Plast). ¿Me pueden dar más información?")
     sub = f'<p class="pdp-sub">{E(f["subtitle"])}</p>' if f["subtitle"] else ""
+    mobile_cta = f'<div class="mobile-cta"><a class="btn btn-primary" href="{contact_url(f["title"], cat["name"])}">Pedir presupuesto</a><a class="btn btn-wa" href="https://wa.me/{TEL[1:]}?text={wa_text}" target="_blank" rel="noopener">{ICON["wa"]} WhatsApp</a></div>\n'
     page = head(f"{f['title']} | {cat['name']} | System Plast", (lead or cat["short"])[:155]) + header("productos.html") + \
         crumbs(("Productos", "productos.html"), (cat["name"], f"{cat['slug']}.html"), (f["title"], None)) + f'''<main>
 <section class="pdp"><div class="container">
@@ -317,9 +318,9 @@ for slug, f in FICHAS.items():
 </div></section>
 <section class="related"><div class="container">
   <div class="section-head reveal"><span class="kicker">{E(cat['name'])}</span><h2>Otros productos de la categoría</h2></div>
-  <div class="product-grid">{rel_html}</div>
+  <div class="product-grid grid-4">{rel_html}</div>
 </div></section>
-''' + CTA + "</main>\n" + footer()
+''' + CTA + "</main>\n" + mobile_cta + footer()
     write(f"{slug}.html", page)
 
 # ---------------------------------------------------------------------------
@@ -346,7 +347,7 @@ write("productos.html", head("Productos | System Plast", "Catálogo System Plast
       cat_tabs(None) + f'''<main>
 <section class="section section--grey"><div class="container">
   <div class="section-head reveal"><span class="kicker">Categorías de productos</span><h2>Conoce nuestra variedad de productos</h2><p>Equipos y componentes para que sus procesos de inyección sean más eficientes, seguros y rentables.</p></div>
-  <div class="product-grid cat-grid" style="grid-template-columns:repeat(4,1fr)">{cats_html}</div>
+  <div class="product-grid cat-grid cat-grid--4">{cats_html}</div>
 </div></section>
 ''' + band("Soluciones a medida", "Nuestras soluciones a medida garantizan una integración perfecta con las líneas de producción de nuestros clientes, lo que les permite obtener una ventaja competitiva en el mercado.", "Contáctanos") + f'''<section class="section"><div class="container">
   <p class="statement reveal">Estos productos ayudan a nuestros clientes a <strong>mejorar la eficiencia de la producción, reducir el consumo de energía y mejorar la calidad del producto</strong>.</p>
@@ -380,18 +381,18 @@ write("index.html", head("System Plast | Sistemas de control y plásticos indust
 ''' + TRUST + f'''<main>
 <section class="section section--grey"><div class="container">
   <div class="section-head reveal"><span class="kicker">Nuestros productos</span><h2>Tecnología y soluciones para tu negocio</h2><p>En SYSTEM PLAST ofrecemos productos diseñados para mejorar la productividad y garantizar procesos de inyección de plástico más eficientes y seguros.</p></div>
-  <div class="product-grid">{home_cats}</div>
+  <div class="product-grid grid-4">{home_cats}</div>
 </div></section>
 <section class="section"><div class="container">
   <div class="section-head reveal"><span class="kicker">Destacados</span><h2>Productos más solicitados</h2></div>
-  <div class="product-grid">{feat_html}</div>
+  <div class="product-grid grid-4">{feat_html}</div>
 </div></section>
 <section class="section section--grey"><div class="container">
   <div class="section-head reveal"><span class="kicker">Tecnología avanzada para tu proceso de inyección</span><h2>Tu aliado estratégico en innovación</h2></div>
   <div class="feature-list">{"".join(f'<div class="feature reveal"><span class="num">{n}.</span><h3>{E(t)}</h3><p>{E(d)}</p></div>' for n, t, d in features)}</div>
 </div></section>
 ''' + band("Asesoría técnica especializada", "En SYSTEM PLAST entendemos que elegir un proveedor es elegir un socio de confianza. Le ayudamos a elegir el equipo adecuado y le acompañamos antes, durante y después de la compra.", "Solicitar asesoramiento") + f'''<section class="section"><div class="container">
-  <div class="section-head reveal"><span class="kicker">Por qué elegirnos</span><h2>Tu aliado estratégico en innovación</h2><p>En SYSTEM PLAST entendemos que elegir un proveedor es elegir un socio de confianza. Por eso ofrecemos:</p></div>
+  <div class="section-head reveal"><span class="kicker">Por qué elegirnos</span><h2>Lo que nos diferencia</h2><p>En SYSTEM PLAST entendemos que elegir un proveedor es elegir un socio de confianza. Por eso ofrecemos:</p></div>
   <div class="why">{"".join(f'<div class="why-item reveal"><div class="icon">{ICON[ic]}</div><h4>{E(t)}</h4><p>{E(d)}</p></div>' for ic, t, d in why)}</div>
 </div></section>
 <section class="section section--grey"><div class="container">
