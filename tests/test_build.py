@@ -61,5 +61,11 @@ class Tarjetas(Base):
         self.lacks('class="count"', page("eoat-accesorio-robotica.html"))
 
 
+class Portada(Base):
+    def test_portada_sin_ceja(self):
+        for n in ["productos.html", "eoat-accesorio-robotica.html", "quienes-somos.html"]:
+            self.lacks("hero-eyebrow", page(n))
+
+
 if __name__ == "__main__":
     unittest.main()

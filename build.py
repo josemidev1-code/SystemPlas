@@ -178,10 +178,10 @@ def footer():
 </html>
 '''
 
-def hero(title, sub, eyebrow="System Plast", compact=False):
+def hero(title, sub, compact=False):
     cls = "hero hero--compact" if compact else "hero"
     return f'''<section class="{cls}" style="background-image:url(assets/img/home-2.jpg)"><div class="container">
-  <span class="hero-eyebrow">{E(eyebrow)}</span><h1>{E(title)}</h1><p>{E(sub)}</p>
+  <h1>{E(title)}</h1><p>{E(sub)}</p>
 </div></section>
 '''
 
@@ -327,7 +327,7 @@ for slug, f in FICHAS.items():
 for c in CATS:
     t, s = c["hero"]
     bt, bx = c["band"]
-    page = head(f"{c['name']} | System Plast", c["short"]) + header("productos.html") + hero(t, s, "Productos System Plast") + \
+    page = head(f"{c['name']} | System Plast", c["short"]) + header("productos.html") + hero(t, s) + \
         cat_tabs(c["slug"]) + f'''<main>
 <section class="section"><div class="container">
   <div class="product-grid">{product_cards(c)}</div>
@@ -340,7 +340,7 @@ for c in CATS:
 # ---------------------------------------------------------------------------
 cats_html = "".join(card(c["name"], c["img"], f"{c['slug']}.html") for c in CATS)
 write("productos.html", head("Productos | System Plast", "Catálogo System Plast: controladores HRS de canal caliente, resistencias eléctricas, EOAT para robótica y estanterías para moldes.") +
-      header("productos.html") + hero("Catálogo de productos", "Productos diseñados para mejorar la productividad y garantizar procesos de inyección más eficientes y seguros", "System Plast") +
+      header("productos.html") + hero("Catálogo de productos", "Productos diseñados para mejorar la productividad y garantizar procesos de inyección más eficientes y seguros") +
       cat_tabs(None) + f'''<main>
 <section class="section section--grey"><div class="container">
   <div class="section-head reveal"><span class="kicker">Categorías de productos</span><h2>Conoce nuestra variedad de productos</h2><p>Equipos y componentes para que sus procesos de inyección sean más eficientes, seguros y rentables.</p></div>
@@ -410,7 +410,7 @@ write("index.html", head("System Plast | Sistemas de control y plásticos indust
 # Quiénes somos
 # ---------------------------------------------------------------------------
 write("quienes-somos.html", head("Quiénes somos | System Plast", "20 años desarrollando y distribuyendo soluciones tecnológicas para la industria del plástico.") +
-      header("quienes-somos.html") + hero("Quiénes somos", "Desarrollo y distribución de soluciones tecnológicas", "System Plast") + crumbs(("Quiénes somos", None)) + f'''<main>
+      header("quienes-somos.html") + hero("Quiénes somos", "Desarrollo y distribución de soluciones tecnológicas") + crumbs(("Quiénes somos", None)) + f'''<main>
 <section class="section"><div class="container split">
   <div class="reveal"><span class="kicker">01. Nuestra empresa</span><h2>En SYSTEM PLAST nos especializamos</h2>
   <p>En el desarrollo y distribución de soluciones tecnológicas para la industria del plástico. Nuestro compromiso es ofrecer equipos y sistemas que optimicen procesos, aumenten la eficiencia y garanticen calidad en cada producción.</p>

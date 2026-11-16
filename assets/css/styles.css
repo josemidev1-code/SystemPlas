@@ -72,12 +72,12 @@ p { margin: 0 0 1em; }
 .menu-toggle span { display: block; height: 2px; background: var(--heading); margin: 5px 0; transition: .25s; }
 
 /* ---------- Hero ---------- */
-.hero { position: relative; min-height: 340px; display: flex; align-items: center; justify-content: center; text-align: center; background: #cfd8dc center/cover no-repeat; border-bottom: 9px solid var(--brand); overflow: hidden; }
-.hero::before { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(240,244,246,.72), rgba(220,228,232,.78)); }
+.hero { position: relative; min-height: 440px; display: flex; align-items: center; justify-content: center; text-align: center; background: #23404a center/cover no-repeat; overflow: hidden; }
+.hero::before { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(1,44,61,.55), rgba(1,44,61,.70)); }
 .hero .container { position: relative; padding-top: 60px; padding-bottom: 60px; }
 .hero-eyebrow { display: inline-block; font-size: 13px; letter-spacing: .18em; text-transform: uppercase; color: var(--brand); font-weight: 600; margin-bottom: 14px; }
-.hero h1 { font-size: clamp(28px, 4vw, 42px); text-transform: uppercase; color: #0f1418; margin-bottom: 10px; }
-.hero p { font-weight: 600; color: #1e2328; font-size: 17px; margin: 0; }
+.hero h1 { font-size: clamp(28px, 4vw, 45px); font-weight: 700; text-transform: uppercase; color: #fff; margin-bottom: 12px; text-shadow: 0 2px 14px rgba(0,0,0,.3); }
+.hero p { font-weight: 600; color: #fff; font-size: 18px; margin: 0; text-shadow: 0 1px 10px rgba(0,0,0,.3); }
 .hero-logo { max-height: 90px; margin: 0 auto 18px; }
 .hero--home { min-height: 520px; }
 .hero--home::before { background: linear-gradient(180deg, rgba(10,25,35,.55), rgba(10,25,35,.65)); }
@@ -244,7 +244,7 @@ p { margin: 0 0 1em; }
 /* =========================================================
    v2 — Mejoras sobre la referencia: fichas, pestañas, migas
    ========================================================= */
-.hero--compact { min-height: 260px; }
+.hero--compact { min-height: 300px; }
 .crumbs { background: var(--white); border-bottom: 1px solid #eceef1; font-size: 14.5px; }
 .crumbs .container { padding-top: 12px; padding-bottom: 12px; display: flex; flex-wrap: wrap; gap: 6px; color: var(--muted); }
 .crumbs a { color: var(--muted); }
@@ -357,7 +357,8 @@ p { margin: 0 0 1em; }
   .mobile-cta .btn { text-align: center; display: flex; align-items: center; justify-content: center; gap: 8px; padding: 13px 10px; font-size: 15px; }
   .mobile-cta ~ .whatsapp, .mobile-cta ~ .to-top { display: none; }
   .mobile-cta ~ .footer { padding-bottom: 76px; }
-  .hero { min-height: 280px; }
+  .hero { min-height: 360px; }
+  .hero--compact { min-height: 260px; }
 }
 
 @media (max-width: 600px) {
@@ -365,7 +366,8 @@ p { margin: 0 0 1em; }
   .whatsapp { width: 54px; height: 54px; right: 16px; bottom: calc(16px + env(safe-area-inset-bottom)); }
   .section { padding: 48px 0; }
   .section-head { margin-bottom: 28px; }
-  .hero { min-height: 240px; }
+  .hero { min-height: 300px; }
+  .hero--compact { min-height: 220px; }
   .hero .container { padding-top: 44px; padding-bottom: 44px; }
   .hero h1 { font-size: 26px; }
   .hero p { font-size: 15.5px; }
