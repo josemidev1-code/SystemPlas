@@ -1,0 +1,309 @@
+{
+ "start": "2026-11-17T18:33:10.003Z",
+ "round": 1,
+ "idle": 0,
+ "errors": 0,
+ "status": "pass",
+ "history": [
+  {
+   "at": "2026-11-17T19:21:47.388Z",
+   "mode": "manual",
+   "status": "fail",
+   "fails": 1,
+   "round": 1,
+   "reused": false,
+   "stopHookActive": false
+  },
+  {
+   "at": "2026-11-17T19:23:39.046Z",
+   "mode": "manual",
+   "status": "pass",
+   "fails": 0,
+   "round": 1,
+   "reused": false,
+   "stopHookActive": false
+  }
+ ],
+ "max": 3,
+ "marker": {
+  "page": "index.html",
+  "url": null,
+  "root": null,
+  "kind": "tech",
+  "category": "controladores de canal caliente, resistencias, garras EOAT, estanterías y recambios para inyectoras y moldes de plástico",
+  "primary": "Pedir presupuesto",
+  "rounds": 3,
+  "start": "2026-11-17T18:33:10.003Z",
+  "by": "gate.mjs --start"
+ },
+ "manual": true,
+ "roundKey": "df48f93799bddf1f:c4c45ffe",
+ "roundFree": false,
+ "idleFree": false,
+ "blockKey": null,
+ "fp": "8fac2837fdb731b9",
+ "page": "index.html",
+ "found": {
+  "fails": [
+   {
+    "check": "phone-number",
+    "where": "div.grid > div.span-3.footer__col:nth-of-type(4) > ul > li:nth-of-type(2) \"+34) 627 96 77 29\"",
+    "msg": "a phone number in international format: \"+34) 627 96 77 29\"; a visitor can dial it and reach a stranger (and 1 more like it: div.span-3.footer__col:nth-of-type(4) > ul > li:nth-of-type(2) > a)",
+    "fix": "drop the number and its tel: link (a \"Request a call\" form may stand in), unless the brief gives the number",
+    "widths": [
+     1440
+    ],
+    "from": "consistency",
+    "ids": [
+     "phone-number"
+    ],
+    "wheres": [
+     "div.grid > div.span-3.footer__col:nth-of-type(4) > ul > li:nth-of-type(2) \"+34) 627 96 77 29\""
+    ]
+   }
+  ],
+  "warns": [
+   {
+    "check": "empty-visual",
+    "where": "div.wrap.grid > div.span-6.start-7 > a:nth-of-type(1) > img \"res-1.jpg\"",
+    "msg": "the picture shows nothing here: 100% of it is one colour (#f4f6f5) (inside a held section or scroll scene, whose motion --quick does not check) (and 1 more like it: \"res-3.jpg\")",
+    "fix": "make the visual draw at every width: a picture that loads, an effect that renders, or its still fallback; never an empty frame",
+    "widths": [
+     1440
+    ],
+    "from": "consistency"
+   },
+   {
+    "check": "flush",
+    "where": "section#resistencias > div.mo-lc__stage > div.mo-lc__cover",
+    "msg": "its first line sits 17px under the top edge of section#resistencias, where the ground changes",
+    "fix": "give the section its padding at the edge where the ground changes (the closing call keeps a clear gap above the footer)",
+    "widths": [
+     1440
+    ],
+    "from": "consistency"
+   },
+   {
+    "check": "scroll-reveal",
+    "where": "section#resistencias \"Resistencias fabricadas a su medida Enví\"",
+    "msg": "starts \"color\" (0.1 s) the moment it is scrolled into view (an IntersectionObserver) on a.link (inside a dealt moment's section, [data-moment]: an enter moment is expected on every kind; its still is judged under reduced motion)",
+    "fix": "show it at rest: no fade, rise or unmask when it is scrolled into view",
+    "widths": [
+     1440
+    ],
+    "from": "consistency"
+   },
+   {
+    "check": "card-layout",
+    "where": "section#catalogo > div.wrap > div.grid.fill \"HRS Controladores Monozona, multizona y \"",
+    "msg": "4 cards with 1 placement of their UI (vary them: rise, corner, a low stack, right)",
+    "fix": "vary the cards of a group: at least three placements, and the ground in its own light on each",
+    "widths": [
+     1440
+    ],
+    "from": "consistency"
+   },
+   {
+    "check": "same-action",
+    "where": "section#catalogo > div.wrap > div.section-head.section-head--row > a.link \"Ver el catálogo\"",
+    "msg": "\"Ver el catálogo\" is a button in one place and a text link in another: one action in two looks",
+    "fix": "show one action one way: the same button wherever it repeats, or a text link everywhere",
+    "widths": [
+     1440,
+     390
+    ],
+    "from": "consistency"
+   },
+   {
+    "check": "copy-buttons",
+    "where": "header.nav > div.wrap.nav__bar > div.nav__actions > a.btn.btn--primary \"Pedir presupuesto\"",
+    "msg": "\"Pedir presupuesto\" does not start with a verb (book, buy, try, start, get, see...) (and 1 more like it: \"Ver el catálogo\")",
+    "fix": "label buttons with a verb and what the visitor gets (\"Book a room\", \"Start free trial\")",
+    "widths": [
+     1440
+    ],
+    "from": "consistency"
+   },
+   {
+    "check": "section-gaps",
+    "where": "main#top > section.hero.hero--photo / section#catalogo",
+    "msg": "115px between these sections, -39% against the median 187px",
+    "fix": "use one gap between sections (all within 25% of each other)",
+    "widths": [
+     1440,
+     390
+    ],
+    "from": "consistency"
+   },
+   {
+    "check": "section-gaps",
+    "where": "section#hrs / section#resistencias",
+    "msg": "89px between these sections, -52% against the median 187px of gaps at a change of ground",
+    "fix": "use one gap between sections (all within 25% of each other)",
+    "widths": [
+     1440,
+     390
+    ],
+    "from": "consistency"
+   },
+   {
+    "check": "section-gaps",
+    "where": "section#resistencias / section#eoat",
+    "msg": "uneven space at the edge of a band: 115px outside its edge, 72px inside it (the space on either side of a change of ground reads as one gap only when the two match)",
+    "fix": "use one gap between sections (all within 25% of each other)",
+    "widths": [
+     1440
+    ],
+    "from": "consistency"
+   },
+   {
+    "check": "section-gaps",
+    "where": "section#eoat / section#servicio",
+    "msg": "uneven space at the edge of a band: 72px outside its edge, 115px inside it (the space on either side of a change of ground reads as one gap only when the two match)",
+    "fix": "use one gap between sections (all within 25% of each other)",
+    "widths": [
+     1440,
+     390
+    ],
+    "from": "consistency"
+   },
+   {
+    "check": "photo-set",
+    "where": "section#servicio > div.wrap > div.frame.frame--photo > img.frame__img \"photo-f74695444.jpg\"",
+    "msg": "9 photographs in more than one look: lightness from 0.38 to 0.96; the odd one out is photo-f74695444.jpg",
+    "fix": "grade the photographs to one look (light, colour, warmth), or replace the odd one out",
+    "widths": [
+     1440
+    ],
+    "from": "consistency"
+   },
+   {
+    "check": "photo-credit",
+    "where": "(the page text)",
+    "msg": "2 library sources (pexels, wikimedia): the page credits pexels, the page credits wikimedia; confirm each shows the client's own product, place or people",
+    "fix": "confirm the library photograph shows the client's own product, place or people; otherwise replace it",
+    "widths": [
+     1440
+    ],
+    "from": "consistency"
+   },
+   {
+    "check": "action-repeat",
+    "where": "header.nav > div.wrap.nav__bar > div.nav__actions > a.btn.btn--primary \"pedir presupuesto\"",
+    "msg": "\"pedir presupuesto\" shows 2 times on the first screen at 1440px (nav, hero): the nav's button and the hero's; nothing else on the screen may repeat it",
+    "fix": "show the action once a screen besides the nav's button: the hero's, the close's or the phone bar's, never all at once",
+    "widths": [
+     1440
+    ],
+    "from": "consistency"
+   },
+   {
+    "check": "nav",
+    "where": "header.nav > div.wrap.nav__bar > button.nav__toggle",
+    "msg": "the nav is lopsided: its last item ends 13px inside the content's edge (366px), while its first starts on the other edge",
+    "fix": "start the nav's first item and end its last on the content's two edges",
+    "widths": [
+     390
+    ],
+    "from": "consistency"
+   },
+   {
+    "check": "no-visual",
+    "where": "section#servicio \"Recambios en 12 a 24 horas\"",
+    "msg": "pictures, effects and mocks cover 25% of this section; a feature section needs a visual (about 25% or more)",
+    "fix": "give the section a visual: a UI fragment on a ground, real icons, or a photograph that fits",
+    "widths": [
+     390
+    ],
+    "from": "consistency"
+   },
+   {
+    "check": "card-layout",
+    "where": "section#catalogo > div.wrap > div.grid.fill \"HRS Controladores\"",
+    "msg": "4 cards with 1 placement of their UI (vary them: rise, corner, a low stack, right)",
+    "fix": "vary the cards of a group: at least three placements, and the ground in its own light on each",
+    "widths": [
+     390
+    ],
+    "from": "consistency"
+   },
+   {
+    "check": "section-gaps",
+    "where": "section#servicio / footer#contact",
+    "msg": "uneven space at the edge of a band: 93px outside its edge, 48px inside it (the space on either side of a change of ground reads as one gap only when the two match)",
+    "fix": "use one gap between sections (all within 25% of each other)",
+    "widths": [
+     390
+    ],
+    "from": "consistency"
+   },
+   {
+    "check": "hole",
+    "where": "section#resistencias > div.wrap.grid > div.span-6.start-7",
+    "msg": "an empty band 368px tall across the card (33% of its height), with content above and below it",
+    "fix": "close the empty space: move the content together, or give the space the visual it lacks",
+    "widths": [
+     390
+    ],
+    "from": "consistency"
+   },
+   {
+    "check": "photo-set",
+    "where": "section#servicio > div.wrap > div.frame.frame--photo > img.frame__img \"photo-f74695444-500.jpg\"",
+    "msg": "7 photographs in more than one look: lightness from 0.38 to 0.97; the odd one out is photo-f74695444-500.jpg",
+    "fix": "grade the photographs to one look (light, colour, warmth), or replace the odd one out",
+    "widths": [
+     390
+    ],
+    "from": "consistency"
+   },
+   {
+    "check": "fold-cut",
+    "where": "div.hero-text > div.hero__text > div.btn-row > a.btn.btn--primary \"Pedir presupuesto\"",
+    "msg": "the hero's button \"Pedir presupuesto\" is cut by the bottom of the first screen (30px of its 44px below the fold)",
+    "fix": "size the hero so the heading ends above the fold, or starts below it",
+    "widths": [
+     320
+    ],
+    "from": "consistency"
+   },
+   {
+    "check": "collide",
+    "where": "div.wrap > div.grid.fill > a.card.card--open:nth-of-type(3) > h3 \"EOAT accesorio robótica\"",
+    "msg": "the words \"EOAT accesorio robótica\" run out of their section into the next one (section#hrs): the section is shorter than what it holds",
+    "fix": "on a phone nothing lies on anything else: let the section grow with its content (min-height for its screens, never a fixed height; --hm: 2 when it needs two) or cut what it holds; keep pictures and cards off the buttons; pad the page under a fixed bar by the bar's height (top: the first section; end: the footer)",
+    "widths": [
+     320
+    ],
+    "from": "consistency"
+   }
+  ],
+  "crashed": [],
+  "seconds": {
+   "consistency": 100,
+   "layout": 3
+  }
+ },
+ "open": [],
+ "waived": [
+  {
+   "check": "phone-number",
+   "where": "div.grid > div.span-3.footer__col:nth-of-type(4) > ul > li:nth-of-type(2) \"+34) 627 96 77 29\"",
+   "msg": "a phone number in international format: \"+34) 627 96 77 29\"; a visitor can dial it and reach a stranger (and 1 more like it: div.span-3.footer__col:nth-of-type(4) > ul > li:nth-of-type(2) > a)",
+   "fix": "drop the number and its tel: link (a \"Request a call\" form may stand in), unless the brief gives the number",
+   "widths": [
+    1440
+   ],
+   "from": "consistency",
+   "ids": [
+    "phone-number"
+   ],
+   "wheres": [
+    "div.grid > div.span-3.footer__col:nth-of-type(4) > ul > li:nth-of-type(2) \"+34) 627 96 77 29\""
+   ],
+   "reason": "Es el teléfono real de System Plast, publicado por el cliente en su web actual; no es inventado."
+  }
+ ],
+ "warnCount": 21,
+ "at": "2026-11-17T19:23:39.046Z"
+}

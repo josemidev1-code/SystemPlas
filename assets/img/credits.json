@@ -1,0 +1,33 @@
+{
+ "note": "Credits for the photographs in this folder: photos.mjs credits prints the footer block for the ones the pages use.",
+ "photos": [
+  {
+   "file": "photo-f74695444.jpg",
+   "files": [
+    "photo-f74695444-500.jpg",
+    "photo-f74695444-960.jpg",
+    "photo-f74695444.jpg"
+   ],
+   "id": "f74695444",
+   "alt": "Inside the factory",
+   "by": "Orionpenindia",
+   "licence": "CC BY-SA 4.0",
+   "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+   "page": "https://commons.wikimedia.org/wiki/File:Inside_the_factory.jpg",
+   "source": "Wikimedia Commons"
+  },
+  {
+   "file": "photo-f7026183-500.jpg",
+   "files": [
+    "photo-f7026183-500.jpg"
+   ],
+   "id": "f7026183",
+   "alt": "HTS main frame polymer injection mold",
+   "by": "MobiusDaXter",
+   "licence": "CC BY-SA 3.0",
+   "licenceUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+   "page": "https://commons.wikimedia.org/wiki/File:HTS_main_frame_polymer_injection_mold.jpg",
+   "source": "Wikimedia Commons"
+  }
+ ]
+}

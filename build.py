@@ -1,13 +1,16 @@
 """
 Generador de la web de SYSTEM PLAST.
 Edita los datos de este archivo o data/productos.json y ejecuta:  python3 build.py
+
+Diseño: sistema de la skill taste-skill (assets/system.css, motion, layout) con los colores
+del logo (verde #037c75, azul marino #012c3d). La portada lleva un vídeo de licencia libre
+(Pexels) detrás del titular: assets/video/maquina-*.mp4.
 """
 import os, html, json
 from urllib.parse import quote
 
 OUT = os.path.dirname(os.path.abspath(__file__))
 E = html.escape
-ACT = ' class="active"'
 FICHAS = json.load(open(os.path.join(OUT, "data", "productos.json"), encoding="utf-8"))
 
 TEL = "+34627967729"
@@ -15,22 +18,14 @@ TEL_TXT = "(+34) 627 96 77 29"
 MAIL = "info@systemplas.com"
 DIR1, DIR2 = "Pol. Ind. Riodil, 1", "03110 Mutxamel, Alicante"
 LINKEDIN = "https://www.linkedin.com/company/system-plas/"
+MAIN_ACTION = "Pedir presupuesto"
+YEAR = 2026
 
 ICON = {
- "pin": '<svg viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 0-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/></svg>',
- "phone": '<svg viewBox="0 0 24 24"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1z"/></svg>',
- "mail": '<svg viewBox="0 0 24 24"><path d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zm0 4-8 5-8-5V6l8 5 8-5z"/></svg>',
- "wa": '<svg viewBox="0 0 32 32"><path d="M16 3a13 13 0 0 0-11.2 19.6L3 29l6.6-1.7A13 13 0 1 0 16 3zm0 23.6a10.6 10.6 0 0 1-5.4-1.5l-.4-.2-3.9 1 1-3.8-.2-.4A10.6 10.6 0 1 1 16 26.6zm5.8-7.9c-.3-.2-1.9-.9-2.2-1s-.5-.2-.7.2-.8 1-1 1.2-.4.2-.7.1a8.7 8.7 0 0 1-4.3-3.8c-.3-.6.3-.5.9-1.7a.6.6 0 0 0 0-.5l-1-2.4c-.3-.6-.5-.5-.7-.5h-.6a1.2 1.2 0 0 0-.9.4 3.7 3.7 0 0 0-1.1 2.7 6.4 6.4 0 0 0 1.3 3.4 14.7 14.7 0 0 0 5.7 5c2.1.9 2.9 1 4 .8a3.4 3.4 0 0 0 2.2-1.6 2.8 2.8 0 0 0 .2-1.6c0-.2-.3-.3-.6-.5z"/></svg>',
- "linkedin": '<svg viewBox="0 0 24 24"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9h4v12H3zm7 0h3.8v1.7h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1V21h-4v-5.6c0-1.34-.02-3.06-1.86-3.06-1.87 0-2.15 1.46-2.15 2.96V21h-4z"/></svg>',
- "rack": '<svg class="thumb-placeholder" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round"><path d="M10 6v52M54 6v52M10 20h44M10 36h44M10 52h44"/><rect x="16" y="10" width="14" height="10"/><rect x="34" y="26" width="16" height="10"/><rect x="18" y="42" width="20" height="10"/></svg>',
- "clock": '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>',
- "globe": '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15 15 0 0 1 0 20M12 2a15 15 0 0 0 0 20"/></svg>',
- "user": '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>',
- "award": '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="6"/><path d="M8.2 13.2 7 22l5-3 5 3-1.2-8.8"/></svg>',
- "tool": '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-2.5 2.5-2.4-.6-.6-2.4z"/></svg>',
- "star": '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3 6 6.5 1-4.7 4.6 1.1 6.4L12 17l-5.9 3 1.1-6.4L2.5 9 9 8z"/></svg>',
- "gear": '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.2 4.2l2.9 2.9M16.9 16.9l2.9 2.9M1 12h4M19 12h4M4.2 19.8l2.9-2.9M16.9 7.1l2.9-2.9"/></svg>',
+ "wa": '<svg viewBox="0 0 32 32" aria-hidden="true" width="18" height="18"><path fill="currentColor" d="M16 3a13 13 0 0 0-11.2 19.6L3 29l6.6-1.7A13 13 0 1 0 16 3zm0 23.6a10.6 10.6 0 0 1-5.4-1.5l-.4-.2-3.9 1 1-3.8-.2-.4A10.6 10.6 0 1 1 16 26.6zm5.8-7.9c-.3-.2-1.9-.9-2.2-1s-.5-.2-.7.2-.8 1-1 1.2-.4.2-.7.1a8.7 8.7 0 0 1-4.3-3.8c-.3-.6.3-.5.9-1.7a.6.6 0 0 0 0-.5l-1-2.4c-.3-.6-.5-.5-.7-.5h-.6a1.2 1.2 0 0 0-.9.4 3.7 3.7 0 0 0-1.1 2.7 6.4 6.4 0 0 0 1.3 3.4 14.7 14.7 0 0 0 5.7 5c2.1.9 2.9 1 4 .8a3.4 3.4 0 0 0 2.2-1.6 2.8 2.8 0 0 0 .2-1.6c0-.2-.3-.3-.6-.5z"/></svg>',
+ "linkedin": '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9h4v12H3zm7 0h3.8v1.7h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1V21h-4v-5.6c0-1.34-.02-3.06-1.86-3.06-1.87 0-2.15 1.46-2.15 2.96V21h-4z"/></svg>',
 }
+ARROW = '<svg class="m-arrow" viewBox="0 0 12 12" aria-hidden="true"><path class="m-arrow__stem" d="M1 6h8"/><path class="m-arrow__head" d="M4.5 2.5 8 6l-3.5 3.5"/></svg>'
 
 # ---------------------------------------------------------------------------
 # Catálogo: (nombre en tarjeta, imagen de tarjeta, slug de ficha o None, descripción breve)
@@ -89,9 +84,6 @@ CATS = [
             ("Fundas y cortinas de protección para moldes", None, None, "Cerramientos de PVC antiestático y fundas textiles contra polvo, humedad y oxidación de moldes con acabado espejo."),
             ("Estantes modulares expansibles", None, None, "Racks atornillables que permiten añadir módulos a medida que crece su inventario de moldes.")]},
 ]
-CAT_BY_PRODUCT = {it[2]: c for c in CATS for it in c["items"] if it[2]}
-CARD_IMG = {it[2]: it[1] for c in CATS for it in c["items"] if it[2]}
-
 NAV = [("index.html", "Inicio"), ("productos.html", "Productos"), ("quienes-somos.html", "Quiénes somos"), ("noticias.html", "Noticias"), ("contacto.html", "Contacto")]
 
 NEWS = [
@@ -100,136 +92,387 @@ NEWS = [
  ("agencia-8.jpg", "Informe del mercado mundial de envases biodegradables y su crecimiento proyectado", "Mordor Intelligence", "https://www.mordorintelligence.com/es/industry-reports/gobal-biodegradable-packaging-solutions-market-industry"),
 ]
 
-# ---------------------------------------------------------------------------
-def head(title, desc):
-    return f'''<!doctype html>
-<html lang="es" class="no-js">
-<head>
-<meta charset="utf-8">
-<script>document.documentElement.className="js"</script>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>{E(title)}</title>
-<meta name="description" content="{E(desc)}">
-<meta property="og:title" content="{E(title)}">
-<meta property="og:description" content="{E(desc)}">
-<meta property="og:image" content="assets/img/logo.png">
-<link rel="icon" href="assets/img/logo.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/styles.css">
-</head>
-<body>
-'''
+# Foto de tarjeta de categoría (la de estanterías es una foto de molde: el cliente no tiene foto de racks)
+CAT_IMG = {"hrs-controladores": "hrs-1.png", "resistencias-electricas": "res-2.png",
+           "eoat-accesorio-robotica": "eoat-3.png", "estanterias-moldes": "photo-f7026183-500.jpg"}
+CAT_LINE = {"hrs-controladores": "Monozona, multizona y secuencia para valve gate.",
+            "resistencias-electricas": "Mica, aluminio, cobre, cerámica e infrarrojos.",
+            "eoat-accesorio-robotica": "Pinzas, ventosas, cambiadores y perfilería.",
+            "estanterias-moldes": "Racks, cajones extraíbles y carros para moldes."}
+CAT_BY_PRODUCT = {it[2]: c for c in CATS for it in c["items"] if it[2]}
+CARD_IMG = {it[2]: it[1] for c in CATS for it in c["items"] if it[2]}
+NAVW = [("productos.html", "Productos"), ("quienes-somos.html", "Empresa"), ("noticias.html", "Noticias"), ("contacto.html", "Contacto")]
 
-def header(active):
-    items = []
-    for href, label in NAV:
-        cls = ' class="active"' if href == active else ""
-        if label == "Productos":
-            sub = "".join(f'<li><a href="{c["slug"]}.html">{E(c["name"])}</a></li>' for c in CATS)
-            items.append(f'<li class="has-sub"><a href="productos.html"{cls}>Productos</a><ul class="submenu">{sub}</ul></li>')
-        else:
-            items.append(f'<li><a href="{href}"{cls}>{label}</a></li>')
-    return f'''<div class="topbar"><div class="container">
-  <span class="addr">{ICON["pin"]} {DIR1} · {DIR2} · España</span>
-  <a href="tel:{TEL}">{ICON["phone"]} {TEL_TXT}</a>
-  <a href="mailto:{MAIL}">{ICON["mail"]} {MAIL}</a>
-</div></div>
-<header class="header"><div class="container">
-  <a class="logo" href="index.html" aria-label="System Plast - inicio"><img src="assets/img/logo.png" alt="System Plast" width="600" height="260"></a>
-  <button class="menu-toggle" aria-label="Abrir menú" aria-expanded="false"><span></span><span></span><span></span></button>
-  <nav class="nav"><ul>{"".join(items)}</ul><a class="btn btn-primary" href="contacto.html">Contáctanos</a></nav>
-</div></header>
-'''
 
-CTA = '''<section class="cta" style="background-image:url(assets/img/home-2.jpg)"><div class="container">
-  <h2>Innovamos contigo</h2>
-  <p>Nuestras <strong>soluciones a medida</strong> garantizan una integración perfecta con las líneas de producción de nuestros clientes, lo que les permite obtener <strong>una ventaja competitiva en el mercado</strong>. Cuéntanos tu proyecto.</p>
-  <a class="btn" href="contacto.html">Contacto</a>
-</div></section>
-'''
+def img_src(name):
+    """La foto ligera: el JPEG sobre blanco de la versión sin mancha verde si existe, si no la original."""
+    base = name[:-4] if name.endswith(".png") else None
+    for cand in ([f"web/sin-fondo/{base}.jpg", f"sin-fondo/{name}", f"web/{base}.jpg"] if base else []) + [name]:
+        if os.path.exists(os.path.join(OUT, "assets", "img", cand)):
+            return f"assets/img/{cand}"
+    return f"assets/img/{name}"
 
-def footer():
-    return f'''<footer class="footer"><div class="container footer-grid">
-  <div>
-    <h4>System Plast</h4>
-    <p>Innovación en sistemas de control y plásticos industriales. Respuesta y recambios en 12 a 24 horas.</p>
-    <div class="socials"><a href="{LINKEDIN}" target="_blank" rel="noopener" aria-label="LinkedIn">{ICON["linkedin"]}</a><a href="https://wa.me/{TEL[1:]}" target="_blank" rel="noopener" aria-label="WhatsApp">{ICON["wa"]}</a><a href="mailto:{MAIL}" aria-label="Email">{ICON["mail"]}</a></div>
-    <a class="footer-logo" href="index.html"><img src="assets/img/logo.png" alt="System Plast"></a>
-  </div>
-  <div>
-    <h4>Contacto</h4>
-    <address>{DIR1}<br>{DIR2} · España<br>
-    <a href="tel:{TEL}">{TEL_TXT}</a><br>
-    <a href="mailto:{MAIL}">{MAIL}</a></address>
-  </div>
-  <div>
-    <h4>Productos</h4>
-    <ul class="footer-links">{"".join(f'<li><a href="{c["slug"]}.html">{E(c["name"])}</a></li>' for c in CATS)}</ul>
-  </div>
-</div>
-<div class="footer-bottom"><div class="container">© 2026 SYSTEM PLAST · <a href="#">Aviso legal</a> · <a href="#">Política de privacidad</a> · <a href="#">Política de cookies</a></div></div>
-</footer>
-<a class="whatsapp" href="https://wa.me/{TEL[1:]}" target="_blank" rel="noopener" aria-label="Escríbenos por WhatsApp">{ICON["wa"]}</a>
-<button class="to-top" aria-label="Volver arriba">↑</button>
-<script src="assets/js/main.js"></script>
-</body>
-</html>
-'''
 
-def hero(title, sub, compact=False):
-    cls = "hero hero--compact" if compact else "hero"
-    return f'''<section class="{cls}" style="background-image:url(assets/img/home-2.jpg)"><div class="container">
-  <h1>{E(title)}</h1><p>{E(sub)}</p>
-</div></section>
-'''
+def jpeg_size(path):
+    """Ancho y alto de un JPEG o PNG, para width/height (sin librerías)."""
+    import struct
+    with open(os.path.join(OUT, path), "rb") as fh:
+        d = fh.read()
+    if d[:8] == b"\x89PNG\r\n\x1a\n":
+        return struct.unpack(">II", d[16:24])
+    i = 2
+    while i < len(d):
+        marker, size = d[i + 1], struct.unpack(">H", d[i + 2:i + 4])[0]
+        if marker in (0xC0, 0xC1, 0xC2):
+            h, w = struct.unpack(">HH", d[i + 5:i + 9])
+            return w, h
+        i += 2 + size
+    return 700, 534
 
-def crumbs(*parts):
-    out = ['<a href="index.html">Inicio</a>']
-    for i, (label, href) in enumerate(parts):
-        out.append("<span>›</span>")
-        out.append(f'<span aria-current="page">{E(label)}</span>' if href is None else f'<a href="{href}">{E(label)}</a>')
-    return f'<nav class="crumbs" aria-label="Migas de pan"><div class="container">{"".join(out)}</div></nav>\n'
+
+def wh(src):
+    w, h = jpeg_size(src)
+    out = f'width="{w}" height="{h}"'
+    small = src[:-4] + "-360.jpg"
+    if src.endswith(".jpg") and os.path.exists(os.path.join(OUT, small)):
+        out += f' srcset="{small} 360w, {src} {w}w" sizes="(max-width: 639px) 50vw, 40vw"'
+    return out
+
+
+def is_cutout(name):
+    return bool(name) and name.endswith(".png")
+
 
 def contact_url(prod, cat):
     return f"contacto.html?producto={quote(prod)}&cat={quote(cat)}"
 
-def img_src(name):
-    """Ruta de la foto: la versión sin mancha verde si existe, si no la original."""
-    if os.path.exists(os.path.join(OUT, "assets", "img", "sin-fondo", name)):
-        return f"assets/img/sin-fondo/{name}"
-    return f"assets/img/{name}"
-
-def card(title, img, href):
-    inner = f'<img src="{img_src(img)}" alt="{E(title)}" loading="lazy">' if img else ICON["rack"]
-    return f'<a class="product-card" href="{href}"><div class="thumb">{inner}</div><h3>{E(title)}</h3></a>'
-
-def product_cards(cat):
-    return "".join(card(name, img, f"{slug}.html" if slug else contact_url(name, cat["name"]))
-                   for name, img, slug, _desc in cat["items"])
-
-def cat_tabs(active):
-    return '<nav class="cat-tabs" aria-label="Categorías"><div class="container">' + "".join(
-        f'<a href="{c["slug"]}.html"{ACT if c["slug"] == active else ""}>{E(c["name"])}</a>' for c in CATS
-    ) + "</div></nav>\n"
-
-def band(title, text, btn="Solicitar catálogo de productos", href="contacto.html"):
-    return f'''<section class="band"><div class="container">
-  <h2>{E(title)}</h2><p>{E(text)}</p>
-  <a class="btn btn-outline-light" href="{href}">{E(btn)}</a>
-</div></section>
-'''
 
 def write(name, body):
     with open(os.path.join(OUT, name), "w", encoding="utf-8") as f:
         f.write(body)
 
-TRUST = f'''<section class="trust"><div class="container">
-  <div class="trust-item"><div class="ic">{ICON["award"]}</div><div><strong>20</strong><span>años de experiencia en la industria del plástico</span></div></div>
-  <div class="trust-item"><div class="ic">{ICON["clock"]}</div><div><strong>12-24 h</strong><span>respuesta y envío de recambios</span></div></div>
-  <div class="trust-item"><div class="ic">{ICON["gear"]}</div><div><strong>128</strong><span>zonas de control en una sola unidad</span></div></div>
-  <div class="trust-item"><div class="ic">{ICON["globe"]}</div><div><strong>+50</strong><span>clientes con envíos a todo el mundo</span></div></div>
+
+# ---------------------------------------------------------------------------
+# Cabecera, navegación y pie comunes
+# ---------------------------------------------------------------------------
+def head(title, desc, extra=""):
+    return f'''<!doctype html>
+<html lang="es" data-type="product" data-radius="sharp" data-buttons="solid" data-motion>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>{E(title)}</title>
+<meta name="description" content="{E(desc)}">
+<meta property="og:type" content="website">
+<meta property="og:title" content="{E(title)}">
+<meta property="og:description" content="{E(desc)}">
+<meta property="og:image" content="share.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="assets/img/logo.png" type="image/png">
+<meta name="theme-color" content="#f4f6f6">
+<!-- <link rel="canonical" href="https://systemplas.com/"> cuando el dominio esté publicado -->
+<meta name="site-kind" content="tech">
+<meta name="page-type" content="product">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wdth,wght@85..100,400..700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/system.css">
+<link rel="stylesheet" href="assets/ui/cards.css">
+<link rel="stylesheet" href="assets/motion/motion.css">
+<link rel="stylesheet" href="assets/layout/layout.css">
+<style>
+:root {{
+  --p-bg: #f4f6f6; --p-surface: #e8eeee; --p-ink: #012c3d; --p-muted: #546d79;
+  --p-accent: #037c75; --p-accent-ink: #f4f6f6; --p-action: #037c75; --p-action-ink: #f4f6f6;
+  --p-inv-bg: #012c3d; --p-inv-surface: #143849; --p-inv-ink: #f4f6f6; --p-inv-muted: #93a3ab;
+  --p-inv-accent: #f4f6f6; --p-inv-accent-ink: #012c3d; --p-inv-action: #f4f6f6; --p-inv-action-ink: #012c3d;
+  --font-display: "IBM Plex Sans", system-ui, sans-serif;
+  --font-text: "IBM Plex Sans", system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+  --display-weight: 500;
+  --display-tracking: -0.025em;
+  --display-tracking-xl: -0.035em;
+  --ly-scale: 0.98;
+}}
+</style>
+<link rel="stylesheet" href="assets/css/site.css">
+<script>document.documentElement.classList.add('m-enter');setTimeout(()=>document.documentElement.classList.add('m-enter-done'),700)</script>
+{extra}</head>
+'''
+
+
+def nav(active=None):
+    cards = "".join(
+        f'''<a class="menu-card span-3" href="{c["slug"]}.html">
+              <div class="panel{" panel--white" if is_cutout(CAT_IMG[c["slug"]]) else ""}"><img class="frame__img" src="{img_src(CAT_IMG[c["slug"]])}" {wh(img_src(CAT_IMG[c["slug"]]))} alt="" loading="lazy"></div>
+              <span class="t-card">{E(c["name"])}</span>
+              <span class="t-small muted">{E(CAT_LINE[c["slug"]])}</span>
+            </a>''' for n, c in enumerate(CATS))
+    items = []
+    for href, label in NAVW:
+        cur = ' aria-current="page"' if href == active else ""
+        if label == "Productos":
+            items.append(f'''<div class="nav__item">
+        <a class="nav__link" href="{href}"{cur}>{label} <svg class="chev" viewBox="0 0 12 12" aria-hidden="true"><path d="M3 4.5l3 3 3-3" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <div class="nav__menu"><div class="wrap grid">{cards}</div></div>
+      </div>''')
+        else:
+            items.append(f'<div class="nav__item"><a class="nav__link" href="{href}"{cur}>{label}</a></div>')
+    return f'''<body>
+<header class="nav">
+  <div class="wrap nav__bar">
+    <a class="skip-link" href="#top">Saltar al contenido</a>
+    <a class="nav__logo" href="index.html"><img src="assets/img/logo-320.png" alt="System Plast" width="320" height="139"></a>
+    <nav class="nav__links" aria-label="Principal">
+      {"".join(items)}
+    </nav>
+    <div class="nav__actions">
+      <a class="btn btn--primary" href="contacto.html">{MAIN_ACTION}</a>
+    </div>
+    <button class="nav__toggle" type="button" aria-expanded="false" aria-label="Menú">
+      <svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><path d="M2 5h14M2 13h14" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+    </button>
+  </div>
+</header>
+'''
+
+
+CREDITS_LINE = '<a class="credits" href="creditos.html">Vídeo y fotos de contexto vía Pexels y Wikimedia Commons</a>'
+
+
+def footer(close_line="Respuesta y envío de recambios en 12 a 24 horas.", scripts=""):
+    cats = "".join(f'<li><a href="{c["slug"]}.html">{E(c["name"])}</a></li>' for c in CATS)
+    return f'''<footer class="footer closing g2m" id="contact" aria-labelledby="close-h">
+  <div class="wrap">
+    <div class="closing__cta close--word">
+      <div class="section-head--split">
+        <div><h2 id="close-h">Presupuesto para su línea de inyección</h2><p class="t-lead">{E(close_line)}</p></div>
+        <a class="btn btn--primary" href="contacto.html">{MAIN_ACTION}{ARROW}</a>
+      </div>
+      <p class="close__word" aria-hidden="true">System Plast</p>
+    </div>
+    <div class="closing__links">
+      <div class="grid">
+        <div class="span-4 stack-4">
+          <a class="nav__logo" href="index.html"><img src="assets/img/logo-320.png" alt="System Plast" width="320" height="139" loading="lazy"></a>
+          <p class="footer__lede">Componentes y recambios para la inyección de plástico.</p>
+        </div>
+        <div class="span-3 footer__col"><h3>Productos</h3><ul>{cats}</ul></div>
+        <div class="span-2 footer__col"><h3>Empresa</h3><ul><li><a href="quienes-somos.html">Quiénes somos</a></li><li><a href="noticias.html">Noticias</a></li><li><a href="contacto.html">Contacto</a></li></ul></div>
+        <div class="span-3 footer__col"><h3>Contacto</h3><ul><li>{DIR1}, {DIR2}</li><li><a href="tel:{TEL}">{TEL_TXT}</a></li><li><a href="mailto:{MAIL}">{MAIL}</a></li></ul></div>
+      </div>
+      <div class="footer__legal">
+        <span>&copy; {YEAR} System Plast</span>
+        <div class="socials"><a href="{LINKEDIN}" target="_blank" rel="noopener" aria-label="LinkedIn">{ICON["linkedin"]}</a></div>
+        {CREDITS_LINE}
+      </div>
+    </div>
+  </div>
+</footer>
+<script type="module" src="assets/system.js"></script>
+<script type="module" src="assets/motion/motion.js"></script>
+<script type="module" src="assets/layout/layout.js"></script>
+{scripts}</body>
+</html>
+'''
+
+
+def page_head(title, lead, crumbs=(), video=False):
+    trail = ""
+    if crumbs:
+        parts = ['<a href="index.html">Inicio</a>']
+        for label, href in crumbs:
+            parts.append(f'<a href="{href}">{E(label)}</a>' if href else f'<span aria-current="page">{E(label)}</span>')
+        trail = '<nav class="crumbs" aria-label="Migas de pan">' + '<span aria-hidden="true">/</span>'.join(parts) + '</nav>'
+    if video:
+        # La portada de catálogo lleva el mismo vídeo de máquinas que la portada (como Botbox)
+        return f'''<header class="pg-head pg-head--video" data-enter>
+  <video class="pg-head__bg" autoplay muted loop playsinline preload="metadata" poster="assets/video/maquina-poster.jpg" aria-hidden="true" data-bg-video>
+    <source src="assets/video/maquina-640.mp4" type="video/mp4" media="(max-width: 639px)">
+    <source src="assets/video/maquina-720.mp4" type="video/mp4">
+  </video>
+  <div class="wrap">{trail}<h1>{E(title)}</h1><p class="t-lead">{E(lead)}</p>
+    <button class="loop-pause pg-head__pause" type="button" aria-label="Pausar el vídeo" aria-pressed="false" data-video-pause></button>
+  </div>
+</header>
+'''
+    return f'''<header class="pg-head ground-inverse" data-enter>
+  <div class="wrap">{trail}<h1>{E(title)}</h1><p class="t-lead">{E(lead)}</p></div>
+</header>
+'''
+
+
+def card(title, img, href, line=None):
+    panel = ""
+    if img:
+        cls = "panel panel--white" if is_cutout(img) else "panel"
+        panel = f'<div class="{cls}"><img class="frame__img" src="{img_src(img)}" {wh(img_src(img))} alt="{E(title)}" loading="lazy"></div>'
+    sub = f'<p>{E(line)}</p>' if line else ""
+    return f'<a class="card card--open card--prod" href="{href}">{panel}<h3>{E(title)}</h3>{sub}</a>'
+
+# ---------------------------------------------------------------------------
+# Inicio
+# ---------------------------------------------------------------------------
+HOME_EXTRA = '''<script>document.documentElement.classList.add('mo-js');setTimeout(()=>document.documentElement.classList.add('mo-safe'),2500)</script>
+<link rel="modulepreload" href="assets/moments/moments.js">
+<link rel="modulepreload" href="assets/moments/lib.js">
+<link rel="modulepreload" href="assets/moments/line-carries-colour/moment.js">
+'''
+
+def row_link(name, value, href):
+    return f'<li><a class="rows__link" href="{href}"><span class="rows__name">{E(name)}</span><span class="rows__value">{E(value)}</span></a></li>'
+
+home_cards = "".join(f'''<a class="card card--open card--prod {"cat-big span-6" if n == 0 else "cat-small span-6 start-7"}" href="{c["slug"]}.html">
+          <div class="panel{" panel--white" if is_cutout(CAT_IMG[c["slug"]]) else ""}"><img class="frame__img" src="{img_src(CAT_IMG[c["slug"]])}" {wh(img_src(CAT_IMG[c["slug"]]))} alt="{E(c["name"])}" loading="lazy" data-source="{"client" if is_cutout(CAT_IMG[c["slug"]]) else "stand-in"}" data-subject="{"product" if is_cutout(CAT_IMG[c["slug"]]) else "injection mould"}"></div>
+          <h3>{E(c["name"])}</h3><p>{E(CAT_LINE[c["slug"]])}</p>
+        </a>''' for n, c in enumerate(CATS))
+
+hrs_rows = "".join(row_link(n, v, f"{s}.html") for n, v, s in [
+    ("Serie MTC-B", "Pantalla IPS a color", "serie-mtc-b"),
+    ("Serie MTC-H", "Hasta 128 zonas", "serie-mtc-h"),
+    ("Serie TG", "Módulos con perilla", "serie-tg"),
+    ("Controlador SVGE-8", "8 zonas, valve gate", "svge-8")])
+
+res_rows = "".join(f'<li><span class="rows__name">{k}</span><span class="rows__value">{v}</span></li>' for k, v in [
+    ("Dimensiones", "Diámetro, ancho, alto"), ("Tensión", "Voltios de su máquina"), ("Potencia", "En vatios"),
+    ("Perforaciones", "Posición y diámetro"), ("Conexión", "Cable, borna o terminal")])
+res_tiles = "".join(f'<a href="{s}.html"><img src="{img_src(i)}" width="700" height="534" alt="{E(n)}" loading="lazy" data-source="client" data-subject="product"></a>' for n, i, s in [
+    ("Resistencia de mica en acero inoxidable", "res-1.png", "resistencia-en-acero-inoxidable-de-mica"),
+    ("Resistencia en cobre puro", "res-3.png", "resistencia-en-cobre-puro"),
+    ("Nano-infrarrojo de bajo consumo", "res-5.png", "nano-infrarrojo-calentador-de-bajo-consumo"),
+    ("Anillo calefactor cerámico", "res-8.png", "anillo-calefactor-ceramico")])
+
+eoat_rows = "".join(row_link(n, v, f"{s}.html") for n, v, s in [
+    ("Cambiadores rápidos", "Carga máxima 15 kg", "cambiadores-rapidos-de-herramientas-quick-changers"),
+    ("Pinzas de bebedero", "Extracción de coladas", "pinzas-de-bebedero-sprue-grippers"),
+    ("Ventosas de vacío", "Silicona, NBR, poliuretano", "ventosas-de-vacio"),
+    ("Pinzas neumáticas", "Dos o tres dedos", "pinzas-neumaticas-paralelas-y-angulares")])
+
+write("index.html", head("System Plast: componentes para inyectoras de plástico",
+                         "Controladores de canal caliente, resistencias a medida y garras EOAT para moldeo por inyección, con recambios en 12 a 24 horas desde Mutxamel.",
+                         HOME_EXTRA) + nav() + f'''<!-- type: product (hardware, site-kind tech)
+     deal: hero photo con vídeo de fondo (el cliente pide un vídeo de máquinas detrás, como Botbox; sustituye al hero product repartido),
+     nav nav-cards, close close-word, footer footer-columns, rhythm dark-band, buttons solid, mark: logo del cliente
+     palette: colores del logo (start.mjs brand), type plex, radius sharp
+     moments: line-carries-colour en #resistencias (la franja oscura) -->
+<main id="top">
+  <section class="hero hero--photo" data-enter data-calm="left" data-box="none" data-tone="light" aria-labelledby="hero-h">
+    <!-- VÍDEO: Pexels 32386599 (licencia Pexels, uso libre). Se cambia aquí por el vídeo propio del cliente. -->
+    <video class="hero__bg" autoplay muted loop playsinline preload="metadata" poster="assets/video/maquina-poster.jpg" aria-hidden="true" style="--ly-pos: 70% 50%; --ly-pos-phone: 70% 50%" data-source="stand-in" data-subject="vacuum gripper on an automated line">
+      <source src="assets/video/maquina-640.mp4" type="video/mp4" media="(max-width: 639px)">
+      <source src="assets/video/maquina-720.mp4" type="video/mp4">
+    </video>
+    <div class="wrap"><div class="hero-text">
+      <div class="hero__text">
+        <h1 id="hero-h">Componentes para inyectoras</h1>
+        <p class="hero__lead">Controladores de canal caliente de hasta 128 zonas, resistencias fabricadas a medida y garras EOAT para robots de extracción, con recambios en 12 a 24 horas.</p>
+        <div class="btn-row"><a class="btn btn--primary" href="contacto.html">{MAIN_ACTION}{ARROW}</a><a class="btn btn--secondary" href="productos.html">Ver el catálogo</a></div>
+      </div>
+      <button class="loop-pause hero-pause" type="button" aria-label="Pausar el vídeo" aria-pressed="false" data-video-pause></button>
+    </div></div>
+  </section>
+
+  <section class="section" id="catalogo" aria-labelledby="catalogo-h">
+    <div class="wrap">
+      <div class="section-head section-head--row">
+        <h2 id="catalogo-h">Catálogo por línea de producto</h2>
+        <a class="link" href="productos.html">Ver el catálogo</a>
+      </div>
+      <div class="grid fill cat-row">
+        {home_cards}
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="hrs" style="--hm: 2" aria-labelledby="hrs-h">
+    <div class="wrap grid grid--top">
+      <div class="span-5 stack-6">
+        <div class="section-head">
+          <h2 id="hrs-h">Controladores de canal caliente</h2>
+          <p>Control PID de cada boquilla del molde, de una zona a 128 en la misma unidad.</p>
+        </div>
+        <ul class="rows rows--links">{hrs_rows}</ul>
+        <a class="link" href="hrs-controladores.html">Ver controladores</a>
+      </div>
+      <a class="frame frame--white span-6 start-7 big-product" href="serie-mtc-g.html" aria-label="Serie MTC-G">
+        <img class="frame__img" src="{img_src("hrs-2.png")}" width="700" height="534" alt="Controlador de canal caliente Serie MTC-G de seis zonas" loading="lazy" data-source="client" data-subject="product">
+      </a>
+    </div>
+  </section>
+
+  <section class="section ground-inverse" id="resistencias" style="--hm: 2" aria-labelledby="res-h" data-moment="line-carries-colour" data-moment-opts='{{"from": "base"}}'>
+    <div class="wrap grid grid--top">
+      <div class="span-5 stack-6">
+        <div class="section-head">
+          <h2 id="res-h">Resistencias fabricadas a su medida</h2>
+          <p>Envíe estos cinco datos y fabricamos la resistencia exacta para su husillo, boquilla o molde.</p>
+        </div>
+        <ul class="rows rows--spec">{res_rows}</ul>
+        <a class="link" href="resistencias-electricas.html">Ver resistencias</a>
+      </div>
+      <div class="span-6 start-7 res-wall">{res_tiles}</div>
+    </div>
+  </section>
+
+  <section class="section" id="eoat" style="--hm: 2" aria-labelledby="eoat-h">
+    <div class="wrap grid grid--top">
+      <div class="span-5 stack-6">
+        <div class="section-head">
+          <h2 id="eoat-h">Garras EOAT para robots de extracción</h2>
+          <p>Combinamos pinzas, ventosas y perfilería para montar la garra de cada pieza y de cada robot.</p>
+        </div>
+        <ul class="rows rows--links">{eoat_rows}</ul>
+        <a class="link" href="eoat-accesorio-robotica.html">Ver la gama EOAT</a>
+      </div>
+      <a class="frame frame--photo span-6 start-7 eoat-photo" href="eoat-accesorio-robotica.html" aria-label="Componentes EOAT">
+        <img class="frame__img" src="assets/img/home-2.jpg" width="1000" height="1000" alt="Robot de extracción junto a una inyectora, con garra montada" loading="lazy" data-source="client" data-subject="robot at injection machine">
+      </a>
+    </div>
+  </section>
+
+  <section class="section ground-surface" id="servicio" aria-labelledby="servicio-h">
+    <div class="wrap">
+      <div class="section-head section-head--row">
+        <h2 id="servicio-h">Recambios en 12 a 24 horas</h2>
+        <a class="link" href="quienes-somos.html">Conocer la empresa</a>
+      </div>
+      <div class="grid service-cols">
+        <div class="span-4"><h3>Asesoría para elegir controlador</h3><p>Le ayudamos a elegir la serie y la resistencia antes de la compra, y le atendemos después.</p></div>
+        <div class="span-4"><h3>Envío de recambios al extranjero</h3><p>Más de 50 clientes en automoción, electrodomésticos, dispositivos médicos y envases.</p></div>
+        <div class="span-4"><h3>Cajas de control para su molde</h3><p>Fabricamos cajas de control de temperatura ajustadas a su molde y a su producción.</p></div>
+      </div>
+      <div class="frame frame--photo fill plant-photo">
+        <img class="frame__img" src="assets/img/photo-f74695444.jpg" srcset="assets/img/photo-f74695444-500.jpg 500w, assets/img/photo-f74695444-960.jpg 960w, assets/img/photo-f74695444.jpg 1280w" sizes="(max-width: 1279px) 100vw, 1280px" width="1280" height="853" alt="Nave con una fila de inyectoras de plástico" loading="lazy" decoding="async" data-source="stand-in" data-subject="injection moulding hall">
+      </div>
+    </div>
+  </section>
+</main>
+''' + footer(scripts='<script type="module" src="assets/js/site.js"></script>\n'))
+
+SITE_JS = '<script type="module" src="assets/js/site.js"></script>\n'
+
+
+def inner(title, desc, active, body, close_line=None):
+    kw = {"scripts": SITE_JS}
+    if close_line:
+        kw["close_line"] = close_line
+    write_html = head(title, desc) + nav(active) + '<main id="top">\n<div class="page">\n' + body + '</div>\n</main>\n' + footer(**kw)
+    return write_html
+
+
+CUR = ' aria-current="page"'
+
+
+def cat_tabs(active):
+    return '<nav class="cat-tabs" aria-label="Categorías"><div class="wrap">' + "".join(
+        f'<a href="{c["slug"]}.html"{CUR if c["slug"] == active else ""}>{E(c["name"])}</a>' for c in CATS
+    ) + "</div></nav>\n"
+
+
+def band(title, text, btn, href):
+    return f'''<section class="pg-band ground-surface"><div class="wrap band-row">
+  <div><h2>{E(title)}</h2><p>{E(text)}</p></div>
+  <a class="btn btn--secondary" href="{href}">{E(btn)}</a>
 </div></section>
 '''
 
@@ -247,27 +490,26 @@ def render_section(sec, first):
     h = sec["h"] or ("Descripción" if first else "Más información")
     body = "".join(f"<p>{E(p['v'])}</p>" for p in ps)
     if lis:
-        body += '<ul class="checklist">' + "".join(f"<li>{E(i['v'])}</li>" for i in lis) + "</ul>"
+        body += '<ul class="rows rows--plain">' + "".join(f"<li><span>{E(i['v'])}</span></li>" for i in lis) + "</ul>"
     if short_kv:
-        body += '<table class="spec"><tbody>' + "".join(f"<tr><th>{E(i['k'])}</th><td>{E(i['v'])}</td></tr>" for i in short_kv) + "</tbody></table>"
+        body += '<ul class="rows rows--spec">' + "".join(f'<li><span class="rows__name">{E(i["k"])}</span><span class="rows__value">{E(i["v"])}</span></li>' for i in short_kv) + "</ul>"
     if long_kv:
-        body += '<div class="feat-grid">' + "".join(f'<div class="feat"><h3>{E(i["k"])}</h3><p>{E(i["v"])}</p></div>' for i in long_kv) + "</div>"
-    wide = bool(long_kv) or len(" ".join(p["v"] for p in ps)) > 700 or len(short_kv) > 7
-    return f'<section class="block{" block--wide" if wide else ""}"><h2>{E(h)}</h2>{body}</section>', wide
+        body += '<div class="feat-grid">' + "".join(f'<div class="feat"><h4>{E(i["k"])}</h4><p>{E(i["v"])}</p></div>' for i in long_kv) + "</div>"
+    return f'<section class="pdp-block"><h3>{E(h)}</h3>{body}</section>'
+
 
 for slug, f in FICHAS.items():
     cat = CAT_BY_PRODUCT.get(slug)
     if not cat:
         continue
-    imgs = f["images"] or [CARD_IMG[slug]]
-    imgs = list(dict.fromkeys(imgs))
-    main = imgs[0]
+    imgs = list(dict.fromkeys(f["images"] or [CARD_IMG[slug]]))
+    main_img = imgs[0]
     thumbs = ""
     if len(imgs) > 1:
         thumbs = '<div class="thumbs">' + "".join(
-            f'<button type="button" data-src="{img_src(i)}"{ACT if n == 0 else ""} aria-label="Ver imagen {n+1}"><img src="{img_src(i)}" alt="" loading="lazy"></button>' for n, i in enumerate(imgs[:10])) + "</div>"
+            f'<button type="button" data-gallery-thumb data-src="{img_src(i)}" aria-pressed="{"true" if n == 0 else "false"}" aria-label="Ver imagen {n+1}"><img src="{img_src(i)}" {wh(img_src(i))} alt="" loading="lazy"></button>'
+            for n, i in enumerate(imgs[:10])) + "</div>"
     sections = [dict(s) for s in f["sections"]]
-    # Párrafo de entrada: primer párrafo de la primera sección sin título
     lead = ""
     if sections and sections[0]["h"] is None and sections[0]["items"] and sections[0]["items"][0]["t"] == "p":
         lead = sections[0]["items"][0]["v"]
@@ -275,51 +517,43 @@ for slug, f in FICHAS.items():
     if not lead:
         lead = cat["short"]
     sections = [s for s in sections if s["items"]]
-    # Chips: primeras ventajas o claves técnicas
-    chips_src = [i["v"] for s in sections for i in s["items"] if i["t"] == "li"][:4]
-    chips = ('<ul class="chips">' + "".join(f"<li>{E(c.rstrip('.'))}</li>" for c in chips_src) + "</ul>") if chips_src else ""
-    blocks = []
-    for n, s in enumerate(sections):
-        b, _ = render_section(s, n == 0)
-        blocks.append(b)
+    blocks = "".join(render_section(s, n == 0) for n, s in enumerate(sections))
     custom = ""
     if cat["slug"] == "resistencias-electricas":
-        custom = '<div class="custom-note"><div><strong>¿Necesita una medida especial?</strong> Envíenos dimensiones, voltaje, potencia, perforaciones y tipo de conexión y le preparamos un presupuesto a medida.</div></div>'
+        custom = '<p class="pdp-note">¿Necesita otra medida? Envíenos dimensiones, tensión, potencia, perforaciones y tipo de conexión.</p>'
     related = [it for it in cat["items"] if it[2] != slug][:4]
     rel_html = "".join(card(n, i, f"{s}.html" if s else contact_url(n, cat["name"])) for n, i, s, d in related)
     wa_text = quote(f"Hola, me interesa {f['title']} (System Plast). ¿Me pueden dar más información?")
     sub = f'<p class="pdp-sub">{E(f["subtitle"])}</p>' if f["subtitle"] else ""
-    mobile_cta = f'<div class="mobile-cta"><a class="btn btn-primary" href="{contact_url(f["title"], cat["name"])}">Pedir presupuesto</a><a class="btn btn-wa" href="https://wa.me/{TEL[1:]}?text={wa_text}" target="_blank" rel="noopener">{ICON["wa"]} WhatsApp</a></div>\n'
-    page = head(f"{f['title']} | {cat['name']} | System Plast", (lead or cat["short"])[:155]) + header("productos.html") + \
-        crumbs(("Productos", "productos.html"), (cat["name"], f"{cat['slug']}.html"), (f["title"], None)) + f'''<main>
-<section class="pdp"><div class="container">
+    body = f'''<section class="pdp"><div class="wrap">
+  <nav class="crumbs crumbs--light" aria-label="Migas de pan"><a href="index.html">Inicio</a><span aria-hidden="true">/</span><a href="productos.html">Productos</a><span aria-hidden="true">/</span><a href="{cat['slug']}.html">{E(cat['name'])}</a></nav>
   <div class="pdp-top">
-    <div class="gallery"><div class="gallery-main"><img src="{img_src(main)}" alt="{E(f['title'])}"></div>{thumbs}</div>
-    <div class="pdp-info">
-      <span class="kicker">{E(cat['name'])}</span>
+    <div class="gallery"><div class="gallery-main"><img data-gallery-main src="{img_src(main_img)}" {wh(img_src(main_img))} alt="{E(f['title'])}"></div>{thumbs}</div>
+    <div class="pdp-info" data-enter>
+      <p class="t-label muted">{E(cat['name'])}</p>
       <h1>{E(f['title'])}</h1>{sub}
-      <p class="lead">{E(lead)}</p>
-      {chips}
-      <div class="pdp-actions">
-        <a class="btn btn-primary btn-lg" href="{contact_url(f['title'], cat['name'])}">Solicitar presupuesto</a>
-        <a class="btn btn-wa btn-lg" href="https://wa.me/{TEL[1:]}?text={wa_text}" target="_blank" rel="noopener">{ICON['wa']} WhatsApp</a>
+      <p class="pdp-lead">{E(lead)}</p>
+      <div class="btn-row">
+        <a class="btn btn--primary" href="{contact_url(f['title'], cat['name'])}">{MAIN_ACTION}{ARROW}</a>
+        <a class="btn btn--secondary" href="https://wa.me/{TEL[1:]}?text={wa_text}" target="_blank" rel="noopener">{ICON['wa']} Escribir por WhatsApp</a>
       </div>
       {custom}
-      <ul class="pdp-assure">
-        <li>{ICON['clock']} Recambios en 12-24 h</li>
-        <li>{ICON['user']} Asesoría técnica</li>
-        <li>{ICON['globe']} Envíos a todo el mundo</li>
+      <ul class="rows rows--spec pdp-assure">
+        <li><span class="rows__name">Recambios</span><span class="rows__value">12 a 24 horas</span></li>
+        <li><span class="rows__name">Asesoría técnica</span><span class="rows__value">Antes y después</span></li>
+        <li><span class="rows__name">Envíos</span><span class="rows__value">A todo el mundo</span></li>
       </ul>
     </div>
   </div>
-  <div class="pdp-body">{"".join(blocks)}</div>
+  <h2 class="pdp-body-h">Características de {E(f['title'])}</h2>
+  <div class="pdp-body">{blocks}</div>
 </div></section>
-<section class="related"><div class="container">
-  <div class="section-head"><span class="kicker">{E(cat['name'])}</span><h2>Otros productos de la categoría</h2></div>
-  <div class="product-grid grid-4">{rel_html}</div>
+<section class="pg-section"><div class="wrap">
+  <div class="section-head section-head--row"><h2>Más de {E(cat['name'].lower() if cat['slug'] != 'hrs-controladores' else 'HRS controladores')}</h2><a class="link" href="{cat['slug']}.html">Ver la categoría</a></div>
+  <div class="prod-grid">{rel_html}</div>
 </div></section>
-''' + CTA + "</main>\n" + mobile_cta + footer()
-    write(f"{slug}.html", page)
+'''
+    write(f"{slug}.html", inner(f"{f['title']} | {cat['name']} | System Plast", (lead or cat["short"])[:155], "productos.html", body))
 
 # ---------------------------------------------------------------------------
 # Páginas de categoría
@@ -327,144 +561,98 @@ for slug, f in FICHAS.items():
 for c in CATS:
     t, s = c["hero"]
     bt, bx = c["band"]
-    page = head(f"{c['name']} | System Plast", c["short"]) + header("productos.html") + hero(t, s) + \
-        cat_tabs(c["slug"]) + f'''<main>
-<section class="section"><div class="container">
-  <div class="product-grid">{product_cards(c)}</div>
-</div></section>
-''' + band(bt, bx) + CTA + "</main>\n" + footer()
-    write(f"{c['slug']}.html", page)
+    if any(it[1] for it in c["items"]):
+        grid = '<div class="prod-grid">' + "".join(
+            card(n, i, f"{sl}.html" if sl else contact_url(n, c["name"]), d) for n, i, sl, d in c["items"]) + "</div>"
+    else:
+        grid = '<div class="text-grid">' + "".join(
+            f'<a class="text-card" href="{contact_url(n, c["name"])}"><h3>{E(n)}</h3><p>{E(d)}</p><span class="link">Pedir información</span></a>' for n, i, sl, d in c["items"]) + "</div>"
+    body = page_head(t, s, [("Productos", "productos.html"), (c["name"], None)], video=True) + cat_tabs(c["slug"]) + \
+        f'<section class="pg-section"><div class="wrap"><h2 class="grid-h">{len(c["items"])} productos de {E(c["name"])}</h2>{grid}</div></section>\n' + band(bt, bx, "Pedir el catálogo completo", "contacto.html")
+    write(f"{c['slug']}.html", inner(f"{c['name']} | System Plast", c["short"], "productos.html", body))
 
 # ---------------------------------------------------------------------------
 # Productos
 # ---------------------------------------------------------------------------
-cats_html = "".join(card(c["name"], c["img"], f"{c['slug']}.html") for c in CATS)
-write("productos.html", head("Productos | System Plast", "Catálogo System Plast: controladores HRS de canal caliente, resistencias eléctricas, EOAT para robótica y estanterías para moldes.") +
-      header("productos.html") + hero("Catálogo de productos", "Productos diseñados para mejorar la productividad y garantizar procesos de inyección más eficientes y seguros") +
-      cat_tabs(None) + f'''<main>
-<section class="section section--grey"><div class="container">
-  <div class="section-head"><span class="kicker">Categorías de productos</span><h2>Conoce nuestra variedad de productos</h2><p>Equipos y componentes para que sus procesos de inyección sean más eficientes, seguros y rentables.</p></div>
-  <div class="product-grid cat-grid cat-grid--4">{cats_html}</div>
-</div></section>
-''' + band("Soluciones a medida", "Nuestras soluciones a medida garantizan una integración perfecta con las líneas de producción de nuestros clientes, lo que les permite obtener una ventaja competitiva en el mercado.", "Contáctanos") + f'''<section class="section"><div class="container">
-  <p class="statement">Estos productos ayudan a nuestros clientes a <strong>mejorar la eficiencia de la producción, reducir el consumo de energía y mejorar la calidad del producto</strong>.</p>
-  <p>Al ofrecer productos de mayor calidad y servicios más especializados, aspiramos a contribuir significativamente al desarrollo de la industria global del moldeo por inyección y a liderar la nueva generación de tecnología de control de temperatura de canal caliente.</p>
-</div></section>
-''' + CTA + "</main>\n" + footer())
-
-# ---------------------------------------------------------------------------
-# Inicio
-# ---------------------------------------------------------------------------
-features = [("01", "Sistemas de control de temperatura para hot runner", "Diseñados para garantizar precisión y estabilidad en procesos de inyección plástica, optimizando la calidad del producto final y reduciendo tiempos de producción."),
-            ("02", "Accesorios y recambios para moldes de inyección", "Componentes y piezas de alto rendimiento que extienden la vida útil de sus moldes, asegurando continuidad operativa sin interrupciones."),
-            ("03", "Soluciones personalizadas para procesos industriales", "Proyectos a medida según las necesidades de su línea de producción, integrando innovación y eficiencia en cada etapa del proceso.")]
-why = [("star", "Calidad garantizada", "Equipos y productos diseñados bajo estándares internacionales."),
-       ("gear", "Tecnología de vanguardia", "Innovación constante en cada solución."),
-       ("user", "Atención personalizada", "Soporte antes, durante y después de su compra."),
-       ("globe", "Cobertura amplia", "Envíos y atención en cualquier parte del mundo."),
-       ("clock", "Respuesta y recambios", "De 12 a 24 horas.")]
-news_html = "".join(f'<a class="news-card" href="{u}" target="_blank" rel="noopener"><img src="assets/img/{i}" alt="" loading="lazy"><div class="body"><span class="kicker">{E(src)}</span><h3>{E(t)}</h3><span class="card-link">Leer noticia ↗</span></div></a>' for i, t, src, u in NEWS)
-home_cats = "".join(card(c["name"], c["img"], f"{c['slug']}.html") for c in CATS)
-featured = [("serie-mtc-b", "Serie MTC-B", "Más vendido"), ("resistencias-de-aluminio", "Resistencias de aluminio", None),
-            ("cambiadores-rapidos-de-herramientas-quick-changers", "Cambiadores rápidos", None), ("svge-8", "Controlador SVGE-8", "Nuevo")]
-feat_html = "".join(card(n, CARD_IMG[s], f"{s}.html") for s, n, b in featured)
-write("index.html", head("System Plast | Sistemas de control y plásticos industriales", "Soluciones de alto rendimiento para la industria del plástico y la inyección: controladores de canal caliente, resistencias, EOAT y estanterías para moldes.") +
-      header("index.html") + f'''<section class="hero hero--home" style="background-image:url(assets/img/home-2.jpg)"><div class="container">
-  <span class="hero-eyebrow">Innovación en sistemas de control y plásticos industriales</span>
-  <h1>Soluciones de alto rendimiento para la industria del plástico y la inyección</h1>
-  <p>Tecnología y soluciones para tu negocio</p>
-  <a class="btn btn-primary btn-lg" href="productos.html">Ver productos</a>
-</div></section>
-''' + TRUST + f'''<main>
-<section class="section section--grey"><div class="container">
-  <div class="section-head"><span class="kicker">Nuestros productos</span><h2>Tecnología y soluciones para tu negocio</h2><p>En SYSTEM PLAST ofrecemos productos diseñados para mejorar la productividad y garantizar procesos de inyección de plástico más eficientes y seguros.</p></div>
-  <div class="product-grid grid-4">{home_cats}</div>
-</div></section>
-<section class="section"><div class="container">
-  <div class="section-head"><span class="kicker">Destacados</span><h2>Productos más solicitados</h2></div>
-  <div class="product-grid grid-4">{feat_html}</div>
-</div></section>
-<section class="section section--grey"><div class="container">
-  <div class="section-head"><span class="kicker">Tecnología avanzada para tu proceso de inyección</span><h2>Tu aliado estratégico en innovación</h2></div>
-  <div class="feature-list">{"".join(f'<div class="feature"><span class="num">{n}.</span><h3>{E(t)}</h3><p>{E(d)}</p></div>' for n, t, d in features)}</div>
-</div></section>
-''' + band("Asesoría técnica especializada", "En SYSTEM PLAST entendemos que elegir un proveedor es elegir un socio de confianza. Le ayudamos a elegir el equipo adecuado y le acompañamos antes, durante y después de la compra.", "Solicitar asesoramiento") + f'''<section class="section"><div class="container">
-  <div class="section-head"><span class="kicker">Por qué elegirnos</span><h2>Lo que nos diferencia</h2><p>En SYSTEM PLAST entendemos que elegir un proveedor es elegir un socio de confianza. Por eso ofrecemos:</p></div>
-  <div class="why">{"".join(f'<div class="why-item"><div class="icon">{ICON[ic]}</div><h4>{E(t)}</h4><p>{E(d)}</p></div>' for ic, t, d in why)}</div>
-</div></section>
-<section class="section section--grey"><div class="container">
-  <div class="section-head"><span class="kicker">Industrias</span><h2>Que confían en SYSTEM PLAST</h2><p>Nuestros productos están presentes en grandes sectores como automoción, electrodomésticos, dispositivos médicos y envases.</p></div>
-  <div class="logos">{"".join(f'<img src="assets/img/industria-{i}.png" alt="Cliente de System Plast" loading="lazy">' for i in range(1, 7))}</div>
-</div></section>
-<section class="section"><div class="container">
-  <div class="section-head"><span class="kicker">Actualidad</span><h2>Noticias del sector</h2></div>
-  <div class="news-grid">{news_html}</div>
-</div></section>
-<section class="section section--grey"><div class="container">
-  <p class="statement">Estos productos ayudan a nuestros clientes a <strong>mejorar la eficiencia de la producción, reducir el consumo de energía y mejorar la calidad del producto</strong>.</p>
-  <p>Al ofrecer productos de mayor calidad y servicios más especializados, aspiramos a contribuir significativamente al desarrollo de la industria global del moldeo por inyección y a liderar la nueva generación de tecnología de control de temperatura de canal caliente.</p>
-</div></section>
-''' + CTA + "</main>\n" + footer())
+cats_html = "".join(card(c["name"], CAT_IMG[c["slug"]], f"{c['slug']}.html", CAT_LINE[c["slug"]]) for c in CATS)
+body = page_head("Catálogo de productos", "Controladores, resistencias, EOAT y estanterías para que sus procesos de inyección sean más eficientes y seguros.", [("Productos", None)], video=True) + \
+    f'<section class="pg-section"><div class="wrap"><h2 class="grid-h">Cuatro líneas de producto</h2><div class="prod-grid">{cats_html}</div></div></section>\n' + \
+    band("Soluciones a medida", "Diseñamos cajas de control y resistencias que se integran en su línea de producción tal como está.", "Contar su proyecto", "contacto.html")
+write("productos.html", inner("Productos | System Plast", "Catálogo System Plast: controladores HRS de canal caliente, resistencias eléctricas, EOAT para robótica y estanterías para moldes.", "productos.html", body))
 
 # ---------------------------------------------------------------------------
 # Quiénes somos
 # ---------------------------------------------------------------------------
-write("quienes-somos.html", head("Quiénes somos | System Plast", "20 años desarrollando y distribuyendo soluciones tecnológicas para la industria del plástico.") +
-      header("quienes-somos.html") + hero("Quiénes somos", "Desarrollo y distribución de soluciones tecnológicas") + crumbs(("Quiénes somos", None)) + f'''<main>
-<section class="section"><div class="container split">
-  <div><span class="kicker">01. Nuestra empresa</span><h2>En SYSTEM PLAST nos especializamos</h2>
-  <p>En el desarrollo y distribución de soluciones tecnológicas para la industria del plástico. Nuestro compromiso es ofrecer equipos y sistemas que optimicen procesos, aumenten la eficiencia y garanticen calidad en cada producción.</p>
-  <p>Con 20 años de experiencia, un equipo altamente capacitado y la confianza de nuestros clientes, nos hemos consolidado como un aliado estratégico para empresas que buscan innovación y resultados reales.</p>
-  <div class="stats"><div class="stat"><strong>20</strong><span>Años de experiencia</span></div><div class="stat"><strong>+50</strong><span>Clientes</span></div></div></div>
-  <div><img src="assets/img/home-2.jpg" alt="Célula de inyección con robot" loading="lazy"></div>
-</div></section>
-<section class="section section--grey"><div class="container">
-  <div class="section-head"><span class="kicker">Calidad</span><h2>¿Por qué elegirnos?</h2><p>Nos adherimos estrictamente a los sistemas internacionales de gestión de calidad durante todo el proceso de producción, desde la adquisición de materias primas hasta el ensamblaje del producto.</p></div>
-  <div class="pdp-body" style="margin-top:0">
-    <section class="block"><h2>Liderazgo tecnológico</h2><p>Contamos con una amplia gama de soluciones en control de temperatura, desde equipos monozona y multizona hasta sistemas inteligentes diseñados para lograr la máxima precisión. Nuestros controladores de canal caliente integran tecnología avanzada basada en algoritmos PID, lo que permite un control estable, exacto y con tiempos de respuesta muy rápidos.</p><p>Gracias a estas características, se optimiza el proceso de moldeo por inyección, garantizando mayor eficiencia, consistencia y confiabilidad para los fabricantes que buscan resultados de alto nivel.</p></section>
-    <section class="block"><h2>Servicios personalizados</h2><p>Entendemos que cada cliente tiene requerimientos particulares, por eso desarrollamos y fabricamos cajas de control de temperatura totalmente personalizadas, diseñadas para ajustarse de manera precisa a los procesos de moldeo por inyección y a las demandas específicas de producción.</p><p>Nuestras soluciones hechas a la medida se integran de forma eficiente en las líneas de producción, brindando a las empresas un mejor rendimiento operativo y una ventaja competitiva dentro de su industria.</p></section>
+logos = "".join(f'<img src="assets/img/industria-{i}.png" alt="{n}" loading="lazy">' for i, n in
+                [(1, "Samsung"), (2, "Midea"), (3, "Valeo"), (4, "Gree"), (5, "Hasco"), (6, "Sharp")])
+body = page_head("Quiénes somos", "20 años desarrollando y distribuyendo soluciones tecnológicas para la industria del plástico.", [("Quiénes somos", None)]) + f'''<section class="pg-section"><div class="wrap split-6">
+  <div class="stack-5">
+    <h2>Especialistas en control de temperatura para la inyección</h2>
+    <p>En System Plast desarrollamos y distribuimos equipos para la industria del plástico: controladores de canal caliente, resistencias, garras EOAT y almacenaje de moldes.</p>
+    <p>Con 20 años de experiencia y más de 50 clientes, acompañamos a cada fábrica antes, durante y después de la compra.</p>
   </div>
+  <div class="frame frame--photo about-photo"><img class="frame__img" src="assets/img/home-2.jpg" width="1000" height="1000" alt="Célula de inyección con robot de extracción" loading="lazy"></div>
 </div></section>
-''' + band("Nuestra visión de futuro", "De cara al futuro, la empresa se compromete a seguir centrándose en el sector de los controladores de temperatura de canal caliente. Incrementaremos la inversión en investigación y desarrollo, fomentando una cultura de innovación continua para liderar la nueva generación de tecnología de control de temperatura de canal caliente.", "Ver productos", "productos.html") + CTA + "</main>\n" + footer())
+<section class="pg-section ground-surface"><div class="wrap split-6">
+  <div class="stack-4"><h2>Liderazgo tecnológico</h2><p>Del equipo monozona al multizona y a los sistemas inteligentes: nuestros controladores de canal caliente usan algoritmos PID para un control estable, exacto y rápido de cada zona.</p></div>
+  <div class="stack-4"><h2>Servicios personalizados</h2><p>Fabricamos cajas de control de temperatura a medida, ajustadas a cada molde y a la producción de cada cliente, para que encajen en su línea sin cambios.</p></div>
+</div></section>
+<section class="pg-section"><div class="wrap">
+  <div class="section-head"><h2>Sectores que trabajan con nosotros</h2><p>Automoción, electrodomésticos, dispositivos médicos y envases.</p></div>
+  <div class="logo-row">{logos}</div>
+</div></section>
+'''
+write("quienes-somos.html", inner("Quiénes somos | System Plast", "20 años desarrollando y distribuyendo soluciones tecnológicas para la industria del plástico.", "quienes-somos.html", body))
 
 # ---------------------------------------------------------------------------
 # Noticias
 # ---------------------------------------------------------------------------
-write("noticias.html", head("Noticias | System Plast", "Noticias y tendencias de la industria del plástico.") + header("noticias.html") +
-      hero("Noticias", "Actualidad y tendencias de la industria del plástico", compact=True) + crumbs(("Noticias", None)) + f'''<main>
-<section class="section section--grey"><div class="container"><div class="news-grid">{news_html}</div></div></section>
-''' + CTA + "</main>\n" + footer())
+news_html = "".join(f'<a class="card card--open card--prod news-card" href="{u}" target="_blank" rel="noopener"><div class="panel"><img class="frame__img" src="assets/img/{i}" alt="" loading="lazy"></div><p class="t-label muted">{E(src)}</p><h3>{E(t)}</h3></a>' for i, t, src, u in NEWS)
+body = page_head("Noticias del sector", "Actualidad y tendencias de la industria del plástico.", [("Noticias", None)]) + \
+    f'<section class="pg-section"><div class="wrap"><div class="news-grid">{news_html}</div></div></section>\n'
+write("noticias.html", inner("Noticias | System Plast", "Noticias y tendencias de la industria del plástico.", "noticias.html", body))
 
 # ---------------------------------------------------------------------------
 # Contacto
 # ---------------------------------------------------------------------------
 opts = "".join(f"<option>{E(c['name'])}</option>" for c in CATS) + "<option>Otro / proyecto a medida</option>"
-write("contacto.html", head("Contacto | System Plast", f"Contacte con System Plast: {DIR1}, {DIR2}. Tel. {TEL_TXT}.") + header("contacto.html") +
-      hero("Contacto", "Un miembro de nuestro equipo le responderá", compact=True) + crumbs(("Contacto", None)) + f'''<main>
-<section class="section section--grey"><div class="container contact-grid">
-  <div class="contact-info">
-    <h3>Hablemos de su proyecto</h3>
-    <p>Si tiene alguna pregunta sobre controladores de temperatura de canal caliente, controladores de válvula secuencial, resistencias o EOAT, complete el formulario y un miembro de nuestro equipo le responderá.</p>
-    <dl><dt>Dirección</dt><dd>{DIR1}<br>{DIR2}</dd>
-    <dt>Teléfono</dt><dd><a href="tel:{TEL}">{TEL_TXT}</a></dd>
-    <dt>Email</dt><dd><a href="mailto:{MAIL}">{MAIL}</a></dd>
-    <dt>WhatsApp</dt><dd><a href="https://wa.me/{TEL[1:]}" target="_blank" rel="noopener">Escríbanos por WhatsApp</a></dd>
-    <dt>Respuesta</dt><dd>De 12 a 24 horas</dd></dl>
+body = page_head("Contacto", "Cuéntenos qué necesita y le respondemos en 12 a 24 horas.", [("Contacto", None)]) + f'''<section class="pg-section"><div class="wrap split-6 contact">
+  <div class="stack-5">
+    <h2>Hablemos de su proyecto</h2>
+    <p>Controladores de canal caliente, controladores de válvula secuencial, resistencias o EOAT: complete el formulario y un técnico le responderá.</p>
+    <ul class="rows rows--spec">
+      <li><span class="rows__name">Dirección</span><span class="rows__value">{DIR1}<br>{DIR2}</span></li>
+      <li><span class="rows__name">Teléfono</span><span class="rows__value"><a class="link" href="tel:{TEL}">{TEL_TXT}</a></span></li>
+      <li><span class="rows__name">Email</span><span class="rows__value"><a class="link" href="mailto:{MAIL}">{MAIL}</a></span></li>
+      <li><span class="rows__name">WhatsApp</span><span class="rows__value"><a class="link" href="https://wa.me/{TEL[1:]}" target="_blank" rel="noopener">Escribir por WhatsApp</a></span></li>
+    </ul>
   </div>
-  <form class="form" id="contact-form">
-    <div class="row"><div class="field"><label for="nombre">Nombre *</label><input id="nombre" name="nombre" autocomplete="name" required></div>
-    <div class="field"><label for="empresa">Empresa</label><input id="empresa" name="empresa" autocomplete="organization"></div></div>
-    <div class="row"><div class="field"><label for="email">Email *</label><input id="email" name="email" type="email" autocomplete="email" required></div>
-    <div class="field"><label for="telefono">Teléfono</label><input id="telefono" name="telefono" type="tel" autocomplete="tel"></div></div>
-    <div class="field"><label for="producto">Categoría de interés</label><select id="producto" name="producto">{opts}</select></div>
-    <div class="field"><label for="mensaje">Mensaje *</label><textarea id="mensaje" name="mensaje" required></textarea></div>
-    <div class="field"><label class="check"><input type="checkbox" required> He leído y acepto la política de privacidad.</label></div>
-    <button class="btn btn-primary btn-lg" type="submit">Enviar consulta</button>
-    <div class="form-msg">Se ha abierto su programa de correo con la consulta preparada.</div>
+  <form class="form form-card" id="contact-form" action="mailto:{MAIL}" method="post" enctype="text/plain" data-endpoint="" novalidate>
+    <div class="field"><label for="f-name">Nombre</label><input id="f-name" name="nombre" type="text" autocomplete="name" required aria-describedby="f-name-err"><p class="field__error" id="f-name-err" hidden>Escriba su nombre.</p></div>
+    <div class="field"><label for="f-company">Empresa</label><input id="f-company" name="empresa" type="text" autocomplete="organization"></div>
+    <div class="field"><label for="f-email">Email</label><input id="f-email" name="email" type="email" autocomplete="email" inputmode="email" required aria-describedby="f-email-err"><p class="field__error" id="f-email-err" hidden>Escriba un email con @, por ejemplo nombre@empresa.com.</p></div>
+    <div class="field"><label for="f-cat">Producto de interés</label><select id="f-cat" name="producto">{opts}</select></div>
+    <div class="field"><label for="f-msg">Mensaje</label><textarea id="f-msg" name="mensaje" rows="5" required aria-describedby="f-msg-err"></textarea><p class="field__error" id="f-msg-err" hidden>Escriba qué producto o medida necesita.</p></div>
+    <div class="btn-row"><button class="btn btn--primary" type="submit">{MAIN_ACTION}</button></div>
+    <p class="form__status" role="status" data-form-status></p>
+    <p class="t-small">Al enviar acepta que usemos sus datos solo para responder a esta consulta.</p>
   </form>
 </div></section>
-<section style="line-height:0"><iframe title="Ubicación System Plast" src="https://maps.google.com/maps?q=Pol.%20Ind.%20Riodil%201%2C%2003110%20Mutxamel%2C%20Alicante&z=15&output=embed" width="100%" height="380" style="border:0" loading="lazy"></iframe></section>
-</main>
-''' + footer())
+'''
+write("contacto.html", inner("Contacto | System Plast", f"Contacte con System Plast en Mutxamel (Alicante): presupuestos de controladores, resistencias y EOAT.", "contacto.html", body))
+
+# ---------------------------------------------------------------------------
+# Créditos
+# ---------------------------------------------------------------------------
+body = page_head("Créditos", "Material de terceros usado en esta web.", [("Créditos", None)]) + '''<section class="pg-section"><div class="wrap measure stack-4">
+  <ul class="rows rows--plain">
+    <li><span>Vídeo de la portada: «Automated Manufacturing Equipment in Action», Pexels, vídeo 32386599, <a class="link" href="https://www.pexels.com/license/">licencia Pexels</a>.</span></li>
+    <li><span>Nave de inyectoras: «Inside the factory», Orionpenindia, Wikimedia Commons, <a class="link" href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>.</span></li>
+    <li><span>Molde de inyección: «HTS main frame polymer injection mold», MobiusDaXter, Wikimedia Commons, <a class="link" href="https://creativecommons.org/licenses/by-sa/3.0/">CC BY-SA 3.0</a>.</span></li>
+    <li><span>Las marcas y logotipos de clientes pertenecen a sus propietarios.</span></li>
+  </ul>
+</div></section>
+'''
+write("creditos.html", inner("Créditos | System Plast", "Licencias del vídeo y de las fotografías de terceros usadas en la web de System Plast.", None, body))
 
 print("Páginas generadas:", len([f for f in os.listdir(OUT) if f.endswith(".html")]))
