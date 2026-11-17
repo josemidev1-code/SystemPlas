@@ -1,7 +1,7 @@
 {
  "page": "/Users/josemidev1/Desktop/webjefetalbi/hrs-controladores.html",
  "url": "http://127.0.0.1:5200/hrs-controladores.html",
- "at": "2026-11-17T19:36:03.142Z",
+ "at": "2026-11-17T21:31:26.745Z",
  "out": "/Users/josemidev1/Desktop/webjefetalbi/.taste-skill/consistency-hrs-controladores",
  "widths": [
   {
@@ -267,14 +267,104 @@
   {
    "width": 390,
    "height": 844,
-   "screens": 0,
+   "screens": 6,
    "held": 0,
-   "errors": [
-    "CDP socket closed"
+   "errors": [],
+   "findings": [
+    {
+     "check": "hero-fill",
+     "sev": "FAIL",
+     "sel": "main#top > div.page > section.pg-section",
+     "text": "8 productos de HRS Controladores",
+     "msg": "the next section shows on the first screen: it starts at 780px on a 844px screen (the hero ends at 630px)",
+     "stop": 0,
+     "crop": "390-01-hero-fill.jpg",
+     "fix": "let the hero fill the first screen alone (min-height: 100svh, less above it): nothing of the next section on load"
+    },
+    {
+     "check": "fold-cut",
+     "sev": "FAIL",
+     "sel": "div.page > section.pg-section > div.wrap > h2.grid-h",
+     "text": "8 productos de HRS Controladores",
+     "msg": "a 30px line is sliced by the bottom of the first screen (8px of it below the fold)",
+     "stop": 0,
+     "crop": "390-02-fold-cut.jpg",
+     "fix": "size the hero so the heading ends above the fold, or starts below it"
+    },
+    {
+     "check": "text-only",
+     "sev": "FAIL",
+     "sel": "main#top > div.page > section.pg-band.ground-surface",
+     "text": "Especialistas en control de canal caliente",
+     "msg": "the closing section is only text: no picture, icon, mock or effect in it",
+     "stop": 3,
+     "crop": "390-08-text-only.jpg",
+     "fix": "give the section a visual: a photograph that fits, the real icons, or a UI fragment on a ground"
+    },
+    {
+     "check": "card-layout",
+     "sev": "FAIL",
+     "sel": "div.page > section.pg-section > div.wrap > div.prod-grid",
+     "text": "Serie MTC-B Pantalla IPS a todo color",
+     "msg": "8 of 8 cards drawn one way (one panel, ground, placement and fragment): copies of one card",
+     "stop": 1,
+     "crop": "390-07-card-layout.jpg",
+     "fix": "a card layout at most twice on a page: build the other sections another way"
+    },
+    {
+     "check": "cta",
+     "sev": "FAIL",
+     "sel": "main#top > div.page > header.pg-head.pg-head--video",
+     "text": "",
+     "msg": "the hero has no button (the nav's does not count)",
+     "stop": 0,
+     "crop": "390-03-cta.jpg",
+     "fix": "add the action: a button in the hero, one on every priced item, one in the closing section"
+    },
+    {
+     "check": "section-tile",
+     "sev": "FAIL",
+     "sel": "main#top > div.page > header.pg-head.pg-head--video",
+     "text": "Catálogo de controladores HRS",
+     "shows": "main#top > div.page > section.pg-section",
+     "msg": "the header and the first section fill 630px (0.75 screens at 390x844; the section is 574px), shorter than the screen: the first screen shows 574px of it and 157px of a section further down, its heading \"8 productos de HRS Controlador\" on screen",
+     "fix": "make the hero exactly one screen (height: 100svh) with its content between the nav and 24px above the fold",
+     "stop": 6,
+     "crop": "390-09-section-tile.jpg"
+    },
+    {
+     "check": "section-tile",
+     "sev": "FAIL",
+     "sel": "main#top > div.page > nav.cat-tabs",
+     "text": "HRS Controladores Resistencias eléctrica",
+     "shows": "main#top > div.page > section.pg-section",
+     "msg": "the section is 57px tall (0.07 screens at 390x844), shorter than the screen: its tile (the screen from its top) shows none of it and 787px of the next section, its heading \"8 productos de HRS Controlador\" on screen",
+     "stop": 0,
+     "crop": "390-04-section-tile.jpg",
+     "fix": "set every section after the hero to one screen or two (height: calc(var(--h,1) * 100vh)) and fit its content above --padb"
+    },
+    {
+     "check": "nav",
+     "sev": "WARN",
+     "sel": "header.nav > div.wrap.nav__bar > button.nav__toggle",
+     "text": "",
+     "stop": 0,
+     "msg": "the nav is lopsided: its last item ends 13px inside the content's edge (366px), while its first starts on the other edge",
+     "fix": "start the nav's first item and end its last on the content's two edges",
+     "crop": "390-05-nav.jpg"
+    },
+    {
+     "check": "tap-size",
+     "sev": "WARN",
+     "sel": "header.pg-head.pg-head--video > div.wrap > nav.crumbs > a:nth-of-type(1)",
+     "text": "Inicio",
+     "msg": "a 35x22px tap target (and 1 more like it on this screen): under the 44px a phone needs",
+     "stop": 0,
+     "crop": "390-06-tap-size.jpg",
+     "fix": "make every link and control outside running text 44px tall on a phone: display: inline-flex; align-items: center; min-height: 44px (a footer list then needs no gap), a 44px small button, or a transparent ::before laid past the box"
+    }
    ],
-   "findings": [],
-   "glAsked": 0,
-   "failed": true
+   "glAsked": 0
   }
  ],
  "notChecked": [
@@ -293,12 +383,37 @@
   "screens": 8,
   "quick": true
  },
- "notCheckedAt": [
-  390
- ],
+ "sweep": {
+  "widths": [
+   1280,
+   1152,
+   1024,
+   896,
+   768
+  ],
+  "errors": [],
+  "findings": []
+ },
+ "narrow": {
+  "width": 320,
+  "height": 640,
+  "errors": [],
+  "findings": [
+   {
+    "check": "tap-size",
+    "sev": "WARN",
+    "sel": "header.pg-head.pg-head--video > div.wrap > nav.crumbs > a:nth-of-type(1)",
+    "text": "Inicio",
+    "msg": "a 35x22px tap target (and 1 more like it on this screen): under the 44px a phone needs",
+    "crop": "narrow-320-01-tap-size.jpg",
+    "width": 320,
+    "fix": "make every link and control outside running text 44px tall on a phone: display: inline-flex; align-items: center; min-height: 44px (a footer list then needs no gap), a 44px small button, or a transparent ::before laid past the box"
+   }
+  ]
+ },
  "counts": {
-  "FAIL": 23,
-  "WARN": 3
+  "FAIL": 30,
+  "WARN": 6
  },
  "checks": {
   "assets": "PASS",
@@ -311,7 +426,7 @@
   "sample-label": "PASS",
   "caption": "PASS",
   "credit-wall": "PASS",
-  "nav": "PASS",
+  "nav": "WARN",
   "nav-covers": "PASS",
   "spill": "PASS",
   "off-viewport": "PASS",
@@ -319,10 +434,10 @@
   "hover-spill": "not checked",
   "overlap-text": "PASS",
   "collide": "PASS",
-  "tap-size": "PASS",
+  "tap-size": "WARN",
   "row-gap": "PASS",
   "cut-text": "PASS",
-  "fold-cut": "PASS",
+  "fold-cut": "FAIL",
   "marquee": "PASS",
   "scroll-linked": "not checked",
   "scroll-reveal": "not checked",

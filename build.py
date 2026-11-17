@@ -479,7 +479,7 @@ def band(title, text, btn, href):
 # ---------------------------------------------------------------------------
 # Fichas de producto
 # ---------------------------------------------------------------------------
-def render_section(sec, first):
+def render_section(sec, first, title=""):
     items = sec["items"]
     lis = [i for i in items if i["t"] == "li"]
     ps = [i for i in items if i["t"] == "p"]
@@ -488,6 +488,8 @@ def render_section(sec, first):
     short_kv = [] if many_long else kvs
     long_kv = kvs if many_long else []
     h = sec["h"] or ("Descripción" if first else "Más información")
+    if title and len(h.split()) <= 2:
+        h = f"{h} de {title}"
     body = "".join(f"<p>{E(p['v'])}</p>" for p in ps)
     if lis:
         body += '<ul class="rows rows--plain">' + "".join(f"<li><span>{E(i['v'])}</span></li>" for i in lis) + "</ul>"
@@ -517,7 +519,7 @@ for slug, f in FICHAS.items():
     if not lead:
         lead = cat["short"]
     sections = [s for s in sections if s["items"]]
-    blocks = "".join(render_section(s, n == 0) for n, s in enumerate(sections))
+    blocks = "".join(render_section(s, n == 0, f["title"]) for n, s in enumerate(sections))
     custom = ""
     if cat["slug"] == "resistencias-electricas":
         custom = '<p class="pdp-note">¿Necesita otra medida? Envíenos dimensiones, tensión, potencia, perforaciones y tipo de conexión.</p>'
@@ -528,7 +530,6 @@ for slug, f in FICHAS.items():
     body = f'''<section class="pdp"><div class="wrap">
   <nav class="crumbs crumbs--light" aria-label="Migas de pan"><a href="index.html">Inicio</a><span aria-hidden="true">/</span><a href="productos.html">Productos</a><span aria-hidden="true">/</span><a href="{cat['slug']}.html">{E(cat['name'])}</a></nav>
   <div class="pdp-top">
-    <div class="gallery"><div class="gallery-main"><img data-gallery-main src="{img_src(main_img)}" {wh(img_src(main_img))} alt="{E(f['title'])}"></div>{thumbs}</div>
     <div class="pdp-info" data-enter>
       <p class="t-label muted">{E(cat['name'])}</p>
       <h1>{E(f['title'])}</h1>{sub}
@@ -544,6 +545,7 @@ for slug, f in FICHAS.items():
         <li><span class="rows__name">Envíos</span><span class="rows__value">A todo el mundo</span></li>
       </ul>
     </div>
+    <div class="gallery"><div class="gallery-main"><img data-gallery-main src="{img_src(main_img)}" width="700" height="700" alt="{E(f['title'])}"></div>{thumbs}</div>
   </div>
   <h2 class="pdp-body-h">Características de {E(f['title'])}</h2>
   <div class="pdp-body">{blocks}</div>

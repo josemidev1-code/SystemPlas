@@ -1,7 +1,7 @@
 {
  "page": "/Users/josemidev1/Desktop/webjefetalbi/serie-mtc-h.html",
  "url": "http://127.0.0.1:5200/serie-mtc-h.html",
- "at": "2026-11-17T19:33:19.494Z",
+ "at": "2026-11-17T21:32:54.096Z",
  "out": "/Users/josemidev1/Desktop/webjefetalbi/.taste-skill/consistency-serie-mtc-h",
  "widths": [
   {
@@ -18,7 +18,7 @@
      "text": "Serie MTC-B",
      "msg": "4 of 4 cards drawn one way (one panel, ground, placement and fragment): copies of one card",
      "stop": 2,
-     "crop": "1440-07-card-layout.jpg",
+     "crop": "1440-10-card-layout.jpg",
      "fix": "a card layout at most twice on a page: build the other sections another way"
     },
     {
@@ -34,32 +34,42 @@
     {
      "check": "copy-headings",
      "sev": "FAIL",
-     "sel": "div.wrap > div.pdp-body > section.pdp-block:nth-of-type(1) > h2",
+     "sel": "div.wrap > div.pdp-body > section.pdp-block:nth-of-type(1) > h3",
      "text": "Ventajas",
      "msg": "\"Ventajas\" names no product, part, place or section (2 headings like it; at most one brand line per page) (and 1 more like it: \"Pantalla plegable\")",
      "stop": 1,
-     "crop": "1440-04-copy-headings.jpg",
+     "crop": "1440-05-copy-headings.jpg",
      "fix": "name the thing in every heading: the product, a part, the place or a section noun"
     },
     {
      "check": "heading-scale",
      "sev": "FAIL",
-     "sel": "section.pg-section > div.wrap > div.section-head.section-head--row > h2",
-     "text": "Más de HRS controladores",
-     "msg": "an h2 at 48px, as large as the h1 (48px) or larger",
-     "stop": 2,
-     "crop": "1440-08-heading-scale.jpg",
+     "sel": "div.page > section.pdp > div.wrap > h2.pdp-body-h",
+     "text": "Características de Serie MTC-H",
+     "msg": "an h2 at 48px, as large as the h1 (48px) or larger (and 1 more like it: \"Más de HRS controladores\")",
+     "stop": 1,
+     "crop": "1440-06-heading-scale.jpg",
      "fix": "size headings by level: the h1 largest, one size per level, each level below the one above"
     },
     {
      "check": "heading-scale",
      "sev": "FAIL",
-     "sel": "section.pg-section > div.wrap > div.section-head.section-head--row > h2",
-     "text": "Más de HRS controladores",
-     "msg": "h2 headings in 2 sizes, 28px (\"Ventajas\") to 48px (x1.71)",
-     "stop": 2,
-     "crop": "1440-09-heading-scale.jpg",
+     "sel": "div.wrap > div.pdp-body > section.pdp-block:nth-of-type(1) > h3",
+     "text": "Ventajas",
+     "msg": "h3 headings in 2 sizes, 18px (\"Serie MTC-B\") to 28px (x1.56)",
+     "stop": 1,
+     "crop": "1440-07-heading-scale.jpg",
      "fix": "size headings by level: the h1 largest, one size per level, each level below the one above"
+    },
+    {
+     "check": "off-grid",
+     "sev": "FAIL",
+     "sel": "section.pdp > div.wrap > nav.crumbs.crumbs--light > a:nth-of-type(3)",
+     "text": "HRS Controladores",
+     "stop": 0,
+     "msg": "left edge at 222px, 13px off a common edge of its section at 209px (3 elements, like span:nth-of-type(2))",
+     "crop": "1440-02-off-grid.jpg",
+     "fix": "move it onto the page margin, or the column edge its section uses"
     },
     {
      "check": "phone-number",
@@ -68,7 +78,7 @@
      "text": "+34) 627 96 77 29",
      "stop": 3,
      "msg": "a phone number in international format: \"+34) 627 96 77 29\"; a visitor can dial it and reach a stranger (and 2 more like it: div.pdp-top > div.pdp-info > div.btn-row > a.btn.btn--secondary, div.span-3.footer__col:nth-of-type(4) > ul > li:nth-of-type(2) > a)",
-     "crop": "1440-11-phone-number.jpg",
+     "crop": "1440-12-phone-number.jpg",
      "fix": "drop the number and its tel: link (a \"Request a call\" form may stand in), unless the brief gives the number"
     },
     {
@@ -79,18 +89,28 @@
      "shows": "footer#contact",
      "msg": "the section is 637px tall (0.71 screens at 1440x900), shorter than the screen: its tile (the screen from its top) shows 565px of it and 263px of the next section, its heading \"Presupuesto para su línea de i\" on screen",
      "stop": 6,
-     "crop": "1440-12-section-tile.jpg",
+     "crop": "1440-13-section-tile.jpg",
      "fix": "set every section after the hero to one screen or two (height: calc(var(--h,1) * 100vh)) and fit its content above --padb"
     },
     {
-     "check": "fold-card",
+     "check": "fold-cut",
      "sev": "WARN",
-     "sel": "div.wrap > div.pdp-top > div.gallery > div.gallery-main",
+     "sel": "div.pdp-top > div.gallery > div.thumbs > button:nth-of-type(1)",
      "text": "",
-     "msg": "the 737x737 card starts on the first screen and runs 26px past its bottom",
+     "msg": "the hero's button \"\" is cut by the bottom of the first screen (46px of its 116px below the fold)",
      "stop": 0,
-     "crop": "1440-02-fold-card.jpg",
-     "fix": "end the card inside the first screen, or start it lower, so its whole edge shows"
+     "crop": "1440-03-fold-cut.jpg",
+     "fix": "size the hero so the heading ends above the fold, or starts below it"
+    },
+    {
+     "check": "no-visual",
+     "sev": "WARN",
+     "sel": "main#top > div.page > section.pdp",
+     "text": "Serie MTC-H",
+     "msg": "pictures, effects and mocks cover 21% of this section; a feature section needs a visual (about 25% or more)",
+     "stop": 1,
+     "crop": "1440-08-no-visual.jpg",
+     "fix": "give the section a visual: a UI fragment on a ground, real icons, or a photograph that fits"
     },
     {
      "check": "copy-buttons",
@@ -99,18 +119,8 @@
      "text": "Pedir presupuesto",
      "msg": "\"Pedir presupuesto\" does not start with a verb (book, buy, try, start, get, see...)",
      "stop": 0,
-     "crop": "1440-03-copy-buttons.jpg",
+     "crop": "1440-04-copy-buttons.jpg",
      "fix": "label buttons with a verb and what the visitor gets (\"Book a room\", \"Start free trial\")"
-    },
-    {
-     "check": "photo-set",
-     "sev": "WARN",
-     "sel": "div.gallery > div.thumbs > button:nth-of-type(2) > img",
-     "text": "serie-mtc-h-2.jpg",
-     "stop": 1,
-     "msg": "13 photographs in more than one look: saturation from 0.22 to 0.75; the odd one out is serie-mtc-h-2.jpg",
-     "crop": "1440-05-photo-set.jpg",
-     "fix": "grade the photographs to one look (light, colour, warmth), or replace the odd one out"
     },
     {
      "check": "photo-credit",
@@ -126,10 +136,10 @@
      "sev": "WARN",
      "sel": "main#top > div.page > section.pdp",
      "text": "Serie MTC-H",
-     "msg": "1 section over 90 words a screen outside the UI mocks (\"Serie MTC-H\" 107); 75 words a screen across the page (218 words in 2.9 screens): a tech page says it in about 80 or fewer",
+     "msg": "1 section over 90 words a screen outside the UI mocks (\"Serie MTC-H\" 115); 79 words a screen across the page (222 words in 2.8 screens): a tech page says it in about 80 or fewer",
      "fix": "cut every section to its heading, one line and the product UI: the UI says the rest; no second paragraph, no list of feature sentences",
      "stop": 1,
-     "crop": "1440-06-copy-length.jpg"
+     "crop": "1440-09-copy-length.jpg"
     },
     {
      "check": "one-screen",
@@ -139,7 +149,7 @@
      "msg": "1 section is shorter than the screen, so the next one's heading or picture shows with it: \"Más de HRS controladores\" is 637px of the 828px under the nav, and \"Presupuesto para su línea de i\" shows below it",
      "fix": "give each section the screen (min-height: 100svh less the nav, its content centred), or join two short ones into one",
      "stop": 2,
-     "crop": "1440-10-one-screen.jpg"
+     "crop": "1440-11-one-screen.jpg"
     },
     {
      "check": "moment-none",
@@ -157,7 +167,7 @@
      "text": "pedir presupuesto",
      "stop": 7,
      "msg": "\"pedir presupuesto\" shows 2 times on the first screen at 1440px (nav, hero): the nav's button and the hero's; nothing else on the screen may repeat it",
-     "crop": "1440-13-action-repeat.jpg",
+     "crop": "1440-14-action-repeat.jpg",
      "fix": "show the action once a screen besides the nav's button: the hero's, the close's or the phone bar's, never all at once"
     },
     {
@@ -165,7 +175,7 @@
      "sev": "FAIL",
      "sel": "main#top > div.page",
      "text": "Inicio/Productos/HRS Controladores HRS C",
-     "msg": "the hero ends at 2376px on a 900px screen, 1476px below the fold: it ends at the fold, 1px either way (SR-1)",
+     "msg": "the hero ends at 2325px on a 900px screen, 1425px below the fold: it ends at the fold, 1px either way (SR-1)",
      "fix": "make the hero exactly one screen (height: 100svh, its content fitted inside), never taller or shorter",
      "rule": "SR-1 T1",
      "crop": "1440-rhythm-01-hero-screen.jpg"
@@ -175,7 +185,7 @@
      "sev": "FAIL",
      "sel": "footer#contact",
      "text": "Presupuesto para su línea de inyecciónRe",
-     "msg": "the section starts at 2376px, 324px above the screen grid (3 x 900px): sections start on whole screens (SR-2)",
+     "msg": "the section starts at 2325px, 375px above the screen grid (3 x 900px): sections start on whole screens (SR-2)",
      "fix": "make every section above it exactly one or two screens tall, so this one starts on a whole screen",
      "rule": "SR-2 T-grid",
      "crop": "1440-rhythm-02-section-height.jpg"
@@ -185,7 +195,7 @@
      "sev": "FAIL",
      "sel": "h2#close-h",
      "text": "Presupuesto para su línea de inyección",
-     "msg": "the screen at scroll 1800px (stride 2) shows 324px of section 2 and the heading of section 2 whole and the content of 2 sections, over 24px each beside section 1: a screen shows one section (another may peek 8px, 24px WARN) (SR-4)",
+     "msg": "the screen at scroll 1800px (stride 2) shows 375px of section 2 and the heading of section 2 whole and the content of 2 sections, over 24px each beside section 1: a screen shows one section (another may peek 8px, 24px WARN) (SR-4)",
      "fix": "make each section exactly one screen or two, so a screen shows one section and no neighbour peeks",
      "rule": "SR-4 T-views",
      "crop": "1440-rhythm-03-one-section.jpg"
@@ -202,12 +212,21 @@
     {
      "check": "one-heading",
      "sev": "FAIL",
-     "sel": "div.wrap > div.pdp-body > section.pdp-block:nth-of-type(1) > h2",
-     "text": "Ventajas",
-     "msg": "the hero holds an h2 (3): its heading is the h1, and an h2 opens the next section (SR-5)",
+     "sel": "div.page > section.pdp > div.wrap > h2.pdp-body-h",
+     "text": "Características de Serie MTC-H",
+     "msg": "the hero holds an h2 (2): its heading is the h1, and an h2 opens the next section (SR-5)",
      "fix": "give each section one h2, first in its .wrap, and the hero only its h1",
      "rule": "SR-5 T1",
      "crop": "1440-rhythm-04-one-heading.jpg"
+    },
+    {
+     "check": "one-heading",
+     "sev": "FAIL",
+     "sel": "h2#close-h",
+     "text": "Presupuesto para su línea de inyección",
+     "msg": "headings of two sections show whole on one screen at 2 of 47 scroll positions (4.3%; at scroll 1650, 1700px), here with \"Más de HRS controladores\": at most 3% on a desktop (SR-5)",
+     "fix": "make the sections one screen tall so their headings sit a screen apart and two never share one",
+     "rule": "SR-5 T2"
     },
     {
      "check": "container-edges",
@@ -233,7 +252,7 @@
      "sev": "FAIL",
      "sel": "main#top > div.page > section.pdp > div.wrap",
      "text": "Inicio/Productos/HRS Controladores HRS C",
-     "msg": "the hero's .wrap holds 3 children, 0 of them .hero-text: one .hero-text and at most one strip (SR-6)",
+     "msg": "the hero's .wrap holds 4 children, 0 of them .hero-text: one .hero-text and at most one strip (SR-6)",
      "fix": "build the page as header.nav, a main of sections (each one in-flow .wrap plus background layers) and footer.closing",
      "rule": "SR-6 T1-structure"
     },
@@ -242,7 +261,7 @@
      "sev": "FAIL",
      "sel": "div.wrap > div.pdp-top > div.pdp-info > p.t-label.muted",
      "text": "HRS Controladores",
-     "msg": "7 text blocks start on a left line at x 949, 869px from the container's left: text starts on the container's left, or on one split line (x 623, 732, 841) (also \"Serie MTC-H\", \"Controlador de temperatura del c\", \"Controladores de temperatura par\") (SR-6)",
+     "msg": "7 text blocks start on a left line at x 796, 716px from the container's left: text starts on the container's left, or on one split line (x 623, 732, 841) (also \"Serie MTC-H\", \"Controlador de temperatura del c\", \"Controladores de temperatura par\") (SR-6)",
      "fix": "start the text on the container's left, or on the one split line every split shares",
      "rule": "SR-6 T3-left-lines"
     },
@@ -251,16 +270,7 @@
      "sev": "FAIL",
      "sel": "div.wrap > div.pdp-top > div.pdp-info > h1",
      "text": "Serie MTC-H",
-     "msg": "the h1 starts 869px right of the container's left: every h1 and h2 starts on it, 2px either way (SR-6)",
-     "fix": "start the text on the container's left, or on the one split line every split shares",
-     "rule": "SR-6 T3-left-lines"
-    },
-    {
-     "check": "container-edges",
-     "sev": "FAIL",
-     "sel": "div.wrap > div.pdp-body > section.pdp-block:nth-of-type(2) > h2",
-     "text": "Pantalla plegable",
-     "msg": "the h2 starts 652px right of the container's left: every h1 and h2 starts on it, 2px either way (SR-6)",
+     "msg": "the h1 starts 716px right of the container's left: every h1 and h2 starts on it, 2px either way (SR-6)",
      "fix": "start the text on the container's left, or on the one split line every split shares",
      "rule": "SR-6 T3-left-lines"
     },
@@ -273,15 +283,6 @@
      "fix": "put the text in the left column and the visual in the right, on every split",
      "rule": "SR-8 T-orientation",
      "crop": "1440-rhythm-06-split-pair.jpg"
-    },
-    {
-     "check": "split-pair",
-     "sev": "FAIL",
-     "sel": "div.page > section.pdp > div.wrap > div.pdp-top",
-     "text": "HRS Controladores Serie MTC-HControlador",
-     "msg": "the split's columns are off the page's one pair of lines: its right column starts at x 949, on none of the split lines 623 (k=5), 732 (k=6), 841 (k=7) (SR-8)",
-     "fix": "start every split's right column on one shared line (wrap.left + k x (width + 24) / 12, k 5, 6 or 7; 6 on a place page) and end the left one 24px before it",
-     "rule": "SR-8 T-pair"
     }
    ],
    "glAsked": 0
@@ -294,14 +295,34 @@
    "errors": [],
    "findings": [
     {
+     "check": "no-visual",
+     "sev": "FAIL",
+     "sel": "main#top > div.page > section.pdp",
+     "text": "Serie MTC-H",
+     "msg": "pictures, effects and mocks cover 14% of this section; a feature section needs a visual (about 25% or more)",
+     "stop": 1,
+     "crop": "390-05-no-visual.jpg",
+     "fix": "give the section a visual: a UI fragment on a ground, real icons, or a photograph that fits"
+    },
+    {
      "check": "card-layout",
      "sev": "FAIL",
      "sel": "div.page > section.pg-section > div.wrap > div.prod-grid",
      "text": "Serie MTC-B",
      "msg": "4 of 4 cards drawn one way (one panel, ground, placement and fragment): copies of one card",
-     "stop": 3,
-     "crop": "390-07-card-layout.jpg",
+     "stop": 4,
+     "crop": "390-08-card-layout.jpg",
      "fix": "a card layout at most twice on a page: build the other sections another way"
+    },
+    {
+     "check": "heading-scale",
+     "sev": "FAIL",
+     "sel": "div.wrap > div.pdp-body > section.pdp-block:nth-of-type(1) > h3",
+     "text": "Ventajas",
+     "msg": "h3 headings in 2 sizes, 16px (\"Serie MTC-B\") to 24px (x1.50)",
+     "stop": 1,
+     "crop": "390-06-heading-scale.jpg",
+     "fix": "size headings by level: the h1 largest, one size per level, each level below the one above"
     },
     {
      "check": "off-grid",
@@ -330,7 +351,7 @@
      "text": "",
      "msg": "the hero's main button \"Pedir presupuesto\" starts 133px below the first screen (844px tall): it is not seen on load",
      "stop": 1,
-     "crop": "390-05-fold-action.jpg",
+     "crop": "390-07-fold-action.jpg",
      "fix": "bring the hero's buttons onto the first screen: a shorter headline or line, the picture under the buttons"
     },
     {
@@ -352,26 +373,6 @@
      "stop": 0,
      "crop": "390-04-tap-size.jpg",
      "fix": "make every link and control outside running text 44px tall on a phone: display: inline-flex; align-items: center; min-height: 44px (a footer list then needs no gap), a 44px small button, or a transparent ::before laid past the box"
-    },
-    {
-     "check": "no-visual",
-     "sev": "WARN",
-     "sel": "main#top > div.page > section.pdp",
-     "text": "Serie MTC-H",
-     "msg": "pictures, effects and mocks cover 15% of this section; a feature section needs a visual (about 25% or more)",
-     "stop": 1,
-     "crop": "390-06-no-visual.jpg",
-     "fix": "give the section a visual: a UI fragment on a ground, real icons, or a photograph that fits"
-    },
-    {
-     "check": "heading-scale",
-     "sev": "WARN",
-     "sel": "section.pg-section > div.wrap > div.section-head.section-head--row > h2",
-     "text": "Más de HRS controladores",
-     "msg": "h2 headings in 2 sizes, 24px (\"Ventajas\") to 30px (x1.25)",
-     "stop": 3,
-     "crop": "390-08-heading-scale.jpg",
-     "fix": "size headings by level: the h1 largest, one size per level, each level below the one above"
     },
     {
      "check": "section-tile",
@@ -433,8 +434,8 @@
   ]
  },
  "counts": {
-  "FAIL": 24,
-  "WARN": 14
+  "FAIL": 26,
+  "WARN": 12
  },
  "checks": {
   "assets": "PASS",
@@ -451,14 +452,14 @@
   "nav-covers": "PASS",
   "spill": "PASS",
   "off-viewport": "PASS",
-  "fold-card": "WARN",
+  "fold-card": "PASS",
   "hover-spill": "not checked",
   "overlap-text": "PASS",
   "collide": "PASS",
   "tap-size": "WARN",
   "row-gap": "PASS",
   "cut-text": "PASS",
-  "fold-cut": "PASS",
+  "fold-cut": "WARN",
   "marquee": "PASS",
   "scroll-linked": "not checked",
   "scroll-reveal": "not checked",
@@ -467,7 +468,7 @@
   "reduced-motion": "not checked",
   "hidden-content": "PASS",
   "webgl": "PASS",
-  "no-visual": "WARN",
+  "no-visual": "FAIL",
   "text-only": "PASS",
   "card-visual": "PASS",
   "hidden-visual": "not checked",
@@ -507,7 +508,7 @@
   "links": "PASS",
   "forms": "not checked",
   "photo-upscale": "FAIL",
-  "photo-set": "WARN",
+  "photo-set": "PASS",
   "photo-credit": "WARN",
   "nav-family": "PASS",
   "nav-labels": "PASS",
