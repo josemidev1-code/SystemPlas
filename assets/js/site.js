@@ -56,6 +56,6 @@ if (index) {
   const bar = index.querySelector('.wrap');
   new MutationObserver(() => {
     const a = index.querySelector('a[aria-current]');
-    if (a && bar.scrollWidth > bar.clientWidth) bar.scrollTo({ left: a.offsetLeft - 24, behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
+    if (a && bar.scrollWidth > bar.clientWidth) bar.scrollTo({ left: a.offsetLeft - bar.offsetLeft - 24, behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
   }).observe(index, { subtree: true, attributeFilter: ['aria-current'] });
 }

@@ -33,6 +33,7 @@ html[data-radius] { --r-sm: 0px; --r-md: 0px; --r-lg: 0px; --r-btn: 0px; }
 .plant-photo { overflow: hidden; aspect-ratio: 21 / 8; }
 .plant-photo > .frame__img { object-position: 50% 60%; }
 @media (max-width: 1023px) { .plant-photo { aspect-ratio: 16 / 9; } }
+@media (max-width: 639px) { .closing__links .footer__lede { display: none; } }
 @media (max-width: 639px) { .service-cols > div { grid-column: 1 / -1; } .service-cols > div p { font-size: var(--t-body); } }
 
 /* ------------------------------------------------ inner pages: they scroll as normal pages */
@@ -348,7 +349,7 @@ footer.closing:has(.quote-row) { height: auto; min-height: 100svh; }
 
 /* a phone: long button labels wrap instead of pushing the page sideways; card titles are 44px targets */
 @media (max-width: 639px) {
-  main .btn-row .btn { white-space: normal; text-align: center; min-height: 48px; height: auto; padding-block: 12px; }
+  main#top .btn-row .btn { white-space: normal; text-align: center; min-height: 48px; height: auto; padding-block: 12px; }
   .eo-card__link, .res-tile h3 a { display: inline-block; padding-block: 12px; margin-block: -12px; }
 }
 @media (max-width: 639px) {

@@ -313,7 +313,8 @@ def card(title, img, href, line=None):
 
 # ---------------------------------------------------------------------------
 # Inicio: el catálogo completo, línea a línea, con EOAT primero (requisito del cliente)
-# Todo sale de CATS: añadir o quitar un producto allí lo añade o lo quita de la portada.
+# Todo sale de CATS: un producto añadido allí aparece en la portada, con o sin foto, línea o ficha.
+# (Estanterías: un producto nuevo debe añadirse también a SHELF_GROUPS; si no, el build se detiene.)
 # ---------------------------------------------------------------------------
 HOME_EXTRA = '''<script>document.documentElement.classList.add('mo-js');setTimeout(()=>document.documentElement.classList.add('mo-safe'),2500)</script>
 <link rel="modulepreload" href="assets/moments/moments.js">
@@ -327,7 +328,10 @@ ANCHOR = {"eoat-accesorio-robotica": "eoat", "hrs-controladores": "hrs", "resist
 
 
 def pic(name, alt, sizes, cls=""):
-    """Foto de producto ligera: JPEG sobre blanco con su variante de 360 px, diferida y con medidas."""
+    """Foto de producto ligera: JPEG sobre blanco con su variante de 360 px, diferida y con medidas.
+    Sin foto (None) devuelve "": el panel blanco queda vacío en vez de romper el build."""
+    if not name:
+        return ""
     src = img_src(name)
     w, h = jpeg_size(src)
     small = src[:-4] + "-360.jpg"
@@ -341,59 +345,62 @@ def prod_href(item, cat):
     return f"{slug}.html" if slug else contact_url(name, cat["name"])
 
 
-def eoat_card(n, item, size):
+def go_label(item):
+    """La única pareja de acciones del catálogo: «Ver ficha» si hay ficha, «Pedir presupuesto» si no."""
+    return "Ver ficha" if item[2] else "Pedir presupuesto"
+
+
+def eoat_card(item, size):
     """size: 'feature' (horizontal, grande), 'main' (vertical) o 'consult' (compacta, sin ficha)."""
     name, img, slug, line = item
-    href = prod_href(item, EOAT)
-    go = "Ver ficha" if slug else "Pedir presupuesto"
     quote_link = f'<a class="eo-quote" href="{contact_url(name, EOAT["name"])}" aria-label="Pedir presupuesto: {E(name)}">Pedir presupuesto</a>' if slug else ""
-    sub = f"<p>{E(line)}</p>" if line and size != "consult" else ""
-    sizes = {"feature": "(max-width: 639px) 90vw, 260px", "main": "(max-width: 639px) 40vw, (max-width: 1023px) 32vw, 420px", "consult": "(max-width: 639px) 45vw, 240px"}[size]
+    sub = f"<p>{E(line)}</p>" if line else ""
+    sizes = {"feature": "(max-width: 639px) 90vw, 260px", "main": "(max-width: 639px) 40vw, (max-width: 1023px) 32vw, 420px", "consult": "(max-width: 639px) 36vw, 240px"}[size]
     return f'''<article class="eo-card eo-card--{size}" data-product="{E(name)}">
           <div class="eo-card__media">{pic(img, name, sizes)}</div>
           <div class="eo-card__body">
-            <h3><a class="eo-card__link" href="{href}">{E(name)}</a></h3>{sub}
-            <div class="eo-card__acts"><span class="eo-go" aria-hidden="true">{go}{ARROW}</span>{quote_link}</div>
+            <h3><a class="eo-card__link" href="{prod_href(item, EOAT)}">{E(name)}</a></h3>{sub}
+            <div class="eo-card__acts"><span class="eo-go" aria-hidden="true">{go_label(item)}{ARROW}</span>{quote_link}</div>
           </div>
         </article>'''
 
 
 def hrs_row(item):
     name, img, slug, line = item
+    sub = f'<span class="hrs-row__line">{E(line)}</span>' if line else ""
+    # la foto va dentro del enlace junto al nombre: alt vacío para no leer el nombre dos veces
     return f'''<li class="hrs-row" data-product="{E(name)}"><a href="{prod_href(item, HRS)}">
-          <span class="hrs-row__pic">{pic(img, name, "128px")}</span>
-          <span class="hrs-row__text"><span class="hrs-row__name">{E(name)}</span><span class="hrs-row__line">{E(line)}</span></span>
+          <span class="hrs-row__pic">{pic(img, "", "128px")}</span>
+          <span class="hrs-row__text"><span class="hrs-row__name">{E(name)}</span>{sub}</span>
           {ARROW}
         </a></li>'''
 
 
 def res_tile(item):
     name, img, slug, line = item
+    sub = f"<p>{E(line)}</p>" if line else ""
     return f'''<article class="res-tile" data-product="{E(name)}">
           <div class="res-tile__pic">{pic(img, name, "(max-width: 639px) 45vw, (max-width: 1023px) 45vw, 300px")}</div>
-          <h3><a href="{prod_href(item, RES)}">{E(name)}</a></h3>
-          <p>{E(line)}</p>
-          <span class="res-tile__go" aria-hidden="true">Ver ficha{ARROW}</span>
+          <h3><a href="{prod_href(item, RES)}">{E(name)}</a></h3>{sub}
+          <span class="res-tile__go" aria-hidden="true">{go_label(item)}{ARROW}</span>
         </article>'''
 
 
-def shelf_item(n, item):
+def shelf_item(item):
     name, img, slug, line = item
+    sub = f'<span class="shelf__line">{E(line)}</span>' if line else ""
     return f'''<li class="shelf" data-product="{E(name)}"><a href="{prod_href(item, EST)}">
-          <span class="shelf__text"><span class="shelf__name">{E(name)}</span><span class="shelf__line">{E(line)}</span></span>
-          <span class="shelf__go">Pedir presupuesto</span>
+          <span class="shelf__text"><span class="shelf__name">{E(name)}</span>{sub}</span>
+          <span class="shelf__go">{go_label(item)}</span>
         </a></li>'''
 
 
 # EOAT: primero los que tienen ficha (dos destacados y tres principales), después los de consulta
-eo_items = list(enumerate(EOAT["items"]))
-eo_fichas = [x for x in eo_items if x[1][2]]
-eo_consult = [x for x in eo_items if not x[1][2]]
-eo_order = eo_fichas + eo_consult
-eo_no = {i: k + 1 for k, (i, _) in enumerate(eo_order)}
-eo_feature = "".join(eoat_card(eo_no[i], it, "feature") for i, it in eo_fichas[:2])
-eo_main = "".join(eoat_card(eo_no[i], it, "main") for i, it in eo_fichas[2:])
-eo_cons = "".join(eoat_card(eo_no[i], it, "consult") for i, it in eo_consult)
+eo_fichas = [it for it in EOAT["items"] if it[2]]
+eo_consult = [it for it in EOAT["items"] if not it[2]]
+eo_feature = "".join(eoat_card(it, "feature") for it in eo_fichas[:2])
+eo_main = "".join(eoat_card(it, "main") for it in eo_fichas[2:])
+eo_cons = "".join(eoat_card(it, "consult") for it in eo_consult)
 
 index_links = "".join(f'<a href="#{ANCHOR[c["slug"]]}"><span>{E(SHORT[c["slug"]])}</span><span class="cat-index__n">{len(c["items"])}</span></a>' for c in (EOAT, HRS, RES, EST))
 TOTAL = sum(len(c["items"]) for c in CATS)
@@ -401,7 +408,7 @@ TOTAL = sum(len(c["items"]) for c in CATS)
 # Estanterías: los diez productos de CATS agrupados por uso (por índice, así ninguno se pierde ni se repite)
 SHELF_GROUPS = [("Almacenaje", (0, 1, 2, 3, 5, 9)), ("Manipulación y mantenimiento", (4, 6)), ("Seguridad y protección", (7, 8))]
 assert sorted(i for _, ix in SHELF_GROUPS for i in ix) == list(range(len(EST["items"])))
-shelf_groups = "".join(f'''<div class="shelf-group"><h3>{E(g)}</h3><ul class="shelves">{"".join(shelf_item(0, EST["items"][i]) for i in ix)}</ul></div>''' for g, ix in SHELF_GROUPS)
+shelf_groups = "".join(f'''<div class="shelf-group"><h3>{E(g)}</h3><ul class="shelves">{"".join(shelf_item(EST["items"][i]) for i in ix)}</ul></div>''' for g, ix in SHELF_GROUPS)
 
 home_close = f'''<div class="section-head--split">
         <div><h2 id="close-h">Pida presupuesto de cualquier producto</h2><p class="t-lead">Elija la línea, cuéntenos qué necesita y un técnico le responde en 12 a 24 horas.</p></div>

@@ -85,3 +85,24 @@ técnico → Contacto y presupuesto (cierre) → pie.
 4. Vídeo con pausa operativa y en reposo con `prefers-reduced-motion`.
 5. Transferencia inicial no peor que la actual (3.057 KiB escritorio / 1.585 KiB móvil).
 6. `python3 build.py` reproducible (dos ejecuciones → mismo resultado).
+
+## Cambios tras la auditoría (Impeccable, taste-skill y revisión de código)
+
+Decisiones tomadas durante la fase 4–5 que sustituyen a lo descrito arriba:
+
+- **Sin numeración ni etiquetas sobre los títulos.** La numeración 01–10 y las etiquetas
+  «EOAT / 10 productos» eran decorativas (Impeccable las prohíbe; la crítica las vio
+  inconsistentes). Los recuentos reales se quedan en el índice fijo, donde son información.
+- **Una sola pareja de acciones en todo el catálogo:** «Ver ficha» (si hay ficha) y «Pedir
+  presupuesto» (siempre). Sustituye a «Consultar» y «Pedir información».
+- **Estanterías agrupadas por uso** (Almacenaje · Manipulación y mantenimiento · Seguridad y
+  protección) en lugar de una lista numerada de diez filas iguales. Mismos diez productos y textos.
+- **El momento `line-carries-colour` pasa a «Servicio técnico»**, no a EOAT: el momento mantiene
+  invisibles los bloques hasta que la línea los cruza, y el foco del teclado podía caer en un botón
+  todavía transparente. Ningún producto queda oculto durante el desplazamiento.
+- **Secciones de catálogo con altura según contenido** (`min-height: 0`): el `min-height` de una
+  pantalla dejaba aire vacío en HRS y Servicio.
+- **Esquinas a 0 px en todo el sitio** (el modo «sharp» del kit eran 4–8 px; el brief dice «esquinas rectas»).
+- **Ventosas de vacío usa su foto de ficha:** `eoat-6.png` y `eoat-7.png` eran el mismo archivo
+  (la foto de Recuperadores).
+- **EOAT primero también en menú, pie, formulario y página de productos** (orden de `CATS`).

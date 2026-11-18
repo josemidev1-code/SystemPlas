@@ -22,7 +22,8 @@ def page(name):
 
 def cats():
     """CATS tal como lo define build.py (se lee el módulo sin regenerar la web dos veces)."""
-    src = open(os.path.join(ROOT, "build.py"), encoding="utf-8").read()
+    with open(os.path.join(ROOT, "build.py"), encoding="utf-8") as fh:
+        src = fh.read()
     start = src.index("CATS = [")
     end = src.index("\nNAV = ")
     ns = {}
@@ -52,7 +53,8 @@ class Categorias(Base):
 
     def test_todas_las_fichas_se_generan(self):
         import json
-        fichas = json.load(open(os.path.join(ROOT, "data/productos.json"), encoding="utf-8"))
+        with open(os.path.join(ROOT, "data/productos.json"), encoding="utf-8") as fh:
+            fichas = json.load(fh)
         for slug in fichas:
             self.assertTrue(os.path.exists(os.path.join(ROOT, f"{slug}.html")), slug)
 
@@ -87,6 +89,19 @@ class PortadaCatalogo(Base):
                 if slug:
                     body = dict((H.unescape(n), b) for n, b in self.cards)[name]
                     self.has(f'href="{slug}.html"', body)
+
+    def test_presupuesto_preselecciona_producto_y_linea(self):
+        """Los enlaces a contacto llevan el nombre exacto del producto y una línea que existe en el formulario."""
+        from urllib.parse import urlsplit, parse_qs
+        options = set(H.unescape(o) for o in re.findall(r"<option>([^<]+)</option>", page("contacto.html")))
+        checked = 0
+        for name, body in self.cards:
+            for h in re.findall(r'href="(contacto\.html\?[^"]+)"', body):
+                q = parse_qs(urlsplit(H.unescape(h)).query)
+                self.assertEqual(q["producto"], [H.unescape(name)], h)
+                self.assertIn(q["cat"][0], options, h)
+                checked += 1
+        self.assertGreaterEqual(checked, 20)  # 15 productos sin ficha + «Pedir presupuesto» de las 5 EOAT con ficha
 
     def test_eoat_es_la_primera_linea(self):
         order = [self.html.index(f'id="{i}"') for i in ("eoat", "hrs", "resistencias", "estanterias", "servicio")]
