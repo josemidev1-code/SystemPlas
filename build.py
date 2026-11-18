@@ -31,6 +31,20 @@ ARROW = '<svg class="m-arrow" viewBox="0 0 12 12" aria-hidden="true"><path class
 # Catálogo: (nombre en tarjeta, imagen de tarjeta, slug de ficha o None, descripción breve)
 # ---------------------------------------------------------------------------
 CATS = [
+ {"slug": "eoat-accesorio-robotica", "name": "EOAT accesorio robótica", "img": "home-junto.png",
+  "short": "Garras, pinzas, ventosas y perfilería para robots de extracción en inyección.",
+  "hero": ("Catálogo EOAT · accesorios de robótica", "Garras y herramientas de final de brazo para robots de extracción"),
+  "band": ("Especialistas en garras para robot", "Disponemos de una gran variedad de componentes, medidas y tamaños para combinar y construir la garra que mejor se adapte a cada pieza y a cada robot."),
+  "items": [("Cambiadores rápidos (Quick Changers)", "eoat-1.png", "cambiadores-rapidos-de-herramientas-quick-changers", "Carga máxima 15 kg"),
+            ("Pinzas de bebedero (Sprue Grippers)", "eoat-2.png", "pinzas-de-bebedero-sprue-grippers", "Extracción de coladas"),
+            ("Accesorios perfil EOAT", "eoat-3.png", None, "Perfilería y uniones"),
+            ("Pinzas de aguja y de expansión", "eoat-4.png", "pinzas-de-aguja-y-de-expansion", "Piezas blandas e interiores"),
+            ("Pinzas neumáticas angulares de dedo", "eoat-5.png", "pinzas-neumaticas-paralelas-y-angulares", "De dos o tres dedos"),
+            ("Ventosas de vacío", "p/ventosas-de-vacio-1.png", "ventosas-de-vacio", "Silicona, NBR y poliuretano"),
+            ("Recuperadores", "eoat-7.png", None, None),
+            ("Pistones paralelos", "eoat-8.png", None, None),
+            ("Corte neumático", "eoat-9.png", None, None),
+            ("Sistema tubular", "eoat-10.png", None, None)]},
  {"slug": "hrs-controladores", "name": "HRS Controladores", "img": "hrs-1.png",
   "short": "Controladores de temperatura para canal caliente: monozona, multizona y sistemas inteligentes con algoritmo PID.",
   "hero": ("Catálogo de controladores HRS", "Control de temperatura de canal caliente con precisión PID"),
@@ -55,20 +69,6 @@ CATS = [
             ("Placa calefactora de mica e inox", "res-6.png", "placa-calefactora-de-mica-y-acero-inoxidable", "Soporta hasta 600 °C"),
             ("Funda de aislamiento térmico", "res-7.png", "funda-de-aislamiento-para-el-ahorro-de-energia", "Menos pérdida de calor"),
             ("Anillo calefactor cerámico", "res-8.png", "anillo-calefactor-ceramico", "Alta temperatura y seguridad")]},
- {"slug": "eoat-accesorio-robotica", "name": "EOAT accesorio robótica", "img": "home-junto.png",
-  "short": "Garras, pinzas, ventosas y perfilería para robots de extracción en inyección.",
-  "hero": ("Catálogo EOAT · accesorios de robótica", "Garras y herramientas de final de brazo para robots de extracción"),
-  "band": ("Especialistas en garras para robot", "Disponemos de una gran variedad de componentes, medidas y tamaños para combinar y construir la garra que mejor se adapte a cada pieza y a cada robot."),
-  "items": [("Cambiadores rápidos (Quick Changers)", "eoat-1.png", "cambiadores-rapidos-de-herramientas-quick-changers", "Carga máxima 15 kg"),
-            ("Pinzas de bebedero (Sprue Grippers)", "eoat-2.png", "pinzas-de-bebedero-sprue-grippers", "Extracción de coladas"),
-            ("Accesorios perfil EOAT", "eoat-3.png", None, "Perfilería y uniones"),
-            ("Pinzas de aguja y de expansión", "eoat-4.png", "pinzas-de-aguja-y-de-expansion", "Piezas blandas e interiores"),
-            ("Pinzas neumáticas angulares de dedo", "eoat-5.png", "pinzas-neumaticas-paralelas-y-angulares", "De dos o tres dedos"),
-            ("Ventosas de vacío", "eoat-6.png", "ventosas-de-vacio", "Silicona, NBR y poliuretano"),
-            ("Recuperadores", "eoat-7.png", None, None),
-            ("Pistones paralelos", "eoat-8.png", None, None),
-            ("Corte neumático", "eoat-9.png", None, None),
-            ("Sistema tubular", "eoat-10.png", None, None)]},
  {"slug": "estanterias-moldes", "name": "Estanterías moldes", "img": None,
   "short": "Racks, cajones extraíbles, carros y accesorios para almacenar y mover moldes con seguridad.",
   "hero": ("Catálogo de estanterías para moldes", "Almacenaje seguro y ordenado de sus moldes de inyección"),
@@ -240,16 +240,17 @@ def nav(active=None):
 CREDITS_LINE = '<a class="credits" href="creditos.html">Vídeo y fotos de contexto vía Pexels y Wikimedia Commons</a>'
 
 
-def footer(close_line="Respuesta y envío de recambios en 12 a 24 horas.", scripts=""):
+def footer(close_line="Respuesta y envío de recambios en 12 a 24 horas.", scripts="", closing=None):
     cats = "".join(f'<li><a href="{c["slug"]}.html">{E(c["name"])}</a></li>' for c in CATS)
-    return f'''<footer class="footer closing g2m" id="contact" aria-labelledby="close-h">
-  <div class="wrap">
-    <div class="closing__cta close--word">
-      <div class="section-head--split">
+    closing = closing or f'''<div class="section-head--split">
         <div><h2 id="close-h">Presupuesto para su línea de inyección</h2><p class="t-lead">{E(close_line)}</p></div>
         <a class="btn btn--primary" href="contacto.html">{MAIN_ACTION}{ARROW}</a>
       </div>
-      <p class="close__word" aria-hidden="true">System Plast</p>
+      <p class="close__word" aria-hidden="true">System Plast</p>'''
+    return f'''<footer class="footer closing g2m" id="contact" aria-labelledby="close-h">
+  <div class="wrap">
+    <div class="closing__cta close--word">
+      {closing}
     </div>
     <div class="closing__links">
       <div class="grid">
@@ -311,50 +312,119 @@ def card(title, img, href, line=None):
     return f'<a class="card card--open card--prod" href="{href}">{panel}<h3>{E(title)}</h3>{sub}</a>'
 
 # ---------------------------------------------------------------------------
-# Inicio
+# Inicio: el catálogo completo, línea a línea, con EOAT primero (requisito del cliente)
+# Todo sale de CATS: añadir o quitar un producto allí lo añade o lo quita de la portada.
 # ---------------------------------------------------------------------------
 HOME_EXTRA = '''<script>document.documentElement.classList.add('mo-js');setTimeout(()=>document.documentElement.classList.add('mo-safe'),2500)</script>
 <link rel="modulepreload" href="assets/moments/moments.js">
 <link rel="modulepreload" href="assets/moments/lib.js">
 <link rel="modulepreload" href="assets/moments/line-carries-colour/moment.js">
 '''
+CAT = {c["slug"]: c for c in CATS}
+EOAT, HRS, RES, EST = (CAT[s] for s in ("eoat-accesorio-robotica", "hrs-controladores", "resistencias-electricas", "estanterias-moldes"))
+SHORT = {"eoat-accesorio-robotica": "EOAT", "hrs-controladores": "Controladores HRS", "resistencias-electricas": "Resistencias", "estanterias-moldes": "Estanterías"}
+ANCHOR = {"eoat-accesorio-robotica": "eoat", "hrs-controladores": "hrs", "resistencias-electricas": "resistencias", "estanterias-moldes": "estanterias"}
 
-def row_link(name, value, href):
-    return f'<li><a class="rows__link" href="{href}"><span class="rows__name">{E(name)}</span><span class="rows__value">{E(value)}</span></a></li>'
 
-home_cards = "".join(f'''<a class="card card--open card--prod {"cat-big span-6" if n == 0 else "cat-small span-6 start-7"}" href="{c["slug"]}.html">
-          <div class="panel{" panel--white" if is_cutout(CAT_IMG[c["slug"]]) else ""}"><img class="frame__img" src="{img_src(CAT_IMG[c["slug"]])}" {wh(img_src(CAT_IMG[c["slug"]]))} alt="{E(c["name"])}" loading="lazy" data-source="{"client" if is_cutout(CAT_IMG[c["slug"]]) else "stand-in"}" data-subject="{"product" if is_cutout(CAT_IMG[c["slug"]]) else "injection mould"}"></div>
-          <h3>{E(c["name"])}</h3><p>{E(CAT_LINE[c["slug"]])}</p>
-        </a>''' for n, c in enumerate(CATS))
+def pic(name, alt, sizes, cls=""):
+    """Foto de producto ligera: JPEG sobre blanco con su variante de 360 px, diferida y con medidas."""
+    src = img_src(name)
+    w, h = jpeg_size(src)
+    small = src[:-4] + "-360.jpg"
+    ss = f' srcset="{small} 360w, {src} {w}w" sizes="{sizes}"' if src.endswith(".jpg") and os.path.exists(os.path.join(OUT, small)) else ""
+    c = f' class="{cls}"' if cls else ""
+    return f'<img{c} src="{src}"{ss} width="{w}" height="{h}" alt="{E(alt)}" loading="lazy" decoding="async">'
 
-hrs_rows = "".join(row_link(n, v, f"{s}.html") for n, v, s in [
-    ("Serie MTC-B", "Pantalla IPS a color", "serie-mtc-b"),
-    ("Serie MTC-H", "Hasta 128 zonas", "serie-mtc-h"),
-    ("Serie TG", "Módulos con perilla", "serie-tg"),
-    ("Controlador SVGE-8", "8 zonas, valve gate", "svge-8")])
 
-res_rows = "".join(f'<li><span class="rows__name">{k}</span><span class="rows__value">{v}</span></li>' for k, v in [
-    ("Dimensiones", "Diámetro, ancho, alto"), ("Tensión", "Voltios de su máquina"), ("Potencia", "En vatios"),
-    ("Perforaciones", "Posición y diámetro"), ("Conexión", "Cable, borna o terminal")])
-res_tiles = "".join(f'<a href="{s}.html"><img src="{img_src(i)}" width="700" height="534" alt="{E(n)}" loading="lazy" data-source="client" data-subject="product"></a>' for n, i, s in [
-    ("Resistencia de mica en acero inoxidable", "res-1.png", "resistencia-en-acero-inoxidable-de-mica"),
-    ("Resistencia en cobre puro", "res-3.png", "resistencia-en-cobre-puro"),
-    ("Nano-infrarrojo de bajo consumo", "res-5.png", "nano-infrarrojo-calentador-de-bajo-consumo"),
-    ("Anillo calefactor cerámico", "res-8.png", "anillo-calefactor-ceramico")])
+def prod_href(item, cat):
+    name, img, slug, line = item
+    return f"{slug}.html" if slug else contact_url(name, cat["name"])
 
-eoat_rows = "".join(row_link(n, v, f"{s}.html") for n, v, s in [
-    ("Cambiadores rápidos", "Carga máxima 15 kg", "cambiadores-rapidos-de-herramientas-quick-changers"),
-    ("Pinzas de bebedero", "Extracción de coladas", "pinzas-de-bebedero-sprue-grippers"),
-    ("Ventosas de vacío", "Silicona, NBR, poliuretano", "ventosas-de-vacio"),
-    ("Pinzas neumáticas", "Dos o tres dedos", "pinzas-neumaticas-paralelas-y-angulares")])
 
-write("index.html", head("System Plast: componentes para inyectoras de plástico",
-                         "Controladores de canal caliente, resistencias a medida y garras EOAT para moldeo por inyección, con recambios en 12 a 24 horas desde Mutxamel.",
+def eoat_card(n, item, size):
+    """size: 'feature' (horizontal, grande), 'main' (vertical) o 'consult' (compacta, sin ficha)."""
+    name, img, slug, line = item
+    href = prod_href(item, EOAT)
+    go = "Ver ficha" if slug else "Pedir presupuesto"
+    quote_link = f'<a class="eo-quote" href="{contact_url(name, EOAT["name"])}" aria-label="Pedir presupuesto: {E(name)}">Pedir presupuesto</a>' if slug else ""
+    sub = f"<p>{E(line)}</p>" if line and size != "consult" else ""
+    sizes = {"feature": "(max-width: 639px) 90vw, 260px", "main": "(max-width: 639px) 40vw, (max-width: 1023px) 32vw, 420px", "consult": "(max-width: 639px) 45vw, 240px"}[size]
+    return f'''<article class="eo-card eo-card--{size}" data-product="{E(name)}">
+          <div class="eo-card__media">{pic(img, name, sizes)}</div>
+          <div class="eo-card__body">
+            <h3><a class="eo-card__link" href="{href}">{E(name)}</a></h3>{sub}
+            <div class="eo-card__acts"><span class="eo-go" aria-hidden="true">{go}{ARROW}</span>{quote_link}</div>
+          </div>
+        </article>'''
+
+
+def hrs_row(item):
+    name, img, slug, line = item
+    return f'''<li class="hrs-row" data-product="{E(name)}"><a href="{prod_href(item, HRS)}">
+          <span class="hrs-row__pic">{pic(img, name, "128px")}</span>
+          <span class="hrs-row__text"><span class="hrs-row__name">{E(name)}</span><span class="hrs-row__line">{E(line)}</span></span>
+          {ARROW}
+        </a></li>'''
+
+
+def res_tile(item):
+    name, img, slug, line = item
+    return f'''<article class="res-tile" data-product="{E(name)}">
+          <div class="res-tile__pic">{pic(img, name, "(max-width: 639px) 45vw, (max-width: 1023px) 45vw, 300px")}</div>
+          <h3><a href="{prod_href(item, RES)}">{E(name)}</a></h3>
+          <p>{E(line)}</p>
+          <span class="res-tile__go" aria-hidden="true">Ver ficha{ARROW}</span>
+        </article>'''
+
+
+def shelf_item(n, item):
+    name, img, slug, line = item
+    return f'''<li class="shelf" data-product="{E(name)}"><a href="{prod_href(item, EST)}">
+          <span class="shelf__text"><span class="shelf__name">{E(name)}</span><span class="shelf__line">{E(line)}</span></span>
+          <span class="shelf__go">Pedir presupuesto</span>
+        </a></li>'''
+
+
+# EOAT: primero los que tienen ficha (dos destacados y tres principales), después los de consulta
+eo_items = list(enumerate(EOAT["items"]))
+eo_fichas = [x for x in eo_items if x[1][2]]
+eo_consult = [x for x in eo_items if not x[1][2]]
+eo_order = eo_fichas + eo_consult
+eo_no = {i: k + 1 for k, (i, _) in enumerate(eo_order)}
+eo_feature = "".join(eoat_card(eo_no[i], it, "feature") for i, it in eo_fichas[:2])
+eo_main = "".join(eoat_card(eo_no[i], it, "main") for i, it in eo_fichas[2:])
+eo_cons = "".join(eoat_card(eo_no[i], it, "consult") for i, it in eo_consult)
+
+index_links = "".join(f'<a href="#{ANCHOR[c["slug"]]}"><span>{E(SHORT[c["slug"]])}</span><span class="cat-index__n">{len(c["items"])}</span></a>' for c in (EOAT, HRS, RES, EST))
+TOTAL = sum(len(c["items"]) for c in CATS)
+
+# Estanterías: los diez productos de CATS agrupados por uso (por índice, así ninguno se pierde ni se repite)
+SHELF_GROUPS = [("Almacenaje", (0, 1, 2, 3, 5, 9)), ("Manipulación y mantenimiento", (4, 6)), ("Seguridad y protección", (7, 8))]
+assert sorted(i for _, ix in SHELF_GROUPS for i in ix) == list(range(len(EST["items"])))
+shelf_groups = "".join(f'''<div class="shelf-group"><h3>{E(g)}</h3><ul class="shelves">{"".join(shelf_item(0, EST["items"][i]) for i in ix)}</ul></div>''' for g, ix in SHELF_GROUPS)
+
+home_close = f'''<div class="section-head--split">
+        <div><h2 id="close-h">Pida presupuesto de cualquier producto</h2><p class="t-lead">Elija la línea, cuéntenos qué necesita y un técnico le responde en 12 a 24 horas.</p></div>
+        <a class="btn btn--primary" href="contacto.html">{MAIN_ACTION}{ARROW}</a>
+      </div>
+      <div class="quote-row">
+      <ul class="quote-lines" aria-label="Pedir presupuesto por línea de producto">{"".join(f'<li><a href="contacto.html?cat={quote(c["name"])}">{E(c["name"])}</a></li>' for c in (EOAT, HRS, RES, EST))}<li><a href="contacto.html?cat={quote("Otro / proyecto a medida")}">Proyecto a medida</a></li></ul>
+      <ul class="quote-direct">
+        <li><a class="link" href="tel:{TEL}">{TEL_TXT}</a></li>
+        <li><a class="link" href="mailto:{MAIL}">{MAIL}</a></li>
+        <li><a class="link" href="https://wa.me/{TEL[1:]}" target="_blank" rel="noopener">Escribir por WhatsApp</a></li>
+      </ul>
+      </div>
+      <p class="close__word" aria-hidden="true">System Plast</p>'''
+
+write("index.html", head("System Plast: garras EOAT, controladores HRS y resistencias para inyectoras",
+                         "Catálogo completo de System Plast: garras EOAT para robots de extracción, controladores de canal caliente, resistencias a medida y estanterías para moldes, con recambios en 12 a 24 horas.",
                          HOME_EXTRA) + nav() + f'''<!-- type: product (hardware, site-kind tech)
-     deal: hero photo con vídeo de fondo (el cliente pide un vídeo de máquinas detrás, como Botbox; sustituye al hero product repartido),
-     nav nav-cards, close close-word, footer footer-columns, rhythm dark-band, buttons solid, mark: logo del cliente
-     palette: colores del logo (start.mjs brand), type plex, radius sharp
-     moments: line-carries-colour en #resistencias (la franja oscura) -->
+     deal: hero photo con vídeo de fondo, nav nav-cards, close close-word, footer footer-columns,
+     rhythm dark-band (EOAT), buttons solid, mark: logo del cliente; palette: colores del logo, type plex, radius sharp
+     moments: line-carries-colour en #servicio (fuera del catálogo: ningún producto queda oculto mientras se desplaza)
+     Requisito del cliente: los {TOTAL} productos de CATS en la portada, EOAT primero y destacado.
+     Las secciones de catálogo crecen con su contenido (excepción a «una sección por pantalla»). -->
 <main id="top">
   <section class="hero hero--photo" data-enter data-calm="left" data-box="none" data-tone="light" aria-labelledby="hero-h">
     <!-- VÍDEO: Pexels 32386599 (licencia Pexels, uso libre). Se cambia aquí por el vídeo propio del cliente. -->
@@ -362,78 +432,84 @@ write("index.html", head("System Plast: componentes para inyectoras de plástico
       <source src="assets/video/maquina-640.mp4" type="video/mp4" media="(max-width: 639px)">
       <source src="assets/video/maquina-720.mp4" type="video/mp4">
     </video>
+    <button class="loop-pause hero-pause" type="button" aria-label="Pausar el vídeo" aria-pressed="false" data-video-pause></button>
     <div class="wrap"><div class="hero-text">
       <div class="hero__text">
         <h1 id="hero-h">Componentes para inyectoras</h1>
-        <p class="hero__lead">Controladores de canal caliente de hasta 128 zonas, resistencias fabricadas a medida y garras EOAT para robots de extracción, con recambios en 12 a 24 horas.</p>
-        <div class="btn-row"><a class="btn btn--primary" href="contacto.html">{MAIN_ACTION}{ARROW}</a><a class="btn btn--secondary" href="productos.html">Ver el catálogo</a></div>
+        <p class="hero__lead">Garras EOAT para robots de extracción, controladores de canal caliente de hasta 128 zonas y resistencias fabricadas a medida, con recambios en 12 a 24 horas.</p>
+        <div class="btn-row"><a class="btn btn--primary" href="#eoat">Ver los {TOTAL} productos{ARROW}</a><a class="btn btn--secondary" href="contacto.html">{MAIN_ACTION}</a></div>
       </div>
-      <button class="loop-pause hero-pause" type="button" aria-label="Pausar el vídeo" aria-pressed="false" data-video-pause></button>
     </div></div>
   </section>
 
-  <section class="section" id="catalogo" aria-labelledby="catalogo-h">
+  <nav class="cat-index" id="catalogo" aria-label="Líneas del catálogo">
+    <div class="wrap"><span class="cat-index__title">Catálogo</span>{index_links}<a href="#servicio"><span>Servicio técnico</span></a></div>
+  </nav>
+
+  <section class="section ground-inverse cat-sec" id="eoat" style="--h: 2" aria-labelledby="eoat-h">
     <div class="wrap">
-      <div class="section-head section-head--row">
-        <h2 id="catalogo-h">Catálogo por línea de producto</h2>
-        <a class="link" href="productos.html">Ver el catálogo</a>
-      </div>
-      <div class="grid fill cat-row">
-        {home_cards}
-      </div>
-    </div>
-  </section>
-
-  <section class="section" id="hrs" style="--hm: 2" aria-labelledby="hrs-h">
-    <div class="wrap grid grid--top">
-      <div class="span-5 stack-6">
-        <div class="section-head">
-          <h2 id="hrs-h">Controladores de canal caliente</h2>
-          <p>Control PID de cada boquilla del molde, de una zona a 128 en la misma unidad.</p>
-        </div>
-        <ul class="rows rows--links">{hrs_rows}</ul>
-        <a class="link" href="hrs-controladores.html">Ver controladores</a>
-      </div>
-      <a class="frame frame--white span-6 start-7 big-product" href="serie-mtc-g.html" aria-label="Serie MTC-G">
-        <img class="frame__img" src="{img_src("hrs-2.png")}" width="700" height="534" alt="Controlador de canal caliente Serie MTC-G de seis zonas" loading="lazy" data-source="client" data-subject="product">
-      </a>
-    </div>
-  </section>
-
-  <section class="section ground-inverse" id="resistencias" style="--hm: 2" aria-labelledby="res-h" data-moment="line-carries-colour" data-moment-opts='{{"from": "base"}}'>
-    <div class="wrap grid grid--top">
-      <div class="span-5 stack-6">
-        <div class="section-head">
-          <h2 id="res-h">Resistencias fabricadas a su medida</h2>
-          <p>Envíe estos cinco datos y fabricamos la resistencia exacta para su husillo, boquilla o molde.</p>
-        </div>
-        <ul class="rows rows--spec">{res_rows}</ul>
-        <a class="link" href="resistencias-electricas.html">Ver resistencias</a>
-      </div>
-      <div class="span-6 start-7 res-wall">{res_tiles}</div>
-    </div>
-  </section>
-
-  <section class="section" id="eoat" style="--hm: 2" aria-labelledby="eoat-h">
-    <div class="wrap grid grid--top">
-      <div class="span-5 stack-6">
-        <div class="section-head">
+      <div class="eo-head">
+        <div class="eo-head__text">
           <h2 id="eoat-h">Garras EOAT para robots de extracción</h2>
-          <p>Combinamos pinzas, ventosas y perfilería para montar la garra de cada pieza y de cada robot.</p>
         </div>
-        <ul class="rows rows--links">{eoat_rows}</ul>
-        <a class="link" href="eoat-accesorio-robotica.html">Ver la gama EOAT</a>
+        <div class="eo-head__side">
+          <p>{E(EOAT["band"][1])}</p>
+          <div class="btn-row"><a class="btn btn--primary" href="contacto.html?cat={quote(EOAT["name"])}">Pedir presupuesto de garras{ARROW}</a><a class="link" href="{EOAT["slug"]}.html">Ver la gama EOAT</a></div>
+        </div>
       </div>
-      <a class="frame frame--photo span-6 start-7 eoat-photo" href="eoat-accesorio-robotica.html" aria-label="Componentes EOAT">
-        <img class="frame__img" src="assets/img/home-2.jpg" width="1000" height="1000" alt="Robot de extracción junto a una inyectora, con garra montada" loading="lazy" data-source="client" data-subject="robot at injection machine">
-      </a>
+      <div class="eo-bento">
+        <div class="eo-photo"><img class="frame__img" src="assets/img/home-2.jpg" srcset="assets/img/home-2-640.jpg 640w, assets/img/home-2.jpg 1000w" sizes="(max-width: 1023px) 100vw, 740px" width="1000" height="1000" alt="Robot de extracción junto a una inyectora, con la garra montada" loading="lazy" decoding="async" data-source="client" data-subject="robot at injection machine"></div>
+        {eo_feature}
+      </div>
+      <div class="eo-main">{eo_main}</div>
+      <div class="eo-consult">
+        <div class="eo-consult__head"><h3 class="eo-consult__h">Componentes EOAT bajo consulta</h3><p>Le preparamos la referencia exacta para su garra.</p></div>
+        <div class="eo-consult__grid">{eo_cons}</div>
+      </div>
     </div>
   </section>
 
-  <section class="section ground-surface" id="servicio" aria-labelledby="servicio-h">
+  <section class="section cat-sec" id="hrs" aria-labelledby="hrs-h">
+    <div class="wrap hrs-split">
+      <div class="hrs-intro">
+        <h2 id="hrs-h">Controladores de canal caliente</h2>
+        <p>Control PID de cada boquilla del molde, de una zona a 128 en la misma unidad.</p>
+        <p>{E(HRS["band"][1])}</p>
+        <div class="btn-row"><a class="btn btn--secondary" href="contacto.html?cat={quote(HRS["name"])}">Pedir presupuesto de controladores</a><a class="link" href="{HRS["slug"]}.html">Ver controladores</a></div>
+      </div>
+      <ul class="hrs-list">{"".join(hrs_row(it) for it in HRS["items"])}</ul>
+    </div>
+  </section>
+
+  <section class="section ground-surface cat-sec" id="resistencias" aria-labelledby="res-h">
     <div class="wrap">
       <div class="section-head section-head--row">
-        <h2 id="servicio-h">Recambios en 12 a 24 horas</h2>
+        <div><h2 id="res-h">Resistencias fabricadas a su medida</h2></div>
+        <a class="link" href="{RES["slug"]}.html">Ver resistencias</a>
+      </div>
+      <div class="res-grid">{"".join(res_tile(it) for it in RES["items"])}</div>
+      <div class="res-spec">
+        <p class="res-spec__h">Para fabricarla a medida, envíenos:</p>
+        <ul>{"".join(f'<li><span>{k}</span>{v}</li>' for k, v in [("Dimensiones", "Diámetro, ancho, alto"), ("Tensión", "Voltios de su máquina"), ("Potencia", "En vatios"), ("Perforaciones", "Posición y diámetro"), ("Conexión", "Cable, borna o terminal")])}</ul>
+        <a class="btn btn--primary" href="contacto.html?cat={quote(RES["name"])}">Pedir presupuesto de resistencias{ARROW}</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section cat-sec" id="estanterias" aria-labelledby="est-h">
+    <div class="wrap">
+      <div class="section-head section-head--row">
+        <div><h2 id="est-h">Estanterías y almacenaje de moldes</h2><p>{E(EST["band"][1])}</p></div>
+        <a class="link" href="{EST["slug"]}.html">Ver estanterías</a>
+      </div>
+      <div class="shelf-groups">{shelf_groups}</div>
+    </div>
+  </section>
+
+  <section class="section ground-surface cat-sec" id="servicio" aria-labelledby="servicio-h" data-moment="line-carries-colour" data-moment-opts='{{"from": "base"}}'>
+    <div class="wrap">
+      <div class="section-head section-head--row">
+        <h2 id="servicio-h">Servicio técnico y recambios en 12 a 24 horas</h2>
         <a class="link" href="quienes-somos.html">Conocer la empresa</a>
       </div>
       <div class="grid service-cols">
@@ -441,13 +517,13 @@ write("index.html", head("System Plast: componentes para inyectoras de plástico
         <div class="span-4"><h3>Envío de recambios al extranjero</h3><p>Más de 50 clientes en automoción, electrodomésticos, dispositivos médicos y envases.</p></div>
         <div class="span-4"><h3>Cajas de control para su molde</h3><p>Fabricamos cajas de control de temperatura ajustadas a su molde y a su producción.</p></div>
       </div>
-      <div class="frame frame--photo fill plant-photo">
+      <div class="frame frame--photo plant-photo">
         <img class="frame__img" src="assets/img/photo-f74695444.jpg" srcset="assets/img/photo-f74695444-500.jpg 500w, assets/img/photo-f74695444-960.jpg 960w, assets/img/photo-f74695444.jpg 1280w" sizes="(max-width: 1279px) 100vw, 1280px" width="1280" height="853" alt="Nave con una fila de inyectoras de plástico" loading="lazy" decoding="async" data-source="stand-in" data-subject="injection moulding hall">
       </div>
     </div>
   </section>
 </main>
-''' + footer(scripts='<script type="module" src="assets/js/site.js"></script>\n'))
+''' + footer(scripts='<script type="module" src="assets/js/site.js"></script>\n', closing=home_close))
 
 SITE_JS = '<script type="module" src="assets/js/site.js"></script>\n'
 
@@ -605,7 +681,7 @@ body = page_head("Quiénes somos", "20 años desarrollando y distribuyendo soluc
     <p>En System Plast desarrollamos y distribuimos equipos para la industria del plástico: controladores de canal caliente, resistencias, garras EOAT y almacenaje de moldes.</p>
     <p>Con 20 años de experiencia y más de 50 clientes, acompañamos a cada fábrica antes, durante y después de la compra.</p>
   </div>
-  <div class="frame frame--photo about-photo"><img class="frame__img" src="assets/img/home-2.jpg" width="1000" height="1000" alt="Célula de inyección con robot de extracción" loading="lazy"></div>
+  <div class="frame frame--photo about-photo"><img class="frame__img" src="assets/img/home-2.jpg" srcset="assets/img/home-2-640.jpg 640w, assets/img/home-2.jpg 1000w" sizes="(max-width: 1023px) 100vw, 740px" width="1000" height="1000" alt="Célula de inyección con robot de extracción" loading="lazy"></div>
 </div></section>
 <section class="pg-section ground-surface"><div class="wrap split-6">
   <div class="stack-4"><h2>Liderazgo tecnológico</h2><p>Del equipo monozona al multizona y a los sistemas inteligentes: nuestros controladores de canal caliente usan algoritmos PID para un control estable, exacto y rápido de cada zona.</p></div>

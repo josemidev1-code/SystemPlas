@@ -1,6 +1,11 @@
 [
  {
   "check": "phone-number",
+  "target": "quote-direct",
+  "reason": "Es el teléfono real de System Plast, publicado por el cliente en su web actual y en el brief; no es inventado."
+ },
+ {
+  "check": "phone-number",
   "target": "footer__col",
   "reason": "Es el teléfono real de System Plast, publicado por el cliente en su web actual; no es inventado."
  }

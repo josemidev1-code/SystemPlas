@@ -37,3 +37,25 @@ if (form) {
   if (cat && sel) [...sel.options].forEach((o) => { if (o.text === cat) sel.value = o.value; });
   if (prod) form.querySelector('#f-msg').value = `Me interesa recibir presupuesto de: ${prod}.\n\n`;
 }
+
+// Índice del catálogo en portada: marca la línea que se está viendo (sin JS, los enlaces funcionan igual)
+const index = document.querySelector('.cat-index');
+if (index && 'IntersectionObserver' in window) {
+  const links = new Map([...index.querySelectorAll('a[href^="#"]')].map((a) => [a.hash.slice(1), a]));
+  const seen = new Map();
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((e) => seen.set(e.target.id, e.isIntersecting));
+    const current = [...links.keys()].find((id) => seen.get(id));
+    links.forEach((a, id) => (id === current ? a.setAttribute('aria-current', 'true') : a.removeAttribute('aria-current')));
+  }, { rootMargin: '-45% 0px -50% 0px' });
+  links.forEach((_, id) => { const s = document.getElementById(id); if (s) io.observe(s); });
+}
+
+// En el móvil el índice se desplaza en horizontal: la línea activa queda siempre a la vista
+if (index) {
+  const bar = index.querySelector('.wrap');
+  new MutationObserver(() => {
+    const a = index.querySelector('a[aria-current]');
+    if (a && bar.scrollWidth > bar.clientWidth) bar.scrollTo({ left: a.offsetLeft - 24, behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
+  }).observe(index, { subtree: true, attributeFilter: ['aria-current'] });
+}
