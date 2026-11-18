@@ -4,3 +4,5 @@ __pycache__/
 shots/
 .taste-skill/chrome-*/
 .taste-skill/consistency/
+.taste-skill/consistency*/
+.taste-skill/*.txt
