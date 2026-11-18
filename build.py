@@ -589,7 +589,7 @@ for c in CATS:
 # Productos
 # ---------------------------------------------------------------------------
 cats_html = "".join(card(c["name"], CAT_IMG[c["slug"]], f"{c['slug']}.html", CAT_LINE[c["slug"]]) for c in CATS)
-body = page_head("Catálogo de productos", "Controladores, resistencias, EOAT y estanterías para que sus procesos de inyección sean más eficientes y seguros.", [("Productos", None)], video=True) + \
+body = page_head("Catálogo de componentes para inyectoras", "Controladores, resistencias, EOAT y estanterías para que sus procesos de inyección sean más eficientes y seguros.", [("Productos", None)], video=True) + \
     f'<section class="pg-section"><div class="wrap"><h2 class="grid-h">Cuatro líneas de producto</h2><div class="prod-grid">{cats_html}</div></div></section>\n' + \
     band("Soluciones a medida", "Diseñamos cajas de control y resistencias que se integran en su línea de producción tal como está.", "Contar su proyecto", "contacto.html")
 write("productos.html", inner("Productos | System Plast", "Catálogo System Plast: controladores HRS de canal caliente, resistencias eléctricas, EOAT para robótica y estanterías para moldes.", "productos.html", body))
@@ -630,7 +630,7 @@ write("noticias.html", inner("Noticias | System Plast", "Noticias y tendencias d
 # Contacto
 # ---------------------------------------------------------------------------
 opts = "".join(f"<option>{E(c['name'])}</option>" for c in CATS) + "<option>Otro / proyecto a medida</option>"
-body = page_head("Contacto", "Cuéntenos qué necesita y le respondemos en 12 a 24 horas.", [("Contacto", None)]) + f'''<section class="pg-section"><div class="wrap split-6 contact">
+body = page_head("Presupuesto de controladores, resistencias y EOAT", "Cuéntenos qué necesita y le respondemos en 12 a 24 horas.", [("Contacto", None)]) + f'''<section class="pg-section"><div class="wrap split-6 contact">
   <div class="stack-5">
     <h2>Hablemos de su proyecto</h2>
     <p>Controladores de canal caliente, controladores de válvula secuencial, resistencias o EOAT: complete el formulario y un técnico le responderá.</p>

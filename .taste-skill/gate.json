@@ -1,25 +1,16 @@
 {
- "start": "2026-11-17T18:33:10.003Z",
- "round": 1,
+ "start": "2026-11-18T00:07:11.207Z",
+ "round": 0,
  "idle": 0,
  "errors": 0,
  "status": "pass",
  "history": [
   {
-   "at": "2026-11-17T19:21:47.388Z",
-   "mode": "manual",
-   "status": "fail",
-   "fails": 1,
-   "round": 1,
-   "reused": false,
-   "stopHookActive": false
-  },
-  {
-   "at": "2026-11-17T19:23:39.046Z",
+   "at": "2026-11-18T00:08:54.598Z",
    "mode": "manual",
    "status": "pass",
    "fails": 0,
-   "round": 1,
+   "round": 0,
    "reused": false,
    "stopHookActive": false
   }
@@ -33,15 +24,11 @@
   "category": "controladores de canal caliente, resistencias, garras EOAT, estanterías y recambios para inyectoras y moldes de plástico",
   "primary": "Pedir presupuesto",
   "rounds": 3,
-  "start": "2026-11-17T18:33:10.003Z",
+  "start": "2026-11-18T00:07:11.207Z",
   "by": "gate.mjs --start"
  },
  "manual": true,
- "roundKey": "df48f93799bddf1f:c4c45ffe",
- "roundFree": false,
- "idleFree": false,
- "blockKey": null,
- "fp": "8fac2837fdb731b9",
+ "fp": "99445873a43c53ba",
  "page": "index.html",
  "found": {
   "fails": [
@@ -238,19 +225,9 @@
     "from": "consistency"
    },
    {
-    "check": "hole",
-    "where": "section#resistencias > div.wrap.grid > div.span-6.start-7",
-    "msg": "an empty band 368px tall across the card (33% of its height), with content above and below it",
-    "fix": "close the empty space: move the content together, or give the space the visual it lacks",
-    "widths": [
-     390
-    ],
-    "from": "consistency"
-   },
-   {
     "check": "photo-set",
     "where": "section#servicio > div.wrap > div.frame.frame--photo > img.frame__img \"photo-f74695444-500.jpg\"",
-    "msg": "7 photographs in more than one look: lightness from 0.38 to 0.97; the odd one out is photo-f74695444-500.jpg",
+    "msg": "6 photographs in more than one look: lightness from 0.38 to 0.97; the odd one out is photo-f74695444-500.jpg",
     "fix": "grade the photographs to one look (light, colour, warmth), or replace the odd one out",
     "widths": [
      390
@@ -304,6 +281,6 @@
    "reason": "Es el teléfono real de System Plast, publicado por el cliente en su web actual; no es inventado."
   }
  ],
- "warnCount": 21,
- "at": "2026-11-17T19:23:39.046Z"
+ "warnCount": 20,
+ "at": "2026-11-18T00:08:54.598Z"
 }
