@@ -479,6 +479,18 @@ def band(title, text, btn, href):
 # ---------------------------------------------------------------------------
 # Fichas de producto
 # ---------------------------------------------------------------------------
+def de(title):
+    """«de la Serie», «del Anillo», «de las Pinzas», «de los Cambiadores»: concuerda con la primera palabra."""
+    w = title.split()[0].lower()
+    if w in ("cambiadores",):
+        return f"de los {title}"
+    if w.endswith("as"):
+        return f"de las {title}"
+    if w.endswith("a") or w in ("serie",):
+        return f"de la {title}"
+    return f"del {title}"
+
+
 def render_section(sec, first, title=""):
     items = sec["items"]
     lis = [i for i in items if i["t"] == "li"]
@@ -489,7 +501,7 @@ def render_section(sec, first, title=""):
     long_kv = kvs if many_long else []
     h = sec["h"] or ("Descripción" if first else "Más información")
     if title and len(h.split()) <= 2:
-        h = f"{h} de {title}"
+        h = f"{h} {de(title)}"
     body = "".join(f"<p>{E(p['v'])}</p>" for p in ps)
     if lis:
         body += '<ul class="rows rows--plain">' + "".join(f"<li><span>{E(i['v'])}</span></li>" for i in lis) + "</ul>"
@@ -547,7 +559,7 @@ for slug, f in FICHAS.items():
     </div>
     <div class="gallery"><div class="gallery-main"><img data-gallery-main src="{img_src(main_img)}" width="700" height="700" alt="{E(f['title'])}"></div>{thumbs}</div>
   </div>
-  <h2 class="pdp-body-h">Características de {E(f['title'])}</h2>
+  <h2 class="pdp-body-h">Características {E(de(f['title']))}</h2>
   <div class="pdp-body">{blocks}</div>
 </div></section>
 <section class="pg-section"><div class="wrap">
