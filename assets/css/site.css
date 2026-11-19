@@ -356,3 +356,37 @@ footer.closing:has(.quote-row) { height: auto; min-height: 100svh; }
   :is(.eo-head__side, .hrs-intro) .btn-row { flex-direction: column; align-items: stretch; gap: var(--s-4); }
   :is(.eo-head__side, .hrs-intro) .btn-row > .link { align-self: flex-start; }
 }
+
+/* ================================================ HOME: ENTRANCES ON SCROLL
+   html.rv-on is set by site.js only when IntersectionObserver exists and the visitor allows motion:
+   without script, with reduced motion or in print every block stands as written. Each block rises
+   and fades in once as it comes into view, in a short cascade along its row (--i); a picture is
+   uncovered by a clip instead. The rise uses the translate property, so the cards' own hover
+   transform still composes with it. */
+@media screen and (prefers-reduced-motion: no-preference) {
+  .rv-on [data-rv] {
+    --rv-d: calc(var(--i, 0) * 80ms);
+    opacity: 0; translate: 0 32px;
+    transition: opacity 700ms cubic-bezier(.2, .8, .2, 1) var(--rv-d), translate 900ms cubic-bezier(.16, 1, .3, 1) var(--rv-d);
+  }
+  .rv-on .eo-card[data-rv], .rv-on .res-tile[data-rv] {
+    transition: opacity 700ms cubic-bezier(.2, .8, .2, 1) var(--rv-d), translate 900ms cubic-bezier(.16, 1, .3, 1) var(--rv-d),
+                transform .25s cubic-bezier(.2, .7, .2, 1), background-color .25s;
+  }
+  .rv-on [data-rv].is-in { opacity: 1; translate: none; }
+
+  /* pictures: a curtain lifts from the foot while the photograph settles from 1.08 */
+  .rv-on [data-rv="clip"] { opacity: 1; translate: none; clip-path: inset(100% 0 0 0); transition: clip-path 1100ms cubic-bezier(.65, 0, .35, 1); }
+  .rv-on [data-rv="clip"] > img { scale: 1.08; transition: scale 1600ms cubic-bezier(.22, 1, .36, 1); }
+  .rv-on [data-rv="clip"].is-in { clip-path: inset(0); }
+  .rv-on [data-rv="clip"].is-in > img { scale: 1; }
+
+  /* the product photographs inside the EOAT and resistance cards settle a beat after their card */
+  .rv-on :is(.eo-card, .res-tile)[data-rv] :is(.eo-card__media, .res-tile__pic) > img { scale: 1.06; transition: scale 1200ms cubic-bezier(.22, 1, .36, 1) calc(var(--rv-d) + 120ms), transform .45s cubic-bezier(.2, .7, .2, 1); }
+  .rv-on :is(.eo-card, .res-tile)[data-rv].is-in :is(.eo-card__media, .res-tile__pic) > img { scale: 1; }
+}
+/* a phone: a shorter rise and a quicker cascade, so a thumb scrolling fast never waits for a card */
+@media screen and (prefers-reduced-motion: no-preference) and (max-width: 639px) {
+  .rv-on [data-rv] { --rv-d: calc(var(--i, 0) * 50ms); translate: 0 20px; transition-duration: 550ms, 700ms; }
+  .rv-on .eo-card[data-rv], .rv-on .res-tile[data-rv] { transition-duration: 550ms, 700ms, .25s, .25s; }
+}

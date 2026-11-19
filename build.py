@@ -196,7 +196,8 @@ def head(title, desc, extra=""):
 }}
 </style>
 <link rel="stylesheet" href="assets/css/site.css">
-<script>document.documentElement.classList.add('m-enter');setTimeout(()=>document.documentElement.classList.add('m-enter-done'),700)</script>
+<link rel="modulepreload" href="assets/motion/motion.js">
+<script>document.documentElement.classList.add('m-enter');setTimeout(()=>document.documentElement.classList.add('m-enter-done'),1200)</script>
 {extra}</head>
 '''
 
@@ -350,13 +351,18 @@ def go_label(item):
     return "Ver ficha" if item[2] else "Pedir presupuesto"
 
 
-def eoat_card(item, size):
+def rv(i=0):
+    """Entrada al hacer scroll (assets/js/site.js): i es el puesto en la cascada de su fila."""
+    return f' data-rv style="--i: {i % 4}"'
+
+
+def eoat_card(item, size, i=0):
     """size: 'feature' (horizontal, grande), 'main' (vertical) o 'consult' (compacta, sin ficha)."""
     name, img, slug, line = item
     quote_link = f'<a class="eo-quote" href="{contact_url(name, EOAT["name"])}" aria-label="Pedir presupuesto: {E(name)}">Pedir presupuesto</a>' if slug else ""
     sub = f"<p>{E(line)}</p>" if line else ""
     sizes = {"feature": "(max-width: 639px) 90vw, 260px", "main": "(max-width: 639px) 40vw, (max-width: 1023px) 32vw, 420px", "consult": "(max-width: 639px) 36vw, 240px"}[size]
-    return f'''<article class="eo-card eo-card--{size}" data-product="{E(name)}">
+    return f'''<article class="eo-card eo-card--{size}" data-product="{E(name)}"{rv(i)}>
           <div class="eo-card__media">{pic(img, name, sizes)}</div>
           <div class="eo-card__body">
             <h3><a class="eo-card__link" href="{prod_href(item, EOAT)}">{E(name)}</a></h3>{sub}
@@ -365,31 +371,31 @@ def eoat_card(item, size):
         </article>'''
 
 
-def hrs_row(item):
+def hrs_row(item, i=0):
     name, img, slug, line = item
     sub = f'<span class="hrs-row__line">{E(line)}</span>' if line else ""
     # la foto va dentro del enlace junto al nombre: alt vacío para no leer el nombre dos veces
-    return f'''<li class="hrs-row" data-product="{E(name)}"><a href="{prod_href(item, HRS)}">
+    return f'''<li class="hrs-row" data-product="{E(name)}"{rv(i // 2)}><a href="{prod_href(item, HRS)}">
           <span class="hrs-row__pic">{pic(img, "", "128px")}</span>
           <span class="hrs-row__text"><span class="hrs-row__name">{E(name)}</span>{sub}</span>
           {ARROW}
         </a></li>'''
 
 
-def res_tile(item):
+def res_tile(item, i=0):
     name, img, slug, line = item
     sub = f"<p>{E(line)}</p>" if line else ""
-    return f'''<article class="res-tile" data-product="{E(name)}">
+    return f'''<article class="res-tile" data-product="{E(name)}"{rv(i)}>
           <div class="res-tile__pic">{pic(img, name, "(max-width: 639px) 45vw, (max-width: 1023px) 45vw, 300px")}</div>
           <h3><a href="{prod_href(item, RES)}">{E(name)}</a></h3>{sub}
           <span class="res-tile__go" aria-hidden="true">{go_label(item)}{ARROW}</span>
         </article>'''
 
 
-def shelf_item(item):
+def shelf_item(item, i=0):
     name, img, slug, line = item
     sub = f'<span class="shelf__line">{E(line)}</span>' if line else ""
-    return f'''<li class="shelf" data-product="{E(name)}"><a href="{prod_href(item, EST)}">
+    return f'''<li class="shelf" data-product="{E(name)}"{rv(i)}><a href="{prod_href(item, EST)}">
           <span class="shelf__text"><span class="shelf__name">{E(name)}</span>{sub}</span>
           <span class="shelf__go">{go_label(item)}</span>
         </a></li>'''
@@ -398,9 +404,9 @@ def shelf_item(item):
 # EOAT: primero los que tienen ficha (dos destacados y tres principales), después los de consulta
 eo_fichas = [it for it in EOAT["items"] if it[2]]
 eo_consult = [it for it in EOAT["items"] if not it[2]]
-eo_feature = "".join(eoat_card(it, "feature") for it in eo_fichas[:2])
-eo_main = "".join(eoat_card(it, "main") for it in eo_fichas[2:])
-eo_cons = "".join(eoat_card(it, "consult") for it in eo_consult)
+eo_feature = "".join(eoat_card(it, "feature", n + 1) for n, it in enumerate(eo_fichas[:2]))
+eo_main = "".join(eoat_card(it, "main", n) for n, it in enumerate(eo_fichas[2:]))
+eo_cons = "".join(eoat_card(it, "consult", n) for n, it in enumerate(eo_consult))
 
 index_links = "".join(f'<a href="#{ANCHOR[c["slug"]]}"><span>{E(SHORT[c["slug"]])}</span><span class="cat-index__n">{len(c["items"])}</span></a>' for c in (EOAT, HRS, RES, EST))
 TOTAL = sum(len(c["items"]) for c in CATS)
@@ -408,13 +414,13 @@ TOTAL = sum(len(c["items"]) for c in CATS)
 # Estanterías: los diez productos de CATS agrupados por uso (por índice, así ninguno se pierde ni se repite)
 SHELF_GROUPS = [("Almacenaje", (0, 1, 2, 3, 5, 9)), ("Manipulación y mantenimiento", (4, 6)), ("Seguridad y protección", (7, 8))]
 assert sorted(i for _, ix in SHELF_GROUPS for i in ix) == list(range(len(EST["items"])))
-shelf_groups = "".join(f'''<div class="shelf-group"><h3>{E(g)}</h3><ul class="shelves">{"".join(shelf_item(EST["items"][i]) for i in ix)}</ul></div>''' for g, ix in SHELF_GROUPS)
+shelf_groups = "".join(f'''<div class="shelf-group"><h3 data-rv>{E(g)}</h3><ul class="shelves">{"".join(shelf_item(EST["items"][i], n) for n, i in enumerate(ix))}</ul></div>''' for g, ix in SHELF_GROUPS)
 
 home_close = f'''<div class="section-head--split">
         <div><h2 id="close-h">Pida presupuesto de cualquier producto</h2><p class="t-lead">Elija la línea, cuéntenos qué necesita y un técnico le responde en 12 a 24 horas.</p></div>
         <a class="btn btn--primary" href="contacto.html">{MAIN_ACTION}{ARROW}</a>
       </div>
-      <div class="quote-row">
+      <div class="quote-row" data-rv>
       <ul class="quote-lines" aria-label="Pedir presupuesto por línea de producto">{"".join(f'<li><a href="contacto.html?cat={quote(c["name"])}">{E(c["name"])}</a></li>' for c in (EOAT, HRS, RES, EST))}<li><a href="contacto.html?cat={quote("Otro / proyecto a medida")}">Proyecto a medida</a></li></ul>
       <ul class="quote-direct">
         <li><a class="link" href="tel:{TEL}">{TEL_TXT}</a></li>
@@ -456,21 +462,21 @@ write("index.html", head("System Plast: garras EOAT, controladores HRS y resiste
   <section class="section ground-inverse cat-sec" id="eoat" style="--h: 2" aria-labelledby="eoat-h">
     <div class="wrap">
       <div class="eo-head">
-        <div class="eo-head__text">
+        <div class="eo-head__text" data-rv>
           <h2 id="eoat-h">Garras EOAT para robots de extracción</h2>
         </div>
-        <div class="eo-head__side">
+        <div class="eo-head__side" data-rv style="--i: 1">
           <p>{E(EOAT["band"][1])}</p>
           <div class="btn-row"><a class="btn btn--primary" href="contacto.html?cat={quote(EOAT["name"])}">Pedir presupuesto de garras{ARROW}</a><a class="link" href="{EOAT["slug"]}.html">Ver la gama EOAT</a></div>
         </div>
       </div>
       <div class="eo-bento">
-        <div class="eo-photo"><img class="frame__img" src="assets/img/home-2.jpg" srcset="assets/img/home-2-640.jpg 640w, assets/img/home-2.jpg 1000w" sizes="(max-width: 1023px) 100vw, 740px" width="1000" height="1000" alt="Robot de extracción junto a una inyectora, con la garra montada" loading="lazy" decoding="async" data-source="client" data-subject="robot at injection machine"></div>
+        <div class="eo-photo" data-rv="clip"><img class="frame__img" src="assets/img/home-2.jpg" srcset="assets/img/home-2-640.jpg 640w, assets/img/home-2.jpg 1000w" sizes="(max-width: 1023px) 100vw, 740px" width="1000" height="1000" alt="Robot de extracción junto a una inyectora, con la garra montada" loading="lazy" decoding="async" data-source="client" data-subject="robot at injection machine"></div>
         {eo_feature}
       </div>
       <div class="eo-main">{eo_main}</div>
       <div class="eo-consult">
-        <div class="eo-consult__head"><h3 class="eo-consult__h">Componentes EOAT bajo consulta</h3><p>Le preparamos la referencia exacta para su garra.</p></div>
+        <div class="eo-consult__head" data-rv><h3 class="eo-consult__h">Componentes EOAT bajo consulta</h3><p>Le preparamos la referencia exacta para su garra.</p></div>
         <div class="eo-consult__grid">{eo_cons}</div>
       </div>
     </div>
@@ -478,24 +484,24 @@ write("index.html", head("System Plast: garras EOAT, controladores HRS y resiste
 
   <section class="section cat-sec" id="hrs" aria-labelledby="hrs-h">
     <div class="wrap hrs-split">
-      <div class="hrs-intro">
+      <div class="hrs-intro" data-rv>
         <h2 id="hrs-h">Controladores de canal caliente</h2>
         <p>Control PID de cada boquilla del molde, de una zona a 128 en la misma unidad.</p>
         <p>{E(HRS["band"][1])}</p>
         <div class="btn-row"><a class="btn btn--secondary" href="contacto.html?cat={quote(HRS["name"])}">Pedir presupuesto de controladores</a><a class="link" href="{HRS["slug"]}.html">Ver controladores</a></div>
       </div>
-      <ul class="hrs-list">{"".join(hrs_row(it) for it in HRS["items"])}</ul>
+      <ul class="hrs-list">{"".join(hrs_row(it, n) for n, it in enumerate(HRS["items"]))}</ul>
     </div>
   </section>
 
   <section class="section ground-surface cat-sec" id="resistencias" aria-labelledby="res-h">
     <div class="wrap">
-      <div class="section-head section-head--row">
+      <div class="section-head section-head--row" data-rv>
         <div><h2 id="res-h">Resistencias fabricadas a su medida</h2></div>
         <a class="link" href="{RES["slug"]}.html">Ver resistencias</a>
       </div>
-      <div class="res-grid">{"".join(res_tile(it) for it in RES["items"])}</div>
-      <div class="res-spec">
+      <div class="res-grid">{"".join(res_tile(it, n) for n, it in enumerate(RES["items"]))}</div>
+      <div class="res-spec" data-rv>
         <p class="res-spec__h">Para fabricarla a medida, envíenos:</p>
         <ul>{"".join(f'<li><span>{k}</span>{v}</li>' for k, v in [("Dimensiones", "Diámetro, ancho, alto"), ("Tensión", "Voltios de su máquina"), ("Potencia", "En vatios"), ("Perforaciones", "Posición y diámetro"), ("Conexión", "Cable, borna o terminal")])}</ul>
         <a class="btn btn--primary" href="contacto.html?cat={quote(RES["name"])}">Pedir presupuesto de resistencias{ARROW}</a>
@@ -505,7 +511,7 @@ write("index.html", head("System Plast: garras EOAT, controladores HRS y resiste
 
   <section class="section cat-sec" id="estanterias" aria-labelledby="est-h">
     <div class="wrap">
-      <div class="section-head section-head--row">
+      <div class="section-head section-head--row" data-rv>
         <div><h2 id="est-h">Estanterías y almacenaje de moldes</h2><p>{E(EST["band"][1])}</p></div>
         <a class="link" href="{EST["slug"]}.html">Ver estanterías</a>
       </div>
@@ -515,16 +521,16 @@ write("index.html", head("System Plast: garras EOAT, controladores HRS y resiste
 
   <section class="section ground-surface cat-sec" id="servicio" aria-labelledby="servicio-h" data-moment="line-carries-colour" data-moment-opts='{{"from": "base"}}'>
     <div class="wrap">
-      <div class="section-head section-head--row">
+      <div class="section-head section-head--row" data-rv>
         <h2 id="servicio-h">Servicio técnico y recambios en 12 a 24 horas</h2>
         <a class="link" href="quienes-somos.html">Conocer la empresa</a>
       </div>
       <div class="grid service-cols">
-        <div class="span-4"><h3>Asesoría para elegir controlador</h3><p>Le ayudamos a elegir la serie y la resistencia antes de la compra, y le atendemos después.</p></div>
-        <div class="span-4"><h3>Envío de recambios al extranjero</h3><p>Más de 50 clientes en automoción, electrodomésticos, dispositivos médicos y envases.</p></div>
-        <div class="span-4"><h3>Cajas de control para su molde</h3><p>Fabricamos cajas de control de temperatura ajustadas a su molde y a su producción.</p></div>
+        <div class="span-4" data-rv><h3>Asesoría para elegir controlador</h3><p>Le ayudamos a elegir la serie y la resistencia antes de la compra, y le atendemos después.</p></div>
+        <div class="span-4" data-rv style="--i: 1"><h3>Envío de recambios al extranjero</h3><p>Más de 50 clientes en automoción, electrodomésticos, dispositivos médicos y envases.</p></div>
+        <div class="span-4" data-rv style="--i: 2"><h3>Cajas de control para su molde</h3><p>Fabricamos cajas de control de temperatura ajustadas a su molde y a su producción.</p></div>
       </div>
-      <div class="frame frame--photo plant-photo">
+      <div class="frame frame--photo plant-photo" data-rv="clip">
         <img class="frame__img" src="assets/img/photo-f74695444.jpg" srcset="assets/img/photo-f74695444-500.jpg 500w, assets/img/photo-f74695444-960.jpg 960w, assets/img/photo-f74695444.jpg 1280w" sizes="(max-width: 1279px) 100vw, 1280px" width="1280" height="853" alt="Nave con una fila de inyectoras de plástico" loading="lazy" decoding="async" data-source="stand-in" data-subject="injection moulding hall">
       </div>
     </div>

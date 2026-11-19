@@ -59,3 +59,27 @@ if (index) {
     if (a && bar.scrollWidth > bar.clientWidth) bar.scrollTo({ left: a.offsetLeft - bar.offsetLeft - 24, behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
   }).observe(index, { subtree: true, attributeFilter: ['aria-current'] });
 }
+
+// Entradas al hacer scroll en la portada: cada bloque [data-rv] aparece una vez al entrar en pantalla.
+// Sin IntersectionObserver o con movimiento reducido no se activa nada y todo se ve como está escrito.
+const rvBlocks = [...document.querySelectorAll('[data-rv]')];
+if (rvBlocks.length && 'IntersectionObserver' in window && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  const show = (el) => el.classList.add('is-in');
+  // red de seguridad: un scroll muy rápido o un salto del índice puede pasar un bloque sin que el
+  // observador lo vea; todo lo que ya está por encima del borde inferior de la pantalla aparece
+  const catchUp = () => rvBlocks.forEach((el) => {
+    if (!el.classList.contains('is-in') && el.getBoundingClientRect().top < innerHeight * 0.92) { show(el); io.unobserve(el); }
+  });
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((e) => { if (e.isIntersecting) { show(e.target); io.unobserve(e.target); } });
+    catchUp();
+  }, { rootMargin: '0px 0px -8% 0px', threshold: 0.12 });
+  rvBlocks.forEach((el) => io.observe(el));
+  let idle;
+  addEventListener('scroll', () => { clearTimeout(idle); idle = setTimeout(catchUp, 120); }, { passive: true });
+  document.documentElement.classList.add('rv-on');
+  // el teclado nunca cae en algo invisible: lo que recibe el foco aparece al momento
+  document.addEventListener('focusin', (e) => { const el = e.target.closest('[data-rv]'); if (el) { show(el); io.unobserve(el); } });
+  // al imprimir, todo visible
+  addEventListener('beforeprint', () => rvBlocks.forEach(show));
+}

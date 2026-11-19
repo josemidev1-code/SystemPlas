@@ -129,11 +129,47 @@ class PortadaCatalogo(Base):
         self.has("maquina-640.mp4", self.html)
 
 
-class SinAnimacion(Base):
-    def test_ninguna_pagina_usa_reveal(self):
-        for f in glob.glob(os.path.join(ROOT, "*.html")):
-            with open(f, encoding="utf-8") as fh:
-                self.assertNotRegex(fh.read(), r'class="[^"]*\breveal\b', os.path.basename(f))
+class EntradasAccesibles(Base):
+    """Las entradas al hacer scroll nunca esconden contenido sin JS ni con movimiento reducido."""
+
+    def setUp(self):
+        with open(os.path.join(ROOT, "assets/css/site.css"), encoding="utf-8") as fh:
+            self.css = fh.read()
+        with open(os.path.join(ROOT, "assets/js/site.js"), encoding="utf-8") as fh:
+            self.js = fh.read()
+
+    @staticmethod
+    def top_level(selector):
+        """Parte una lista de selectores por sus comas de primer nivel (no las de :is(...))."""
+        parts, depth, cur = [], 0, ""
+        for ch in selector:
+            depth += ch == "("
+            depth -= ch == ")"
+            if ch == "," and depth == 0:
+                parts.append(cur)
+                cur = ""
+            else:
+                cur += ch
+        return parts + [cur]
+
+    def test_css_solo_oculta_bajo_rv_on_y_movimiento_permitido(self):
+        start = self.css.index("ENTRANCES ON SCROLL")
+        block = self.css[start:]
+        for sel in re.findall(r"([^{}]*\[data-rv[^{}]*)\{", block):
+            for part in self.top_level(sel):
+                if "[data-rv" in part:
+                    self.assertIn(".rv-on", part, part.strip())
+        self.assertNotIn("[data-rv", self.css[:start])
+        for media in re.findall(r"@media[^{]*\{", block):
+            self.assertIn("prefers-reduced-motion: no-preference", media)
+
+    def test_js_respeta_movimiento_reducido_y_foco(self):
+        self.has("prefers-reduced-motion: reduce", self.js)
+        self.has("'focusin'", self.js)
+        self.has("classList.add('rv-on')", self.js)
+
+    def test_fichas_sin_entradas(self):
+        self.lacks("data-rv", page("serie-mtc-b.html"))
 
 
 class Reproducible(Base):
