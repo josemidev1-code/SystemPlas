@@ -155,6 +155,10 @@ def write(name, body):
 # ---------------------------------------------------------------------------
 # Cabecera, navegación y pie comunes
 # ---------------------------------------------------------------------------
+# Paso entre páginas: en la página que llega, la foto del producto recibe el nombre compartido antes del
+# primer pintado (por eso va en línea en el <head>; site.js nombra la de la página que se va).
+VT_HEAD = """<script>(()=>{const n=window.navigation;if(!n||!('onpagereveal' in window))return;const l=document.createElement('link');l.rel='expect';l.href='#vt-parsed';l.setAttribute('blocking','render');document.head.append(l);const P=s=>s.replace(/\\/index\\.html$/,'/');const same=(a,b)=>{try{const x=new URL(a,location.href),y=new URL(b,location.href);return x.origin===y.origin&&P(x.pathname)===P(y.pathname)}catch(e){return false}};addEventListener('pagereveal',e=>{const vt=e.viewTransition,f=n.activation&&n.activation.from;if(!vt||!f||matchMedia('(prefers-reduced-motion: reduce)').matches)return;let el=null;for(const a of document.querySelectorAll('a.card[href]'))if(same(a.href,f.url)){el=a.querySelector('.frame__img,img');break}el=el||document.querySelector('[data-gallery-main]');if(!el)return;const r=el.getBoundingClientRect();if(!r.height||r.bottom<0||r.top>innerHeight)return;el.style.viewTransitionName='product-photo';const c=()=>{el.style.viewTransitionName=''};vt.finished.then(c,c)})})()</script>"""
+
 def head(title, desc, extra=""):
     return f'''<!doctype html>
 <html lang="es" data-type="product" data-radius="sharp" data-buttons="solid" data-motion>
@@ -197,6 +201,7 @@ def head(title, desc, extra=""):
 </style>
 <link rel="stylesheet" href="assets/css/site.css">
 <script>document.documentElement.classList.add('m-enter');setTimeout(()=>document.documentElement.classList.add('m-enter-done'),700)</script>
+{VT_HEAD}
 {extra}</head>
 '''
 

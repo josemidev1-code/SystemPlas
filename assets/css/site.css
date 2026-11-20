@@ -204,3 +204,85 @@
 .grid-h, .pdp-body-h { font: var(--display-weight) var(--t-h2)/1.1 var(--font-display); letter-spacing: var(--display-tracking); margin-bottom: var(--s-7); }
 .pdp-body-h { margin-top: var(--s-10); margin-bottom: 0; }
 .pdp-body { margin-top: var(--s-7); }
+
+/* ================================================================ refinement layer (impeccable)
+   Content and structure stay as built; this layer only tunes type, browser surfaces and motion.
+   Motion thesis: continuity through the catalogue. Pages hand over to each other instead of
+   blinking, and a product's photograph travels from its card to the gallery of its page (site.js
+   names the two pictures). Everything else is feedback. Nothing here hides content by default. */
+
+/* ------------------------------------------------ type: headings break between words, not inside them */
+@media (min-width: 640px) {
+  h1, h2, h3, h4 { hyphens: manual; -webkit-hyphens: manual; }
+}
+.pg-head h1, .pdp-info h1, .grid-h, .pdp-body-h, .band-row h2, .split-6 h2 { text-wrap: balance; }
+.rows__value, .rows--spec .rows__value { font-variant-numeric: tabular-nums; }
+
+/* ------------------------------------------------ browser surfaces carry the palette */
+:root { accent-color: var(--action); caret-color: var(--action); scrollbar-color: color-mix(in oklab, var(--ink) 28%, transparent) transparent; }
+::selection { background: color-mix(in oklab, var(--action) 22%, transparent); color: var(--ink); }
+.ground-inverse ::selection, .hero--photo[data-tone="dark"] ::selection { background: color-mix(in oklab, #fff 28%, transparent); color: #fff; }
+.crumbs a { transition: text-decoration-color 150ms var(--m-ease, ease); }
+.cat-tabs a { transition: color 150ms var(--m-ease, ease), border-color 200ms var(--m-ease, ease); }
+
+/* ------------------------------------------------ page-to-page handover (cross-document view transitions)
+   The header and the phone's action bar hold still; the page underneath fades out fast and the new one
+   settles 10px up. Browsers without view transitions navigate as before. */
+@view-transition { navigation: auto; }
+.nav { view-transition-name: site-nav; }
+.actionbar { view-transition-name: site-bar; }
+::view-transition-group(site-nav), ::view-transition-group(site-bar) { animation: none; z-index: 2; }
+::view-transition-old(root) { animation: vt-leave 160ms cubic-bezier(.4, 0, 1, 1) both; }
+::view-transition-new(root) { animation: vt-arrive 420ms cubic-bezier(.16, 1, .3, 1) 60ms both; }
+@keyframes vt-leave { to { opacity: 0; } }
+@keyframes vt-arrive { from { opacity: 0; translate: 0 10px; } }
+
+/* the product's photograph travels between card and gallery (one name, set by site.js only while it runs) */
+::view-transition-group(product-photo) { animation-duration: 520ms; animation-timing-function: cubic-bezier(.16, 1, .3, 1); z-index: 1; }
+::view-transition-old(product-photo), ::view-transition-new(product-photo) { height: 100%; object-fit: contain; overflow: clip; }
+::view-transition-old(product-photo) { animation: vt-photo-out 260ms cubic-bezier(.4, 0, .2, 1) both; }
+::view-transition-new(product-photo) { animation: vt-photo-in 360ms cubic-bezier(.16, 1, .3, 1) both; }
+@keyframes vt-photo-out { to { opacity: 0; } }
+@keyframes vt-photo-in { from { opacity: 0; } }
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(root) { animation: vt-leave 120ms linear both; }
+  ::view-transition-new(root) { animation: vt-photo-in 180ms linear both; }
+  ::view-transition-group(*) { animation-duration: 0s; }
+}
+
+/* ------------------------------------------------ product gallery: the picture changes by a soft cross-focus */
+.gallery-main { isolation: isolate; }
+.thumbs button { transition: border-color 150ms var(--m-ease, ease), box-shadow 200ms var(--m-ease, ease), transform 90ms var(--m-ease, ease); }
+@media (hover: hover) and (pointer: fine) {
+  .thumbs button:not([aria-pressed="true"]):hover { border-color: color-mix(in oklab, var(--action) 40%, transparent); }
+  .thumbs button img { transition: scale 400ms cubic-bezier(.16, 1, .3, 1); }
+  .thumbs button:hover img { scale: 1.06; }
+}
+.thumbs button:active { transform: scale(.97); }
+.thumbs button[aria-pressed="true"] { box-shadow: 0 0 0 1px var(--action); }
+
+/* ------------------------------------------------ home: the machine video drifts back as the hero leaves
+   (scroll-linked; only where the browser ties animation to scroll; the video never hides) */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .hero--photo > video.hero__bg, .pg-head--video > .pg-head__bg {
+      animation: hero-drift linear both; animation-timeline: view(); animation-range: exit 0% exit 100%;
+    }
+    @keyframes hero-drift { to { translate: 0 8%; opacity: .55; } }
+  }
+}
+
+/* ------------------------------------------------ catalogue cards: the name answers the pointer with the photo */
+.card--prod > h3 { transition: color 150ms var(--m-ease, ease); }
+@media (hover: hover) and (pointer: fine) {
+  .card--prod:hover > h3 { color: var(--action); }
+}
+.text-card { transition: box-shadow 200ms var(--m-ease, ease), translate 200ms var(--m-ease, ease); }
+@media (hover: hover) and (pointer: fine) {
+  .text-card:has(a):hover { box-shadow: 0 10px 30px -18px color-mix(in oklab, var(--ink) 35%, transparent); }
+}
+
+/* ------------------------------------------------ form: fields acknowledge focus */
+.form-card :is(input, select, textarea) { transition: border-color 150ms var(--m-ease, ease), box-shadow 200ms var(--m-ease, ease); }
+.form-card :is(input, select, textarea):focus-visible { box-shadow: 0 0 0 4px color-mix(in oklab, var(--action) 16%, transparent); }
