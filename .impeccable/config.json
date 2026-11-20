@@ -1,0 +1,17 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "repeating-stripes-gradient",
+        "value": "*",
+        "files": [
+          "assets/css/decor.css"
+        ],
+        "createdAt": "2026-11-20T04:32:10.705Z",
+        "reason": "Approved design spec docs/superpowers/specs/2026-11-20-decoracion-y-entradas-design.md: the technical-drawing grid and ruler are the chosen decoration (user approved option C)"
+      }
+    ]
+  }
+}
