@@ -3,6 +3,7 @@
 
 const html = document.documentElement;
 const reduced = () => matchMedia('(prefers-reduced-motion: reduce)').matches;
+const shot = () => /HeadlessChrome/.test(navigator.userAgent) && html.dataset.motion !== 'live';
 const EASE = 'cubic-bezier(.22, 1, .36, 1)';
 const LINE_HEADINGS = '.section-head h2, .grid-h, .pdp-body-h, .band-row h2, .split-6 h2, main > .section h2';
 
@@ -45,9 +46,10 @@ function maskWords(h1) {
 export function enterPage(root) {
   // .is-in: la cuadrícula y la regla se dibujan (decor.css) en paralelo con las palabras
   const show = () => { root.classList.add('is-in'); html.classList.add('page-entered'); };
-  if (!html.classList.contains('m-enter') || reduced() || root.getBoundingClientRect().bottom < 0) return show();
+  if (!html.classList.contains('m-enter') || html.dataset.motion === 'off' || shot() || reduced() || root.getBoundingClientRect().bottom < 0) return show();
   // la marca de seguridad ya pasó: el CSS funde el texto; se da por terminada tras el fundido
-  if (html.classList.contains('m-enter-done')) { html.classList.add('page-entered'); return void setTimeout(() => root.classList.add('is-in'), 450); }
+  const late = () => setTimeout(() => { root.classList.add('is-in'); html.classList.add('page-entered'); }, 450);
+  if (html.classList.contains('m-enter-done')) return void late();
   const h1 = root.querySelector('h1');
   if (!h1) return show();
 
@@ -64,8 +66,11 @@ export function enterPage(root) {
 
   // las fuentes primero (una línea en la tipografía de reserva se parte distinto), 100 ms como mucho
   const t0 = performance.now();
-  Promise.race([document.fonts?.ready ?? Promise.resolve(), new Promise(r => setTimeout(r, 100))]).then(() => {
-    if (html.classList.contains('m-enter-done') && !root.classList.contains('is-entering')) { over = true; html.classList.add('page-entered'); return; }
+  Promise.race([document.fonts?.ready ?? Promise.resolve(), new Promise(r => setTimeout(r, 100))])
+    // un fotograma más: el pagereveal de la cabecera ya habrá nombrado la foto de la transición de vista
+    .then(() => new Promise(r => { requestAnimationFrame(r); setTimeout(r, 60); })).then(() => {
+    if (over) return;
+    if (html.classList.contains('m-enter-done') && !root.classList.contains('is-entering')) { over = true; late(); return; }
     masks = maskWords(h1);
     // .is-entering suelta la espera del CSS (las animaciones retienen el estado inicial); page-entering,
     // la de las tarjetas, que están en otra sección. Las que no caben en pantalla quedan visibles ya.
@@ -80,8 +85,15 @@ export function enterPage(root) {
       : [{ transform: 'translateY(.35em)', opacity: 0 }, { transform: 'none', opacity: 1 }],
       { duration: 700, delay: 80 + k * lineStep, easing: EASE, fill: 'both' }))));
 
+    // la etiqueta sobre el titular entra con su primera línea
+    const label = root.querySelector('.pdp-info > .t-label');
+    if (label) {
+      const t = { duration: 500, delay: 80, easing: EASE, fill: 'both' };
+      anims.push(label.animate([{ opacity: 0 }, { opacity: 1 }], t),
+        label.animate([{ transform: 'translateY(12px)' }, { transform: 'none' }], { ...t, composite: 'add' }));
+    }
     // migas, entradilla, hijos de la ficha y miniaturas: uno tras otro, 220 ms después del titular
-    const steps = [...new Set(root.querySelectorAll('.crumbs, .t-lead, .pdp-sub, .pdp-info > :not(h1), .thumbs'))];
+    const steps = [...new Set(root.querySelectorAll('.crumbs, .t-lead, .pdp-sub, .pdp-info > :not(h1, .t-label), .thumbs'))];
     const after = Math.min(80 + (lines.length - 1) * lineStep + 220, B - 500);
     const gap = Math.max(0, Math.min(60, (B - 500 - after) / Math.max(1, steps.length - 1)));
     steps.forEach((el, k) => {
@@ -90,13 +102,18 @@ export function enterPage(root) {
         el.animate([{ transform: 'translateY(12px)' }, { transform: 'none' }], { ...t, composite: 'add' }));
     });
 
-    // la foto de la galería se asienta
+    // el vídeo de la cabecera se asienta (scale compone con el desplazamiento por scroll de site.css)
+    const bg = root.querySelector('.pg-head__bg');
+    if (bg) anims.push(bg.animate([{ scale: 1.04 }, { scale: 1 }], { duration: B, easing: EASE, fill: 'both' }));
+
+    // la foto de la galería se asienta, salvo que ya la lleve la transición de vista entre documentos
+    const vtName = el => el && (el.style.viewTransitionName || html.dataset.vtArrive === '1');
     const photo = root.querySelector('.gallery-main img[data-gallery-main]');
-    if (photo) anims.push(photo.animate([{ scale: 1.04, clipPath: 'inset(2%)' }, { scale: 1, clipPath: 'inset(0)' }],
+    if (photo && !vtName(photo)) anims.push(photo.animate([{ scale: 1.04, clipPath: 'inset(2%)' }, { scale: 1, clipPath: 'inset(0)' }],
       { duration: B, easing: EASE, fill: 'both' }));
 
     // primeras tarjetas del catálogo que caben en el primer viewport, en cascada desde los 300 ms
-    const cards = [...document.querySelectorAll('.prod-grid > .card:nth-child(-n+8)')].filter(c => c.getBoundingClientRect().top < innerHeight);
+    const cards = [...document.querySelectorAll('.prod-grid > .card:nth-child(-n+8)')].filter(c => c.getBoundingClientRect().top < innerHeight && !c.querySelector('img')?.style.viewTransitionName);
     const cardGap = Math.max(0, Math.min(60, (B - 500 - 300) / Math.max(1, cards.length - 1)));
     cards.forEach((c, i) => {
         const t = { duration: 500, delay: 300 + i * cardGap, easing: EASE, fill: 'both' };

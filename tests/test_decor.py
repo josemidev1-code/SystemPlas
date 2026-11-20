@@ -45,6 +45,7 @@ class Momentos(Base):
         html = page("index.html")
         self.has('class="section bg-ruled" id="hrs"', html)
         self.has('href="assets/backgrounds/backgrounds.css"', html)
+        self.has('<script src="assets/backgrounds/backgrounds.js"></script>', html)
 
 
 if __name__ == "__main__":
