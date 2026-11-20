@@ -79,6 +79,8 @@ html.js-decor :is(.section-head h2, .grid-h, .pdp-body-h, .band-row h2, .split-6
 
 /* Bandas y pie: cuadrícula al 6 % con el centro limpio (máscara, no halo). */
 #resistencias.ground-inverse, footer.closing { position: relative; isolation: isolate; }
+/* El pie es claro: sus líneas van en verde petróleo tenue (el blanco no se vería sobre el fondo claro). */
+footer.closing:not(.ground-inverse) { --decor-lt-band: color-mix(in oklab, var(--decor-c) 9%, transparent); }
 #resistencias.ground-inverse::before, footer.closing::before {
   content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
   background:
