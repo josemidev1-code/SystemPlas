@@ -38,6 +38,8 @@
 }
 </style>
 <link rel="stylesheet" href="assets/css/site.css">
+<link rel="stylesheet" href="assets/css/decor.css">
+<script type="module" src="assets/js/entrance.js"></script>
 <script>document.documentElement.classList.add('m-enter');setTimeout(()=>document.documentElement.classList.add('m-enter-done'),700)</script>
 <script>(()=>{const n=window.navigation;if(!n||!('onpagereveal' in window))return;const l=document.createElement('link');l.rel='expect';l.href='#vt-parsed';l.setAttribute('blocking','render');document.head.append(l);const P=s=>s.replace(/\/index\.html$/,'/');const same=(a,b)=>{try{const x=new URL(a,location.href),y=new URL(b,location.href);return x.origin===y.origin&&P(x.pathname)===P(y.pathname)}catch(e){return false}};addEventListener('pagereveal',e=>{const vt=e.viewTransition,f=n.activation&&n.activation.from;if(!vt||!f||matchMedia('(prefers-reduced-motion: reduce)').matches)return;let el=null;for(const a of document.querySelectorAll('a.card[href]'))if(same(a.href,f.url)){el=a.querySelector('.frame__img,img');break}el=el||document.querySelector('[data-gallery-main]');if(!el)return;const r=el.getBoundingClientRect();if(!r.height||r.bottom<0||r.top>innerHeight)return;el.style.viewTransitionName='product-photo';const c=()=>{el.style.viewTransitionName=''};vt.finished.then(c,c)})})()</script>
 <script>document.documentElement.classList.add('mo-js');setTimeout(()=>document.documentElement.classList.add('mo-safe'),2500)</script>

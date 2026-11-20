@@ -200,6 +200,8 @@ def head(title, desc, extra=""):
 }}
 </style>
 <link rel="stylesheet" href="assets/css/site.css">
+<link rel="stylesheet" href="assets/css/decor.css">
+<script type="module" src="assets/js/entrance.js"></script>
 <script>document.documentElement.classList.add('m-enter');setTimeout(()=>document.documentElement.classList.add('m-enter-done'),700)</script>
 {VT_HEAD}
 {extra}</head>
@@ -298,10 +300,14 @@ def page_head(title, lead, crumbs=(), video=False):
   <div class="wrap">{trail}<h1>{E(title)}</h1><p class="t-lead">{E(lead)}</p>
     <button class="loop-pause pg-head__pause" type="button" aria-label="Pausar el vídeo" aria-pressed="false" data-video-pause></button>
   </div>
+  <div class="decor-grid" aria-hidden="true"></div>
+  <div class="decor-ruler" aria-hidden="true"></div>
 </header>
 '''
     return f'''<header class="pg-head ground-inverse" data-enter>
   <div class="wrap">{trail}<h1>{E(title)}</h1><p class="t-lead">{E(lead)}</p></div>
+  <div class="decor-grid" aria-hidden="true"></div>
+  <div class="decor-ruler" aria-hidden="true"></div>
 </header>
 '''
 
@@ -543,7 +549,7 @@ for slug, f in FICHAS.items():
     rel_html = "".join(card(n, i, f"{s}.html" if s else contact_url(n, cat["name"])) for n, i, s, d in related)
     wa_text = quote(f"Hola, me interesa {f['title']} (System Plast). ¿Me pueden dar más información?")
     sub = f'<p class="pdp-sub">{E(f["subtitle"])}</p>' if f["subtitle"] else ""
-    body = f'''<section class="pdp"><div class="wrap">
+    body = f'''<section class="pdp" data-enter><div class="wrap">
   <nav class="crumbs crumbs--light" aria-label="Migas de pan"><a href="index.html">Inicio</a><span aria-hidden="true">/</span><a href="productos.html">Productos</a><span aria-hidden="true">/</span><a href="{cat['slug']}.html">{E(cat['name'])}</a></nav>
   <div class="pdp-top">
     <div class="pdp-info" data-enter>
