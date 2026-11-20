@@ -20,8 +20,6 @@
 .hero .hero-pause { right: 0; bottom: 0; }
 @media (max-width: 1023px) { .hero .hero-pause { position: fixed; position: absolute; top: auto; bottom: 0; } }
 
-/* the close: the name set wide keeps its ascenders */
-.close__word { line-height: 1; padding-top: .04em; font-size: clamp(36px, 13vw, 196px); }
 .footer ul li { overflow-wrap: anywhere; }
 @media (min-width: 640px) and (max-width: 1023px) { .footer .footer__col { grid-column: auto / span 4; } }
 

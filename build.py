@@ -247,14 +247,13 @@ CREDITS_LINE = '<a class="credits" href="creditos.html">Vídeo y fotos de contex
 
 def footer(close_line="Respuesta y envío de recambios en 12 a 24 horas.", scripts=""):
     cats = "".join(f'<li><a href="{c["slug"]}.html">{E(c["name"])}</a></li>' for c in CATS)
-    return f'''<footer class="footer closing g2m" id="contact" aria-labelledby="close-h">
+    return f'''<footer class="footer closing" id="contact" aria-labelledby="close-h">
   <div class="wrap">
     <div class="closing__cta close--word">
       <div class="section-head--split">
         <div><h2 id="close-h">Presupuesto para su línea de inyección</h2><p class="t-lead">{E(close_line)}</p></div>
         <a class="btn btn--primary" href="contacto.html">{MAIN_ACTION}{ARROW}</a>
       </div>
-      <p class="close__word" aria-hidden="true">System Plast</p>
     </div>
     <div class="closing__links">
       <div class="grid">
