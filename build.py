@@ -20,6 +20,12 @@ DIR1, DIR2 = "Pol. Ind. Riodil, 1", "03110 Mutxamel, Alicante"
 LINKEDIN = "https://www.linkedin.com/company/system-plas/"
 MAIN_ACTION = "Pedir presupuesto"
 YEAR = 2026
+# Dirección pública de la web. Cuando systemplas.com apunte a GitHub Pages, cámbiala aquí (y crea el archivo CNAME).
+BASE_URL = "https://josemidev1-code.github.io/SystemPlas/"
+# Envío del formulario de contacto (FormSubmit, sin cuenta). El primer envío manda a MAIL un correo de activación.
+FORM_ENDPOINT = f"https://formsubmit.co/ajax/{MAIL}"
+FORM_ACTION = f"https://formsubmit.co/{MAIL}"
+WA_TEXT = "Hola, quiero información sobre sus productos (System Plast)."
 
 ICON = {
  "wa": '<svg viewBox="0 0 32 32" aria-hidden="true" width="18" height="18"><path fill="currentColor" d="M16 3a13 13 0 0 0-11.2 19.6L3 29l6.6-1.7A13 13 0 1 0 16 3zm0 23.6a10.6 10.6 0 0 1-5.4-1.5l-.4-.2-3.9 1 1-3.8-.2-.4A10.6 10.6 0 1 1 16 26.6zm5.8-7.9c-.3-.2-1.9-.9-2.2-1s-.5-.2-.7.2-.8 1-1 1.2-.4.2-.7.1a8.7 8.7 0 0 1-4.3-3.8c-.3-.6.3-.5.9-1.7a.6.6 0 0 0 0-.5l-1-2.4c-.3-.6-.5-.5-.7-.5h-.6a1.2 1.2 0 0 0-.9.4 3.7 3.7 0 0 0-1.1 2.7 6.4 6.4 0 0 0 1.3 3.4 14.7 14.7 0 0 0 5.7 5c2.1.9 2.9 1 4 .8a3.4 3.4 0 0 0 2.2-1.6 2.8 2.8 0 0 0 .2-1.6c0-.2-.3-.3-.6-.5z"/></svg>',
@@ -147,7 +153,19 @@ def contact_url(prod, cat):
     return f"contacto.html?producto={quote(prod)}&cat={quote(cat)}"
 
 
+PAGES = []
+
+
+def page_url(name):
+    return BASE_URL if name == "index.html" else BASE_URL + name
+
+
 def write(name, body):
+    if name != "404.html":
+        PAGES.append(name)
+    url = page_url(name)
+    tags = "" if name == "404.html" else f'<link rel="canonical" href="{url}">\n<meta property="og:url" content="{url}">'
+    body = body.replace("<!--URL-->", tags, 1)
     with open(os.path.join(OUT, name), "w", encoding="utf-8") as f:
         f.write(body)
 
@@ -158,6 +176,21 @@ def write(name, body):
 # Paso entre páginas: en la página que llega, la foto del producto recibe el nombre compartido antes del
 # primer pintado (por eso va en línea en el <head>; site.js nombra la de la página que se va).
 VT_HEAD = """<script>(()=>{const n=window.navigation;if(!n||!('onpagereveal' in window))return;const l=document.createElement('link');l.rel='expect';l.href='#vt-parsed';l.setAttribute('blocking','render');document.head.append(l);const P=s=>s.replace(/\\/index\\.html$/,'/');const same=(a,b)=>{try{const x=new URL(a,location.href),y=new URL(b,location.href);return x.origin===y.origin&&P(x.pathname)===P(y.pathname)}catch(e){return false}};addEventListener('pagereveal',e=>{const vt=e.viewTransition,f=n.activation&&n.activation.from;if(!vt||!f||matchMedia('(prefers-reduced-motion: reduce)').matches)return;let el=null;for(const a of document.querySelectorAll('a.card[href]'))if(same(a.href,f.url)){el=a.querySelector('.frame__img,img');break}el=el||document.querySelector('[data-gallery-main]');if(!el)return;const r=el.getBoundingClientRect();if(!r.height||r.bottom<0||r.top>innerHeight)return;el.style.viewTransitionName='product-photo';document.documentElement.dataset.vtArrive='1';const c=()=>{el.style.viewTransitionName='';delete document.documentElement.dataset.vtArrive};vt.finished.then(c,c)})})()</script>"""
+
+LOCAL_BUSINESS = {
+    "@context": "https://schema.org", "@type": "LocalBusiness", "@id": BASE_URL + "#empresa",
+    "name": "System Plast", "url": BASE_URL, "logo": BASE_URL + "assets/img/logo-320.png", "image": BASE_URL + "share.jpg",
+    "description": "Controladores de canal caliente, resistencias eléctricas a medida, EOAT y estanterías para moldes de inyección de plástico.",
+    "telephone": TEL, "email": MAIL,
+    "address": {"@type": "PostalAddress", "streetAddress": DIR1, "postalCode": "03110", "addressLocality": "Mutxamel",
+                "addressRegion": "Alicante", "addressCountry": "ES"},
+    "sameAs": [LINKEDIN],
+}
+
+
+def ld(obj):
+    return '<script type="application/ld+json">' + json.dumps(obj, ensure_ascii=False).replace("</", "<\\/") + "</script>\n"
+
 
 def head(title, desc, extra=""):
     return f'''<!doctype html>
@@ -170,11 +203,14 @@ def head(title, desc, extra=""):
 <meta property="og:type" content="website">
 <meta property="og:title" content="{E(title)}">
 <meta property="og:description" content="{E(desc)}">
-<meta property="og:image" content="share.jpg">
+<meta property="og:image" content="{BASE_URL}share.jpg">
+<meta property="og:site_name" content="System Plast">
+<meta property="og:locale" content="es_ES">
+<!--URL-->
 <meta name="twitter:card" content="summary_large_image">
-<link rel="icon" href="assets/img/logo.png" type="image/png">
+<link rel="icon" href="assets/img/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
 <meta name="theme-color" content="#f4f6f6">
-<!-- <link rel="canonical" href="https://systemplas.com/"> cuando el dominio esté publicado -->
 <meta name="site-kind" content="tech">
 <meta name="page-type" content="product">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -275,6 +311,7 @@ def footer(close_line="Respuesta y envío de recambios en 12 a 24 horas.", scrip
     </div>
   </div>
 </footer>
+<a class="wa-float" href="https://wa.me/{TEL[1:]}?text={quote(WA_TEXT)}" target="_blank" rel="noopener" aria-label="Escribir por WhatsApp">{ICON["wa"]}<span>WhatsApp</span></a>
 <script type="module" src="assets/system.js"></script>
 <script type="module" src="assets/motion/motion.js"></script>
 <script type="module" src="assets/layout/layout.js"></script>
@@ -363,7 +400,7 @@ eoat_rows = "".join(row_link(n, v, f"{s}.html") for n, v, s in [
 
 write("index.html", head("System Plast: componentes para inyectoras de plástico",
                          "Controladores de canal caliente, resistencias a medida y garras EOAT para moldeo por inyección, con recambios en 12 a 24 horas desde Mutxamel.",
-                         HOME_EXTRA) + nav() + f'''<!-- type: product (hardware, site-kind tech)
+                         HOME_EXTRA + ld(LOCAL_BUSINESS)) + nav() + f'''<!-- type: product (hardware, site-kind tech)
      deal: hero photo con vídeo de fondo (el cliente pide un vídeo de máquinas detrás, como Botbox; sustituye al hero product repartido),
      nav nav-cards, close close-word, footer footer-columns, rhythm dark-band, buttons solid, mark: logo del cliente
      palette: colores del logo (start.mjs brand), type plex, radius sharp
@@ -465,11 +502,11 @@ write("index.html", head("System Plast: componentes para inyectoras de plástico
 SITE_JS = '<script type="module" src="assets/js/site.js"></script>\n'
 
 
-def inner(title, desc, active, body, close_line=None):
+def inner(title, desc, active, body, close_line=None, extra=""):
     kw = {"scripts": SITE_JS}
     if close_line:
         kw["close_line"] = close_line
-    write_html = head(title, desc) + nav(active) + '<main id="top">\n<div class="page">\n' + body + '</div>\n</main>\n' + footer(**kw)
+    write_html = head(title, desc, extra) + nav(active) + '<main id="top">\n<div class="page">\n' + body + '</div>\n</main>\n' + footer(**kw)
     return write_html
 
 
@@ -580,7 +617,10 @@ for slug, f in FICHAS.items():
   <div class="prod-grid">{rel_html}</div>
 </div></section>
 '''
-    write(f"{slug}.html", inner(f"{f['title']} | {cat['name']} | System Plast", (lead or cat["short"])[:155], "productos.html", body))
+    product_ld = ld({"@context": "https://schema.org", "@type": "Product", "name": f["title"], "description": lead[:300],
+                     "image": [BASE_URL + img_src(i) for i in imgs[:5]], "category": cat["name"],
+                     "brand": {"@type": "Brand", "name": "System Plast"}, "url": page_url(f"{slug}.html")})
+    write(f"{slug}.html", inner(f"{f['title']} | {cat['name']} | System Plast", (lead or cat["short"])[:155], "productos.html", body, extra=product_ld))
 
 # ---------------------------------------------------------------------------
 # Páginas de categoría
@@ -654,7 +694,12 @@ body = page_head("Presupuesto de controladores, resistencias y EOAT", "Cuénteno
       <li><span class="rows__name">WhatsApp</span><span class="rows__value"><a class="link" href="https://wa.me/{TEL[1:]}" target="_blank" rel="noopener">Escribir por WhatsApp</a></span></li>
     </ul>
   </div>
-  <form class="form form-card" id="contact-form" action="mailto:{MAIL}" method="post" enctype="text/plain" data-endpoint="" novalidate>
+  <form class="form form-card" id="contact-form" action="{FORM_ACTION}" method="post" data-endpoint="{FORM_ENDPOINT}" data-sending="Enviando…" data-sent="Mensaje enviado. Le responderemos en 12 a 24 horas." data-failed="No se ha podido enviar. Su mensaje sigue aquí: inténtelo de nuevo o escríbanos por WhatsApp." data-fix="Revise {{n}} campo(s) marcados." novalidate>
+    <input type="hidden" name="_subject" value="Nueva consulta desde la web de System Plast">
+    <input type="hidden" name="_template" value="table">
+    <input type="hidden" name="_captcha" value="false">
+    <input type="hidden" name="_next" value="{BASE_URL}contacto.html?enviado=1">
+    <input type="text" name="_honey" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
     <div class="field"><label for="f-name">Nombre</label><input id="f-name" name="nombre" type="text" autocomplete="name" required aria-describedby="f-name-err"><p class="field__error" id="f-name-err" hidden>Escriba su nombre.</p></div>
     <div class="field"><label for="f-company">Empresa</label><input id="f-company" name="empresa" type="text" autocomplete="organization"></div>
     <div class="field"><label for="f-email">Email</label><input id="f-email" name="email" type="email" autocomplete="email" inputmode="email" required aria-describedby="f-email-err"><p class="field__error" id="f-email-err" hidden>Escriba un email con @, por ejemplo nombre@empresa.com.</p></div>
@@ -666,7 +711,7 @@ body = page_head("Presupuesto de controladores, resistencias y EOAT", "Cuénteno
   </form>
 </div></section>
 '''
-write("contacto.html", inner("Contacto | System Plast", f"Contacte con System Plast en Mutxamel (Alicante): presupuestos de controladores, resistencias y EOAT.", "contacto.html", body))
+write("contacto.html", inner("Contacto | System Plast", f"Contacte con System Plast en Mutxamel (Alicante): presupuestos de controladores, resistencias y EOAT.", "contacto.html", body, extra=ld(LOCAL_BUSINESS)))
 
 # ---------------------------------------------------------------------------
 # Créditos
@@ -681,5 +726,24 @@ body = page_head("Créditos", "Material de terceros usado en esta web.", [("Cré
 </div></section>
 '''
 write("creditos.html", inner("Créditos | System Plast", "Licencias del vídeo y de las fotografías de terceros usadas en la web de System Plast.", None, body))
+
+# ---------------------------------------------------------------------------
+# 404, sitemap.xml y robots.txt
+# ---------------------------------------------------------------------------
+body = page_head("Página no encontrada", "La dirección que busca no existe o ha cambiado de sitio.") + f'''<section class="pg-section"><div class="wrap measure stack-5">
+  <p>Puede volver al inicio, ver el catálogo completo o escribirnos y le ayudamos a encontrar la pieza.</p>
+  <div class="btn-row"><a class="btn btn--primary" href="productos.html">Ver el catálogo{ARROW}</a><a class="btn btn--secondary" href="contacto.html">Contactar</a></div>
+</div></section>
+'''
+# GitHub Pages sirve 404.html en cualquier ruta: <base> hace que sus enlaces relativos funcionen desde ahí
+write("404.html", inner("Página no encontrada | System Plast", "La página que busca no existe.", None, body,
+                        extra=f'<base href="{BASE_URL}">\n<meta name="robots" content="noindex">\n'))
+
+skip = {"creditos.html"}
+urls = "".join(f"  <url><loc>{page_url(n)}</loc></url>\n" for n in sorted(set(PAGES), key=lambda n: (n != "index.html", n)) if n not in skip)
+with open(os.path.join(OUT, "sitemap.xml"), "w", encoding="utf-8") as fh:
+    fh.write(f'<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n{urls}</urlset>\n')
+with open(os.path.join(OUT, "robots.txt"), "w", encoding="utf-8") as fh:
+    fh.write(f"User-agent: *\nDisallow: /assets/ui/_lab/\nDisallow: /assets/backgrounds/demo.html\nDisallow: /assets/backgrounds/check.html\n\nSitemap: {BASE_URL}sitemap.xml\n")
 
 print("Páginas generadas:", len([f for f in os.listdir(OUT) if f.endswith(".html")]))

@@ -284,3 +284,20 @@
 /* ------------------------------------------------ form: fields acknowledge focus */
 .form-card :is(input, select, textarea) { transition: border-color 150ms var(--m-ease, ease), box-shadow 200ms var(--m-ease, ease); }
 .form-card :is(input, select, textarea):focus-visible { box-shadow: 0 0 0 4px color-mix(in oklab, var(--action) 16%, transparent); }
+
+/* Botón flotante de WhatsApp (todas las páginas) */
+.wa-float {
+  position: fixed; right: max(16px, env(safe-area-inset-right)); bottom: max(16px, env(safe-area-inset-bottom)); z-index: 50;
+  display: inline-flex; align-items: center; gap: 8px; padding: 12px 16px 12px 14px; border-radius: 999px;
+  background: #1f8f5f; color: #fff; font: 500 15px/1 var(--font-text); text-decoration: none;
+  box-shadow: 0 6px 20px rgba(1, 44, 61, .22); transition: transform .18s ease, box-shadow .18s ease;
+}
+.wa-float svg { width: 22px; height: 22px; flex: none; }
+.wa-float:hover { transform: translateY(-2px); box-shadow: 0 10px 26px rgba(1, 44, 61, .28); }
+.wa-float:focus-visible { outline: 2px solid var(--p-ink); outline-offset: 3px; }
+@media (max-width: 639px) { .wa-float { padding: 14px; } .wa-float span { display: none; } }
+@media (prefers-reduced-motion: reduce) { .wa-float { transition: none; } .wa-float:hover { transform: none; } }
+@media print { .wa-float { display: none; } }
+
+/* Campo trampa anti-spam del formulario */
+.hp { position: absolute !important; left: -9999px; width: 1px; height: 1px; opacity: 0; }

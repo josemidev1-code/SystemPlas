@@ -1,0 +1,6 @@
+User-agent: *
+Disallow: /assets/ui/_lab/
+Disallow: /assets/backgrounds/demo.html
+Disallow: /assets/backgrounds/check.html
+
+Sitemap: https://josemidev1-code.github.io/SystemPlas/sitemap.xml
