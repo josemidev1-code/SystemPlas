@@ -62,26 +62,30 @@ export function enterPage(root) {
     show();
   };
 
-  // las fuentes primero (una línea en la tipografía de reserva se parte distinto), 250 ms como mucho
-  Promise.race([document.fonts?.ready ?? Promise.resolve(), new Promise(r => setTimeout(r, 250))]).then(() => {
+  // las fuentes primero (una línea en la tipografía de reserva se parte distinto), 100 ms como mucho
+  const t0 = performance.now();
+  Promise.race([document.fonts?.ready ?? Promise.resolve(), new Promise(r => setTimeout(r, 100))]).then(() => {
     if (html.classList.contains('m-enter-done') && !root.classList.contains('is-entering')) { over = true; html.classList.add('page-entered'); return; }
     masks = maskWords(h1);
     // .is-entering suelta la espera del CSS (las animaciones retienen el estado inicial); page-entering,
     // la de las tarjetas, que están en otra sección. Las que no caben en pantalla quedan visibles ya.
     root.classList.add('is-entering', 'is-in');
     html.classList.add('page-entering');
+    // presupuesto: la última animación acaba a 1100 ms de empezar la entrada (≥ 1000 ms tras la espera de fuentes)
+    const B = Math.max(900, 1100 - (performance.now() - t0));
     const lines = masks ? masks.lines : [[h1]];
-    const lineStep = Math.min(80, 240 / Math.max(1, lines.length - 1));
+    const lineStep = Math.max(0, Math.min(80, 240 / Math.max(1, lines.length - 1), (B - 780) / Math.max(1, lines.length - 1)));
     lines.forEach((ws, k) => ws.forEach(w => anims.push(w.animate(masks
       ? [{ transform: 'translateY(calc(100% + .2em))' }, { transform: 'none' }]
       : [{ transform: 'translateY(.35em)', opacity: 0 }, { transform: 'none', opacity: 1 }],
       { duration: 700, delay: 80 + k * lineStep, easing: EASE, fill: 'both' }))));
 
     // migas, entradilla, hijos de la ficha y miniaturas: uno tras otro, 220 ms después del titular
-    const after = 80 + (lines.length - 1) * lineStep + 220;
     const steps = [...new Set(root.querySelectorAll('.crumbs, .t-lead, .pdp-sub, .pdp-info > :not(h1), .thumbs'))];
+    const after = Math.min(80 + (lines.length - 1) * lineStep + 220, B - 500);
+    const gap = Math.max(0, Math.min(60, (B - 500 - after) / Math.max(1, steps.length - 1)));
     steps.forEach((el, k) => {
-      const t = { duration: 500, delay: after + Math.min(k, 5) * 60, easing: EASE, fill: 'both' };
+      const t = { duration: 500, delay: after + k * gap, easing: EASE, fill: 'both' };
       anims.push(el.animate([{ opacity: 0 }, { opacity: 1 }], t),
         el.animate([{ transform: 'translateY(12px)' }, { transform: 'none' }], { ...t, composite: 'add' }));
     });
@@ -89,19 +93,20 @@ export function enterPage(root) {
     // la foto de la galería se asienta
     const photo = root.querySelector('.gallery-main img[data-gallery-main]');
     if (photo) anims.push(photo.animate([{ scale: 1.04, clipPath: 'inset(2%)' }, { scale: 1, clipPath: 'inset(0)' }],
-      { duration: 1100, easing: EASE, fill: 'both' }));
+      { duration: B, easing: EASE, fill: 'both' }));
 
     // primeras tarjetas del catálogo que caben en el primer viewport, en cascada desde los 300 ms
-    [...document.querySelectorAll('.prod-grid > .card:nth-child(-n+8)')]
-      .filter(c => c.getBoundingClientRect().top < innerHeight)
-      .forEach((c, i) => {
-        const t = { duration: 500, delay: 300 + i * 60, easing: EASE, fill: 'both' };
+    const cards = [...document.querySelectorAll('.prod-grid > .card:nth-child(-n+8)')].filter(c => c.getBoundingClientRect().top < innerHeight);
+    const cardGap = Math.max(0, Math.min(60, (B - 500 - 300) / Math.max(1, cards.length - 1)));
+    cards.forEach((c, i) => {
+        const t = { duration: 500, delay: 300 + i * cardGap, easing: EASE, fill: 'both' };
         anims.push(c.animate([{ opacity: 0 }, { opacity: 1 }], t),
           c.animate([{ transform: 'translateY(12px)' }, { transform: 'none' }], { ...t, composite: 'add' }));
       });
 
     // todo termina antes de 1,1 s; sin animaciones (pestaña oculta) el límite lo pone el temporizador
     Promise.all(anims.map(a => a.finished)).then(finish, finish);
+    setTimeout(finish, B + 50);   // tope real de la entrada
   }).catch(finish);
   setTimeout(finish, 2400);   // pase lo que pase, la cabecera queda en pie a los 2,4 s
 }
