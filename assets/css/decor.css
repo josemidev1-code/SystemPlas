@@ -95,3 +95,26 @@ html.js-decor :is(.section-head h2, .grid-h, .pdp-body-h, .band-row h2, .split-6
   html.m-enter:not(.m-enter-done) .pg-head[data-enter]:not(.is-in) .decor-ruler { scale: 1 !important; }
   html.js-decor :is(.section-head h2, .grid-h, .pdp-body-h, .band-row h2, .split-6 h2, main > .section h2)::before { scale: 1 !important; }
 }
+
+/* Entrada de páginas interiores (entrance.js): estados de espera.
+   Solo hasta m-enter-done: si el script no llega, todo se ve igual. El texto espera con opacidad 0
+   hasta que la entrada empieza (.is-entering) o termina (.is-in); la foto de la galería espera algo
+   más grande y recortada. Las primeras tarjetas del catálogo viven en otra sección (hermana de la
+   cabecera), así que las suelta una clase en <html>: page-entering al empezar, page-entered al acabar
+   o al saltarse la entrada. */
+@media screen and (prefers-reduced-motion: no-preference) {
+  html.m-enter:not(.m-enter-done) :is(.pg-head, .pdp)[data-enter]:not(.is-entering, .is-in)
+    :is(h1, .crumbs, .t-lead, .pdp-sub, .pdp-info > :not(h1), .thumbs) { opacity: 0; }
+  html.m-enter:not(.m-enter-done) .pdp[data-enter]:not(.is-entering, .is-in) .gallery-main img[data-gallery-main] {
+    scale: 1.04; clip-path: inset(2%);
+  }
+  html.m-enter:not(.m-enter-done):not(.page-entering, .page-entered):has(:is(.pg-head, .pdp)[data-enter])
+    .prod-grid > .card:nth-child(-n+8) { opacity: 0; }
+  /* la marca de 700 ms llegó antes que el script: todo aparece con un fundido */
+  html.m-enter.m-enter-done :is(.pg-head, .pdp)[data-enter]:not(.is-entering, .is-in)
+    :is(h1, .crumbs, .t-lead, .pdp-sub, .pdp-info > :not(h1), .thumbs),
+  html.m-enter.m-enter-done:not(.page-entering, .page-entered) .prod-grid > .card:nth-child(-n+8) { transition: opacity 400ms var(--decor-ease); }
+}
+/* Palabras del h1 en su máscara mientras dura la entrada (igual que motion.css con el h1 de la portada). */
+:is(.pg-head, .pdp)[data-enter] .m-w { display: inline-block; overflow: clip; vertical-align: top; padding-bottom: .12em; margin-bottom: -.12em; }
+:is(.pg-head, .pdp)[data-enter] .m-w__in { display: inline-block; }
