@@ -327,6 +327,9 @@ HOME_EXTRA = '''<script>document.documentElement.classList.add('mo-js');setTimeo
 <link rel="modulepreload" href="assets/moments/moments.js">
 <link rel="modulepreload" href="assets/moments/lib.js">
 <link rel="modulepreload" href="assets/moments/line-carries-colour/moment.js">
+<link rel="modulepreload" href="assets/moments/picture-develops/moment.js">
+<link rel="stylesheet" href="assets/backgrounds/backgrounds.css">
+<script src="assets/backgrounds/backgrounds.js"></script>
 '''
 
 def row_link(name, value, href):
@@ -394,7 +397,7 @@ write("index.html", head("System Plast: componentes para inyectoras de plástico
     </div>
   </section>
 
-  <section class="section" id="hrs" style="--hm: 2" aria-labelledby="hrs-h">
+  <section class="section bg-ruled" id="hrs" style="--hm: 2" aria-labelledby="hrs-h">
     <div class="wrap grid grid--top">
       <div class="span-5 stack-6">
         <div class="section-head">
@@ -451,7 +454,7 @@ write("index.html", head("System Plast: componentes para inyectoras de plástico
         <div class="span-4"><h3>Envío de recambios al extranjero</h3><p>Más de 50 clientes en automoción, electrodomésticos, dispositivos médicos y envases.</p></div>
         <div class="span-4"><h3>Cajas de control para su molde</h3><p>Fabricamos cajas de control de temperatura ajustadas a su molde y a su producción.</p></div>
       </div>
-      <div class="frame frame--photo fill plant-photo">
+      <div class="frame frame--photo fill plant-photo" data-moment="picture-develops" data-moment-opts='{{"look": "film"}}'>
         <img class="frame__img" src="assets/img/photo-f74695444.jpg" srcset="assets/img/photo-f74695444-500.jpg 500w, assets/img/photo-f74695444-960.jpg 960w, assets/img/photo-f74695444.jpg 1280w" sizes="(max-width: 1279px) 100vw, 1280px" width="1280" height="853" alt="Nave con una fila de inyectoras de plástico" loading="lazy" decoding="async" data-source="stand-in" data-subject="injection moulding hall">
       </div>
     </div>
@@ -615,7 +618,7 @@ body = page_head("Quiénes somos", "20 años desarrollando y distribuyendo soluc
     <p>En System Plast desarrollamos y distribuimos equipos para la industria del plástico: controladores de canal caliente, resistencias, garras EOAT y almacenaje de moldes.</p>
     <p>Con 20 años de experiencia y más de 50 clientes, acompañamos a cada fábrica antes, durante y después de la compra.</p>
   </div>
-  <div class="frame frame--photo about-photo"><img class="frame__img" src="assets/img/home-2.jpg" width="1000" height="1000" alt="Célula de inyección con robot de extracción" loading="lazy"></div>
+  <div class="frame frame--photo about-photo" data-moment="picture-develops" data-moment-opts='{{"look": "film"}}'><img class="frame__img" src="assets/img/home-2.jpg" width="1000" height="1000" alt="Célula de inyección con robot de extracción" loading="lazy"></div>
 </div></section>
 <section class="pg-section ground-surface"><div class="wrap split-6">
   <div class="stack-4"><h2>Liderazgo tecnológico</h2><p>Del equipo monozona al multizona y a los sistemas inteligentes: nuestros controladores de canal caliente usan algoritmos PID para un control estable, exacto y rápido de cada zona.</p></div>

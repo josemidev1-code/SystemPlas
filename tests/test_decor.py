@@ -31,5 +31,21 @@ class Cabeceras(Base):
         self.lacks('class="decor-grid"', page("index.html"))
 
 
+class Momentos(Base):
+    def test_planta_se_revela(self):
+        self.has('plant-photo" data-moment="picture-develops"', page("index.html"))
+
+    def test_empresa_se_revela(self):
+        self.has('about-photo" data-moment="picture-develops"', page("quienes-somos.html"))
+
+    def test_portada_dos_momentos_como_maximo(self):
+        self.assertEqual(page("index.html").count("data-moment="), 2)
+
+    def test_fondo_ruled_en_hrs(self):
+        html = page("index.html")
+        self.has('class="section bg-ruled" id="hrs"', html)
+        self.has('href="assets/backgrounds/backgrounds.css"', html)
+
+
 if __name__ == "__main__":
     unittest.main()
