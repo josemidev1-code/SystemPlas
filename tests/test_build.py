@@ -28,34 +28,45 @@ class Base(unittest.TestCase):
 
 class FotosRecortadas(Base):
     def test_tarjeta_usa_foto_sin_fondo(self):
-        self.has('src="assets/img/sin-fondo/eoat-3.png"', page("eoat-accesorio-robotica.html"))
+        self.has('src="assets/img/web/sin-fondo/eoat-3.jpg"', page("eoat-accesorio-robotica.html"))
 
     def test_galeria_ficha_usa_foto_sin_fondo(self):
-        self.has("assets/img/sin-fondo/p/serie-mtc-b-1.png", page("serie-mtc-b.html"))
+        self.has('src="assets/img/web/sin-fondo/p/serie-mtc-b-1.jpg"', page("serie-mtc-b.html"))
 
     def test_sin_recorte_usa_original(self):
         html = page("index.html")
-        self.has('src="assets/img/logo.png"', html)
-        self.lacks("sin-fondo/logo.png", html)
+        self.has('src="assets/img/logo-320.png"', html)
+        self.lacks("sin-fondo/logo", html)
 
 
 class Tarjetas(Base):
     def cards(self, name):
-        return re.findall(r'<a class="product-card[^"]*"[^>]*>.*?</a>', page(name), re.S)
+        return re.findall(r'<a class="card card--open card--prod"[^>]*>.*?</a>', page(name), re.S)
 
-    def test_tarjeta_solo_foto_y_nombre(self):
+    def text_cards(self, name):
+        return re.findall(r'<a class="text-card"[^>]*>.*?</a>', page(name), re.S)
+
+    def test_tarjeta_foto_nombre_y_una_linea(self):
+        # Desde el rediseño (9243c31) la tarjeta es foto, nombre y como mucho una línea debajo
         cards = self.cards("eoat-accesorio-robotica.html")
         self.assertEqual(len(cards), 10)
         for c in cards:
-            self.lacks("<p>", c)
+            self.has('<img class="frame__img"', c)
+            self.has("<h3>", c)
+            self.assertLessEqual(c.count("<p>"), 1)
             self.lacks('class="tag', c)
             self.lacks('class="badge', c)
 
-    def test_producto_sin_foto_muestra_icono(self):
-        self.assertTrue(any("thumb-placeholder" in c for c in self.cards("estanterias-moldes.html")))
+    def test_producto_sin_foto_es_tarjeta_de_texto(self):
+        # Estanterías no tiene fotos: cada producto es una tarjeta de texto, sin marco de foto vacío
+        html = page("estanterias-moldes.html")
+        self.assertEqual(len(self.text_cards("estanterias-moldes.html")), 10)
+        self.lacks('class="card card--open card--prod"', html)
 
     def test_producto_sin_ficha_enlaza_a_contacto(self):
-        self.assertTrue(any('href="contacto.html?producto=' in c for c in self.cards("estanterias-moldes.html")))
+        eoat = self.cards("eoat-accesorio-robotica.html")
+        self.assertTrue(any('href="contacto.html?producto=' in c for c in eoat))
+        self.assertTrue(all('href="contacto.html?producto=' in c for c in self.text_cards("estanterias-moldes.html")))
 
     def test_categoria_sin_contadores_en_pestanas(self):
         self.lacks('class="count"', page("eoat-accesorio-robotica.html"))
@@ -73,9 +84,17 @@ class SinAnimacion(Base):
             with open(f, encoding="utf-8") as fh:
                 self.assertNotRegex(fh.read(), r'class="[^"]*\breveal\b', os.path.basename(f))
 
-    def test_js_sin_observer(self):
-        with open(os.path.join(ROOT, "assets/js/main.js"), encoding="utf-8") as fh:
-            self.lacks("IntersectionObserver", fh.read())
+    def test_js_no_revela_contenido_al_hacer_scroll(self):
+        # main.js ya no existe. El único IntersectionObserver de la web propia es el de entrance.js,
+        # que solo dibuja la línea decorativa de los titulares (decor-line--in), nunca muestra texto.
+        for f in glob.glob(os.path.join(ROOT, "assets/js/*.js")):
+            with open(f, encoding="utf-8") as fh:
+                src = fh.read()
+            if os.path.basename(f) == "entrance.js":
+                self.has("decor-line--in", src)
+                self.assertNotRegex(src, r"\breveal\b")  # la clase de aparición antigua (pagereveal no cuenta)
+            else:
+                self.lacks("IntersectionObserver", src)
 
 
 if __name__ == "__main__":
