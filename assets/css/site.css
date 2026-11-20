@@ -301,3 +301,7 @@
 
 /* Campo trampa anti-spam del formulario */
 .hp { position: absolute !important; left: -9999px; width: 1px; height: 1px; opacity: 0; }
+
+/* La pausa del vídeo de la portada sube por encima del botón flotante de WhatsApp, que ocupa la esquina */
+.hero .hero-pause { bottom: 76px; }
+@media (max-width: 1023px) { .hero .hero-pause { top: 12px; bottom: auto; } }
