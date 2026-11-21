@@ -77,3 +77,4 @@ if (form) {
   if (cat && sel) [...sel.options].forEach((o) => { if (o.text === cat) sel.value = o.value; });
   if (prod) form.querySelector('#f-msg').value = `Me interesa recibir presupuesto de: ${prod}.\n\n`;
 }
+

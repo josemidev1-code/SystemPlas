@@ -85,12 +85,16 @@ class SinAnimacion(Base):
                 self.assertNotRegex(fh.read(), r'class="[^"]*\breveal\b', os.path.basename(f))
 
     def test_js_no_revela_contenido_al_hacer_scroll(self):
-        # main.js ya no existe. El único IntersectionObserver de la web propia es el de entrance.js,
-        # que solo dibuja la línea decorativa de los titulares (decor-line--in), nunca muestra texto.
+        # main.js ya no existe. Los únicos IntersectionObserver de la web propia son el de entrance.js
+        # (la línea decorativa de los titulares) y el de home-motion.js (emblemas y cifras); ninguno oculta texto.
         for f in glob.glob(os.path.join(ROOT, "assets/js/*.js")):
             with open(f, encoding="utf-8") as fh:
                 src = fh.read()
-            if os.path.basename(f) == "entrance.js":
+            if os.path.basename(f) == "home-motion.js":
+                # portada: traza los emblemas (decorativos) y cuenta las cifras (siempre con número); no oculta texto
+                self.assertNotRegex(src, r"\breveal\b")
+                self.lacks("visibility", src)
+            elif os.path.basename(f) == "entrance.js":
                 self.has("decor-line--in", src)
                 self.assertNotRegex(src, r"\breveal\b")  # la clase de aparición antigua (pagereveal no cuenta)
             else:

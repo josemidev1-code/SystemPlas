@@ -29,6 +29,7 @@ WA_TEXT = "Hola, quiero información sobre sus productos (System Plast)."
 
 ICON = {
  "wa": '<svg viewBox="0 0 32 32" aria-hidden="true" width="18" height="18"><path fill="currentColor" d="M16 3a13 13 0 0 0-11.2 19.6L3 29l6.6-1.7A13 13 0 1 0 16 3zm0 23.6a10.6 10.6 0 0 1-5.4-1.5l-.4-.2-3.9 1 1-3.8-.2-.4A10.6 10.6 0 1 1 16 26.6zm5.8-7.9c-.3-.2-1.9-.9-2.2-1s-.5-.2-.7.2-.8 1-1 1.2-.4.2-.7.1a8.7 8.7 0 0 1-4.3-3.8c-.3-.6.3-.5.9-1.7a.6.6 0 0 0 0-.5l-1-2.4c-.3-.6-.5-.5-.7-.5h-.6a1.2 1.2 0 0 0-.9.4 3.7 3.7 0 0 0-1.1 2.7 6.4 6.4 0 0 0 1.3 3.4 14.7 14.7 0 0 0 5.7 5c2.1.9 2.9 1 4 .8a3.4 3.4 0 0 0 2.2-1.6 2.8 2.8 0 0 0 .2-1.6c0-.2-.3-.3-.6-.5z"/></svg>',
+ "phone": '<svg viewBox="0 0 24 24" aria-hidden="true" width="18" height="18"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" d="M5 3.5h3.2l1.6 4-2 1.3a11 11 0 0 0 5.4 5.4l1.3-2 4 1.6V17a2.5 2.5 0 0 1-2.7 2.5A16 16 0 0 1 2.5 6.2 2.5 2.5 0 0 1 5 3.5z"/></svg>',
  "linkedin": '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9h4v12H3zm7 0h3.8v1.7h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1V21h-4v-5.6c0-1.34-.02-3.06-1.86-3.06-1.87 0-2.15 1.46-2.15 2.96V21h-4z"/></svg>',
 }
 # Emblemas de servicio: marco octogonal grueso en dos tonos de verde petróleo, interior blanco y
@@ -338,6 +339,11 @@ def footer(close_line="Respuesta y envío de recambios en 12 a 24 horas.", scrip
   </div>
 </footer>
 <a class="wa-float" href="https://wa.me/{TEL[1:]}?text={quote(WA_TEXT)}" target="_blank" rel="noopener" aria-label="Escribir por WhatsApp">{ICON["wa"]}<span>WhatsApp</span></a>
+<nav class="actionbar" aria-label="Acciones rápidas">
+  <a class="btn btn--secondary actionbar__call" href="tel:{TEL}" aria-label="Llamar">{ICON["phone"]}<span>Llamar</span></a>
+  <a class="btn btn--secondary" href="https://wa.me/{TEL[1:]}?text={quote(WA_TEXT)}" target="_blank" rel="noopener">{ICON["wa"]}<span>WhatsApp</span></a>
+  <a class="btn btn--primary" href="contacto.html">Presupuesto</a>
+</nav>
 <script type="module" src="assets/system.js"></script>
 <script type="module" src="assets/motion/motion.js"></script>
 <script type="module" src="assets/layout/layout.js"></script>
@@ -460,10 +466,10 @@ write("index.html", head("System Plast: componentes para inyectoras de plástico
       <h2 id="empresa-h">20 años al lado de la inyección de plástico</h2>
       <p class="intro__text">Desarrollamos y distribuimos <strong>equipos de control de temperatura</strong> y <strong>componentes para inyectoras</strong>: controladores de canal caliente, resistencias fabricadas a medida, garras EOAT y almacenaje de moldes. Le asesoramos <strong>antes, durante y después de la compra</strong>.</p>
       <ul class="stats">
-        <li><strong>20</strong><span>años de experiencia</span></li>
-        <li><strong>+50</strong><span>clientes industriales</span></li>
-        <li><strong>128</strong><span>zonas por controlador</span></li>
-        <li><strong>24 h</strong><span>para enviar recambios</span></li>
+        <li><strong data-count="20">20</strong><span>años de experiencia</span></li>
+        <li><strong data-count="50" data-prefix="+">+50</strong><span>clientes industriales</span></li>
+        <li><strong data-count="128">128</strong><span>zonas por controlador</span></li>
+        <li><strong data-count="24" data-suffix=" h">24 h</strong><span>para enviar recambios</span></li>
       </ul>
       <div class="logos" aria-label="Algunos clientes">{HOME_LOGOS}</div>
     </div>
@@ -553,7 +559,7 @@ write("index.html", head("System Plast: componentes para inyectoras de plástico
     </div>
   </section>
 </main>
-''' + footer(scripts='<script type="module" src="assets/js/site.js"></script>\n'))
+''' + footer(scripts='<script type="module" src="assets/js/site.js"></script>\n<script type="module" src="assets/js/home-motion.js"></script>\n'))
 
 SITE_JS = '<script type="module" src="assets/js/site.js"></script>\n'
 

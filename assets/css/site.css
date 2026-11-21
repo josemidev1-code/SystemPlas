@@ -564,3 +564,53 @@ a:hover .more .m-arrow { translate: 3px 0; }
   footer.closing { padding-bottom: var(--padb); min-height: 100svh; display: flex; flex-direction: column; }
   footer.closing > .wrap { flex: 1 0 auto; grid-template-rows: 1fr auto; }
 }
+
+/* ------------------------------------------------ mobile: the action bar at the thumb, no floating button over the text */
+@media (max-width: 639px) {
+  body:has(> nav.actionbar) .wa-float { display: none; }
+  .actionbar { gap: 8px; padding-inline: 12px; }
+  .actionbar .btn { height: 46px; padding-inline: 8px; gap: 6px; font-size: 15px; }
+  .actionbar .btn svg { width: 18px; height: 18px; flex: none; }
+  .actionbar .btn--secondary { background: #fff; }
+  .actionbar a[href^="https://wa.me"] svg { color: #17784f; }
+}
+/* touch: a press answers at once (no hover on a phone) */
+@media (hover: none) {
+  :is(.cat-card, .news-card2, .svc__item, .text-card, .card--prod):active { transform: scale(.985); transition: transform .12s ease-out; }
+}
+/* the range cards: the product grows a touch inside its white panel on hover */
+@media (hover: hover) {
+  #catalogo .cat-card > .panel > .frame__img { transition: transform .5s cubic-bezier(.16, 1, .3, 1); }
+  #catalogo .cat-card:hover > .panel > .frame__img { transform: scale(1.05); }
+  .svc__item { transition: box-shadow .25s; }
+  .svc__item:hover { box-shadow: 0 2px 4px rgb(1 44 61 / .08), 0 16px 36px rgb(1 44 61 / .12); }
+}
+/* the service emblems trace in: the frame is unmasked top to bottom, the pictogram settles, one tile after another */
+.svc.is-armed .emb__frame { clip-path: inset(0 0 100% 0); }
+.svc.is-armed .emb__in, .svc.is-armed .emb__picto { opacity: 0; transform: scale(.82); transform-origin: 60px 60px; }
+.svc.is-in .emb__frame { clip-path: inset(0 0 0 0); transition: clip-path .7s cubic-bezier(.16, 1, .3, 1); }
+.svc.is-in .emb__in, .svc.is-in .emb__picto { opacity: 1; transform: none; transition: opacity .45s ease-out .35s, transform .6s cubic-bezier(.16, 1, .3, 1) .35s; }
+.svc.is-in .svc__item:nth-child(2) :is(.emb__frame, .emb__in, .emb__picto) { transition-delay: .12s, .12s; }
+.svc.is-in .svc__item:nth-child(2) :is(.emb__in, .emb__picto) { transition-delay: .47s, .47s; }
+.svc.is-in .svc__item:nth-child(3) .emb__frame { transition-delay: .24s; }
+.svc.is-in .svc__item:nth-child(3) :is(.emb__in, .emb__picto) { transition-delay: .59s, .59s; }
+.svc.is-in .svc__item:nth-child(4) .emb__frame { transition-delay: .36s; }
+.svc.is-in .svc__item:nth-child(4) :is(.emb__in, .emb__picto) { transition-delay: .71s, .71s; }
+.stats strong { font-variant-numeric: tabular-nums; display: inline-block; }
+@media (prefers-reduced-motion: reduce) {
+  .svc.is-armed :is(.emb__frame, .emb__in, .emb__picto) { clip-path: none; opacity: 1; transform: none; }
+  :is(.cat-card, .news-card2, .svc__item, .text-card, .card--prod):active { transform: none; }
+  #catalogo .cat-card:hover > .panel > .frame__img { transform: none; }
+}
+/* phone: the series rows keep each value on one line, a touch smaller */
+@media (max-width: 639px) { .rows--links .rows__value { white-space: nowrap; font-size: 14.5px; } .rows--links .rows__name { padding-right: 12px; } }
+@media (max-width: 639px) {
+  .actionbar { grid-auto-flow: row; grid-template-columns: auto minmax(0, 1fr) minmax(0, 1.15fr); }
+  .actionbar .btn { min-width: 0; white-space: nowrap; }
+  .rows--links .rows__link { min-height: 44px; }
+}
+@media (max-width: 400px) {
+  .actionbar__call { width: 46px; padding: 0; }
+  .actionbar__call span { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+}
+@media (max-width: 400px) { .rows--links .rows__value { white-space: normal; } }
