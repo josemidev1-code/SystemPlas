@@ -502,3 +502,65 @@ footer.closing { padding-top: var(--nav); }
 .emb__picto .d { fill: #037c75; }
 @media (max-width: 1023px) { .svc__badge { width: 96px; height: 96px; } }
 @media (prefers-reduced-motion: reduce) { .svc__badge { transition: none; } }
+/* ------------------------------------------------ fixes at the in-between widths */
+@media (min-width: 1024px) { .hero--photo[data-tone="dark"] h1 { margin-inline: auto; } }
+/* the range cards never squeezed into the screen: the row takes the height its cards need */
+#catalogo .cat-row.fill { flex: none; height: auto; }
+main > #catalogo { min-height: calc(100svh - 0px); height: auto; }
+/* logos: one row from 1024 */
+@media (min-width: 1024px) and (max-width: 1279px) { .logos img { width: 112px; height: 56px; } .logos { gap: 12px; } }
+/* services under 1280: four horizontal tiles, two by two (one column on a phone) */
+@media (max-width: 1279px) {
+  .svc { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .svc__item { display: grid; grid-template-columns: auto 1fr; grid-template-rows: auto 1fr auto; column-gap: var(--s-5); row-gap: var(--s-2);
+    align-items: start; text-align: left; padding: var(--s-5); }
+  .svc__badge { grid-row: 1 / -1; width: 88px; height: 88px; margin: 0; }
+  .svc__item h3 { align-self: end; }
+  .svc__item p { margin: 0; }
+  .svc__item .btn { justify-self: start; margin-top: var(--s-2); }
+}
+@media (max-width: 639px) {
+  .svc { grid-template-columns: 1fr; gap: 12px; }
+  .svc__item { column-gap: var(--s-4); padding: var(--s-4); }
+  .svc__badge { width: 64px; height: 64px; }
+  .svc__item p { font-size: 15px; }
+}
+@media (min-width: 640px) { main > #hrs { min-height: 100svh; } }
+/* range cards: every picture the same square, so the four bodies line up */
+@media (min-width: 640px) { #catalogo .cat-card > .panel { flex: none; aspect-ratio: 1; min-height: 0; height: auto; } #catalogo .cat-card__body { flex: 1; } #catalogo .cat-card__body .more { margin-top: auto; } }
+/* the video's pause button: a white disc with a dark mark on the dark hero */
+.hero--photo[data-tone="dark"] .hero-pause { color: var(--p-ink); --ink: var(--p-ink); }
+
+/* ------------------------------------------------ final polish */
+/* the close band is never cut: the footer grows with its band and links at every height */
+footer.closing { height: auto; min-height: 0; }
+footer.closing > .wrap { height: auto; grid-template-rows: auto auto; }
+footer.closing .closing__cta.close--band { min-height: 0; }
+/* the "more" arrow is the site's drawn arrow, nudged on hover */
+.more::after { content: none; }
+.more .m-arrow { stroke: currentColor; transition: translate .2s cubic-bezier(.2,.7,.2,1); }
+a:hover .more .m-arrow { translate: 3px 0; }
+/* shelving: the client's photographs, two side by side */
+.est-photos { padding-block: var(--s-8) 0; }
+.est-pair { display: grid; grid-template-columns: 1fr 1fr; gap: var(--gutter); }
+.est-ph { margin: 0; border-radius: var(--r-lg); overflow: hidden; aspect-ratio: 4 / 3; background: var(--p-surface); }
+.est-ph img { width: 100%; height: 100%; object-fit: cover; display: block; }
+@media (max-width: 767px) { .est-pair { grid-template-columns: 1fr; } .est-photos { padding-block: var(--s-6) 0; } }
+/* short screens: sections grow with their content instead of a fixed screen, and centring never pushes a heading under the header */
+@media (min-width: 1280px) { main > :is(section, .section):not(.hero) { height: auto; min-height: calc(var(--h, 1) * 100svh); } }
+@media (min-width: 1024px) {
+  #servicio > .wrap, #empresa > .wrap, main > #servicio { justify-content: safe center; }
+  main > #servicio { padding-bottom: var(--padb); }
+}
+.news-card2__body h2.card__title { font: 500 var(--t-card)/1.3 var(--font-text); color: var(--p-ink); margin-bottom: auto; }
+@media (max-width: 1023px) { .news-row--page .news-card2:nth-child(3) { display: flex; } }
+.est-photos { padding-bottom: var(--s-7); }
+@media (max-width: 767px) { .est-photos { padding-bottom: var(--s-5); } }
+/* product cut-outs melt into their white panel (an off-white photo ground shows no box) */
+.panel.panel--white > .frame__img, .frame--white > .frame__img, .gallery-main img { mix-blend-mode: multiply; }
+/* the close and the footer fit one desktop screen */
+@media (min-width: 1024px) { footer.closing { padding-bottom: var(--s-6); } .closing__cta.close--band { padding-block: clamp(48px, 4.5vw, 72px); } }
+@media (min-width: 1024px) {
+  footer.closing { padding-bottom: var(--padb); min-height: 100svh; display: flex; flex-direction: column; }
+  footer.closing > .wrap { flex: 1 0 auto; grid-template-rows: 1fr auto; }
+}

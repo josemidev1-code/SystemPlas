@@ -116,11 +116,10 @@ NEWS = [
  ("agencia-8.jpg", "Informe del mercado mundial de envases biodegradables y su crecimiento proyectado", "Mordor Intelligence", "https://www.mordorintelligence.com/es/industry-reports/gobal-biodegradable-packaging-solutions-market-industry"),
 ]
 
-# Foto de tarjeta de categoría. El cliente no tiene foto de racks: la de estanterías es de stock
-# (Wikimedia Commons, CC BY 4.0), recortada sobre blanco como las demás (web/sin-fondo/est-1.jpg)
+# Foto de tarjeta de categoría. Estanterías: foto del cliente (2026-11-21), estantería sobre blanco (web/sin-fondo/est-1.jpg)
 CAT_IMG = {"hrs-controladores": "hrs-1.png", "resistencias-electricas": "res-2.png",
            "eoat-accesorio-robotica": "eoat-3.png", "estanterias-moldes": "est-1.png"}
-STOCK_CAT = {"estanterias-moldes"}
+STOCK_CAT = set()
 CAT_LINE = {"hrs-controladores": "Monozona, multizona y secuencia para valve gate.",
             "resistencias-electricas": "Mica, aluminio, cobre, cerámica e infrarrojos.",
             "eoat-accesorio-robotica": "Pinzas, ventosas, cambiadores y perfilería.",
@@ -314,7 +313,7 @@ def footer(close_line="Respuesta y envío de recambios en 12 a 24 horas.", scrip
     return f'''<footer class="footer closing" id="contact" aria-labelledby="close-h">
   <div class="wrap">
     <div class="closing__cta close--word close--band">
-      <img class="close__bg" src="assets/img/photo-f74695444-960.jpg" srcset="assets/img/photo-f74695444-960.jpg 960w, assets/img/photo-f74695444.jpg 1280w" sizes="100vw" width="1280" height="853" alt="" loading="lazy" decoding="async" data-source="stand-in" data-subject="injection moulding hall">
+      <img class="close__bg" src="assets/img/photo-f74695444.jpg" width="1280" height="853" alt="" loading="lazy" decoding="async" data-source="stand-in" data-subject="injection moulding hall">
       <div class="close__in">
         <h2 id="close-h">Presupuesto para su línea de inyección</h2><p class="t-lead">{E(close_line)}</p>
         <div class="btn-row"><a class="btn btn--primary" href="contacto.html">{MAIN_ACTION}{ARROW}</a><a class="btn btn--secondary" href="tel:{TEL}">Llamar al {TEL_TXT}</a></div>
@@ -401,14 +400,14 @@ def row_link(name, value, href):
 
 home_cards = "".join(f'''<a class="card card--open card--prod cat-card span-3" href="{c["slug"]}.html">
           <div class="panel{" panel--white" if is_cutout(CAT_IMG[c["slug"]]) else ""}"><img class="frame__img" src="{img_src(CAT_IMG[c["slug"]])}" {wh(img_src(CAT_IMG[c["slug"]]))} alt="{E(c["name"])}" loading="lazy" data-source="{"stand-in" if c["slug"] in STOCK_CAT or not is_cutout(CAT_IMG[c["slug"]]) else "client"}" data-subject="{"product" if is_cutout(CAT_IMG[c["slug"]]) else "injection mould"}"></div>
-          <div class="cat-card__body"><h3>{E(c["name"])}</h3><p>{E(CAT_LINE[c["slug"]])}</p><span class="more">Ver productos</span></div>
+          <div class="cat-card__body"><h3>{E(c["name"])}</h3><p>{E(CAT_LINE[c["slug"]])}</p><span class="more">Ver productos{ARROW}</span></div>
         </a>''' for n, c in enumerate(CATS))
 
 HOME_LOGOS = "".join(f'<img src="assets/img/industria-{i}.png" alt="{n}" width="300" height="300" loading="lazy">' for i, n in
                      [(1, "Samsung"), (2, "Midea"), (3, "Valeo"), (4, "Gree"), (5, "Hasco"), (6, "Sharp")])
 HOME_NEWS = "".join(f'''<a class="news-card2" href="{u}" target="_blank" rel="noopener">
           <span class="news-card2__img"><img src="assets/img/{i}" alt="" loading="lazy"></span>
-          <span class="news-card2__body"><span class="t-label">{E(src)}</span><h3>{E(t)}</h3><span class="more">Leer la noticia</span></span>
+          <span class="news-card2__body"><span class="t-label">{E(src)}</span><h3>{E(t)}</h3><span class="more">Leer la noticia{ARROW}</span></span>
         </a>''' for i, t, src, u in NEWS)
 
 hrs_rows = "".join(row_link(n, v, f"{s}.html") for n, v, s in [
@@ -458,7 +457,6 @@ write("index.html", head("System Plast: componentes para inyectoras de plástico
 
   <section class="section intro" id="empresa" aria-labelledby="empresa-h">
     <div class="wrap intro__in">
-      <p class="eyebrow">System Plast · Mutxamel, Alicante</p>
       <h2 id="empresa-h">20 años al lado de la inyección de plástico</h2>
       <p class="intro__text">Desarrollamos y distribuimos <strong>equipos de control de temperatura</strong> y <strong>componentes para inyectoras</strong>: controladores de canal caliente, resistencias fabricadas a medida, garras EOAT y almacenaje de moldes. Le asesoramos <strong>antes, durante y después de la compra</strong>.</p>
       <ul class="stats">
@@ -692,7 +690,14 @@ for c in CATS:
     else:
         grid = '<div class="text-grid">' + "".join(
             f'<a class="text-card" href="{contact_url(n, c["name"])}"><h3>{E(n)}</h3><p>{E(d)}</p><span class="link">Pedir información</span></a>' for n, i, sl, d in c["items"]) + "</div>"
-    body = page_head(t, s, [("Productos", "productos.html"), (c["name"], None)], video=True) + cat_tabs(c["slug"]) + \
+    photos = ""
+    if c["slug"] == "estanterias-moldes":
+        photos = '''<section class="pg-section est-photos"><div class="wrap est-pair">
+  <figure class="est-ph"><img src="assets/img/est-planta.jpg" srcset="assets/img/est-planta-640.jpg 640w, assets/img/est-planta.jpg 1280w" sizes="(max-width: 767px) 100vw, 50vw" width="1280" height="853" alt="Estantería de cajones extraíbles con moldes de inyección en una nave" loading="lazy" decoding="async"></figure>
+  <figure class="est-ph"><img src="assets/img/est-moldes.jpg" srcset="assets/img/est-moldes-640.jpg 640w, assets/img/est-moldes.jpg 1280w" sizes="(max-width: 767px) 100vw, 50vw" width="1280" height="960" alt="Estantería para moldes cargada con moldes en sus tres niveles" loading="lazy" decoding="async"></figure>
+</div></section>
+'''
+    body = page_head(t, s, [("Productos", "productos.html"), (c["name"], None)], video=True) + cat_tabs(c["slug"]) + photos + \
         f'<section class="pg-section"><div class="wrap"><h2 class="grid-h">{len(c["items"])} productos de {E(c["name"])}</h2>{grid}</div></section>\n' + band(bt, bx, "Pedir el catálogo completo", "contacto.html")
     write(f"{c['slug']}.html", inner(f"{c['name']} | System Plast", c["short"], "productos.html", body))
 
@@ -732,9 +737,9 @@ write("quienes-somos.html", inner("Quiénes somos | System Plast", "20 años des
 # ---------------------------------------------------------------------------
 # Noticias
 # ---------------------------------------------------------------------------
-news_html = "".join(f'<a class="card card--open card--prod news-card" href="{u}" target="_blank" rel="noopener"><div class="panel"><img class="frame__img" src="assets/img/{i}" alt="" loading="lazy"></div><p class="t-label muted">{E(src)}</p><h2 class="card__title">{E(t)}</h2></a>' for i, t, src, u in NEWS)
+news_html = "".join(f'''<a class="news-card2" href="{u}" target="_blank" rel="noopener"><span class="news-card2__img"><img src="assets/img/{i}" alt="" loading="lazy"></span><span class="news-card2__body"><span class="t-label">{E(src)}</span><h2 class="card__title">{E(t)}</h2><span class="more">Leer la noticia{ARROW}</span></span></a>''' for i, t, src, u in NEWS)
 body = page_head("Noticias del sector", "Actualidad y tendencias de la industria del plástico.", [("Noticias", None)]) + \
-    f'<section class="pg-section"><div class="wrap"><div class="news-grid">{news_html}</div></div></section>\n'
+    f'<section class="pg-section"><div class="wrap"><div class="news-row news-row--page">{news_html}</div></div></section>\n'
 write("noticias.html", inner("Noticias | System Plast", "Noticias y tendencias de la industria del plástico.", "noticias.html", body))
 
 # ---------------------------------------------------------------------------
@@ -778,7 +783,6 @@ body = page_head("Créditos", "Material de terceros usado en esta web.", [("Cré
   <ul class="rows rows--plain">
     <li><span>Vídeo de la portada: «Automated Manufacturing Equipment in Action», Pexels, vídeo 32386599, <a class="link" href="https://www.pexels.com/license/">licencia Pexels</a>.</span></li>
     <li><span>Nave de inyectoras: «Inside the factory», Orionpenindia, Wikimedia Commons, <a class="link" href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>.</span></li>
-    <li><span>Estanterías: «Steckregal Super Schwerlastregal Industrie», Patrick.thm, <a class="link" href="https://commons.wikimedia.org/wiki/File:Steckregal_Super_Schwerlastregal_Industrie.webp">Wikimedia Commons</a>, <a class="link" href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>; recortada y sobre fondo blanco.</span></li>
     <li><span>Las marcas y logotipos de clientes pertenecen a sus propietarios.</span></li>
   </ul>
 </div></section>
