@@ -23,10 +23,8 @@ if (!reduceMotion.matches && 'IntersectionObserver' in window) {
       requestAnimationFrame(tick);
     });
   }
-  // los emblemas de servicio se trazan: el marco se revela de arriba abajo y el pictograma llega después
-  const svc = document.querySelector('.svc');
-  if (svc) {
-    svc.classList.add('is-armed');
-    once([svc], (el) => el.classList.add('is-in'), { threshold: 0.25 });
-  }
+  // los emblemas (líneas de producto y servicios) se trazan: el marco se revela de arriba abajo y el dibujo llega después
+  const sets = [...document.querySelectorAll('.emb-set')];
+  sets.forEach((el) => el.classList.add('is-armed'));
+  once(sets, (el) => el.classList.add('is-in'), { threshold: 0.25 });
 }

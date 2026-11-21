@@ -41,12 +41,12 @@ class Momentos(Base):
     def test_portada_dos_momentos_como_maximo(self):
         self.assertEqual(page("index.html").count("data-moment="), 2)
 
-    def test_fondo_ruled_en_hrs(self):
+    def test_portada_sin_seccion_de_controladores(self):
+        # el cliente (2026-11-21): la sección de controladores sobra en la portada; su tarjeta y su página siguen
         html = page("index.html")
-        self.has('class="section bg-ruled" id="hrs"', html)
-        self.has('href="assets/backgrounds/backgrounds.css"', html)
-        self.has('<script src="assets/backgrounds/backgrounds.js"></script>', html)
-
+        self.lacks('id="hrs"', html)
+        self.has('href="hrs-controladores.html"', html)
+        self.lacks('assets/backgrounds/backgrounds.css', html)
 
 if __name__ == "__main__":
     unittest.main()

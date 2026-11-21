@@ -90,7 +90,11 @@ class SinAnimacion(Base):
         for f in glob.glob(os.path.join(ROOT, "assets/js/*.js")):
             with open(f, encoding="utf-8") as fh:
                 src = fh.read()
-            if os.path.basename(f) == "home-motion.js":
+            if os.path.basename(f) == "reels.js":
+                # vídeos EOAT: solo los pone en marcha o los pausa según estén en pantalla; no oculta texto
+                self.assertNotRegex(src, r"\breveal\b")
+                self.lacks("visibility", src)
+            elif os.path.basename(f) == "home-motion.js":
                 # portada: traza los emblemas (decorativos) y cuenta las cifras (siempre con número); no oculta texto
                 self.assertNotRegex(src, r"\breveal\b")
                 self.lacks("visibility", src)
