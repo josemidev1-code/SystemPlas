@@ -32,8 +32,8 @@ class Cabeceras(Base):
 
 
 class Momentos(Base):
-    def test_planta_se_revela(self):
-        self.has('plant-photo" data-moment="picture-develops"', page("index.html"))
+    def test_robot_se_revela(self):
+        self.has('eoat-photo" data-moment="picture-develops"', page("index.html"))
 
     def test_empresa_se_revela(self):
         self.has('about-photo" data-moment="picture-develops"', page("quienes-somos.html"))

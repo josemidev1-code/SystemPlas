@@ -57,6 +57,12 @@
 </head>
 <body>
 <header class="nav">
+  <div class="nav__top"><div class="wrap nav__top-in">
+    <span>Pol. Ind. Riodil, 1 · 03110 Mutxamel, Alicante</span>
+    <a href="tel:+34627967729">(+34) 627 96 77 29</a>
+    <a href="mailto:info@systemplas.com">info@systemplas.com</a>
+    <a class="nav__top-in-social" href="https://www.linkedin.com/company/system-plas/" target="_blank" rel="noopener" aria-label="LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9h4v12H3zm7 0h3.8v1.7h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1V21h-4v-5.6c0-1.34-.02-3.06-1.86-3.06-1.87 0-2.15 1.46-2.15 2.96V21h-4z"/></svg></a>
+  </div></div>
   <div class="wrap nav__bar">
     <a class="skip-link" href="#top">Saltar al contenido</a>
     <a class="nav__logo" href="index.html"><img src="assets/img/logo-320.png" alt="System Plast" width="320" height="139"></a>
@@ -96,7 +102,7 @@
      palette: colores del logo (start.mjs brand), type plex, radius sharp
      moments: line-carries-colour en #resistencias (la franja oscura) -->
 <main id="top">
-  <section class="hero hero--photo" data-enter data-calm="left" data-box="none" data-tone="light" aria-labelledby="hero-h">
+  <section class="hero hero--photo" data-enter data-calm="left" data-box="none" data-tone="dark" aria-labelledby="hero-h">
     <!-- VÍDEO: Pexels 32386599 (licencia Pexels, uso libre). Se cambia aquí por el vídeo propio del cliente. -->
     <video class="hero__bg" autoplay muted loop playsinline preload="metadata" poster="assets/video/maquina-poster.jpg" aria-hidden="true" style="--ly-pos: 70% 50%; --ly-pos-phone: 70% 50%" data-source="stand-in" data-subject="vacuum gripper on an automated line">
       <source src="assets/video/maquina-640.mp4" type="video/mp4" media="(max-width: 639px)">
@@ -112,25 +118,40 @@
     </div></div>
   </section>
 
-  <section class="section" id="catalogo" aria-labelledby="catalogo-h">
+  <section class="section intro" id="empresa" aria-labelledby="empresa-h">
+    <div class="wrap intro__in">
+      <p class="eyebrow">System Plast · Mutxamel, Alicante</p>
+      <h2 id="empresa-h">20 años al lado de la inyección de plástico</h2>
+      <p class="intro__text">Desarrollamos y distribuimos <strong>equipos de control de temperatura</strong> y <strong>componentes para inyectoras</strong>: controladores de canal caliente, resistencias fabricadas a medida, garras EOAT y almacenaje de moldes. Le asesoramos <strong>antes, durante y después de la compra</strong>.</p>
+      <ul class="stats">
+        <li><strong>20</strong><span>años de experiencia</span></li>
+        <li><strong>+50</strong><span>clientes industriales</span></li>
+        <li><strong>128</strong><span>zonas por controlador</span></li>
+        <li><strong>24 h</strong><span>para enviar recambios</span></li>
+      </ul>
+      <div class="logos" aria-label="Algunos clientes"><img src="assets/img/industria-1.png" alt="Samsung" width="300" height="300" loading="lazy"><img src="assets/img/industria-2.png" alt="Midea" width="300" height="300" loading="lazy"><img src="assets/img/industria-3.png" alt="Valeo" width="300" height="300" loading="lazy"><img src="assets/img/industria-4.png" alt="Gree" width="300" height="300" loading="lazy"><img src="assets/img/industria-5.png" alt="Hasco" width="300" height="300" loading="lazy"><img src="assets/img/industria-6.png" alt="Sharp" width="300" height="300" loading="lazy"></div>
+    </div>
+  </section>
+
+  <section class="section ground-surface" id="catalogo" aria-labelledby="catalogo-h">
     <div class="wrap">
-      <div class="section-head section-head--row">
-        <h2 id="catalogo-h">Catálogo por línea de producto</h2>
-        <a class="link" href="productos.html">Ver el catálogo</a>
+      <div class="section-head section-head--center">
+        <h2 id="catalogo-h">Nuestras líneas de producto</h2>
+        <p>Cuatro gamas para la inyectora, el molde y el robot de extracción.</p>
       </div>
       <div class="grid fill cat-row">
-        <a class="card card--open card--prod cat-big span-6" href="hrs-controladores.html">
+        <a class="card card--open card--prod cat-card span-3" href="hrs-controladores.html">
           <div class="panel panel--white"><img class="frame__img" src="assets/img/web/sin-fondo/hrs-1.jpg" width="561" height="479" srcset="assets/img/web/sin-fondo/hrs-1-360.jpg 360w, assets/img/web/sin-fondo/hrs-1.jpg 561w" sizes="(max-width: 639px) 50vw, 40vw" alt="HRS Controladores" loading="lazy" data-source="client" data-subject="product"></div>
-          <h3>HRS Controladores</h3><p>Monozona, multizona y secuencia para valve gate.</p>
-        </a><a class="card card--open card--prod cat-small span-6 start-7" href="resistencias-electricas.html">
+          <div class="cat-card__body"><h3>HRS Controladores</h3><p>Monozona, multizona y secuencia para valve gate.</p><span class="more">Ver productos</span></div>
+        </a><a class="card card--open card--prod cat-card span-3" href="resistencias-electricas.html">
           <div class="panel panel--white"><img class="frame__img" src="assets/img/web/sin-fondo/res-2.jpg" width="610" height="445" srcset="assets/img/web/sin-fondo/res-2-360.jpg 360w, assets/img/web/sin-fondo/res-2.jpg 610w" sizes="(max-width: 639px) 50vw, 40vw" alt="Resistencias eléctricas" loading="lazy" data-source="client" data-subject="product"></div>
-          <h3>Resistencias eléctricas</h3><p>Mica, aluminio, cobre, cerámica e infrarrojos.</p>
-        </a><a class="card card--open card--prod cat-small span-6 start-7" href="eoat-accesorio-robotica.html">
+          <div class="cat-card__body"><h3>Resistencias eléctricas</h3><p>Mica, aluminio, cobre, cerámica e infrarrojos.</p><span class="more">Ver productos</span></div>
+        </a><a class="card card--open card--prod cat-card span-3" href="eoat-accesorio-robotica.html">
           <div class="panel panel--white"><img class="frame__img" src="assets/img/web/sin-fondo/eoat-3.jpg" width="503" height="318" srcset="assets/img/web/sin-fondo/eoat-3-360.jpg 360w, assets/img/web/sin-fondo/eoat-3.jpg 503w" sizes="(max-width: 639px) 50vw, 40vw" alt="EOAT accesorio robótica" loading="lazy" data-source="client" data-subject="product"></div>
-          <h3>EOAT accesorio robótica</h3><p>Pinzas, ventosas, cambiadores y perfilería.</p>
-        </a><a class="card card--open card--prod cat-small span-6 start-7" href="estanterias-moldes.html">
+          <div class="cat-card__body"><h3>EOAT accesorio robótica</h3><p>Pinzas, ventosas, cambiadores y perfilería.</p><span class="more">Ver productos</span></div>
+        </a><a class="card card--open card--prod cat-card span-3" href="estanterias-moldes.html">
           <div class="panel panel--white"><img class="frame__img" src="assets/img/web/sin-fondo/est-1.jpg" width="600" height="466" srcset="assets/img/web/sin-fondo/est-1-360.jpg 360w, assets/img/web/sin-fondo/est-1.jpg 600w" sizes="(max-width: 639px) 50vw, 40vw" alt="Estanterías moldes" loading="lazy" data-source="stand-in" data-subject="product"></div>
-          <h3>Estanterías moldes</h3><p>Racks, cajones extraíbles y carros para moldes.</p>
+          <div class="cat-card__body"><h3>Estanterías moldes</h3><p>Racks, cajones extraíbles y carros para moldes.</p><span class="more">Ver productos</span></div>
         </a>
       </div>
     </div>
@@ -176,7 +197,7 @@
         <ul class="rows rows--links"><li><a class="rows__link" href="cambiadores-rapidos-de-herramientas-quick-changers.html"><span class="rows__name">Cambiadores rápidos</span><span class="rows__value">Carga máxima 15 kg</span></a></li><li><a class="rows__link" href="pinzas-de-bebedero-sprue-grippers.html"><span class="rows__name">Pinzas de bebedero</span><span class="rows__value">Extracción de coladas</span></a></li><li><a class="rows__link" href="ventosas-de-vacio.html"><span class="rows__name">Ventosas de vacío</span><span class="rows__value">Silicona, NBR, poliuretano</span></a></li><li><a class="rows__link" href="pinzas-neumaticas-paralelas-y-angulares.html"><span class="rows__name">Pinzas neumáticas</span><span class="rows__value">Dos o tres dedos</span></a></li></ul>
         <a class="link" href="eoat-accesorio-robotica.html">Ver la gama EOAT</a>
       </div>
-      <a class="frame frame--photo span-6 start-7 eoat-photo" href="eoat-accesorio-robotica.html" aria-label="Componentes EOAT">
+      <a class="frame frame--photo span-6 start-7 eoat-photo" data-moment="picture-develops" data-moment-opts='{"look": "film"}' href="eoat-accesorio-robotica.html" aria-label="Componentes EOAT">
         <img class="frame__img" src="assets/img/home-2.jpg" width="1000" height="1000" alt="Robot de extracción junto a una inyectora, con garra montada" loading="lazy" data-source="client" data-subject="robot at injection machine">
       </a>
     </div>
@@ -184,27 +205,46 @@
 
   <section class="section ground-surface" id="servicio" aria-labelledby="servicio-h">
     <div class="wrap">
-      <div class="section-head section-head--row">
-        <h2 id="servicio-h">Recambios en 12 a 24 horas</h2>
-        <a class="link" href="quienes-somos.html">Conocer la empresa</a>
+      <div class="section-head section-head--center">
+        <h2 id="servicio-h">Servicios</h2>
+        <p>Le acompañamos desde la elección del equipo hasta el recambio urgente.</p>
       </div>
-      <div class="grid service-cols">
-        <div class="span-4"><h3>Asesoría para elegir controlador</h3><p>Le ayudamos a elegir la serie y la resistencia antes de la compra, y le atendemos después.</p></div>
-        <div class="span-4"><h3>Envío de recambios al extranjero</h3><p>Más de 50 clientes en automoción, electrodomésticos, dispositivos médicos y envases.</p></div>
-        <div class="span-4"><h3>Cajas de control para su molde</h3><p>Fabricamos cajas de control de temperatura ajustadas a su molde y a su producción.</p></div>
+      <div class="svc">
+        <div class="svc__item"><span class="svc__icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 13v-1a8 8 0 0 1 16 0v1"/><rect x="2.5" y="13" width="4" height="6" rx="1.5"/><rect x="17.5" y="13" width="4" height="6" rx="1.5"/><path d="M19.5 19v.5a2.5 2.5 0 0 1-2.5 2.5h-3"/></svg></span><h3>Asesoría técnica</h3><p>Le ayudamos a elegir la serie de controlador y la resistencia adecuadas antes de la compra.</p><a class="btn btn--secondary btn--sm" href="contacto.html">Consultar a un técnico</a></div>
+        <div class="svc__item"><span class="svc__icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2.5 6.5h11v9h-11z"/><path d="M13.5 9.5h4l3 3v3h-7"/><circle cx="6.5" cy="17.5" r="1.8"/><circle cx="17" cy="17.5" r="1.8"/></svg></span><h3>Recambios urgentes</h3><p>Stock en Mutxamel y envío de recambios en 12 a 24 horas para que su línea no pare.</p><a class="btn btn--secondary btn--sm" href="contacto.html">Pedir un recambio</a></div>
+        <div class="svc__item"><span class="svc__icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.7 6.3a4 4 0 0 0-5.3 5.3L3.5 17.5a1.8 1.8 0 0 0 2.5 2.5l5.9-5.9a4 4 0 0 0 5.3-5.3l-2.6 2.6-2.3-.3-.3-2.3z"/></svg></span><h3>Fabricación a medida</h3><p>Resistencias y cajas de control de temperatura ajustadas a su molde y a su producción.</p><a class="btn btn--secondary btn--sm" href="resistencias-electricas.html">Ver resistencias</a></div>
+        <div class="svc__item"><span class="svc__icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 3.8 5.6 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3z"/></svg></span><h3>Envío internacional</h3><p>Clientes en automoción, electrodomésticos, dispositivos médicos y envases fuera de España.</p><a class="btn btn--secondary btn--sm" href="quienes-somos.html">Conocer la empresa</a></div>
       </div>
-      <div class="frame frame--photo fill plant-photo" data-moment="picture-develops" data-moment-opts='{"look": "film"}'>
-        <img class="frame__img" src="assets/img/photo-f74695444.jpg" srcset="assets/img/photo-f74695444-500.jpg 500w, assets/img/photo-f74695444-960.jpg 960w, assets/img/photo-f74695444.jpg 1280w" sizes="(max-width: 1279px) 100vw, 1280px" width="1280" height="853" alt="Nave con una fila de inyectoras de plástico" loading="lazy" decoding="async" data-source="stand-in" data-subject="injection moulding hall">
+    </div>
+  </section>
+
+  <section class="section" id="noticias" aria-labelledby="noticias-h">
+    <div class="wrap">
+      <div class="section-head section-head--center">
+        <h2 id="noticias-h">Noticias del sector</h2>
+        <p>Lo que se mueve en la industria del plástico.</p>
       </div>
+      <div class="news-row"><a class="news-card2" href="https://www.residuosprofesional.com/catalizador-reciclaje-plasticos-sin-clasificacion-previa/" target="_blank" rel="noopener">
+          <span class="news-card2__img"><img src="assets/img/agencia-6.jpg" alt="" loading="lazy"></span>
+          <span class="news-card2__body"><span class="t-label">Residuos Profesional</span><h3>Un catalizador abre la puerta al reciclaje de plásticos sin clasificación previa</h3><span class="more">Leer la noticia</span></span>
+        </a><a class="news-card2" href="https://smartco.mx/tendencias-de-empaque-2025-innovacion-sostenibilidad-y-eficiencia/" target="_blank" rel="noopener">
+          <span class="news-card2__img"><img src="assets/img/agencia-7.jpg" alt="" loading="lazy"></span>
+          <span class="news-card2__body"><span class="t-label">Smartco</span><h3>Tendencias en envases plásticos 2025: sostenibilidad e innovación</h3><span class="more">Leer la noticia</span></span>
+        </a><a class="news-card2" href="https://www.mordorintelligence.com/es/industry-reports/gobal-biodegradable-packaging-solutions-market-industry" target="_blank" rel="noopener">
+          <span class="news-card2__img"><img src="assets/img/agencia-8.jpg" alt="" loading="lazy"></span>
+          <span class="news-card2__body"><span class="t-label">Mordor Intelligence</span><h3>Informe del mercado mundial de envases biodegradables y su crecimiento proyectado</h3><span class="more">Leer la noticia</span></span>
+        </a></div>
+      <p class="news-more"><a class="link" href="noticias.html">Ver todas las noticias</a></p>
     </div>
   </section>
 </main>
 <footer class="footer closing" id="contact" aria-labelledby="close-h">
   <div class="wrap">
-    <div class="closing__cta close--word">
-      <div class="section-head--split">
-        <div><h2 id="close-h">Presupuesto para su línea de inyección</h2><p class="t-lead">Respuesta y envío de recambios en 12 a 24 horas.</p></div>
-        <a class="btn btn--primary" href="contacto.html">Pedir presupuesto<svg class="m-arrow" viewBox="0 0 12 12" aria-hidden="true"><path class="m-arrow__stem" d="M1 6h8"/><path class="m-arrow__head" d="M4.5 2.5 8 6l-3.5 3.5"/></svg></a>
+    <div class="closing__cta close--word close--band">
+      <img class="close__bg" src="assets/img/photo-f74695444-960.jpg" srcset="assets/img/photo-f74695444-960.jpg 960w, assets/img/photo-f74695444.jpg 1280w" sizes="100vw" width="1280" height="853" alt="" loading="lazy" decoding="async" data-source="stand-in" data-subject="injection moulding hall">
+      <div class="close__in">
+        <h2 id="close-h">Presupuesto para su línea de inyección</h2><p class="t-lead">Respuesta y envío de recambios en 12 a 24 horas.</p>
+        <div class="btn-row"><a class="btn btn--primary" href="contacto.html">Pedir presupuesto<svg class="m-arrow" viewBox="0 0 12 12" aria-hidden="true"><path class="m-arrow__stem" d="M1 6h8"/><path class="m-arrow__head" d="M4.5 2.5 8 6l-3.5 3.5"/></svg></a><a class="btn btn--secondary" href="tel:+34627967729">Llamar al (+34) 627 96 77 29</a></div>
       </div>
     </div>
     <div class="closing__links">

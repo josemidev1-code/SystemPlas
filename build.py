@@ -31,6 +31,12 @@ ICON = {
  "wa": '<svg viewBox="0 0 32 32" aria-hidden="true" width="18" height="18"><path fill="currentColor" d="M16 3a13 13 0 0 0-11.2 19.6L3 29l6.6-1.7A13 13 0 1 0 16 3zm0 23.6a10.6 10.6 0 0 1-5.4-1.5l-.4-.2-3.9 1 1-3.8-.2-.4A10.6 10.6 0 1 1 16 26.6zm5.8-7.9c-.3-.2-1.9-.9-2.2-1s-.5-.2-.7.2-.8 1-1 1.2-.4.2-.7.1a8.7 8.7 0 0 1-4.3-3.8c-.3-.6.3-.5.9-1.7a.6.6 0 0 0 0-.5l-1-2.4c-.3-.6-.5-.5-.7-.5h-.6a1.2 1.2 0 0 0-.9.4 3.7 3.7 0 0 0-1.1 2.7 6.4 6.4 0 0 0 1.3 3.4 14.7 14.7 0 0 0 5.7 5c2.1.9 2.9 1 4 .8a3.4 3.4 0 0 0 2.2-1.6 2.8 2.8 0 0 0 .2-1.6c0-.2-.3-.3-.6-.5z"/></svg>',
  "linkedin": '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9h4v12H3zm7 0h3.8v1.7h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1V21h-4v-5.6c0-1.34-.02-3.06-1.86-3.06-1.87 0-2.15 1.46-2.15 2.96V21h-4z"/></svg>',
 }
+SVC_ICON = {
+ "asesoria": '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 13v-1a8 8 0 0 1 16 0v1"/><rect x="2.5" y="13" width="4" height="6" rx="1.5"/><rect x="17.5" y="13" width="4" height="6" rx="1.5"/><path d="M19.5 19v.5a2.5 2.5 0 0 1-2.5 2.5h-3"/></svg>',
+ "recambios": '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2.5 6.5h11v9h-11z"/><path d="M13.5 9.5h4l3 3v3h-7"/><circle cx="6.5" cy="17.5" r="1.8"/><circle cx="17" cy="17.5" r="1.8"/></svg>',
+ "medida": '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.7 6.3a4 4 0 0 0-5.3 5.3L3.5 17.5a1.8 1.8 0 0 0 2.5 2.5l5.9-5.9a4 4 0 0 0 5.3-5.3l-2.6 2.6-2.3-.3-.3-2.3z"/></svg>',
+ "mundo": '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 3.8 5.6 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3z"/></svg>',
+}
 ARROW = '<svg class="m-arrow" viewBox="0 0 12 12" aria-hidden="true"><path class="m-arrow__stem" d="M1 6h8"/><path class="m-arrow__head" d="M4.5 2.5 8 6l-3.5 3.5"/></svg>'
 
 # ---------------------------------------------------------------------------
@@ -265,6 +271,12 @@ def nav(active=None):
             items.append(f'<div class="nav__item"><a class="nav__link" href="{href}"{cur}>{label}</a></div>')
     return f'''<body>
 <header class="nav">
+  <div class="nav__top"><div class="wrap nav__top-in">
+    <span>{DIR1} · {DIR2}</span>
+    <a href="tel:{TEL}">{TEL_TXT}</a>
+    <a href="mailto:{MAIL}">{MAIL}</a>
+    <a class="nav__top-in-social" href="{LINKEDIN}" target="_blank" rel="noopener" aria-label="LinkedIn">{ICON["linkedin"]}</a>
+  </div></div>
   <div class="wrap nav__bar">
     <a class="skip-link" href="#top">Saltar al contenido</a>
     <a class="nav__logo" href="index.html"><img src="assets/img/logo-320.png" alt="System Plast" width="320" height="139"></a>
@@ -289,10 +301,11 @@ def footer(close_line="Respuesta y envío de recambios en 12 a 24 horas.", scrip
     cats = "".join(f'<li><a href="{c["slug"]}.html">{E(c["name"])}</a></li>' for c in CATS)
     return f'''<footer class="footer closing" id="contact" aria-labelledby="close-h">
   <div class="wrap">
-    <div class="closing__cta close--word">
-      <div class="section-head--split">
-        <div><h2 id="close-h">Presupuesto para su línea de inyección</h2><p class="t-lead">{E(close_line)}</p></div>
-        <a class="btn btn--primary" href="contacto.html">{MAIN_ACTION}{ARROW}</a>
+    <div class="closing__cta close--word close--band">
+      <img class="close__bg" src="assets/img/photo-f74695444-960.jpg" srcset="assets/img/photo-f74695444-960.jpg 960w, assets/img/photo-f74695444.jpg 1280w" sizes="100vw" width="1280" height="853" alt="" loading="lazy" decoding="async" data-source="stand-in" data-subject="injection moulding hall">
+      <div class="close__in">
+        <h2 id="close-h">Presupuesto para su línea de inyección</h2><p class="t-lead">{E(close_line)}</p>
+        <div class="btn-row"><a class="btn btn--primary" href="contacto.html">{MAIN_ACTION}{ARROW}</a><a class="btn btn--secondary" href="tel:{TEL}">Llamar al {TEL_TXT}</a></div>
       </div>
     </div>
     <div class="closing__links">
@@ -374,10 +387,17 @@ HOME_EXTRA = '''<script>document.documentElement.classList.add('mo-js');setTimeo
 def row_link(name, value, href):
     return f'<li><a class="rows__link" href="{href}"><span class="rows__name">{E(name)}</span><span class="rows__value">{E(value)}</span></a></li>'
 
-home_cards = "".join(f'''<a class="card card--open card--prod {"cat-big span-6" if n == 0 else "cat-small span-6 start-7"}" href="{c["slug"]}.html">
+home_cards = "".join(f'''<a class="card card--open card--prod cat-card span-3" href="{c["slug"]}.html">
           <div class="panel{" panel--white" if is_cutout(CAT_IMG[c["slug"]]) else ""}"><img class="frame__img" src="{img_src(CAT_IMG[c["slug"]])}" {wh(img_src(CAT_IMG[c["slug"]]))} alt="{E(c["name"])}" loading="lazy" data-source="{"stand-in" if c["slug"] in STOCK_CAT or not is_cutout(CAT_IMG[c["slug"]]) else "client"}" data-subject="{"product" if is_cutout(CAT_IMG[c["slug"]]) else "injection mould"}"></div>
-          <h3>{E(c["name"])}</h3><p>{E(CAT_LINE[c["slug"]])}</p>
+          <div class="cat-card__body"><h3>{E(c["name"])}</h3><p>{E(CAT_LINE[c["slug"]])}</p><span class="more">Ver productos</span></div>
         </a>''' for n, c in enumerate(CATS))
+
+HOME_LOGOS = "".join(f'<img src="assets/img/industria-{i}.png" alt="{n}" width="300" height="300" loading="lazy">' for i, n in
+                     [(1, "Samsung"), (2, "Midea"), (3, "Valeo"), (4, "Gree"), (5, "Hasco"), (6, "Sharp")])
+HOME_NEWS = "".join(f'''<a class="news-card2" href="{u}" target="_blank" rel="noopener">
+          <span class="news-card2__img"><img src="assets/img/{i}" alt="" loading="lazy"></span>
+          <span class="news-card2__body"><span class="t-label">{E(src)}</span><h3>{E(t)}</h3><span class="more">Leer la noticia</span></span>
+        </a>''' for i, t, src, u in NEWS)
 
 hrs_rows = "".join(row_link(n, v, f"{s}.html") for n, v, s in [
     ("Serie MTC-B", "Pantalla IPS a color", "serie-mtc-b"),
@@ -408,7 +428,7 @@ write("index.html", head("System Plast: componentes para inyectoras de plástico
      palette: colores del logo (start.mjs brand), type plex, radius sharp
      moments: line-carries-colour en #resistencias (la franja oscura) -->
 <main id="top">
-  <section class="hero hero--photo" data-enter data-calm="left" data-box="none" data-tone="light" aria-labelledby="hero-h">
+  <section class="hero hero--photo" data-enter data-calm="left" data-box="none" data-tone="dark" aria-labelledby="hero-h">
     <!-- VÍDEO: Pexels 32386599 (licencia Pexels, uso libre). Se cambia aquí por el vídeo propio del cliente. -->
     <video class="hero__bg" autoplay muted loop playsinline preload="metadata" poster="assets/video/maquina-poster.jpg" aria-hidden="true" style="--ly-pos: 70% 50%; --ly-pos-phone: 70% 50%" data-source="stand-in" data-subject="vacuum gripper on an automated line">
       <source src="assets/video/maquina-640.mp4" type="video/mp4" media="(max-width: 639px)">
@@ -424,11 +444,26 @@ write("index.html", head("System Plast: componentes para inyectoras de plástico
     </div></div>
   </section>
 
-  <section class="section" id="catalogo" aria-labelledby="catalogo-h">
+  <section class="section intro" id="empresa" aria-labelledby="empresa-h">
+    <div class="wrap intro__in">
+      <p class="eyebrow">System Plast · Mutxamel, Alicante</p>
+      <h2 id="empresa-h">20 años al lado de la inyección de plástico</h2>
+      <p class="intro__text">Desarrollamos y distribuimos <strong>equipos de control de temperatura</strong> y <strong>componentes para inyectoras</strong>: controladores de canal caliente, resistencias fabricadas a medida, garras EOAT y almacenaje de moldes. Le asesoramos <strong>antes, durante y después de la compra</strong>.</p>
+      <ul class="stats">
+        <li><strong>20</strong><span>años de experiencia</span></li>
+        <li><strong>+50</strong><span>clientes industriales</span></li>
+        <li><strong>128</strong><span>zonas por controlador</span></li>
+        <li><strong>24 h</strong><span>para enviar recambios</span></li>
+      </ul>
+      <div class="logos" aria-label="Algunos clientes">{HOME_LOGOS}</div>
+    </div>
+  </section>
+
+  <section class="section ground-surface" id="catalogo" aria-labelledby="catalogo-h">
     <div class="wrap">
-      <div class="section-head section-head--row">
-        <h2 id="catalogo-h">Catálogo por línea de producto</h2>
-        <a class="link" href="productos.html">Ver el catálogo</a>
+      <div class="section-head section-head--center">
+        <h2 id="catalogo-h">Nuestras líneas de producto</h2>
+        <p>Cuatro gamas para la inyectora, el molde y el robot de extracción.</p>
       </div>
       <div class="grid fill cat-row">
         {home_cards}
@@ -476,7 +511,7 @@ write("index.html", head("System Plast: componentes para inyectoras de plástico
         <ul class="rows rows--links">{eoat_rows}</ul>
         <a class="link" href="eoat-accesorio-robotica.html">Ver la gama EOAT</a>
       </div>
-      <a class="frame frame--photo span-6 start-7 eoat-photo" href="eoat-accesorio-robotica.html" aria-label="Componentes EOAT">
+      <a class="frame frame--photo span-6 start-7 eoat-photo" data-moment="picture-develops" data-moment-opts='{{"look": "film"}}' href="eoat-accesorio-robotica.html" aria-label="Componentes EOAT">
         <img class="frame__img" src="assets/img/home-2.jpg" width="1000" height="1000" alt="Robot de extracción junto a una inyectora, con garra montada" loading="lazy" data-source="client" data-subject="robot at injection machine">
       </a>
     </div>
@@ -484,18 +519,27 @@ write("index.html", head("System Plast: componentes para inyectoras de plástico
 
   <section class="section ground-surface" id="servicio" aria-labelledby="servicio-h">
     <div class="wrap">
-      <div class="section-head section-head--row">
-        <h2 id="servicio-h">Recambios en 12 a 24 horas</h2>
-        <a class="link" href="quienes-somos.html">Conocer la empresa</a>
+      <div class="section-head section-head--center">
+        <h2 id="servicio-h">Servicios</h2>
+        <p>Le acompañamos desde la elección del equipo hasta el recambio urgente.</p>
       </div>
-      <div class="grid service-cols">
-        <div class="span-4"><h3>Asesoría para elegir controlador</h3><p>Le ayudamos a elegir la serie y la resistencia antes de la compra, y le atendemos después.</p></div>
-        <div class="span-4"><h3>Envío de recambios al extranjero</h3><p>Más de 50 clientes en automoción, electrodomésticos, dispositivos médicos y envases.</p></div>
-        <div class="span-4"><h3>Cajas de control para su molde</h3><p>Fabricamos cajas de control de temperatura ajustadas a su molde y a su producción.</p></div>
+      <div class="svc">
+        <div class="svc__item"><span class="svc__icon">{SVC_ICON["asesoria"]}</span><h3>Asesoría técnica</h3><p>Le ayudamos a elegir la serie de controlador y la resistencia adecuadas antes de la compra.</p><a class="btn btn--secondary btn--sm" href="contacto.html">Consultar a un técnico</a></div>
+        <div class="svc__item"><span class="svc__icon">{SVC_ICON["recambios"]}</span><h3>Recambios urgentes</h3><p>Stock en Mutxamel y envío de recambios en 12 a 24 horas para que su línea no pare.</p><a class="btn btn--secondary btn--sm" href="contacto.html">Pedir un recambio</a></div>
+        <div class="svc__item"><span class="svc__icon">{SVC_ICON["medida"]}</span><h3>Fabricación a medida</h3><p>Resistencias y cajas de control de temperatura ajustadas a su molde y a su producción.</p><a class="btn btn--secondary btn--sm" href="resistencias-electricas.html">Ver resistencias</a></div>
+        <div class="svc__item"><span class="svc__icon">{SVC_ICON["mundo"]}</span><h3>Envío internacional</h3><p>Clientes en automoción, electrodomésticos, dispositivos médicos y envases fuera de España.</p><a class="btn btn--secondary btn--sm" href="quienes-somos.html">Conocer la empresa</a></div>
       </div>
-      <div class="frame frame--photo fill plant-photo" data-moment="picture-develops" data-moment-opts='{{"look": "film"}}'>
-        <img class="frame__img" src="assets/img/photo-f74695444.jpg" srcset="assets/img/photo-f74695444-500.jpg 500w, assets/img/photo-f74695444-960.jpg 960w, assets/img/photo-f74695444.jpg 1280w" sizes="(max-width: 1279px) 100vw, 1280px" width="1280" height="853" alt="Nave con una fila de inyectoras de plástico" loading="lazy" decoding="async" data-source="stand-in" data-subject="injection moulding hall">
+    </div>
+  </section>
+
+  <section class="section" id="noticias" aria-labelledby="noticias-h">
+    <div class="wrap">
+      <div class="section-head section-head--center">
+        <h2 id="noticias-h">Noticias del sector</h2>
+        <p>Lo que se mueve en la industria del plástico.</p>
       </div>
+      <div class="news-row">{HOME_NEWS}</div>
+      <p class="news-more"><a class="link" href="noticias.html">Ver todas las noticias</a></p>
     </div>
   </section>
 </main>

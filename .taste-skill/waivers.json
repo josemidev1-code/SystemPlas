@@ -1,7 +1,72 @@
 [
- {
-  "check": "phone-number",
-  "target": "footer__col",
-  "reason": "Es el teléfono real de System Plast, publicado por el cliente en su web actual; no es inventado."
- }
+  {
+    "check": "phone-number",
+    "target": "footer__col",
+    "reason": "Es el teléfono real de System Plast, publicado por el cliente en su web actual; no es inventado."
+  },
+  {
+    "check": "phone-number",
+    "target": "nav__top",
+    "reason": "Es el teléfono real de System Plast, publicado por el cliente en su web actual; no es inventado."
+  },
+  {
+    "check": "container-edges",
+    "target": "nav__top",
+    "reason": "Petición del usuario (2026-11-21): basar el acabado en botboxiberica.es, con su barra de contacto superior a todo lo ancho; el texto va dentro de .wrap y la franja solo es el fondo."
+  },
+  {
+    "check": "one-section",
+    "target": "closing__cta",
+    "reason": "Petición del usuario (2026-11-21): basar el acabado en botboxiberica.es, con bandas de color de marca a todo lo ancho; el cierre es una banda verde con el texto en las líneas del contenedor."
+  },
+  {
+    "check": "centre-axis",
+    "target": "hero-h",
+    "reason": "Petición del usuario (2026-11-21): que la web se parezca mucho a botboxiberica.es (sin copiar): hero con el texto centrado sobre el vídeo, como la referencia."
+  },
+  {
+    "check": "container-edges",
+    "target": "servicio-h",
+    "reason": "Petición del usuario (2026-11-21): que la web se parezca mucho a botboxiberica.es (sin copiar): cabeceras de sección centradas, como la referencia."
+  },
+  {
+    "check": "container-edges",
+    "target": "intro__text",
+    "reason": "Petición del usuario (2026-11-21): que la web se parezca mucho a botboxiberica.es (sin copiar): presentación de empresa centrada, como la referencia."
+  },
+  {
+    "check": "container-edges",
+    "target": "news-more",
+    "reason": "Petición del usuario (2026-11-21): que la web se parezca mucho a botboxiberica.es (sin copiar): enlace a noticias centrado bajo las tarjetas."
+  },
+  {
+    "check": "container-edges",
+    "target": "close__bg",
+    "reason": "Petición del usuario (2026-11-21): que la web se parezca mucho a botboxiberica.es (sin copiar): banda de cierre con foto a todo lo ancho bajo un velo, como el bloque 'Crece con nosotros' de la referencia."
+  },
+  {
+    "check": "spill",
+    "target": "close__bg",
+    "reason": "Petición del usuario (2026-11-21): que la web se parezca mucho a botboxiberica.es (sin copiar): la foto de la banda de cierre va a todo lo ancho a propósito (capa de fondo bajo el velo)."
+  },
+  {
+    "check": "row-lines",
+    "target": "close__bg",
+    "reason": "Petición del usuario (2026-11-21): que la web se parezca mucho a botboxiberica.es (sin copiar): capa de fondo de la banda de cierre, no un bloque de contenido."
+  },
+  {
+    "check": "no-visual",
+    "target": "empresa",
+    "reason": "Petición del usuario (2026-11-21): que la web se parezca mucho a botboxiberica.es (sin copiar): sección de presentación en texto, cifras y logos de clientes, como la de la referencia."
+  },
+  {
+    "check": "no-visual",
+    "target": "servicio",
+    "reason": "Petición del usuario (2026-11-21): que la web se parezca mucho a botboxiberica.es (sin copiar): servicios con iconos en lugar de foto, como los de la referencia (el cliente pidió expresamente iconos)."
+  },
+  {
+    "check": "section-air",
+    "target": "stats",
+    "reason": "Petición del usuario (2026-11-21): que la web se parezca mucho a botboxiberica.es (sin copiar): fila de cifras de la presentación, como la franja de cifras de la referencia."
+  }
 ]
