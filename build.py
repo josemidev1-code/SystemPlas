@@ -31,12 +31,24 @@ ICON = {
  "wa": '<svg viewBox="0 0 32 32" aria-hidden="true" width="18" height="18"><path fill="currentColor" d="M16 3a13 13 0 0 0-11.2 19.6L3 29l6.6-1.7A13 13 0 1 0 16 3zm0 23.6a10.6 10.6 0 0 1-5.4-1.5l-.4-.2-3.9 1 1-3.8-.2-.4A10.6 10.6 0 1 1 16 26.6zm5.8-7.9c-.3-.2-1.9-.9-2.2-1s-.5-.2-.7.2-.8 1-1 1.2-.4.2-.7.1a8.7 8.7 0 0 1-4.3-3.8c-.3-.6.3-.5.9-1.7a.6.6 0 0 0 0-.5l-1-2.4c-.3-.6-.5-.5-.7-.5h-.6a1.2 1.2 0 0 0-.9.4 3.7 3.7 0 0 0-1.1 2.7 6.4 6.4 0 0 0 1.3 3.4 14.7 14.7 0 0 0 5.7 5c2.1.9 2.9 1 4 .8a3.4 3.4 0 0 0 2.2-1.6 2.8 2.8 0 0 0 .2-1.6c0-.2-.3-.3-.6-.5z"/></svg>',
  "linkedin": '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9h4v12H3zm7 0h3.8v1.7h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1V21h-4v-5.6c0-1.34-.02-3.06-1.86-3.06-1.87 0-2.15 1.46-2.15 2.96V21h-4z"/></svg>',
 }
-SVC_ICON = {
- "asesoria": '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 13v-1a8 8 0 0 1 16 0v1"/><rect x="2.5" y="13" width="4" height="6" rx="1.5"/><rect x="17.5" y="13" width="4" height="6" rx="1.5"/><path d="M19.5 19v.5a2.5 2.5 0 0 1-2.5 2.5h-3"/></svg>',
- "recambios": '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2.5 6.5h11v9h-11z"/><path d="M13.5 9.5h4l3 3v3h-7"/><circle cx="6.5" cy="17.5" r="1.8"/><circle cx="17" cy="17.5" r="1.8"/></svg>',
- "medida": '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.7 6.3a4 4 0 0 0-5.3 5.3L3.5 17.5a1.8 1.8 0 0 0 2.5 2.5l5.9-5.9a4 4 0 0 0 5.3-5.3l-2.6 2.6-2.3-.3-.3-2.3z"/></svg>',
- "mundo": '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 3.8 5.6 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3z"/></svg>',
+# Emblemas de servicio: marco octogonal grueso en dos tonos de verde petróleo, interior blanco y
+# pictograma bicolor (idea tomada de los emblemas de la web de referencia, con forma y dibujo propios)
+import math as _m
+def _octa(r, c=60):
+    pts = [(c + r * _m.cos(_m.radians(22.5 + 45 * k)), c + r * _m.sin(_m.radians(22.5 + 45 * k))) for k in range(8)]
+    return "M" + " L".join(f"{x:.1f} {y:.1f}" for x, y in pts) + " Z"
+SVC_PICTO = {
+ "asesoria": '<path class="s" d="M38 62v-4a22 22 0 0 1 44 0v4"/><rect class="f" x="32" y="60" width="12" height="18" rx="4"/><rect class="f" x="76" y="60" width="12" height="18" rx="4"/><path class="s" d="M82 78v2a8 8 0 0 1-8 8h-8"/><circle class="d" cx="62" cy="88" r="3.5"/>',
+ "recambios": '<rect class="f" x="30" y="46" width="34" height="26" rx="2"/><path class="s" d="M64 54h12l10 10v8H64z"/><circle class="d" cx="42" cy="78" r="6"/><circle class="d" cx="76" cy="78" r="6"/><path class="s" d="M36 56h14M36 63h20"/>',
+ "medida": '<circle cx="60" cy="60" r="21" fill="none" stroke="#037c75" stroke-width="9" stroke-dasharray="6.6 9.9"/><circle class="f" cx="60" cy="60" r="17"/><circle cx="60" cy="60" r="6.5" fill="#fff" stroke="#012c3d" stroke-width="3.2"/>',
+ "mundo": '<circle class="f" cx="60" cy="60" r="24"/><path class="s" d="M36 60h48M60 36c7 7 10.5 15 10.5 24S67 77 60 84c-7-7-10.5-15-10.5-24S53 43 60 36z"/><path class="s" d="M40 48h40M40 72h40"/>',
 }
+def badge(key):
+    return (f'<svg class="emb" viewBox="0 0 120 120" aria-hidden="true">'
+            f'<defs><linearGradient id="bg-{key}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#037c75"/><stop offset=".56" stop-color="#037c75"/>'
+            f'<stop offset=".56" stop-color="#5fb0a9"/><stop offset="1" stop-color="#5fb0a9"/></linearGradient></defs>'
+            f'<path class="emb__frame" fill="url(#bg-{key})" fill-rule="evenodd" d="{_octa(58)} {_octa(44)}"/>'
+            f'<path class="emb__in" d="{_octa(44)}"/><g class="emb__picto" transform="translate(60 60) scale(1.14) translate(-60 -60)">{SVC_PICTO[key]}</g></svg>')
 ARROW = '<svg class="m-arrow" viewBox="0 0 12 12" aria-hidden="true"><path class="m-arrow__stem" d="M1 6h8"/><path class="m-arrow__head" d="M4.5 2.5 8 6l-3.5 3.5"/></svg>'
 
 # ---------------------------------------------------------------------------
@@ -524,10 +536,10 @@ write("index.html", head("System Plast: componentes para inyectoras de plástico
         <p>Le acompañamos desde la elección del equipo hasta el recambio urgente.</p>
       </div>
       <div class="svc">
-        <div class="svc__item"><span class="svc__icon">{SVC_ICON["asesoria"]}</span><h3>Asesoría técnica</h3><p>Le ayudamos a elegir la serie de controlador y la resistencia adecuadas antes de la compra.</p><a class="btn btn--secondary btn--sm" href="contacto.html">Consultar a un técnico</a></div>
-        <div class="svc__item"><span class="svc__icon">{SVC_ICON["recambios"]}</span><h3>Recambios urgentes</h3><p>Stock en Mutxamel y envío de recambios en 12 a 24 horas para que su línea no pare.</p><a class="btn btn--secondary btn--sm" href="contacto.html">Pedir un recambio</a></div>
-        <div class="svc__item"><span class="svc__icon">{SVC_ICON["medida"]}</span><h3>Fabricación a medida</h3><p>Resistencias y cajas de control de temperatura ajustadas a su molde y a su producción.</p><a class="btn btn--secondary btn--sm" href="resistencias-electricas.html">Ver resistencias</a></div>
-        <div class="svc__item"><span class="svc__icon">{SVC_ICON["mundo"]}</span><h3>Envío internacional</h3><p>Clientes en automoción, electrodomésticos, dispositivos médicos y envases fuera de España.</p><a class="btn btn--secondary btn--sm" href="quienes-somos.html">Conocer la empresa</a></div>
+        <div class="svc__item"><span class="svc__badge">{badge("asesoria")}</span><h3>Asesoría técnica</h3><p>Le ayudamos a elegir la serie de controlador y la resistencia adecuadas antes de la compra.</p><a class="btn btn--secondary btn--sm" href="contacto.html">Consultar a un técnico</a></div>
+        <div class="svc__item"><span class="svc__badge">{badge("recambios")}</span><h3>Recambios urgentes</h3><p>Stock en Mutxamel y envío de recambios en 12 a 24 horas para que su línea no pare.</p><a class="btn btn--secondary btn--sm" href="contacto.html">Pedir un recambio</a></div>
+        <div class="svc__item"><span class="svc__badge">{badge("medida")}</span><h3>Fabricación a medida</h3><p>Resistencias y cajas de control de temperatura ajustadas a su molde y a su producción.</p><a class="btn btn--secondary btn--sm" href="resistencias-electricas.html">Ver resistencias</a></div>
+        <div class="svc__item"><span class="svc__badge">{badge("mundo")}</span><h3>Envío internacional</h3><p>Clientes en automoción, electrodomésticos, dispositivos médicos y envases fuera de España.</p><a class="btn btn--secondary btn--sm" href="quienes-somos.html">Conocer la empresa</a></div>
       </div>
     </div>
   </section>

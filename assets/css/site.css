@@ -492,3 +492,13 @@ footer.closing { padding-top: var(--nav); }
 @media (max-width: 1023px) { .svc__item { padding: var(--s-6) var(--s-5); gap: var(--s-2); } .svc__icon { width: 60px; height: 60px; } .svc__icon svg { width: 28px; height: 28px; } }
 .svc__item { justify-content: flex-start; } .svc__item p { margin-bottom: auto; }
 .intro__text strong { color: var(--p-ink); font-weight: 600; box-shadow: inset 0 -.32em 0 color-mix(in oklab, var(--p-accent) 18%, transparent); }
+/* service emblems: the octagon badge, lifted a touch when its tile is hovered */
+.svc__badge { display: block; width: 120px; height: 120px; margin-bottom: var(--s-3); transition: transform .3s cubic-bezier(.2,.7,.2,1); }
+.svc__item:hover .svc__badge { transform: translateY(-3px); }
+.emb { width: 100%; height: 100%; display: block; filter: drop-shadow(0 6px 10px rgb(1 44 61 / .12)); }
+.emb__in { fill: #fff; }
+.emb__picto .s { fill: none; stroke: #012c3d; stroke-width: 3.2; stroke-linecap: round; stroke-linejoin: round; }
+.emb__picto .f { fill: #bfe0dc; stroke: #037c75; stroke-width: 3.2; stroke-linejoin: round; }
+.emb__picto .d { fill: #037c75; }
+@media (max-width: 1023px) { .svc__badge { width: 96px; height: 96px; } }
+@media (prefers-reduced-motion: reduce) { .svc__badge { transition: none; } }
