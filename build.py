@@ -674,7 +674,7 @@ write("quienes-somos.html", inner("Quiénes somos | System Plast", "20 años des
 # ---------------------------------------------------------------------------
 # Noticias
 # ---------------------------------------------------------------------------
-news_html = "".join(f'<a class="card card--open card--prod news-card" href="{u}" target="_blank" rel="noopener"><div class="panel"><img class="frame__img" src="assets/img/{i}" alt="" loading="lazy"></div><p class="t-label muted">{E(src)}</p><h3>{E(t)}</h3></a>' for i, t, src, u in NEWS)
+news_html = "".join(f'<a class="card card--open card--prod news-card" href="{u}" target="_blank" rel="noopener"><div class="panel"><img class="frame__img" src="assets/img/{i}" alt="" loading="lazy"></div><p class="t-label muted">{E(src)}</p><h2 class="card__title">{E(t)}</h2></a>' for i, t, src, u in NEWS)
 body = page_head("Noticias del sector", "Actualidad y tendencias de la industria del plástico.", [("Noticias", None)]) + \
     f'<section class="pg-section"><div class="wrap"><div class="news-grid">{news_html}</div></div></section>\n'
 write("noticias.html", inner("Noticias | System Plast", "Noticias y tendencias de la industria del plástico.", "noticias.html", body))

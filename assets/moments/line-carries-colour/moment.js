@@ -10,8 +10,8 @@
   invisible until the line has passed above the whole of it, then fades in whole, so the line never slices a
   word. The line has reached the top by the time the section's top is a fifth of the screen from the top of the
   page, so a tile framed at the section's top shows the whole section. Scrubbed to the scrollbar, no pin, and
-  it climbs back down when the visitor scrolls back up. Phones, reduced motion, no script, a failed module: no
-  stage, every block as it is.
+  it climbs back down when the visitor scrolls back up. It runs on a phone too (one clip-path and one line,
+  scrubbed, nothing pinned). Reduced motion, no script, a failed module: no stage, every block as it is.
 
     <section class="section ground-inverse" data-moment="line-carries-colour" data-moment-opts='{"from": "base"}'>
       <div class="wrap">…the section's h2 and content…</div>
@@ -20,6 +20,8 @@
   opts: from 'base' (default) | 'surface' | 'inverse' (the ground of the section before it),
         start 0.45 (the share of the section's rise at which the line comes up from under the screen).
 */
+// SYSTEM PLAST: la franja también se anima en el móvil (moments.js lee este indicador)
+export const phone = true;
 export default function (root, opts, lib) {
   root.classList.add('mo-lc');
   if (lib.reduced()) { root.classList.add('is-done'); return {}; }
