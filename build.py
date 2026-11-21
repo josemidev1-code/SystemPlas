@@ -98,9 +98,11 @@ NEWS = [
  ("agencia-8.jpg", "Informe del mercado mundial de envases biodegradables y su crecimiento proyectado", "Mordor Intelligence", "https://www.mordorintelligence.com/es/industry-reports/gobal-biodegradable-packaging-solutions-market-industry"),
 ]
 
-# Foto de tarjeta de categoría (la de estanterías es una foto de molde: el cliente no tiene foto de racks)
+# Foto de tarjeta de categoría. El cliente no tiene foto de racks: la de estanterías es de stock
+# (Wikimedia Commons, CC BY 4.0), recortada sobre blanco como las demás (web/sin-fondo/est-1.jpg)
 CAT_IMG = {"hrs-controladores": "hrs-1.png", "resistencias-electricas": "res-2.png",
-           "eoat-accesorio-robotica": "eoat-3.png", "estanterias-moldes": "photo-f7026183-500.jpg"}
+           "eoat-accesorio-robotica": "eoat-3.png", "estanterias-moldes": "est-1.png"}
+STOCK_CAT = {"estanterias-moldes"}
 CAT_LINE = {"hrs-controladores": "Monozona, multizona y secuencia para valve gate.",
             "resistencias-electricas": "Mica, aluminio, cobre, cerámica e infrarrojos.",
             "eoat-accesorio-robotica": "Pinzas, ventosas, cambiadores y perfilería.",
@@ -373,7 +375,7 @@ def row_link(name, value, href):
     return f'<li><a class="rows__link" href="{href}"><span class="rows__name">{E(name)}</span><span class="rows__value">{E(value)}</span></a></li>'
 
 home_cards = "".join(f'''<a class="card card--open card--prod {"cat-big span-6" if n == 0 else "cat-small span-6 start-7"}" href="{c["slug"]}.html">
-          <div class="panel{" panel--white" if is_cutout(CAT_IMG[c["slug"]]) else ""}"><img class="frame__img" src="{img_src(CAT_IMG[c["slug"]])}" {wh(img_src(CAT_IMG[c["slug"]]))} alt="{E(c["name"])}" loading="lazy" data-source="{"client" if is_cutout(CAT_IMG[c["slug"]]) else "stand-in"}" data-subject="{"product" if is_cutout(CAT_IMG[c["slug"]]) else "injection mould"}"></div>
+          <div class="panel{" panel--white" if is_cutout(CAT_IMG[c["slug"]]) else ""}"><img class="frame__img" src="{img_src(CAT_IMG[c["slug"]])}" {wh(img_src(CAT_IMG[c["slug"]]))} alt="{E(c["name"])}" loading="lazy" data-source="{"stand-in" if c["slug"] in STOCK_CAT or not is_cutout(CAT_IMG[c["slug"]]) else "client"}" data-subject="{"product" if is_cutout(CAT_IMG[c["slug"]]) else "injection mould"}"></div>
           <h3>{E(c["name"])}</h3><p>{E(CAT_LINE[c["slug"]])}</p>
         </a>''' for n, c in enumerate(CATS))
 
@@ -720,7 +722,7 @@ body = page_head("Créditos", "Material de terceros usado en esta web.", [("Cré
   <ul class="rows rows--plain">
     <li><span>Vídeo de la portada: «Automated Manufacturing Equipment in Action», Pexels, vídeo 32386599, <a class="link" href="https://www.pexels.com/license/">licencia Pexels</a>.</span></li>
     <li><span>Nave de inyectoras: «Inside the factory», Orionpenindia, Wikimedia Commons, <a class="link" href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>.</span></li>
-    <li><span>Molde de inyección: «HTS main frame polymer injection mold», MobiusDaXter, Wikimedia Commons, <a class="link" href="https://creativecommons.org/licenses/by-sa/3.0/">CC BY-SA 3.0</a>.</span></li>
+    <li><span>Estanterías: «Steckregal Super Schwerlastregal Industrie», Patrick.thm, <a class="link" href="https://commons.wikimedia.org/wiki/File:Steckregal_Super_Schwerlastregal_Industrie.webp">Wikimedia Commons</a>, <a class="link" href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>; recortada y sobre fondo blanco.</span></li>
     <li><span>Las marcas y logotipos de clientes pertenecen a sus propietarios.</span></li>
   </ul>
 </div></section>
