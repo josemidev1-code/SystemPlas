@@ -1,0 +1,38 @@
+{
+ "id": "sp-robot",
+ "made": "2026-11-24T18:07:33.156Z",
+ "px": 1100,
+ "grounds": [
+  "light"
+ ],
+ "colors": [
+  "teal"
+ ],
+ "variants": {
+  "three-quarter": {
+   "view": "three-quarter",
+   "scene": null,
+   "off": false,
+   "grounds": [
+    "light"
+   ],
+   "stills": {
+    "light": {
+     "teal": {
+      "file": "stills/sp-robot-three-quarter-teal.webp",
+      "half": "stills/sp-robot-three-quarter-teal-half.webp",
+      "w": 1190,
+      "h": 1182
+     }
+    }
+   },
+   "box": [
+    0.0143,
+    0.0051,
+    0.9613,
+    0.8942
+   ],
+   "px": 1100
+  }
+ }
+}

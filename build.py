@@ -3,7 +3,7 @@ Generador de la web de SYSTEM PLAST.
 Edita los datos de este archivo o data/productos.json y ejecuta:  python3 build.py
 
 Diseño: sistema de la skill taste-skill (assets/system.css, motion, layout) con los colores
-del logo (verde #037c75, azul marino #012c3d). La portada lleva un vídeo de licencia libre
+del logo (verde #037c75, azul marino #16191b). La portada lleva un vídeo de licencia libre
 (Pexels) detrás del titular: assets/video/maquina-*.mp4.
 """
 import os, html, json
@@ -33,15 +33,11 @@ ICON = {
  "linkedin": '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9h4v12H3zm7 0h3.8v1.7h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1V21h-4v-5.6c0-1.34-.02-3.06-1.86-3.06-1.87 0-2.15 1.46-2.15 2.96V21h-4z"/></svg>',
 }
 # Emblemas de servicio: marco octogonal grueso en dos tonos de verde petróleo, interior blanco y
-# pictograma bicolor (idea tomada de los emblemas de la web de referencia, con forma y dibujo propios)
-import math as _m
-def _octa(r, c=60):
-    pts = [(c + r * _m.cos(_m.radians(22.5 + 45 * k)), c + r * _m.sin(_m.radians(22.5 + 45 * k))) for k in range(8)]
-    return "M" + " L".join(f"{x:.1f} {y:.1f}" for x, y in pts) + " Z"
+# pictogramas dibujados a línea en dos tonos (tinta y verde de la marca), propios de SYSTEM PLAST
 SVC_PICTO = {
  "asesoria": '<path class="s" d="M38 62v-4a22 22 0 0 1 44 0v4"/><rect class="f" x="32" y="60" width="12" height="18" rx="4"/><rect class="f" x="76" y="60" width="12" height="18" rx="4"/><path class="s" d="M82 78v2a8 8 0 0 1-8 8h-8"/><circle class="d" cx="62" cy="88" r="3.5"/>',
  "recambios": '<rect class="f" x="30" y="46" width="34" height="26" rx="2"/><path class="s" d="M64 54h12l10 10v8H64z"/><circle class="d" cx="42" cy="78" r="6"/><circle class="d" cx="76" cy="78" r="6"/><path class="s" d="M36 56h14M36 63h20"/>',
- "medida": '<circle cx="60" cy="60" r="21" fill="none" stroke="#037c75" stroke-width="9" stroke-dasharray="6.6 9.9"/><circle class="f" cx="60" cy="60" r="17"/><circle cx="60" cy="60" r="6.5" fill="#fff" stroke="#012c3d" stroke-width="3.2"/>',
+ "medida": '<circle cx="60" cy="60" r="21" fill="none" stroke="#037c75" stroke-width="7" stroke-dasharray="6.6 9.9"/><circle class="f" cx="60" cy="60" r="17"/><circle cx="60" cy="60" r="6.5" fill="#fff" stroke="#16191b" stroke-width="2.2"/>',
  "mundo": '<circle class="f" cx="60" cy="60" r="24"/><path class="s" d="M36 60h48M60 36c7 7 10.5 15 10.5 24S67 77 60 84c-7-7-10.5-15-10.5-24S53 43 60 36z"/><path class="s" d="M40 48h40M40 72h40"/>',
 }
 REELS = [("eoat-3", "Pinza neumática recogiendo una pieza"), ("eoat-2", "Garra con ventosas de vacío"),
@@ -58,22 +54,25 @@ REELS_JS = '<script type="module" src="assets/js/reels.js"></script>\n'
 
 CAT_PICTO = {
  "hrs": '<rect class="f" x="33" y="45" width="54" height="32" rx="3"/><path class="s" d="M50 45v-5h20v5M38 79v3M82 79v3"/>'
-        + "".join(f'<rect x="{x}" y="49" width="10" height="24" rx="1.5" fill="#fff" stroke="#012c3d" stroke-width="2.4"/><rect x="{x+2}" y="52" width="6" height="5" fill="#037c75"/><circle cx="{x+5}" cy="66" r="2.2" fill="#012c3d"/>' for x in (37, 49, 61, 73))
+        + "".join(f'<rect x="{x}" y="49" width="10" height="24" rx="1.5" fill="#fff" stroke="#16191b" stroke-width="1.8"/><rect x="{x+2}" y="52" width="6" height="5" fill="#037c75"/><circle cx="{x+5}" cy="66" r="2.2" fill="#16191b"/>' for x in (37, 49, 61, 73))
         + '<path class="s" d="M87 69c7 0 7 9 1 11"/>',
- "res": '<path class="f" d="M36 55v15a21 7.5 0 0 0 42 0V55"/><ellipse cx="57" cy="55" rx="21" ry="7.5" fill="#fff" stroke="#037c75" stroke-width="3.2"/><ellipse cx="57" cy="55" rx="13.5" ry="4.2" fill="#012c3d"/><rect x="74" y="58" width="8" height="15" rx="1.5" fill="#fff" stroke="#012c3d" stroke-width="2.4"/><circle cx="78" cy="62" r="1.6" fill="#012c3d"/><circle cx="78" cy="69" r="1.6" fill="#012c3d"/><path class="s" d="M82 65c6 0 6-12 2-18"/><rect class="f" x="78" y="38" width="11" height="9" rx="1.5"/>',
- "eoat": '<rect x="53" y="33" width="14" height="9" rx="2" fill="#012c3d"/><rect class="f" x="49" y="42" width="22" height="6" rx="2"/><rect class="f" x="57" y="48" width="6" height="27"/><rect class="f" x="33" y="56" width="54" height="6"/><path class="s" d="M37 62v6M83 62v6M60 75v5"/><path class="d" d="M31 68h12l-2 5h-8z"/><path class="d" d="M77 68h12l-2 5h-8z"/><path class="d" d="M54 80h12l-2 5h-8z"/>',
- "est": '<rect x="33" y="34" width="4.5" height="52" rx="1" fill="#012c3d"/><rect x="82.5" y="34" width="4.5" height="52" rx="1" fill="#012c3d"/><rect class="f" x="36" y="50" width="48" height="3.5"/><rect class="f" x="36" y="67" width="48" height="3.5"/><rect class="f" x="36" y="82" width="48" height="3.5"/>'
-        + "".join(f'<rect x="{x}" y="{y}" width="17" height="11" rx="1.5" fill="#fff" stroke="#012c3d" stroke-width="2.4"/><rect x="{x}" y="{y}" width="17" height="3.6" fill="#037c75"/>' for x in (41, 62) for y in (38.5, 55.5))
-        + '<rect x="41" y="71.5" width="17" height="10" rx="1.5" fill="#fff" stroke="#012c3d" stroke-width="2.4"/><rect x="41" y="71.5" width="17" height="3.4" fill="#037c75"/>',
+ "res": '<path class="f" d="M36 55v15a21 7.5 0 0 0 42 0V55"/><ellipse cx="57" cy="55" rx="21" ry="7.5" fill="#fff" stroke="#037c75" stroke-width="2.2"/><ellipse cx="57" cy="55" rx="13.5" ry="4.2" fill="#16191b"/><rect x="74" y="58" width="8" height="15" rx="1.5" fill="#fff" stroke="#16191b" stroke-width="1.8"/><circle cx="78" cy="62" r="1.6" fill="#16191b"/><circle cx="78" cy="69" r="1.6" fill="#16191b"/><path class="s" d="M82 65c6 0 6-12 2-18"/><rect class="f" x="78" y="38" width="11" height="9" rx="1.5"/>',
+ "eoat": '<rect x="53" y="33" width="14" height="9" rx="2" fill="#16191b"/><rect class="f" x="49" y="42" width="22" height="6" rx="2"/><rect class="f" x="57" y="48" width="6" height="27"/><rect class="f" x="33" y="56" width="54" height="6"/><path class="s" d="M37 62v6M83 62v6M60 75v5"/><path class="d" d="M31 68h12l-2 5h-8z"/><path class="d" d="M77 68h12l-2 5h-8z"/><path class="d" d="M54 80h12l-2 5h-8z"/>',
+ "est": '<rect x="33" y="34" width="4.5" height="52" rx="1" fill="#16191b"/><rect x="82.5" y="34" width="4.5" height="52" rx="1" fill="#16191b"/><rect class="f" x="36" y="50" width="48" height="3.5"/><rect class="f" x="36" y="67" width="48" height="3.5"/><rect class="f" x="36" y="82" width="48" height="3.5"/>'
+        + "".join(f'<rect x="{x}" y="{y}" width="17" height="11" rx="1.5" fill="#fff" stroke="#16191b" stroke-width="1.8"/><rect x="{x}" y="{y}" width="17" height="3.6" fill="#037c75"/>' for x in (41, 62) for y in (38.5, 55.5))
+        + '<rect x="41" y="71.5" width="17" height="10" rx="1.5" fill="#fff" stroke="#16191b" stroke-width="1.8"/><rect x="41" y="71.5" width="17" height="3.4" fill="#037c75"/>',
 }
 CAT_KEY = {"hrs-controladores": "hrs", "resistencias-electricas": "res", "eoat-accesorio-robotica": "eoat", "estanterias-moldes": "est"}
 
+# los productos se apoyan en una sombra suave (pie del dibujo, en unidades del pictograma)
+CAT_FOOT = {"hrs": 84, "res": 79.5, "eoat": 87, "est": 88}
+
 def badge(key):
+    # dibujo de línea en dos tonos, sin marco (el cliente pidió quitar el octógono, 2026-11-24)
+    foot = CAT_FOOT.get(key)
+    shadow = f'<ellipse class="emb__floor" cx="60" cy="{foot + 2.5}" rx="28" ry="2.8"/>' if foot else ""
     return (f'<svg class="emb" viewBox="0 0 120 120" aria-hidden="true">'
-            f'<defs><linearGradient id="bg-{key}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#037c75"/><stop offset=".56" stop-color="#037c75"/>'
-            f'<stop offset=".56" stop-color="#5fb0a9"/><stop offset="1" stop-color="#5fb0a9"/></linearGradient></defs>'
-            f'<path class="emb__frame" fill="url(#bg-{key})" fill-rule="evenodd" d="{_octa(58)} {_octa(44)}"/>'
-            f'<path class="emb__in" d="{_octa(44)}"/><g class="emb__picto" transform="translate(60 60) scale(1.14) translate(-60 -60)">{SVC_PICTO.get(key) or CAT_PICTO[key]}</g></svg>')
+            f'<g class="emb__picto" transform="translate(60 60) scale(1.62) translate(-60 -60)">{shadow}{SVC_PICTO.get(key) or CAT_PICTO[key]}</g></svg>')
 ARROW = '<svg class="m-arrow" viewBox="0 0 12 12" aria-hidden="true"><path class="m-arrow__stem" d="M1 6h8"/><path class="m-arrow__head" d="M4.5 2.5 8 6l-3.5 3.5"/></svg>'
 
 # ---------------------------------------------------------------------------
@@ -113,7 +112,7 @@ CATS = [
             ("Accesorios perfil EOAT", "eoat-3.png", None, "Perfilería y uniones"),
             ("Pinzas de aguja y de expansión", "eoat-4.png", "pinzas-de-aguja-y-de-expansion", "Piezas blandas e interiores"),
             ("Pinzas neumáticas angulares de dedo", "eoat-5.png", "pinzas-neumaticas-paralelas-y-angulares", "De dos o tres dedos"),
-            ("Ventosas de vacío", "eoat-6.png", "ventosas-de-vacio", "Silicona, NBR y poliuretano"),
+            ("Ventosas de vacío", "p/ventosas-de-vacio-2.png", "ventosas-de-vacio", "Silicona, NBR y poliuretano"),
             ("Recuperadores", "eoat-7.png", None, None),
             ("Pistones paralelos", "eoat-8.png", None, None),
             ("Corte neumático", "eoat-9.png", None, None),
@@ -254,7 +253,7 @@ def head(title, desc, extra=""):
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="assets/img/favicon-32.png" sizes="32x32" type="image/png">
 <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
-<meta name="theme-color" content="#f4f6f6">
+<meta name="theme-color" content="#f2f3f3">
 <meta name="site-kind" content="tech">
 <meta name="page-type" content="product">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -266,10 +265,10 @@ def head(title, desc, extra=""):
 <link rel="stylesheet" href="assets/layout/layout.css">
 <style>
 :root {{
-  --p-bg: #f4f6f6; --p-surface: #e8eeee; --p-ink: #012c3d; --p-muted: #546d79;
-  --p-accent: #037c75; --p-accent-ink: #f4f6f6; --p-action: #037c75; --p-action-ink: #f4f6f6;
-  --p-inv-bg: #012c3d; --p-inv-surface: #143849; --p-inv-ink: #f4f6f6; --p-inv-muted: #93a3ab;
-  --p-inv-accent: #f4f6f6; --p-inv-accent-ink: #012c3d; --p-inv-action: #f4f6f6; --p-inv-action-ink: #012c3d;
+  --p-bg: #f2f3f3; --p-surface: #e5e7e7; --p-ink: #16191b; --p-muted: #596164;
+  --p-accent: #037c75; --p-accent-ink: #f2f3f3; --p-action: #037c75; --p-action-ink: #f2f3f3;
+  --p-inv-bg: #16191b; --p-inv-surface: #23282a; --p-inv-ink: #f2f3f3; --p-inv-muted: #9aa1a4;
+  --p-inv-accent: #f2f3f3; --p-inv-accent-ink: #16191b; --p-inv-action: #f2f3f3; --p-inv-action-ink: #16191b;
   --font-display: "IBM Plex Sans", system-ui, sans-serif;
   --font-text: "IBM Plex Sans", system-ui, sans-serif;
   --font-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
@@ -471,21 +470,36 @@ write("index.html", head("System Plast: componentes para inyectoras de plástico
      palette: colores del logo (start.mjs brand), type plex, radius sharp
      moments: line-carries-colour en #resistencias (la franja oscura) -->
 <main id="top">
-  <section class="hero hero--photo" data-enter data-calm="left" data-box="none" data-tone="dark" aria-labelledby="hero-h">
-    <!-- VÍDEO: Pexels 32386599 (licencia Pexels, uso libre). Se cambia aquí por el vídeo propio del cliente. -->
-    <video class="hero__bg" autoplay muted loop playsinline preload="metadata" poster="assets/video/maquina-poster.jpg" aria-hidden="true" style="--ly-pos: 70% 50%; --ly-pos-phone: 70% 50%" data-source="stand-in" data-subject="vacuum gripper on an automated line">
-      <source src="assets/video/maquina-640.mp4" type="video/mp4" media="(max-width: 639px)">
-      <source src="assets/video/maquina-720.mp4" type="video/mp4">
-    </video>
-    <div class="wrap"><div class="hero-text">
-      <div class="hero__text">
+  <!-- Portada showcase (2026-11-24): un robot de extracción con garra EOAT en 3D (assets/objects/product-render,
+       specs/sp-robot.json) sobre fondo de estudio, con lecturas tipo panel de control y los clientes debajo -->
+  <section class="hero hero--machine" data-enter aria-labelledby="hero-h">
+    <div class="wrap machine">
+      <div class="machine__head">
         <!-- Texto del cliente (2026-11-21), su opción 1: la portada empuja los accesorios de robot (EOAT) -->
         <h1 id="hero-h">Precisión y velocidad en cada movimiento</h1>
-        <p class="hero__lead">Garras, vacío y soluciones EOAT a medida con las mejores marcas del mercado.</p>
-        <div class="btn-row"><a class="btn btn--primary" href="contacto.html">Solicita asesoramiento{ARROW}</a><a class="btn btn--secondary" href="productos.html">Ver catálogo</a></div>
+        <div class="machine__side">
+          <p class="hero__lead">Garras, vacío y soluciones EOAT a medida con las mejores marcas del mercado.</p>
+          <div class="btn-row"><a class="btn btn--primary" href="contacto.html">Solicita asesoramiento{ARROW}</a><a class="btn btn--secondary" href="productos.html">Ver catálogo</a></div>
+        </div>
       </div>
-      <button class="loop-pause hero-pause" type="button" aria-label="Pausar el vídeo" aria-pressed="false" data-video-pause></button>
-    </div></div>
+      <div class="machine__stage">
+        <div class="machine__arm" id="arm" data-product="assets/objects/product-render/specs/sp-robot.json" data-product-place="hero"
+             data-product-params='{{"turn":1}}' data-product-palette='{{"bg":"#dfe2e2","surface":"#d5d9d9","ink":"#16191b","accent":"#037c75"}}'></div>
+        <div class="machine__hud" aria-hidden="true">
+        <span class="hud-mark hud-mark--base"><i class="hud-scan"></i></span>
+        <div class="hud hud--log" data-hud-log><p class="hud__state"><span class="hud__dot"></span>Estado: activo · modo extracción</p><ol>
+          <li><time>08:14:32</time> Ciclo 0418 · inicio</li>
+          <li><time>08:14:33</time> Vacío correcto · −0,82 bar</li>
+          <li><time>08:14:34</time> Pieza extraída del molde</li>
+          <li><time>08:14:36</time> Ciclo completado · 6,2 s</li>
+        </ol></div>
+        </div>
+      </div>
+      <div class="machine__trust">
+        <p class="machine__trust-h">Confían en nosotros</p>
+        <div class="machine__logos">{HOME_LOGOS}</div>
+      </div>
+    </div>
   </section>
 
   <section class="section ground-surface" id="catalogo" aria-labelledby="catalogo-h">
@@ -510,7 +524,6 @@ write("index.html", head("System Plast: componentes para inyectoras de plástico
         <li><strong data-count="128">128</strong><span>zonas por controlador</span></li>
         <li><strong data-count="24" data-suffix=" h">24 h</strong><span>para enviar recambios</span></li>
       </ul>
-      <div class="logos" aria-label="Algunos clientes">{HOME_LOGOS}</div>
     </div>
   </section>
 
@@ -582,7 +595,7 @@ write("index.html", head("System Plast: componentes para inyectoras de plástico
   </section>
 <span id="vt-parsed" hidden></span>
 </main>
-''' + footer(scripts='<script type="module" src="assets/js/site.js"></script>\n<script type="module" src="assets/js/home-motion.js"></script>\n' + REELS_JS))
+''' + footer(scripts='<script type="module" src="assets/js/site.js"></script>\n<script type="module" src="assets/objects/product-render/auto.js"></script>\n<script type="module" src="assets/js/home-motion.js"></script>\n' + REELS_JS))
 
 SITE_JS = '<script type="module" src="assets/js/site.js"></script>\n'
 
@@ -672,6 +685,8 @@ for slug, f in FICHAS.items():
         custom = '<p class="pdp-note">¿Necesita otra medida? Envíenos dimensiones, tensión, potencia, perforaciones y tipo de conexión.</p>'
     related = [it for it in cat["items"] if it[2] != slug][:4]
     rel_html = "".join(card(n, i, f"{s}.html" if s else contact_url(n, cat["name"])) for n, i, s, d in related)
+    # sin bloques de características (todo el texto va en la entrada), no se pinta el titular vacío
+    feats = f'<h2 class="pdp-body-h">Características {E(de(f["title"]))}</h2>\n  <div class="pdp-body">{blocks}</div>' if blocks else ""
     wa_text = quote(f"Hola, me interesa {f['title']} (System Plast). ¿Me pueden dar más información?")
     sub = f'<p class="pdp-sub">{E(f["subtitle"])}</p>' if f["subtitle"] else ""
     body = f'''<section class="pdp" data-enter><div class="wrap">
@@ -694,11 +709,10 @@ for slug, f in FICHAS.items():
     </div>
     <div class="gallery"><div class="gallery-main"><img data-gallery-main src="{img_src(main_img)}" width="700" height="700" alt="{E(f['title'])}"></div>{thumbs}</div>
   </div>
-  <h2 class="pdp-body-h">Características {E(de(f['title']))}</h2>
-  <div class="pdp-body">{blocks}</div>
+  {feats}
 </div></section>
 <section class="pg-section"><div class="wrap">
-  <div class="section-head section-head--row"><h2>Más de {E(cat['name'].lower() if cat['slug'] != 'hrs-controladores' else 'HRS controladores')}</h2><a class="link" href="{cat['slug']}.html">Ver la categoría</a></div>
+  <div class="section-head section-head--row"><h2>Más productos de {E(cat['name'])}</h2><a class="link" href="{cat['slug']}.html">Ver la categoría</a></div>
   <div class="prod-grid">{rel_html}</div>
 </div></section>
 '''
@@ -802,7 +816,7 @@ body = page_head("Presupuesto de controladores, resistencias y EOAT", "Cuénteno
     <div class="field"><label for="f-company">Empresa</label><input id="f-company" name="empresa" type="text" autocomplete="organization"></div>
     <div class="field"><label for="f-email">Email</label><input id="f-email" name="email" type="email" autocomplete="email" inputmode="email" required aria-describedby="f-email-err"><p class="field__error" id="f-email-err" hidden>Escriba un email con @, por ejemplo nombre@empresa.com.</p></div>
     <div class="field"><label for="f-cat">Producto de interés</label><select id="f-cat" name="producto">{opts}</select></div>
-    <div class="field"><label for="f-msg">Mensaje</label><textarea id="f-msg" name="mensaje" rows="5" required aria-describedby="f-msg-err"></textarea><p class="field__error" id="f-msg-err" hidden>Escriba qué producto o medida necesita.</p></div>
+    <div class="field field--full"><label for="f-msg">Mensaje</label><textarea id="f-msg" name="mensaje" rows="5" required aria-describedby="f-msg-err"></textarea><p class="field__error" id="f-msg-err" hidden>Escriba qué producto o medida necesita.</p></div>
     <div class="btn-row"><button class="btn btn--primary" type="submit">{MAIN_ACTION}</button></div>
     <p class="form__status" role="status" data-form-status></p>
     <p class="t-small">Al enviar acepta que usemos sus datos solo para responder a esta consulta.</p>

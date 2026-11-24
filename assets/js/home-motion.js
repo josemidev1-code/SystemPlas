@@ -23,8 +23,28 @@ if (!reduceMotion.matches && 'IntersectionObserver' in window) {
       requestAnimationFrame(tick);
     });
   }
-  // los emblemas (líneas de producto y servicios) se trazan: el marco se revela de arriba abajo y el dibujo llega después
+  // los dibujos (líneas de producto y servicios) aparecen uno tras otro, subiendo sobre su sombra
   const sets = [...document.querySelectorAll('.emb-set')];
   sets.forEach((el) => el.classList.add('is-armed'));
   once(sets, (el) => el.classList.add('is-in'), { threshold: 0.25 });
+}
+
+// Portada: el registro del robot escribe una línea nueva cada 2,2 s con la hora real (decorativo, aria-hidden).
+// Con movimiento reducido se queda con las cuatro líneas escritas en el HTML.
+const log = document.querySelector('[data-hud-log] ol');
+if (log && !reduceMotion.matches) {
+  const steps = ['Ciclo {n} · inicio', 'Bajada al molde · Z 412 mm', 'Vacío correcto · −0,82 bar', 'Pieza extraída del molde', 'Depósito en cinta', 'Ciclo completado · 6,2 s'];
+  let k = 0, n = 419;
+  const two = (v) => String(v).padStart(2, '0');
+  const tick = () => {
+    if (document.hidden) return;
+    const d = new Date(), li = document.createElement('li'), t = document.createElement('time');
+    t.textContent = `${two(d.getHours())}:${two(d.getMinutes())}:${two(d.getSeconds())}`;
+    li.append(t, ` ${steps[k].replace('{n}', String(n).padStart(4, '0'))}`);
+    li.className = 'is-new';
+    log.append(li);
+    while (log.children.length > 4) log.firstElementChild.remove();
+    k = (k + 1) % steps.length; if (k === 0) n++;
+  };
+  setInterval(tick, 2200);
 }
