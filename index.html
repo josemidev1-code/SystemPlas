@@ -100,36 +100,21 @@
      palette: colores del logo (start.mjs brand), type plex, radius sharp
      moments: line-carries-colour en #resistencias (la franja oscura) -->
 <main id="top">
-  <!-- Portada showcase (2026-11-24): un robot de extracción con garra EOAT en 3D (assets/objects/product-render,
-       specs/sp-robot.json) sobre fondo de estudio, con lecturas tipo panel de control y los clientes debajo -->
-  <section class="hero hero--machine" data-enter aria-labelledby="hero-h">
-    <div class="wrap machine">
-      <div class="machine__head">
+  <section class="hero hero--photo" data-enter data-calm="left" data-box="none" data-tone="dark" aria-labelledby="hero-h">
+    <!-- VÍDEO: Pexels 32386599 (licencia Pexels, uso libre). Se cambia aquí por el vídeo propio del cliente. -->
+    <video class="hero__bg" autoplay muted loop playsinline preload="metadata" poster="assets/video/maquina-poster.jpg" aria-hidden="true" style="--ly-pos: 70% 50%; --ly-pos-phone: 70% 50%" data-source="stand-in" data-subject="vacuum gripper on an automated line">
+      <source src="assets/video/maquina-640.mp4" type="video/mp4" media="(max-width: 639px)">
+      <source src="assets/video/maquina-720.mp4" type="video/mp4">
+    </video>
+    <div class="wrap"><div class="hero-text">
+      <div class="hero__text">
         <!-- Texto del cliente (2026-11-21), su opción 1: la portada empuja los accesorios de robot (EOAT) -->
         <h1 id="hero-h">Precisión y velocidad en cada movimiento</h1>
-        <div class="machine__side">
-          <p class="hero__lead">Garras, vacío y soluciones EOAT a medida con las mejores marcas del mercado.</p>
-          <div class="btn-row"><a class="btn btn--primary" href="contacto.html">Solicita asesoramiento<svg class="m-arrow" viewBox="0 0 12 12" aria-hidden="true"><path class="m-arrow__stem" d="M1 6h8"/><path class="m-arrow__head" d="M4.5 2.5 8 6l-3.5 3.5"/></svg></a><a class="btn btn--secondary" href="productos.html">Ver catálogo</a></div>
-        </div>
+        <p class="hero__lead">Garras, vacío y soluciones EOAT a medida con las mejores marcas del mercado.</p>
+        <div class="btn-row"><a class="btn btn--primary" href="contacto.html">Solicita asesoramiento<svg class="m-arrow" viewBox="0 0 12 12" aria-hidden="true"><path class="m-arrow__stem" d="M1 6h8"/><path class="m-arrow__head" d="M4.5 2.5 8 6l-3.5 3.5"/></svg></a><a class="btn btn--secondary" href="productos.html">Ver catálogo</a></div>
       </div>
-      <div class="machine__stage">
-        <div class="machine__arm" id="arm" data-product="assets/objects/product-render/specs/sp-robot.json" data-product-place="hero"
-             data-product-params='{"turn":1}' data-product-palette='{"bg":"#dfe2e2","surface":"#d5d9d9","ink":"#16191b","accent":"#037c75"}'></div>
-        <div class="machine__hud" aria-hidden="true">
-        <span class="hud-mark hud-mark--base"><i class="hud-scan"></i></span>
-        <div class="hud hud--log" data-hud-log><p class="hud__state"><span class="hud__dot"></span>Estado: activo · modo extracción</p><ol>
-          <li><time>08:14:32</time> Ciclo 0418 · inicio</li>
-          <li><time>08:14:33</time> Vacío correcto · −0,82 bar</li>
-          <li><time>08:14:34</time> Pieza extraída del molde</li>
-          <li><time>08:14:36</time> Ciclo completado · 6,2 s</li>
-        </ol></div>
-        </div>
-      </div>
-      <div class="machine__trust">
-        <p class="machine__trust-h">Confían en nosotros</p>
-        <div class="machine__logos"><img src="assets/img/industria-1.png" alt="Samsung" width="300" height="300" loading="lazy"><img src="assets/img/industria-2.png" alt="Midea" width="300" height="300" loading="lazy"><img src="assets/img/industria-3.png" alt="Valeo" width="300" height="300" loading="lazy"><img src="assets/img/industria-4.png" alt="Gree" width="300" height="300" loading="lazy"><img src="assets/img/industria-5.png" alt="Hasco" width="300" height="300" loading="lazy"><img src="assets/img/industria-6.png" alt="Sharp" width="300" height="300" loading="lazy"></div>
-      </div>
-    </div>
+      <button class="loop-pause hero-pause" type="button" aria-label="Pausar el vídeo" aria-pressed="false" data-video-pause></button>
+    </div></div>
   </section>
 
   <section class="section ground-surface" id="catalogo" aria-labelledby="catalogo-h">
@@ -166,6 +151,7 @@
         <li><strong data-count="128">128</strong><span>zonas por controlador</span></li>
         <li><strong data-count="24" data-suffix=" h">24 h</strong><span>para enviar recambios</span></li>
       </ul>
+      <div class="logos" aria-label="Algunos clientes"><img src="assets/img/industria-1.png" alt="Samsung" width="300" height="300" loading="lazy"><img src="assets/img/industria-2.png" alt="Midea" width="300" height="300" loading="lazy"><img src="assets/img/industria-3.png" alt="Valeo" width="300" height="300" loading="lazy"><img src="assets/img/industria-4.png" alt="Gree" width="300" height="300" loading="lazy"><img src="assets/img/industria-5.png" alt="Hasco" width="300" height="300" loading="lazy"><img src="assets/img/industria-6.png" alt="Sharp" width="300" height="300" loading="lazy"></div>
     </div>
   </section>
 
@@ -283,7 +269,6 @@
 <script type="module" src="assets/motion/motion.js"></script>
 <script type="module" src="assets/layout/layout.js"></script>
 <script type="module" src="assets/js/site.js"></script>
-<script type="module" src="assets/objects/product-render/auto.js"></script>
 <script type="module" src="assets/js/home-motion.js"></script>
 <script type="module" src="assets/js/reels.js"></script>
 </body>
