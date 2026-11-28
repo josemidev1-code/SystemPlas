@@ -98,6 +98,11 @@ class SinAnimacion(Base):
                 # portada: traza los emblemas (decorativos) y cuenta las cifras (siempre con número); no oculta texto
                 self.assertNotRegex(src, r"\breveal\b")
                 self.lacks("visibility", src)
+            elif os.path.basename(f) == "catalogo3d.js":
+                # escena 3D: solo retrasa la carga de WebGL y los GLB hasta que la escena está cerca; el póster
+                # y la lista de accesorios están siempre a la vista, no oculta ni revela texto
+                self.assertNotRegex(src, r"\breveal\b")
+                self.lacks("opacity = 0", src)
             elif os.path.basename(f) == "entrance.js":
                 self.has("decor-line--in", src)
                 self.assertNotRegex(src, r"\breveal\b")  # la clase de aparición antigua (pagereveal no cuenta)

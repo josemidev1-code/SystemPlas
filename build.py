@@ -235,7 +235,8 @@ def ld(obj):
     return '<script type="application/ld+json">' + json.dumps(obj, ensure_ascii=False).replace("</", "<\\/") + "</script>\n"
 
 
-def head(title, desc, extra=""):
+def head(title, desc, extra="", pre=""):
+    # pre: lo que debe ir antes de cualquier módulo (un importmap)
     return f'''<!doctype html>
 <html lang="es" data-type="product" data-radius="sharp" data-buttons="solid" data-motion>
 <head>
@@ -243,7 +244,7 @@ def head(title, desc, extra=""):
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>{E(title)}</title>
 <meta name="description" content="{E(desc)}">
-<meta property="og:type" content="website">
+{pre}<meta property="og:type" content="website">
 <meta property="og:title" content="{E(title)}">
 <meta property="og:description" content="{E(desc)}">
 <meta property="og:image" content="{BASE_URL}share.jpg">
@@ -586,11 +587,11 @@ write("index.html", head("System Plast: componentes para inyectoras de plástico
 SITE_JS = '<script type="module" src="assets/js/site.js"></script>\n'
 
 
-def inner(title, desc, active, body, close_line=None, extra="", scripts=""):
+def inner(title, desc, active, body, close_line=None, extra="", scripts="", pre=""):
     kw = {"scripts": SITE_JS + scripts}
     if close_line:
         kw["close_line"] = close_line
-    write_html = head(title, desc, extra) + nav(active) + '<main id="top">\n<div class="page">\n' + body + '</div>\n<span id="vt-parsed" hidden></span>\n</main>\n' + footer(**kw)
+    write_html = head(title, desc, extra, pre) + nav(active) + '<main id="top">\n<div class="page">\n' + body + '</div>\n<span id="vt-parsed" hidden></span>\n</main>\n' + footer(**kw)
     return write_html
 
 
@@ -742,8 +743,80 @@ for c in CATS:
 cats_html = "".join(card(c["name"], CAT_IMG[c["slug"]], f"{c['slug']}.html", CAT_LINE[c["slug"]]) for c in CATS)
 body = page_head("Accesorios EOAT para su robot de extracción", "Garras, ventosas y cambiadores rápidos para montar la garra de cada pieza, junto a todo lo que necesita su inyectora.", [("Productos", None)], photo=("assets/img/eoat-garra-2.jpg", "Garra EOAT con ventosas de vacío sobre el suelo de la nave")) + \
     f'<section class="pg-section"><div class="wrap"><h2 class="grid-h">Cuatro líneas de producto</h2><div class="prod-grid">{cats_html}</div></div></section>\n' + \
+    band("Vea cada accesorio en su sitio", "Resistencias de cilindro y boquilla, EOAT y controlador HRS montados sobre una inyectora en 3D.", "Abrir la vista 3D", "catalogo-3d.html").replace("pg-band ground-surface", "pg-band", 1) + \
     band("Soluciones a medida", "Diseñamos cajas de control y resistencias que se integran en su línea de producción tal como está.", "Contar su proyecto", "contacto.html")
 write("productos.html", inner("Productos | System Plast", "Catálogo System Plast: controladores HRS de canal caliente, resistencias eléctricas, EOAT para robótica y estanterías para moldes.", "productos.html", body))
+
+# ---------------------------------------------------------------------------
+# Accesorios en 3D: la inyectora genérica (CC0) como escenario y los accesorios montados en ella
+# ---------------------------------------------------------------------------
+CAT3D = json.load(open(os.path.join(OUT, "data", "accesorios3d.json"), encoding="utf-8"))
+CAT_BY_SLUG = {c["slug"]: c for c in CATS}
+VENDOR_THREE = "assets/vendor/three-0.170.0"
+
+
+def cat3d_variant(v):
+    """Completa una variante con su texto, su enlace y su presupuesto desde la ficha o la categoría."""
+    out = {k: v[k] for k in ("id", "nombre", "glb")}
+    # validado: el GLB se ha comprobado fuera de la página contra la máquina (eje, paso interior, escala, holguras)
+    out["validado"] = bool(v.get("validado", False))
+    # sin el GLB la página dibuja un volumen en su lugar y no lo pide (ni un 404 en consola)
+    out["disponible"] = os.path.isfile(os.path.join(OUT, v["glb"]))
+    if v.get("ficha"):
+        f, cat = FICHAS[v["ficha"]], CAT_BY_PRODUCT[v["ficha"]]
+        out.update(url=f"{v['ficha']}.html", enlace=f"Ver ficha: {f['title']}", texto=f["subtitle"],
+                   presupuesto=contact_url(f["title"], cat["name"]))
+    else:
+        c = CAT_BY_SLUG[v["categoria"]]
+        out.update(url=f"{c['slug']}.html", enlace="Ver productos de la categoría", texto=CAT_LINE[c["slug"]],
+                   presupuesto=contact_url(c["name"], c["name"]))
+    return out
+
+
+def cat3d_page():
+    accs = [dict(a, variantes=[cat3d_variant(v) for v in a["variantes"]]) for a in CAT3D["accesorios"]]
+    data = {"maquina": CAT3D["maquina"], "vistas": CAT3D["vistas"], "accesorios": accs}
+    items = "".join(f'''<li><button class="cat3d__item" type="button" data-cat3d-item="{a["id"]}" aria-pressed="false">
+        <span class="cat3d__item-name">{E(a["nombre"])}</span><span class="cat3d__item-sub">{E(a["variantes"][0]["texto"])}</span>
+        <span class="cat3d__chip" data-cat3d-chip></span></button></li>''' for a in accs)
+    fallback_links = "".join(f'<li><a href="{E(a["variantes"][0]["url"])}">{E(a["nombre"])}</a></li>' for a in accs)
+    poster = CAT3D["maquina"]["poster"]
+    data_json = json.dumps(data, ensure_ascii=False).replace("</", "<\\/")
+    pre = f'''<script type="importmap">{{"imports":{{"three":"./{VENDOR_THREE}/build/three.module.min.js","three/addons/":"./{VENDOR_THREE}/examples/jsm/"}}}}</script>
+'''
+    body = page_head("Accesorios montados en una inyectora", "Vea dónde va cada accesorio System Plast: resistencias de cilindro y boquilla, EOAT para el robot y controlador de canal caliente.", [("Productos", "productos.html"), ("Accesorios en 3D", None)]) + f'''<section class="pg-section cat3d-section"><div class="wrap">
+  <div class="cat3d" data-cat3d data-cat3d-state="idle">
+    <div class="cat3d__stage" data-cat3d-stage>
+      <img class="cat3d__poster" src="{poster}" width="1600" height="1000" alt="Inyectora con los puntos de montaje de los accesorios System Plast" loading="lazy" decoding="async">
+      <p class="cat3d__status" role="status" data-cat3d-status>Preparando la escena 3D…</p>
+      <p class="cat3d__hint" aria-hidden="true">Arrastre para girar · rueda o pellizco para acercar · toque un accesorio</p>
+    </div>
+    <aside class="cat3d__side" aria-label="Accesorios">
+      <h2 class="cat3d__h">Accesorios en la máquina</h2>
+      <label class="cat3d__quality">Calidad gráfica <select data-cat3d-quality aria-label="Calidad gráfica"><option value="auto">Automática</option><option value="static">Imagen estática</option><option value="medium">3D ligero</option><option value="high">3D detallado</option></select></label>
+      <ul class="cat3d__fallback-links" aria-label="Fichas de accesorios">{fallback_links}</ul>
+      <ul class="cat3d__list">{items}</ul>
+      <div class="cat3d__panel" data-cat3d-panel hidden aria-live="polite">
+        <p class="cat3d__variant t-label" data-cat3d-variant></p>
+        <h3 class="cat3d__name" data-cat3d-name></h3>
+        <p class="cat3d__text" data-cat3d-text></p>
+        <p class="cat3d__pending t-small" data-cat3d-pending hidden>Modelo 3D en preparación: el volumen marca su posición y su tamaño aproximado.</p>
+        <div class="cat3d__variants" data-cat3d-variants hidden></div>
+        <div class="btn-row"><a class="btn btn--primary" href="contacto.html" data-cat3d-quote>{MAIN_ACTION}{ARROW}</a><a class="btn btn--secondary" href="productos.html" data-cat3d-link><span>Ver ficha</span></a></div>
+      </div>
+      <button class="btn btn--secondary cat3d__reset" type="button" data-cat3d-reset hidden>Vista general</button>
+      <p class="cat3d__note t-small">La inyectora y el robot son ilustrativos y no forman parte del catálogo. System Plast suministra los accesorios señalados. Medidas orientativas.</p>
+    </aside>
+  </div>
+</div></section>
+<script type="application/json" id="cat3d-data">{data_json}</script>
+'''
+    write("catalogo-3d.html", inner("Accesorios en 3D | System Plast",
+          "Vea en 3D dónde se montan las resistencias, el EOAT y el controlador HRS de System Plast en una inyectora.",
+          "productos.html", body, pre=pre, scripts='<script type="module" src="assets/js/catalogo3d.js"></script>\n'))
+
+
+cat3d_page()
 
 # ---------------------------------------------------------------------------
 # Quiénes somos

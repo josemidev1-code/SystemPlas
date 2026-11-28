@@ -688,3 +688,61 @@ footer.closing { padding-top: 0; }
       linear-gradient(180deg, rgb(22 25 27 / .30) 0%, transparent 28%, transparent 72%, rgb(22 25 27 / .42) 100%);
   }
 }
+
+/* ---------------------------------------------------------------------------
+   Accesorios en 3D (catalogo-3d.html): escena Three.js y lista de accesorios
+   --------------------------------------------------------------------------- */
+.cat3d { display: grid; grid-template-columns: minmax(0, 1fr) 360px; gap: var(--s-6); align-items: start; }
+.cat3d__stage { --cat3d-bg: #e5e7e7; scroll-margin-top: calc(var(--nav, 64px) + var(--s-4)); position: relative; aspect-ratio: 16 / 10; background: var(--cat3d-bg); border-radius: var(--r-lg); overflow: hidden; touch-action: none; }
+.cat3d__canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; outline: none; }
+.cat3d__poster { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: opacity .4s; }
+.cat3d[data-cat3d-state="ready"] .cat3d__poster { opacity: 0; pointer-events: none; }
+.cat3d__status { position: absolute; left: var(--s-4); top: var(--s-4); right: var(--s-4); width: fit-content; max-width: calc(100% - 2 * var(--s-4));
+  margin: 0; padding: var(--s-2) var(--s-3); border-radius: var(--r-sm); background: color-mix(in oklab, var(--p-bg) 88%, transparent);
+  color: var(--p-ink); font-size: var(--t-small); line-height: 1.4; }
+.cat3d__status, .cat3d__hint { z-index: 1; }
+.cat3d[data-cat3d-state="ready"] .cat3d__status { position: absolute; width: 1px; height: 1px; padding: 0; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+.cat3d__status[data-kind="warn"] { background: var(--p-ink); color: var(--p-bg); }
+.cat3d__hint { position: absolute; left: var(--s-4); bottom: var(--s-4); margin: 0; padding: var(--s-1) var(--s-3); border-radius: var(--r-sm);
+  background: color-mix(in oklab, var(--p-bg) 80%, transparent); color: var(--p-muted); font-size: 13px; pointer-events: none; }
+.cat3d[data-cat3d-state="fallback"] .cat3d__hint { display: none; }
+.cat3d__side { display: flex; flex-direction: column; gap: var(--s-4); }
+.cat3d__h { font: var(--display-weight) var(--t-h3)/1.2 var(--font-display); letter-spacing: var(--display-tracking); margin: 0; }
+.cat3d__list { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--s-2); }
+.cat3d__item { width: 100%; display: grid; gap: 2px; text-align: left; font: inherit; color: var(--p-ink); cursor: pointer;
+  padding: var(--s-3) var(--s-4); border: 1px solid var(--line-strong); border-radius: var(--r-md); background: var(--p-bg);
+  transition: border-color .2s, background-color .2s; }
+.cat3d__item:hover { border-color: var(--p-accent); }
+.cat3d__item:focus-visible { outline: 2px solid var(--p-accent); outline-offset: 2px; }
+.cat3d__item[aria-pressed="true"] { border-color: var(--p-accent); background: color-mix(in oklab, var(--p-accent) 9%, var(--p-bg)); }
+.cat3d__item-name { font-weight: 500; }
+.cat3d__item-sub { color: var(--p-muted); font-size: var(--t-small); line-height: 1.4; }
+.cat3d__chip:empty { display: none; }
+.cat3d__chip { justify-self: start; margin-top: var(--s-1); padding: 1px var(--s-2); border-radius: var(--r-sm); font-size: 12px;
+  background: var(--p-surface); color: var(--p-muted); }
+.cat3d__panel { padding: var(--s-5); border-radius: var(--r-md); background: var(--p-surface); display: grid; gap: var(--s-3); }
+.cat3d__panel[hidden] { display: none; }
+.cat3d__variant { margin: 0; color: var(--p-accent); }
+.cat3d__name { margin: 0; }
+.cat3d__text, .cat3d__pending { margin: 0; color: var(--p-muted); }
+.cat3d__variants { display: flex; flex-wrap: wrap; gap: var(--s-2); }
+.cat3d__variants[hidden] { display: none; }
+.cat3d__chipbtn { font: inherit; font-size: var(--t-small); padding: var(--s-2) var(--s-3); border-radius: var(--r-btn); cursor: pointer;
+  border: 1px solid var(--line-strong); background: var(--p-bg); color: var(--p-ink); }
+.cat3d__chipbtn[aria-pressed="true"] { border-color: var(--p-accent); color: var(--p-accent); }
+.cat3d__chipbtn:focus-visible { outline: 2px solid var(--p-accent); outline-offset: 2px; }
+.cat3d__reset { align-self: start; }
+.cat3d__reset[hidden] { display: none; }
+.cat3d__note { margin: 0; color: var(--p-muted); }
+@media (max-width: 1023px) {
+  .cat3d { grid-template-columns: minmax(0, 1fr); }
+  .cat3d__stage { aspect-ratio: 4 / 3.4; }
+  .cat3d__panel { order: -1; }
+}
+@media (max-width: 639px) {
+  .cat3d__stage { aspect-ratio: 4 / 4.6; border-radius: var(--r-md); }
+  .cat3d__hint { display: none; }
+}
+
+/* Calidad y respaldo del catálogo: enlaces HTML disponibles antes de cargar JavaScript. */
+.cat3d__quality{display:flex;align-items:center;justify-content:space-between;gap:8px;margin:0 0 12px;font-size:.875rem}.cat3d__quality select{max-width:65%;font:inherit;padding:6px 8px;border:1px solid currentColor;border-radius:6px;background:var(--p-bg,#fff);color:inherit}.cat3d__fallback-links{display:grid;gap:8px;padding-left:1.2rem;margin:10px 0}.cat3d:not([data-cat3d-state="ready"]) .cat3d__list{display:none}.cat3d[data-cat3d-state="ready"] .cat3d__fallback-links{display:none}.cat3d[data-cat3d-state="fallback"] .cat3d__canvas{display:none}.cat3d[data-cat3d-state="fallback"] .cat3d__hint{display:none}.cat3d[data-cat3d-state="fallback"] .cat3d__stage{touch-action:auto}
