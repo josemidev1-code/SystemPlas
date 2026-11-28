@@ -760,6 +760,8 @@ def cat3d_variant(v):
     out = {k: v[k] for k in ("id", "nombre", "glb")}
     # validado: el GLB se ha comprobado fuera de la página contra la máquina (eje, paso interior, escala, holguras)
     out["validado"] = bool(v.get("validado", False))
+    out["aproximacion"] = bool(v.get("aproximacion", False))
+    out["aviso"] = v.get("aviso", "")
     # sin el GLB la página dibuja un volumen en su lugar y no lo pide (ni un 404 en consola)
     out["disponible"] = os.path.isfile(os.path.join(OUT, v["glb"]))
     if v.get("ficha"):
@@ -805,7 +807,7 @@ def cat3d_page():
         <div class="btn-row"><a class="btn btn--primary" href="contacto.html" data-cat3d-quote>{MAIN_ACTION}{ARROW}</a><a class="btn btn--secondary" href="productos.html" data-cat3d-link><span>Ver ficha</span></a></div>
       </div>
       <button class="btn btn--secondary cat3d__reset" type="button" data-cat3d-reset hidden>Vista general</button>
-      <p class="cat3d__note t-small">La inyectora y el robot son ilustrativos y no forman parte del catálogo. System Plast suministra los accesorios señalados. Medidas orientativas.</p>
+      <p class="cat3d__note t-small">La inyectora y el robot son ilustrativos y no forman parte del catálogo. System Plast suministra los accesorios señalados. Modelos ilustrativos; medidas y encajes orientativos, no certificados.</p>
     </aside>
   </div>
 </div></section>

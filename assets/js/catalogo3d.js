@@ -20,10 +20,10 @@ const coarse = matchMedia('(pointer: coarse)').matches;
 const qualityEl = root.querySelector('[data-cat3d-quality]');
 const QUALITY_KEY = 'systemplast-cat3d-quality';
 let choice = 'auto';
-try { choice = localStorage.getItem(QUALITY_KEY) || 'auto'; } catch {}
+try { choice = new URLSearchParams(location.search).get('calidad') || localStorage.getItem(QUALITY_KEY) || 'auto'; } catch {}
 if (!['auto', 'static', 'medium', 'high'].includes(choice)) choice = 'auto';
 qualityEl.value = choice;
-qualityEl.addEventListener('change', () => { try { localStorage.setItem(QUALITY_KEY, qualityEl.value); } catch {} location.reload(); });
+qualityEl.addEventListener('change', () => { try { localStorage.setItem(QUALITY_KEY, qualityEl.value); } catch {} const url = new URL(location.href); url.searchParams.set('calidad', qualityEl.value); location.assign(url); });
 const memory = navigator.deviceMemory || 8;
 const cores = navigator.hardwareConcurrency || 4;
 let quality = choice === 'auto' ? (navigator.connection?.saveData || memory <= 2 ? 'static' : coarse || memory <= 4 || cores <= 4 ? 'medium' : 'high') : choice;
@@ -34,7 +34,7 @@ const ACCENT = new THREE.Color(getComputedStyle(root).getPropertyValue('--p-acce
 const css = n => getComputedStyle(stage).getPropertyValue(n).trim();
 
 function webglOk() {
-  try { const c = document.createElement('canvas'); return !!(c.getContext('webgl2') || c.getContext('webgl')); } catch (e) { return false; }
+  try { const c = document.createElement('canvas'); const gl = c.getContext('webgl2'); if (!gl) return false; gl.getExtension('WEBGL_lose_context')?.loseContext(); return true; } catch (e) { return false; }
 }
 
 function setStatus(t, kind = '') { statusEl.textContent = t; statusEl.dataset.kind = kind; }
@@ -53,6 +53,7 @@ if (quality === 'static' || !webglOk()) {
 
 function fail(e) {
   console.error(e);
+  api.ready = false;
   api.error = String(e && e.message || e);
   root.dataset.cat3dState = 'fallback';
   setStatus('No se ha podido cargar la máquina 3D. Se muestra una imagen fija.', 'warn');
@@ -189,25 +190,24 @@ async function init() {
     }
   }
 
-  // Solo se monta un GLB validado fuera de la página (eje del agujero, paso interior, escala, origen y holguras
-  // comprobados sobre el modelo real) y ya en coordenadas del nodo de montaje. Aquí no se adivina nada:
-  // un GLB presente pero sin validar sigue mostrándose como volumen.
+  // Las variantes verificadas y las aproximaciones explícitas se montan en coordenadas locales.
+  // Las restantes conservan un volumen provisional.
   async function loadVariant(acc, variant) {
     const g = groups[acc.id];
     g.variant = variant.id;
     let model = null;
-    if (variant.disponible && variant.validado) {
+    if ((variant.disponible && variant.validado) || (variant.disponible && variant.aproximacion)) {
       try { model = (await loader.loadAsync(variant.glb)).scene; } catch (e) { console.warn('cat3d: no se pudo cargar', variant.glb, e); model = null; }
     }
-    g.placeholder = !model;
     if (g.variant !== variant.id) return; // se cambió de variante mientras cargaba
+    g.placeholder = !model;
     for (const h of g.holders) {
       h.clear();
       const obj = model ? model.clone(true) : placeholder(acc);
       obj.traverse(o => { if (o.isMesh) { o.castShadow = renderer.shadowMap.enabled && !g.placeholder; o.material = o.material.clone(); } });
       h.add(obj);
     }
-    const estado = model ? 'glb' : variant.disponible ? 'sin-validar' : 'pendiente';
+    const estado = model ? (variant.validado ? 'glb' : 'aproximacion') : variant.disponible ? 'sin-validar' : 'pendiente';
     api.accesorios[acc.id] = { variante: variant.id, modelo: estado, instancias: g.holders.length };
     syncPanel(); request();
   }
@@ -287,7 +287,7 @@ async function init() {
     for (const b of listBtns) {
       const st = api.accesorios[b.dataset.cat3dItem];
       const chip = b.querySelector('[data-cat3d-chip]');
-      if (chip && st) chip.textContent = st.modelo === 'glb' ? '' : st.modelo === 'sin-validar' ? 'Modelo en validación' : 'Modelo en preparación';
+      if (chip && st) chip.textContent = st.modelo === 'glb' ? '' : st.modelo === 'aproximacion' ? 'Modelo orientativo' : st.modelo === 'sin-validar' ? 'Modelo en validación' : 'Modelo en preparación';
     }
     if (!acc) return;
     const g = groups[acc.id], v = acc.variantes.find(x => x.id === g.variant) || acc.variantes[0];
@@ -295,8 +295,8 @@ async function init() {
     panel.querySelector('[data-cat3d-variant]').textContent = v.nombre;
     panel.querySelector('[data-cat3d-text]').textContent = v.texto || '';
     const pendEl = panel.querySelector('[data-cat3d-pending]');
-    pendEl.hidden = !g.placeholder;
-    pendEl.textContent = v.disponible && !v.validado
+    pendEl.hidden = !g.placeholder && !v.aproximacion;
+    pendEl.textContent = v.aproximacion && !g.placeholder ? "Representación orientativa: dimensiones y encaje pendientes de validación industrial. " + (v.aviso || "") : v.disponible && !v.validado
       ? 'Modelo 3D en validación: hasta comprobar su encaje en la máquina, el volumen marca su posición y su tamaño aproximado.'
       : 'Modelo 3D en preparación: el volumen marca su posición y su tamaño aproximado.';
     const link = panel.querySelector('[data-cat3d-link]'); link.href = v.url; link.querySelector('span').textContent = v.enlace;
@@ -325,8 +325,8 @@ async function init() {
   document.addEventListener('visibilitychange', () => { if (!document.hidden) request(); });
 
   root.dataset.cat3dState = 'ready';
-  const pend = Object.values(api.accesorios).filter(a => a.modelo !== 'glb').length;
-  setStatus(pend ? `Máquina lista. ${pend} de ${data.accesorios.length} accesorios se muestran como volumen mientras preparamos su modelo.` : 'Máquina y accesorios listos.');
+  const pend = Object.values(api.accesorios).filter(a => !['glb', 'aproximacion'].includes(a.modelo)).length;
+  setStatus(pend ? `Máquina lista. ${pend} de ${data.accesorios.length} accesorios se muestran como volumen mientras preparamos su modelo.` : 'Máquina y accesorios listos. Los modelos orientativos no están certificados dimensionalmente.');
   api.ready = true; api.quality = () => quality;
   api.select = select;
   api.info = () => ({ calls: renderer.info.render.calls, triangles: renderer.info.render.triangles, textures: renderer.info.memory.textures, geometries: renderer.info.memory.geometries });

@@ -5,53 +5,199 @@
     "licencia": "Inyectora 150 t de Innerscene (CC0 1.0), modificada con boquilla y puntos de montaje"
   },
   "vistas": {
-    "general":  { "pos": [3.7, 2.75, 4.3],  "target": [-0.05, 0.85, -0.1] },
-    "cilindro": { "pos": [0.95, 1.65, 1.75], "target": [0.55, 1.05, 0] },
-    "boquilla": { "pos": [0.32, 1.32, 0.85], "target": [-0.07, 1.05, 0] },
-    "eoat":     { "pos": [-0.15, 2.55, 1.5],  "target": [-0.62, 1.15, -0.05] },
-    "hrs":      { "pos": [1.85, 1.75, -2.75], "target": [0.15, 0.85, -0.85] }
+    "general": {
+      "pos": [
+        3.7,
+        2.75,
+        4.3
+      ],
+      "target": [
+        -0.05,
+        0.85,
+        -0.1
+      ]
+    },
+    "cilindro": {
+      "pos": [
+        0.95,
+        1.65,
+        1.75
+      ],
+      "target": [
+        0.55,
+        1.05,
+        0
+      ]
+    },
+    "boquilla": {
+      "pos": [
+        0.32,
+        1.32,
+        0.85
+      ],
+      "target": [
+        -0.07,
+        1.05,
+        0
+      ]
+    },
+    "eoat": {
+      "pos": [
+        -0.15,
+        2.55,
+        1.5
+      ],
+      "target": [
+        -0.62,
+        1.15,
+        -0.05
+      ]
+    },
+    "hrs": {
+      "pos": [
+        1.85,
+        1.75,
+        -2.75
+      ],
+      "target": [
+        0.15,
+        0.85,
+        -0.85
+      ]
+    }
   },
   "accesorios": [
     {
       "id": "resistencia-cilindro",
       "nombre": "Resistencias de cilindro",
       "vista": "cilindro",
-      "montajes": ["MONTAJE_CILINDRO_Z1", "MONTAJE_CILINDRO_Z2", "MONTAJE_CILINDRO_Z3", "MONTAJE_CILINDRO_Z4"],
-      "ajuste": { "tipo": "anillo", "caja": [0.14, 0.23, 0.23], "diametro_int": 0.18, "apoyo": "centro" },
+      "montajes": [
+        "MONTAJE_CILINDRO_Z1",
+        "MONTAJE_CILINDRO_Z2",
+        "MONTAJE_CILINDRO_Z3",
+        "MONTAJE_CILINDRO_Z4"
+      ],
+      "ajuste": {
+        "tipo": "anillo",
+        "caja": [
+          0.14,
+          0.23,
+          0.23
+        ],
+        "diametro_int": 0.18,
+        "apoyo": "centro"
+      },
       "variantes": [
-        { "id": "ceramica", "nombre": "Banda cerámica", "glb": "assets/3d/accesorios/acc-resistencia-cilindro.glb", "ficha": "anillo-calefactor-ceramico", "validado": false },
-        { "id": "mica", "nombre": "Banda de mica", "glb": "assets/3d/accesorios/acc-resistencia-cilindro-mica.glb", "ficha": "resistencia-en-acero-inoxidable-de-mica", "validado": false }
+        {
+          "id": "ceramica",
+          "nombre": "Banda cerámica",
+          "glb": "assets/3d/accesorios/acc-resistencia-cilindro.glb",
+          "ficha": "anillo-calefactor-ceramico",
+          "validado": false,
+          "aproximacion": true,
+          "aviso": "Paso interior comprobado en el candidato; ancho 229 mm y diámetro exterior aproximado 278 mm, superiores a la reserva prevista."
+        },
+        {
+          "id": "mica",
+          "nombre": "Banda de mica",
+          "glb": "assets/3d/accesorios/acc-resistencia-cilindro-mica.glb",
+          "ficha": "resistencia-en-acero-inoxidable-de-mica",
+          "validado": false
+        }
       ]
     },
     {
       "id": "resistencia-boquilla",
       "nombre": "Resistencia de boquilla",
       "vista": "boquilla",
-      "montajes": ["MONTAJE_BOQUILLA"],
-      "ajuste": { "tipo": "anillo", "caja": [0.085, 0.11, 0.11], "diametro_int": 0.07, "apoyo": "centro" },
+      "montajes": [
+        "MONTAJE_BOQUILLA"
+      ],
+      "ajuste": {
+        "tipo": "anillo",
+        "caja": [
+          0.085,
+          0.11,
+          0.11
+        ],
+        "diametro_int": 0.07,
+        "apoyo": "centro"
+      },
       "variantes": [
-        { "id": "cobre", "nombre": "Cobre", "glb": "assets/3d/accesorios/acc-resistencia-boquilla.glb", "ficha": "resistencia-en-cobre-puro", "validado": false }
+        {
+          "id": "cobre",
+          "nombre": "Cobre",
+          "glb": "assets/3d/accesorios/acc-resistencia-boquilla.glb",
+          "ficha": "resistencia-en-cobre-puro",
+          "validado": false,
+          "aproximacion": true,
+          "aviso": "Envolvente de terminales superior a la reserva prevista; encaje no certificado."
+        }
       ]
     },
     {
       "id": "eoat",
       "nombre": "EOAT para robot",
       "vista": "eoat",
-      "montajes": ["MONTAJE_EOAT"],
-      "ajuste": { "tipo": "caja", "caja": [0.26, 0.40, 0.50], "apoyo": "centro" },
+      "montajes": [
+        "MONTAJE_EOAT"
+      ],
+      "ajuste": {
+        "tipo": "caja",
+        "caja": [
+          0.26,
+          0.4,
+          0.5
+        ],
+        "apoyo": "centro"
+      },
       "variantes": [
-        { "id": "brazo-pinzas", "nombre": "Brazo con pinzas", "glb": "assets/3d/accesorios/acc-eoat.glb", "categoria": "eoat-accesorio-robotica", "validado": false }
+        {
+          "id": "brazo-pinzas",
+          "nombre": "Brazo con pinzas",
+          "glb": "assets/3d/accesorios/acc-eoat.glb",
+          "categoria": "eoat-accesorio-robotica",
+          "validado": false,
+          "aproximacion": true,
+          "aviso": "Modelado desde una foto de catálogo; caras ocultas y unión al robot son hipótesis."
+        }
       ]
     },
     {
       "id": "hrs",
       "nombre": "Controlador HRS",
       "vista": "hrs",
-      "montajes": ["MONTAJE_HRS"],
-      "ajuste": { "tipo": "caja", "caja": [0.45, 0.30, 0.25], "apoyo": "base", "desplazamiento": [0, 0.8, 0] },
-      "extras": ["carro", "cable"],
+      "montajes": [
+        "MONTAJE_HRS"
+      ],
+      "ajuste": {
+        "tipo": "caja",
+        "caja": [
+          0.45,
+          0.3,
+          0.25
+        ],
+        "apoyo": "base",
+        "desplazamiento": [
+          0,
+          0.8,
+          0
+        ]
+      },
+      "extras": [
+        "carro",
+        "cable"
+      ],
       "variantes": [
-        { "id": "mtc-b", "nombre": "Serie MTC-B", "glb": "assets/3d/accesorios/acc-hrs.glb", "ficha": "serie-mtc-b", "validado": false }
+        {
+          "id": "mtc-b",
+          "nombre": "Serie MTC-B",
+          "glb": "assets/3d/accesorios/acc-hrs.glb",
+          "ficha": "serie-mtc-b",
+          "validado": false,
+          "aproximacion": true,
+          "aviso": "Fondo aproximado 347 mm, superior a la reserva de 250 mm; trasera no comprobada."
+        }
       ]
     }
   ]
